@@ -1,4 +1,5 @@
-import AdmHeader from "../../components/admHeader"
+import AdmHeader from "@/components/admHeader"
+
 export default function listOfProducts(){
     return(
         <div>
