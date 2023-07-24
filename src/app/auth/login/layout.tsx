@@ -7,14 +7,13 @@ import { bebas_neue } from "../../fonts"
 
 
 
-export default function LoginLayout({children}: {children: ReactNode}) 
-{
+export default function LoginLayout({ children }: { children: ReactNode }) {
 
 
   return (
     <html lang="en" className={bebas_neue.className} >
-      <body >   
-          {children}
+      <body >
+        {children}
       </body>
     </html>
   )

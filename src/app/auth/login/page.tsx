@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-import { AppRoutes } from "../../routes/AppRoutes";
 
 import { useContext } from 'react';
 import { AuthContext } from "@/contexts/users/AuthContext";
@@ -17,10 +16,10 @@ export default function Login() {
 
     return (
         <Container>
-           <AuthHeader/>
+            <AuthHeader />
 
-          <h1>oi</h1>
-               
+            <h1>oi</h1>
+
 
 
         </Container>
