@@ -1,41 +1,36 @@
 'use client'
 
 import { ReactNode } from "react";
-import { usePathname } from "next/navigation";
-import { checkIsPublicRoute } from "./routes/CheckIsPublicAuth"
-import PrivateRoute from "./routes/PrivateRoute";
+import { useRouter } from 'next/navigation';
+import { AppRoutes } from "./routes/AppRoutes";
+import { useEffect } from "react";
+
+import StyledComponentsRegistry from '../lib/registry';
+
+import { bebas_neue } from "./fonts";
 
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode
-}) {
 
-  const pathname = usePathname();
-  
-  const isPublicPage = checkIsPublicRoute(pathname!)
-  console.log(isPublicPage)
+export default function RootLayout({children}: {children: ReactNode}) 
+{
+
+  const { push } =useRouter();
+
+  // useEffect(()=>{
+  //   push(AppRoutes.public.login)
+  // },[])
 
   /** usuário autenticado=> permissão para visualizar rota privada,
    * e o contrário também é valido
   */
 
-
-
-
   return (
-    <html lang="en">
+    <html lang="en" className={bebas_neue.className}>
       <body>
-        {children}
-        
-        <p>A rota é publica: { `${isPublicPage}`}</p>
-
-        {isPublicPage && children}
-      
-        {!isPublicPage && <PrivateRoute>{children}</PrivateRoute>}
-        
-        </body>
+        <StyledComponentsRegistry>   
+          {children}
+        </StyledComponentsRegistry>
+      </body>
     </html>
   )
 }

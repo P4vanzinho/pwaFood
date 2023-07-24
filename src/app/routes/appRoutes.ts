@@ -1,8 +1,7 @@
 export const AppRoutes={
     private:{
-        dashboard:{
-            produtos:'/dashboard/produtos'
-        }
+        admin:'/admin',
+        clientePWA:'/produtos'
     },
     public:{
         login:'/auth/login',
