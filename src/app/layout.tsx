@@ -5,13 +5,17 @@ import { useRouter } from 'next/navigation';
 
 import StyledComponentsRegistry from '../lib/registry';
 
-import { bebas_neue } from '../';
+import { bebas_neue } from './fonts';
 
 import { createGlobalStyle } from 'styled-components';
 
 import { Metadata } from 'next';
 
-export const metadata = {
+import { ThemeProvider } from 'styled-components';
+
+import { theme } from './styles/theme';
+
+export const metadata: Metadata = {
   title: ' dsdsdsdE-FOOD',
   description: 'A deliveryFood connected if',
 };
@@ -22,14 +26,24 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
 
-  body{
+  *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 
+  }
+
+  body{
+    width: 100%;
+    overflow-x: hidden;
+
     a{
       cursor: pointer;
       text-decoration: none;
+    }
+
+    button{
+      cursor: pointer;
     }
   }
 
@@ -42,10 +56,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={bebas_neue.className}>
-      <GlobalStyle />
-      <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-      </body>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <body>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }
