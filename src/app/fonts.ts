@@ -1,4 +1,4 @@
-import { Bebas_Neue, Poppins } from 'next/font/google';
+import { Bebas_Neue, Poppins, Inter } from 'next/font/google';
 
 export const bebas_neue = Bebas_Neue({
   display: 'swap',
@@ -8,6 +8,12 @@ export const bebas_neue = Bebas_Neue({
 
 export const poppins = Poppins({
   display: 'swap',
-  weight: '500',
+  weight: ['400', '500'],
+  subsets: ['latin'],
+});
+
+export const inter = Inter({
+  display: 'swap',
+  weight: ['400', '500', '700'],
   subsets: ['latin'],
 });
