@@ -1,49 +1,51 @@
-'use client'
+'use client';
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-
 
 import StyledComponentsRegistry from '../lib/registry';
 
-import { bebas_neue } from "./fonts";
+import { bebas_neue } from './fonts';
 
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
+import { Metadata } from 'next';
 
+export const metadata = {
+  title: ' dsdsdsdE-FOOD',
+  description: 'A deliveryFood connected if',
+};
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+const GlobalStyle = createGlobalStyle`
 
-  const { push } = useRouter();
+  :root{
+    font-size: 62.5%;
+  }
 
-  const GlobalStyle=createGlobalStyle`
+  body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 
-    :root{
-      font-size: 62.5%;
+    a{
+      cursor: pointer;
+      text-decoration: none;
     }
+  }
 
-    body{
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+`;
 
-      a{
-        cursor: pointer;
-        text-decoration: none;
-      }
-    }
-
-`
-
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={bebas_neue.className}>
-
-    <GlobalStyle/>
+      <GlobalStyle />
       <body>
-        <StyledComponentsRegistry>
-          {children}
-        </StyledComponentsRegistry>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
-  )
+  );
 }
