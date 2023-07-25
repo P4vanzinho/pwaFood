@@ -15,11 +15,6 @@ import { ThemeProvider } from 'styled-components';
 
 import { theme } from './styles/theme';
 
-export const metadata: Metadata = {
-  title: ' dsdsdsdE-FOOD',
-  description: 'A deliveryFood connected if',
-};
-
 const GlobalStyle = createGlobalStyle`
 
   :root{
