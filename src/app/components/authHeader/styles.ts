@@ -33,7 +33,7 @@ export const MenuLinks = styled.div`
   gap: 6rem;
   align-items: center;
   position: relative;
-  left: 4rem;
+  left: 6rem;
 
   > a {
     text-decoration: none;
