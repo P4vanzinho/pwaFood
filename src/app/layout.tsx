@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import StyledComponentsRegistry from '../lib/registry';
 
-import { bebas_neue } from './fonts';
+import { bebas_neue } from '../';
 
 import { createGlobalStyle } from 'styled-components';
 
