@@ -1,41 +1,51 @@
-'use client'
+'use client';
 
-import { ReactNode } from "react";
-import { usePathname } from "next/navigation";
-import { checkIsPublicRoute } from "./routes/CheckIsPublicAuth"
-import PrivateRoute from "./routes/PrivateRoute";
+import { ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 
+import StyledComponentsRegistry from '../lib/registry';
+
+import { bebas_neue } from './fonts';
+
+import { createGlobalStyle } from 'styled-components';
+
+import { Metadata } from 'next';
+
+export const metadata = {
+  title: ' dsdsdsdE-FOOD',
+  description: 'A deliveryFood connected if',
+};
+
+const GlobalStyle = createGlobalStyle`
+
+  :root{
+    font-size: 62.5%;
+  }
+
+  body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    a{
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+`;
 
 export default function RootLayout({
   children,
 }: {
-  children: ReactNode
+  children: React.ReactNode;
 }) {
-
-  const pathname = usePathname();
-  
-  const isPublicPage = checkIsPublicRoute(pathname!)
-  console.log(isPublicPage)
-
-  /** usuário autenticado=> permissão para visualizar rota privada,
-   * e o contrário também é valido
-  */
-
-
-
-
   return (
-    <html lang="en">
+    <html lang="en" className={bebas_neue.className}>
+      <GlobalStyle />
       <body>
-        {children}
-        
-        <p>A rota é publica: { `${isPublicPage}`}</p>
-
-        {isPublicPage && children}
-      
-        {!isPublicPage && <PrivateRoute>{children}</PrivateRoute>}
-        
-        </body>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </body>
     </html>
-  )
+  );
 }
