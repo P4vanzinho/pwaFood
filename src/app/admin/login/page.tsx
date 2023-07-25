@@ -1,4 +1,5 @@
 'use client';
+
 import { SignInForm, Container, Main } from './styles';
 
 import AuthForm from '../../components/AuthForm';
