@@ -1,5 +1,5 @@
 'use client';
-import { AuthHeader } from '@/app/components/AuthHeader';
+import { AuthHeader } from '../../components/AuthHeader';
 import { SignInForm, Container, Main } from './styles';
 
 import AuthForm from '../../components/AuthForm';
