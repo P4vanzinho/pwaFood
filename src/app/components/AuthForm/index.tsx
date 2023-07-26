@@ -1,9 +1,4 @@
-import {
-  Container,
-  FieldsetLogin,
-  ForgetPasswordContainer,
-  AlertSpan,
-} from './styles';
+import { Container, FieldsetLogin, ForgetPasswordContainer } from './styles';
 import Link from 'next/link';
 
 import { poppins, inter, bebas_neue } from '@/app/fonts';
@@ -13,8 +8,6 @@ import { useState, ChangeEvent, useEffect } from 'react';
 export default function AuthForm() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState<string>('');
-  const [errorName, setErrorName] = useState('');
-  const [errorEmail, setErrorEmail] = useState('');
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value);
