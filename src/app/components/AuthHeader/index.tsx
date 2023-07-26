@@ -5,7 +5,7 @@ import { bebas_neue, poppins } from '../../fonts';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export function AuthHeader() {
+export default function AuthHeader() {
   const [isButtonGreen1, setIsButtonGreen1] = useState<boolean>(true);
   const [isButtonGreen2, setIsButtonGreen2] = useState<boolean>(false);
 

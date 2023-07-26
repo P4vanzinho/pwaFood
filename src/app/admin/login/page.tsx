@@ -1,8 +1,9 @@
 'use client';
-import { AuthHeader } from '@/app/components/AuthHeader';
+
 import { SignInForm, Container, Main } from './styles';
 
 import AuthForm from '../../components/AuthForm';
+import AuthHeader from '../../components/AuthHeader';
 
 import Image from 'next/image';
 import { poppins, inter, bebas_neue } from '@/app/fonts';
