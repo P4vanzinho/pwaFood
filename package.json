@@ -26,5 +26,10 @@
   },
   "devDependencies": {
     "@types/cookie": "^0.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run build"
+    }
   }
 }
