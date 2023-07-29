@@ -45,14 +45,14 @@ export const MenuLinks = styled.div`
 export const AuthLinks = styled.div`
   .green_bg_white_color {
     background-color: ${({ theme }) => theme.COLORS.PRIMARY};
-    > a {
+    > span {
       color: ${({ theme }) => theme.COLORS.WHITE};
     }
   }
 
   .gray_bg_black_color {
     background-color: ${({ theme }) => theme.COLORS.LIGHT};
-    > a {
+    > span {
       color: ${({ theme }) => theme.COLORS.DARK};
     }
   }
@@ -66,7 +66,7 @@ export const AuthLinks = styled.div`
     border-radius: 2rem;
     border: none;
 
-    a {
+    span {
       font-size: 14px;
       font-weight: 500;
     }

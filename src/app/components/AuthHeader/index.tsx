@@ -1,26 +1,39 @@
 import { Container, LogoButton, MenuLinks, AuthLinks } from './styles';
 
 import { bebas_neue, poppins } from '../../fonts';
+import { useRouter, usePathname } from 'next/navigation';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { AppRouterContext } from 'next/dist/shared/lib/app-router-context';
 
 export default function AuthHeader() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isButtonGreen1, setIsButtonGreen1] = useState<boolean>(true);
   const [isButtonGreen2, setIsButtonGreen2] = useState<boolean>(false);
 
-  function handleSignIn() {
-    if (isButtonGreen1 === false) {
+  useEffect(() => {
+    // Whenever the route changes, this effect will be triggered
+    // Update the state of the buttons based on the new route
+    if (pathname === '/admin/login') {
       setIsButtonGreen1(true);
       setIsButtonGreen2(false);
     }
-  }
 
-  function handleSignUp() {
-    if (isButtonGreen2 === false) {
+    if (pathname === '/admin/register') {
       setIsButtonGreen1(false);
       setIsButtonGreen2(true);
     }
+    setIsButtonGreen2(pathname === '/admin/register');
+  }, [pathname]);
+
+  function handleSignIn() {
+    router.push('/admin/login');
+  }
+
+  function handleSignUp() {
+    router.push('/admin/register');
   }
 
   return (
@@ -44,9 +57,7 @@ export default function AuthHeader() {
             isButtonGreen1 ? 'green_bg_white_color' : 'gray_bg_black_color'
           }
         >
-          <Link href="" className={poppins.className}>
-            Login
-          </Link>
+          <span className={poppins.className}>Login</span>
         </button>
 
         <button
@@ -55,9 +66,7 @@ export default function AuthHeader() {
             isButtonGreen2 ? 'green_bg_white_color' : 'gray_bg_black_color'
           }
         >
-          <Link href="" className={poppins.className}>
-            Cadastro
-          </Link>
+          <span className={poppins.className}>Cadastro</span>
         </button>
       </AuthLinks>
     </Container>
