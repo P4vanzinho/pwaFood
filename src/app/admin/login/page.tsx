@@ -8,7 +8,6 @@ import {
   ForgetPasswordContainer,
 } from './styles';
 
-import AuthForm from '../../components/AuthLoginForm';
 import AuthHeader from '../../components/AuthHeader';
 
 import Image from 'next/image';
