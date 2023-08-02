@@ -17,6 +17,55 @@ export const Main = styled.main`
   border: 1px solid #f5f5f5;
   border-radius: 12px;
   background: #fff;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    height: 100%;
+    gap: 2rem;
+    width: 28rem;
+    > div:nth-of-type(1) {
+      width: 100%;
+      display: flex;
+      gap: 1.2rem;
+      padding: 1rem 0;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #d0d5dd;
+      border-radius: 0.8rem;
+
+      > span {
+        font-size: 1.2rem;
+        font-weight: 500;
+        height: 1.2rem;
+        color: #344054;
+      }
+    }
+
+    > div:nth-child(2) {
+      display: flex;
+      gap: 0.8rem;
+      padding: 0;
+      background-color: transparent;
+      height: 3.4rem;
+      align-items: center;
+      border: none;
+
+      div {
+        height: 1px;
+        width: 124px;
+        background-color: #bcccdc;
+        padding: 0;
+      }
+
+      span {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: #a3a3a3;
+      }
+    }
+  }
 `;
 
 export const SignInForm = styled.form`
@@ -26,55 +75,6 @@ export const SignInForm = styled.form`
   height: 100%;
   gap: 2rem;
 
-  width: 28rem;
-
-  > div:nth-of-type(1) {
-    width: 100%;
-    display: flex;
-    gap: 1.2rem;
-    padding: 1rem 0;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #d0d5dd;
-    border-radius: 0.8rem;
-
-    > span {
-      font-size: 1.2rem;
-      font-weight: 500;
-      height: 1.2rem;
-      color: #344054;
-    }
-  }
-
-  > div:nth-child(2) {
-    display: flex;
-    gap: 0.8rem;
-    padding: 0;
-    background-color: transparent;
-    height: 3.4rem;
-    align-items: center;
-
-    div {
-      height: 1px;
-      width: 124px;
-      background-color: #bcccdc;
-      padding: 0;
-    }
-
-    span {
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: #a3a3a3;
-    }
-  }
-`;
-
-export const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  height: 100%;
-  gap: 2rem;
   width: 28rem;
 
   > div:nth-of-type(1) {
