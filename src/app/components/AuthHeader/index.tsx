@@ -1,3 +1,4 @@
+'use client';
 import { Container, LogoButton, MenuLinks, AuthLinks } from './styles';
 
 import { bebas_neue, poppins } from '../../fonts';
