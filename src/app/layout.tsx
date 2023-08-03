@@ -15,6 +15,10 @@ import { ThemeProvider } from 'styled-components';
 
 import { theme } from './styles/theme';
 
+import NextAuthSessionProvider from './Providers/SessionProvider';
+import { ToastContainer } from 'react-toastify';
+import '../assets/ReactToastify.css';
+
 const GlobalStyle = createGlobalStyle`
 
   :root{
@@ -44,17 +48,16 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={bebas_neue.className}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <body>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          <StyledComponentsRegistry>
+            <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+          </StyledComponentsRegistry>
+          <ToastContainer className={bebas_neue.className} />
         </body>
       </ThemeProvider>
     </html>

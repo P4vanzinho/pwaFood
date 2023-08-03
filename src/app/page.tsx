@@ -1,6 +1,12 @@
 'use client';
-
-//Estou considerando que esta page.tsx é a do administrador.
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 export default function Home() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (session) {
+    router.replace('/admin/login');
+  }
   return <></>;
 }
