@@ -22,11 +22,11 @@ export default function AuthHeader() {
       setIsButtonGreen2(false);
     }
 
-    if (pathname === '/admin/register') {
+    if (pathname === '/admin/signup') {
       setIsButtonGreen1(false);
       setIsButtonGreen2(true);
     }
-    setIsButtonGreen2(pathname === '/admin/register');
+    setIsButtonGreen2(pathname === '/admin/signup');
   }, [pathname]);
 
   function handleSignIn() {
