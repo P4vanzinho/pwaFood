@@ -34,7 +34,7 @@ export default function AuthHeader() {
   }
 
   function handleSignUp() {
-    router.push('/admin/register');
+    router.push('/admin/signup');
   }
 
   return (
