@@ -17,6 +17,24 @@ export const Main = styled.main`
   border: 1px solid #f5f5f5;
   border-radius: 12px;
   background: #fff;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    height: 100%;
+    gap: 2rem;
+    width: 28rem;
+
+    > div {
+      display: flex;
+      gap: 0.8rem;
+      padding: 0;
+      background-color: transparent;
+      height: 3.4rem;
+      align-items: center;
+    }
+  }
 `;
 
 export const RegisterForm = styled.form`
@@ -54,6 +72,18 @@ export const FieldsetRegister = styled.fieldset`
     > span {
       font-size: 12px;
       color: red;
+    }
+
+    > div {
+      position: relative;
+      > button {
+        height: 2rem;
+        width: 2rem;
+        background: transparent;
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+      }
     }
   }
 

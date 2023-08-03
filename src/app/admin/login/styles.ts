@@ -132,6 +132,19 @@ export const FieldsetLogin = styled.fieldset`
     color: ${({ theme }) => theme.COLORS.PRIMARY};
     font-size: 1.4rem;
 
+    > div {
+      position: relative;
+
+      > button {
+        height: 2rem;
+        width: 2rem;
+        background: transparent;
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+      }
+    }
+
     > span {
       font-size: 12px;
       color: red;
