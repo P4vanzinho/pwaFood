@@ -12,24 +12,20 @@ import GoogleSignInButton from '@/app/components/GoogleSignInButton';
 
 import { poppins, inter, bebas_neue } from '@/app/fonts';
 import Link from 'next/link';
-import React, {
-  useState,
-  ChangeEvent,
-  SyntheticEvent,
-  useContext,
-} from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import React, { useState, SyntheticEvent } from 'react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { toast, cssTransition } from 'react-toastify';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+
+import { toast } from 'react-toastify';
 
 export default function Login() {
-  const { data: session } = useSession();
-
   const router = useRouter();
 
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [notSeePassword, setNotSeePassword] = useState(true);
+  const [matchPasswordError, setMatchPasswordError] = useState<string>('');
 
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
@@ -51,6 +47,10 @@ export default function Login() {
     } catch (error) {
       return;
     }
+  }
+
+  function handleShowPassword() {
+    setNotSeePassword(!notSeePassword);
   }
 
   return (
@@ -82,12 +82,24 @@ export default function Login() {
 
             <label htmlFor="password" className={bebas_neue.className}>
               SENHA
-              <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                onChange={e => setPassword(e.target.value)}
-              />
+              <div>
+                <input
+                  id="password"
+                  type={notSeePassword ? 'password' : 'text'}
+                  placeholder="Password"
+                  onChange={e => setPassword(e.target.value)}
+                  value={password}
+                  minLength={1}
+                />
+
+                <button onClick={handleShowPassword} type="button">
+                  {notSeePassword ? (
+                    <AiFillEye name="eye" size={20} />
+                  ) : (
+                    <AiFillEyeInvisible name="invisibleEye" size={20} />
+                  )}
+                </button>
+              </div>
               {!password && <span>Insira sua senha !!</span>}
             </label>
 
