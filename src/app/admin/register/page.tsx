@@ -14,6 +14,10 @@ import Image from 'next/image';
 import { poppins, inter, bebas_neue } from '@/app/fonts';
 import Link from 'next/link';
 import { useState, ChangeEvent } from 'react';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { SyntheticEvent } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 //Estou considerando que esta page.tsx é a do administrador.
 export default function Register() {
@@ -22,32 +26,66 @@ export default function Register() {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
+  const [notSeePassword, setNotSeePassword] = useState(true);
+  const [notSeeConfirmPassword, setNotSeeConfirmPassword] = useState(true);
+  const [matchPasswordError, setMatchPasswordError] = useState<string>('');
 
-  function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setEmail(event.target.value);
+  const diferentPasswords =
+    password && confirmPassword && password !== confirmPassword;
+
+  const router = useRouter();
+
+  async function handleSubmit(event: SyntheticEvent) {
+    event.preventDefault();
+
+    const response = await fetch(
+      'https://goldfish-app-vg4r3.ondigitalocean.app/tenant',
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          name,
+          phone,
+        }),
+      },
+    );
+
+    const body = await response.json();
+
+    if (body.error) {
+      toast.error(body.error);
+    } else {
+      toast.success('Agora você faz parte família');
+    }
   }
 
-  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
+  function handleShowPassword() {
+    setNotSeePassword(!notSeePassword);
   }
 
-  function handlePhoneChange(event: ChangeEvent<HTMLInputElement>) {
-    setPhone(event.target.value);
+  function handleShowConfirmPassword() {
+    setNotSeeConfirmPassword(!notSeePassword);
   }
 
-  function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
-    setName(event.target.value);
-  }
-
-  function handleConfirmPasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setConfirmPassword(event.target.value);
+  function validatePassword() {
+    if (password && confirmPassword && password !== confirmPassword) {
+      setMatchPasswordError(
+        'Os campos  "Senha" e "Confirmar senha" não correspondem ',
+      );
+    } else {
+      setMatchPasswordError('');
+    }
   }
 
   return (
     <Container>
       <AuthHeader />
       <Main>
-        <RegisterForm>
+        <form onSubmit={handleSubmit}>
           <FieldsetRegister>
             <label htmlFor="email">
               EMAIL
@@ -55,8 +93,7 @@ export default function Register() {
                 id="email"
                 type="email"
                 placeholder="thiago@gmail.com"
-                onChange={handleEmailChange}
-                required
+                onChange={e => setEmail(e.target.value)}
                 value={email}
                 minLength={1}
               />
@@ -69,11 +106,10 @@ export default function Register() {
                 id="phone"
                 type="tel"
                 name="phone"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 placeholder="(14)982098429"
-                onChange={handlePhoneChange}
+                onChange={e => setPhone(e.target.value)}
                 value={phone}
-                required
               />
               {!phone && <span>Insira seu Telefone !!</span>}
             </label>
@@ -84,42 +120,64 @@ export default function Register() {
                 id="name"
                 type="text"
                 placeholder="Rogério"
-                onChange={handleNameChange}
+                onChange={e => setName(e.target.value)}
                 value={name}
                 minLength={1}
-                required
               />
               {!name && <span>Insira seu nome !!</span>}
             </label>
 
             <label htmlFor="password" className={bebas_neue.className}>
               SENHA
-              <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                onChange={handlePasswordChange}
-                required
-              />
+              <div>
+                <input
+                  id="password"
+                  type={notSeePassword ? 'password' : 'text'}
+                  placeholder="Password"
+                  onChange={e => setPassword(e.target.value)}
+                  value={password}
+                  minLength={1}
+                  onBlur={validatePassword}
+                />
+
+                <button onClick={handleShowPassword} type="button">
+                  {notSeePassword ? (
+                    <AiFillEye name="eye" size={20} />
+                  ) : (
+                    <AiFillEyeInvisible name="invisibleEye" size={20} />
+                  )}
+                </button>
+              </div>
               {!password && <span>Insira sua senha !!</span>}
             </label>
 
             <label htmlFor="confirmPassword">
               CONFIRMAR SENHA
-              <input
-                id="confirmPassword"
-                type="password"
-                placeholder="Password"
-                onChange={handleConfirmPasswordChange}
-                required
-                value={email}
-                minLength={1}
-              />
+              <div>
+                <input
+                  id="confirmPassword"
+                  type={notSeeConfirmPassword ? 'password' : 'text'}
+                  placeholder="Password"
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  value={confirmPassword}
+                  minLength={1}
+                  onBlur={validatePassword}
+                />
+
+                <button onClick={handleShowConfirmPassword} type="button">
+                  {notSeeConfirmPassword ? (
+                    <AiFillEye name="eye" size={20} />
+                  ) : (
+                    <AiFillEyeInvisible name="invisibleEye" size={20} />
+                  )}
+                </button>
+              </div>
               {!confirmPassword && <span>Confirme sua senha !!</span>}
+              {diferentPasswords && <span> {matchPasswordError}</span>}
             </label>
 
-            <button type="submit" form="loginForm">
-              <span className={bebas_neue.className}>ENTRAR</span>
+            <button type="submit">
+              <span className={bebas_neue.className}>CADASTRAR</span>
             </button>
           </FieldsetRegister>
 
@@ -127,7 +185,7 @@ export default function Register() {
             <span>Esqueceu sua senha</span>
             <Link href="">Clique aqui </Link>
           </ForgetPasswordContainer>
-        </RegisterForm>
+        </form>
       </Main>
     </Container>
   );
