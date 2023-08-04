@@ -6,7 +6,6 @@ import { useRouter, usePathname } from 'next/navigation';
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { AppRouterContext } from 'next/dist/shared/lib/app-router-context';
 
 export default function AuthHeader() {
   const router = useRouter();

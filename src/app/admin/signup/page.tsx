@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  RegisterForm,
   Container,
   Main,
   FieldsetRegister,
@@ -11,13 +10,13 @@ import {
 import AuthHeader from '../../components/AuthHeader';
 
 import Image from 'next/image';
-import { poppins, inter, bebas_neue } from '@/app/fonts';
+import { inter, bebas_neue } from '@/app/fonts';
 import Link from 'next/link';
-import { useState, ChangeEvent } from 'react';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
 import { SyntheticEvent } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { foodFetch } from '@/app/services/foodFetch/foodFetch';
 
 //Estou considerando que esta page.tsx é a do administrador.
 export default function Register() {
@@ -33,34 +32,45 @@ export default function Register() {
   const diferentPasswords =
     password && confirmPassword && password !== confirmPassword;
 
-  const router = useRouter();
-
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
 
-    const response = await fetch(
-      'https://goldfish-app-vg4r3.ondigitalocean.app/tenant',
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          name,
-          phone,
-        }),
+    const response = await foodFetch<ResponseType>({
+      method: 'POST',
+      body: {
+        email,
+        password,
+        name,
+        phone,
       },
-    );
+      endPoint: 'tenant',
+    });
 
-    const body = await response.json();
+    console.log(response);
 
-    if (body.error) {
-      toast.error(body.error);
-    } else {
-      toast.success('Agora você faz parte família');
-    }
+    // const response = await fetch(
+    //   'https://goldfish-app-vg4r3.ondigitalocean.app/tenant',
+    //   {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       email,
+    //       password,
+    //       name,
+    //       phone,
+    //     }),
+    //   },
+    // );
+
+    // const body = await response.json();
+
+    // if (body.error) {
+    //   toast.error(body.error);
+    // } else {
+    //   toast.success('Agora você faz parte família');
+    // }
   }
 
   function handleShowPassword() {
@@ -106,7 +116,6 @@ export default function Register() {
                 id="phone"
                 type="tel"
                 name="phone"
-                // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 placeholder="(14)982098429"
                 onChange={e => setPhone(e.target.value)}
                 value={phone}

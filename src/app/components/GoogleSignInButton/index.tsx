@@ -1,17 +1,11 @@
 'use client';
 
-import { poppins, inter, bebas_neue } from '@/app/fonts';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { inter } from '@/app/fonts';
+import { signIn, useSession } from 'next-auth/react';
 
-import { SyntheticEvent } from 'react';
 import { Container } from './styles';
-import { type } from 'os';
-import { useRouter } from 'next/navigation';
 
 export default function GoogleSignInButton() {
-  const { data: session } = useSession();
-  const router = useRouter();
-
   return (
     <>
       <Container
