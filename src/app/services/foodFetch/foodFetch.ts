@@ -30,9 +30,9 @@ export async function foodFetch<T>({
 
   if (responseBody.error) {
     toast.error(responseBody.error, { draggable: false });
-  } else {
-    toast.success(responseBody.message);
+    return null;
   }
 
+  toast.success(responseBody.message);
   return responseBody as T;
 }
