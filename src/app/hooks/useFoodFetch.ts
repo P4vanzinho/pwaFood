@@ -37,7 +37,7 @@ function useFoodFetch(
     }
 
     fetch();
-  }, [session, endPoint, fetchParams]);
+  }, [session, endPoint, queryBuilder]);
 
   const request = useCallback(
     ({ endPoint, body, method }: FoodFetchProps) => {
