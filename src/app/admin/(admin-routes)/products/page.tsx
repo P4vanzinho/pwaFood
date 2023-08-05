@@ -7,7 +7,7 @@ export default function Products() {
   const {
     data: categories,
     loading,
-    setFetchParams,
+    setQueryBuilder,
   } = useFoodFetch(EndpointFoodApiEnum.PRODUCT_CATEGORY, {
     injectProducts: false,
   });
@@ -15,7 +15,7 @@ export default function Products() {
   const { request: requestRegisterCategory, error } = useFoodFetch();
 
   const onClick = () => {
-    setFetchParams({
+    setQueryBuilder({
       injectProducts: true,
     });
 

@@ -5,14 +5,14 @@ import { EndpointFoodApiEnum } from '../enums';
 
 function useFoodFetch(
   endPoint?: EndpointFoodApiEnum,
-  params?: Record<string, any>,
+  query?: Record<string, any>,
 ) {
   const { data: session } = useSession();
   const [data, setData] = useState([]);
   const [error, setError] = useState<string | undefined>();
   const [message, setMessage] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
-  const [fetchParams, setFetchParams] = useState(params);
+  const [queryBuilder, setQueryBuilder] = useState(query);
 
   useEffect(() => {
     async function fetch() {
@@ -23,7 +23,7 @@ function useFoodFetch(
       const response = await foodFetch({
         token: session?.data?.token,
         endPoint: endPoint as EndpointFoodApiEnum,
-        params: fetchParams,
+        params: queryBuilder,
       });
 
       setData(response?.data);
@@ -70,7 +70,7 @@ function useFoodFetch(
     [session],
   );
 
-  return { data, error, message, loading, request, setFetchParams };
+  return { data, error, message, loading, request, setQueryBuilder };
 }
 
 export default useFoodFetch;
