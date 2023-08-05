@@ -35,6 +35,8 @@ const GlobalStyle = createGlobalStyle`
   body{
     width: 100%;
     overflow-x: hidden;
+    height:100vh;
+    max-height: none;
 
     a{
       cursor: pointer;
@@ -50,7 +52,7 @@ const GlobalStyle = createGlobalStyle`
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={bebas_neue.className}>
+    <html lang="en">
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <body>
