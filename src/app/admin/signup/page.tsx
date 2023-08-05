@@ -20,7 +20,6 @@ import { foodFetch } from '@/app/services/foodFetch/foodFetch';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
 import { EndpointFoodApiEnum } from '@/app/enums/foodApi/EndpointFoodApiEnum';
 
-//Estou considerando que esta page.tsx é a do administrador.
 export default function Register() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
