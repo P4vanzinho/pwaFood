@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { FoodFetchProps, foodFetch } from '../services/foodFetch/foodFetch';
 import { EndpointFoodApiEnum } from '../enums';
@@ -12,15 +12,18 @@ function useFoodFetch(
   const [error, setError] = useState<string | undefined>();
   const [message, setMessage] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
+  const [fetchParams, setFetchParams] = useState(params);
 
   useEffect(() => {
     async function fetch() {
       setLoading(true);
 
+      console.log('fez fetch');
+
       const response = await foodFetch({
         token: session?.data?.token,
         endPoint: endPoint as EndpointFoodApiEnum,
-        params,
+        params: fetchParams,
       });
 
       setData(response?.data);
@@ -34,7 +37,7 @@ function useFoodFetch(
     }
 
     fetch();
-  }, [session, endPoint]);
+  }, [session, endPoint, fetchParams]);
 
   const request = useCallback(
     ({ endPoint, body, method }: FoodFetchProps) => {
@@ -67,7 +70,7 @@ function useFoodFetch(
     [session],
   );
 
-  return { data, error, message, loading, request };
+  return { data, error, message, loading, request, setFetchParams };
 }
 
 export default useFoodFetch;

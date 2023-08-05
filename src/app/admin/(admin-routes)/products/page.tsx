@@ -4,31 +4,30 @@ import { EndpointFoodApiEnum } from '@/app/enums';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
 
 export default function Products() {
-  const queryParameters = {
-    injectProducts: true,
-  };
-
-  const { data: products, loading } = useFoodFetch(
-    EndpointFoodApiEnum.PRODUCT_CATEGORY,
-    queryParameters,
-  );
+  const {
+    data: categories,
+    loading,
+    setFetchParams,
+  } = useFoodFetch(EndpointFoodApiEnum.PRODUCT_CATEGORY, {
+    injectProducts: false,
+  });
 
   const { request: requestRegisterCategory, error } = useFoodFetch();
 
   const onClick = () => {
-    requestRegisterCategory({
+    setFetchParams({
+      injectProducts: true,
+    });
+
+    /*  requestRegisterCategory({
       method: 'POST',
       body: {
         businessId: 21,
         name: 'Nova Categoria do ro',
       },
       endPoint: EndpointFoodApiEnum.PRODUCT_CATEGORY,
-    });
+    }); */
   };
-
-  if (!products) {
-    <></>;
-  }
 
   return (
     <>
@@ -36,10 +35,11 @@ export default function Products() {
 
       {error && <div>error</div>}
 
-      {products?.length &&
-        products.map(product => (
+      {categories?.length &&
+        categories.map(category => (
           <div>
-            <h1>{product.name}</h1>
+            <h1>{category.name}</h1>
+            {category.product?.map(product => product.name)}
           </div>
         ))}
 
