@@ -14,8 +14,6 @@ export default function AuthHeader() {
   const [isButtonGreen2, setIsButtonGreen2] = useState<boolean>(false);
 
   useEffect(() => {
-    // Whenever the route changes, this effect will be triggered
-    // Update the state of the buttons based on the new route
     if (pathname === '/admin/login') {
       setIsButtonGreen1(true);
       setIsButtonGreen2(false);
