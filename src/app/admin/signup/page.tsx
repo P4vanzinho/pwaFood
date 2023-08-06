@@ -17,8 +17,9 @@ import { useState } from 'react';
 import { SyntheticEvent } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { foodFetch } from '@/app/services/foodFetch/foodFetch';
+import useFoodFetch from '@/app/hooks/useFoodFetch';
+import { EndpointFoodApiEnum } from '@/app/enums/foodApi/EndpointFoodApiEnum';
 
-//Estou considerando que esta page.tsx é a do administrador.
 export default function Register() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -43,34 +44,8 @@ export default function Register() {
         name,
         phone,
       },
-      endPoint: 'tenant',
+      endPoint: EndpointFoodApiEnum.TENANT,
     });
-
-    console.log(response);
-
-    // const response = await fetch(
-    //   'https://goldfish-app-vg4r3.ondigitalocean.app/tenant',
-    //   {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       email,
-    //       password,
-    //       name,
-    //       phone,
-    //     }),
-    //   },
-    // );
-
-    // const body = await response.json();
-
-    // if (body.error) {
-    //   toast.error(body.error);
-    // } else {
-    //   toast.success('Agora você faz parte família');
-    // }
   }
 
   function handleShowPassword() {

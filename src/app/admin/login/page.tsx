@@ -42,7 +42,7 @@ export default function Login() {
         });
       } else {
         toast.success('Parabéns !');
-        router.replace('/admin/dashboard');
+        router.replace('/admin/products');
       }
     } catch (error) {
       return;
