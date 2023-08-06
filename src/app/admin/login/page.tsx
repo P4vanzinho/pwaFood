@@ -67,7 +67,7 @@ export default function Login() {
           </div>
 
           <FieldsetLogin>
-            <label htmlFor="email">
+            <label htmlFor="email" className={bebas_neue.className}>
               EMAIL
               <input
                 id="email"

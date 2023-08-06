@@ -73,7 +73,7 @@ export default function Register() {
       <Main>
         <form onSubmit={handleSubmit}>
           <FieldsetRegister>
-            <label htmlFor="email">
+            <label htmlFor="email" className={bebas_neue.className}>
               EMAIL
               <input
                 id="email"
@@ -86,7 +86,7 @@ export default function Register() {
               {!email && <span>Insira seu email !!</span>}
             </label>
 
-            <label htmlFor="phone">
+            <label htmlFor="phone" className={bebas_neue.className}>
               TELEFONE
               <input
                 id="phone"
@@ -99,7 +99,7 @@ export default function Register() {
               {!phone && <span>Insira seu Telefone !!</span>}
             </label>
 
-            <label htmlFor="name">
+            <label htmlFor="name" className={bebas_neue.className}>
               NOME
               <input
                 id="name"
@@ -136,7 +136,7 @@ export default function Register() {
               {!password && <span>Insira sua senha !!</span>}
             </label>
 
-            <label htmlFor="confirmPassword">
+            <label htmlFor="confirmPassword" className={bebas_neue.className}>
               CONFIRMAR SENHA
               <div>
                 <input
