@@ -8,10 +8,17 @@ import {
 import { bebas_neue, poppins } from '../../fonts';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 export default function AdminAppHeader() {
-  const businessName = 'mc-donalts'.toUpperCase();
-  const userName = 'Rogerio Pavan da Silva';
+  const { data: session } = useSession();
+  const business = session?.data?.business.length
+    ? session?.data?.business[0]
+    : null;
+
+  const pathname = usePathname();
+
+  const userName = session?.data.name;
   const welcomeMessage = `${userName}!`;
   const quantityOfButtons = 4;
   const router = useRouter();
@@ -32,7 +39,6 @@ export default function AdminAppHeader() {
         return 'Configurar Whatsapp';
     }
   }
-  const pathname = usePathname();
 
   function handleButtonsOfMenu(index: number) {
     const newButtonsState = [...linkButtons];
@@ -85,7 +91,9 @@ export default function AdminAppHeader() {
             />
           </defs>
         </svg>
-        <span className={poppins.className}>{businessName}</span>
+        <span className={poppins.className}>
+          {business?.name.toUpperCase()}
+        </span>
       </BusinessContainer>
 
       <ContentContainer>
