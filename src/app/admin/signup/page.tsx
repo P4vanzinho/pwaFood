@@ -40,6 +40,7 @@ export default function Register() {
         email,
         password,
         name,
+        businessName,
         phone,
       },
       endPoint: EndpointFoodApiEnum.TENANT,
