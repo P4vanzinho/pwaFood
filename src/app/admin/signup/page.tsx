@@ -8,16 +8,12 @@ import {
 } from './styles';
 
 import AuthHeader from '../../components/AuthHeader';
-
-import Image from 'next/image';
 import { inter, bebas_neue } from '@/app/fonts';
 import Link from 'next/link';
 import { useState } from 'react';
-
 import { SyntheticEvent } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { foodFetch } from '@/app/services/foodFetch/foodFetch';
-import useFoodFetch from '@/app/hooks/useFoodFetch';
 import { EndpointFoodApiEnum } from '@/app/enums/foodApi/EndpointFoodApiEnum';
 
 //Estou considerando que esta page.tsx é a do administrador.
@@ -25,6 +21,7 @@ export default function Register() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [name, setName] = useState<string>('');
+  const [businessName, setBusinessName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [notSeePassword, setNotSeePassword] = useState(true);
@@ -110,6 +107,19 @@ export default function Register() {
                 minLength={1}
               />
               {!name && <span>Insira seu nome !!</span>}
+            </label>
+
+            <label htmlFor="businessName">
+              QUAL O NOME DA SUA EMPRESA ?
+              <input
+                id="businessName"
+                type="text"
+                placeholder="MC-Donalds"
+                onChange={e => setBusinessName(e.target.value)}
+                value={businessName}
+                minLength={1}
+              />
+              {!name && <span>Insira o nome de sua empresa !!</span>}
             </label>
 
             <label htmlFor="password" className={bebas_neue.className}>
