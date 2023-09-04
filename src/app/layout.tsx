@@ -1,7 +1,6 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
 
 import StyledComponentsRegistry from '../lib/registry';
 
@@ -35,8 +34,9 @@ const GlobalStyle = createGlobalStyle`
   body{
     width: 100%;
     overflow-x: hidden;
-    height:100vh;
+
     max-height: none;
+    min-height: 100vh;
 
     a{
       cursor: pointer;
