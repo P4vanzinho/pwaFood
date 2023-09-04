@@ -8,7 +8,7 @@ import {
 } from './styles';
 
 import AuthHeader from '../../components/AuthHeader';
-import { inter, bebas_neue } from '@/app/fonts';
+import { inter, bebas_neue, poppins } from '@/app/fonts';
 import Link from 'next/link';
 import { useState } from 'react';
 import { SyntheticEvent } from 'react';
@@ -16,7 +16,6 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { foodFetch } from '@/app/services/foodFetch/foodFetch';
 import { EndpointFoodApiEnum } from '@/app/enums/foodApi/EndpointFoodApiEnum';
 
-//Estou considerando que esta page.tsx é a do administrador.
 export default function Register() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -52,7 +51,7 @@ export default function Register() {
   }
 
   function handleShowConfirmPassword() {
-    setNotSeeConfirmPassword(!notSeePassword);
+    setNotSeeConfirmPassword(!notSeeConfirmPassword);
   }
 
   function validatePassword() {
@@ -80,8 +79,8 @@ export default function Register() {
                 onChange={e => setEmail(e.target.value)}
                 value={email}
                 minLength={1}
+                required
               />
-              {!email && <span>Insira seu email !!</span>}
             </label>
 
             <label htmlFor="phone" className={bebas_neue.className}>
@@ -93,8 +92,8 @@ export default function Register() {
                 placeholder="(14)982098429"
                 onChange={e => setPhone(e.target.value)}
                 value={phone}
+                required
               />
-              {!phone && <span>Insira seu Telefone !!</span>}
             </label>
 
             <label htmlFor="name" className={bebas_neue.className}>
@@ -106,11 +105,11 @@ export default function Register() {
                 onChange={e => setName(e.target.value)}
                 value={name}
                 minLength={1}
+                required
               />
-              {!name && <span>Insira seu nome !!</span>}
             </label>
 
-            <label htmlFor="businessName">
+            <label htmlFor="businessName" className={bebas_neue.className}>
               QUAL O NOME DA SUA EMPRESA ?
               <input
                 id="businessName"
@@ -119,8 +118,8 @@ export default function Register() {
                 onChange={e => setBusinessName(e.target.value)}
                 value={businessName}
                 minLength={1}
+                required
               />
-              {!name && <span>Insira o nome de sua empresa !!</span>}
             </label>
 
             <label htmlFor="password" className={bebas_neue.className}>
@@ -134,6 +133,7 @@ export default function Register() {
                   value={password}
                   minLength={1}
                   onBlur={validatePassword}
+                  required
                 />
 
                 <button onClick={handleShowPassword} type="button">
@@ -144,7 +144,6 @@ export default function Register() {
                   )}
                 </button>
               </div>
-              {!password && <span>Insira sua senha !!</span>}
             </label>
 
             <label htmlFor="confirmPassword" className={bebas_neue.className}>
@@ -158,6 +157,7 @@ export default function Register() {
                   value={confirmPassword}
                   minLength={1}
                   onBlur={validatePassword}
+                  required
                 />
 
                 <button onClick={handleShowConfirmPassword} type="button">
@@ -168,8 +168,9 @@ export default function Register() {
                   )}
                 </button>
               </div>
-              {!confirmPassword && <span>Confirme sua senha !!</span>}
-              {diferentPasswords && <span> {matchPasswordError}</span>}
+              {diferentPasswords && (
+                <span className={poppins.className}> {matchPasswordError}</span>
+              )}
             </label>
 
             <button type="submit">
