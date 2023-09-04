@@ -5,6 +5,15 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   justify-content: center;
+  align-items: center;
+
+  input:invalid {
+    outline: 2px solid ${({ theme }) => theme.COLORS.ERROR};
+  }
+
+  input:valid {
+    outline: 2px solid ${({ theme }) => theme.COLORS.PRIMARY};
+  }
 `;
 
 export const Main = styled.main`
@@ -12,11 +21,11 @@ export const Main = styled.main`
   align-items: center;
   justify-content: center;
   width: 33rem;
-  margin: 0 auto;
   padding: 3.2rem 2.4rem;
   border: 1px solid #f5f5f5;
   border-radius: 12px;
   background: #fff;
+  margin: auto;
 
   form {
     display: flex;
@@ -94,14 +103,6 @@ export const FieldsetRegister = styled.fieldset`
     border: none;
     background-color: #f4f4f4;
     padding: 0 1.678rem;
-  }
-
-  input:invalid {
-    border: 2px solid ${({ theme }) => theme.COLORS.ERROR};
-  }
-
-  input:valid {
-    border: 2px solid ${({ theme }) => theme.COLORS.PRIMARY};
   }
 
   input::placeholder {
