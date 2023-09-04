@@ -2,42 +2,16 @@ import styled from 'styled-components';
 
 export const Container = styled.header`
   width: 100%;
-  position: fixed;
-  top: 4.2rem;
-  left: 8.5rem;
-`;
-
-export const BusinessContainer = styled.div`
+  height: 11rem;
   display: flex;
-  gap: 7px;
-  max-width: 40rem;
-  align-items: center;
-`;
+  flex-direction: column;
+  padding-top: 4.3rem;
+  padding-left: 8.5rem;
+  position: sticky;
+  top: 0;
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  z-index: 1;
 
-export const ContentContainer = styled.div`
-  display: flex;
-  gap: 6rem;
-`;
-
-export const LogoButton = styled.button`
-  background: transparent;
-  border: none;
-
-  > span {
-    font-size: 44px;
-    font-weight: 400;
-    line-height: normal;
-  }
-
-  > span:nth-of-type(1) {
-    color: ${({ theme }) => theme.COLORS.DARK};
-  }
-  > span:nth-of-type(2) {
-    color: ${({ theme }) => theme.COLORS.PRIMARY};
-  }
-`;
-
-export const WelcomeAndMenuContainer = styled.div`
   .green_bg_white_color {
     background-color: ${({ theme }) => theme.COLORS.PRIMARY};
     color: ${({ theme }) => theme.COLORS.WHITE};
@@ -49,7 +23,50 @@ export const WelcomeAndMenuContainer = styled.div`
       color: ${({ theme }) => theme.COLORS.DARK};
     }
   }
+`;
 
+export const ContentContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+`;
+
+export const BusinessContainer = styled.div`
+  max-width: 40rem;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  > span {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: ${({ theme }) => theme.COLORS.GRAY};
+  }
+`;
+
+export const LogoButton = styled.button`
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  left: 0;
+
+  > span {
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: ${({ theme }) => theme.COLORS.DARK};
+  }
+
+  > span:nth-of-type(2) {
+    color: ${({ theme }) => theme.COLORS.PRIMARY};
+  }
+`;
+
+export const WelcomeAndMenuContainer = styled.div`
   display: flex;
   gap: 12.5rem;
 

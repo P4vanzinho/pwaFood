@@ -4,8 +4,10 @@ export const Container = styled.header`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  position: fixed;
+  position: sticky;
   top: 0;
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  z-index: 1;
   width: 100%;
   margin: 3.4rem 0;
   padding: 0 4.7rem;
@@ -64,5 +66,6 @@ export const AuthLinks = styled.div`
     border: none;
     font-size: 14px;
     font-weight: 500;
+    height: 5rem;
   }
 `;
