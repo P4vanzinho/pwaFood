@@ -28,10 +28,6 @@ export default function AdminAppHeader() {
     new Array(quantityOfButtons).fill(false),
   );
 
-  if (pathname === '/admin/produtos') {
-    linkButtons[0] = true;
-  }
-
   function getTitleButtonForIndex(index?: number) {
     switch (index) {
       case 0:
@@ -56,7 +52,7 @@ export default function AdminAppHeader() {
   }
 
   useEffect(() => {
-    if (pathname === '/admin/products') {
+    if (pathname === '/admin/produtos') {
       setLinkButtons(prevButton => prevButton.map((_, index) => index === 0));
     }
   }, [pathname]);
