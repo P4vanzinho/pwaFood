@@ -1,7 +1,6 @@
 'use client';
 
 import AdminAppHeader from '@/app/components/AdminAppHeader';
-import SelectCategoryOptions from '@/app/components/SelectCategoryOptions';
 import {
   Container,
   Main,
@@ -52,6 +51,9 @@ export default function NewCategory() {
   const [price, setPrice] = useState<string>('');
   const [priceIsValid, setPriceIsValid] = useState<boolean>(false);
   const [uploadName, setUploadName] = useState<string>('');
+  const [categorySelected, setCategorySelected] = useState<
+    Category | undefined
+  >(undefined);
   const textAreaMaxLength = 300;
   const [remaining, setRemaining] = useState<number>(textAreaMaxLength);
   const router = useRouter();
@@ -99,6 +101,15 @@ export default function NewCategory() {
     }
   }, [file, requestNewProductUpload]);
 
+  useEffect(() => {
+    if (categories && categories.length === 1) {
+      setCategory(() => categories[0].name);
+    }
+    const foundCategory = categories.find(prev => prev.name === category);
+
+    setCategorySelected(foundCategory);
+  }, [categories, category, categorySelected]);
+
   function OnChangeUploadFile(file: any) {
     setFile(file || null);
   }
@@ -119,8 +130,6 @@ export default function NewCategory() {
   }
 
   function handleNewProduct() {
-    const categorySelected = categories?.find(prev => prev.name === category);
-
     requestRegisterNewProduct({
       method: 'POST',
       body: {
@@ -226,9 +235,13 @@ export default function NewCategory() {
                   id="foodCategory"
                   onChange={e => setCategory(e.target.value)}
                 >
-                  {businessId && (
-                    <SelectCategoryOptions businessId={businessId} />
-                  )}
+                  {businessId &&
+                    categories &&
+                    categories?.map(category => (
+                      <option key={category.id} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
                 </select>
               </SelectContainer>
             </SelectCategoryLabel>
