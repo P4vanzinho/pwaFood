@@ -10,6 +10,21 @@ export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.8);
 `;
 
+export const SidebarProductTemplates = styled.div`
+  width: 55.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+
+  > h1 {
+    font-family: Bebas Neue;
+    font-size: 3.6rem;
+    font-weight: 400;
+    line-height: normal;
+    color: ${({ theme }) => theme.COLORS.DARK};
+  }
+`;
+
 export const Container = styled.div`
   width: 100%;
   display: flex;
