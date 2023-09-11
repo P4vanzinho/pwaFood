@@ -12,7 +12,7 @@ import {
   ButtonsContainer,
 } from './styles';
 import { poppins, bebas_neue } from '@/app/fonts';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
 import { useSession } from 'next-auth/react';
