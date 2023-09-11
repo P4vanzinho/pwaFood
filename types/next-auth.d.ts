@@ -5,6 +5,7 @@ declare module 'next-auth' {
       name: string;
       token: string;
       email: string;
+      business: array;
     };
   }
 }

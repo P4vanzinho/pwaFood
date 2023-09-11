@@ -8,22 +8,19 @@ import {
 } from './styles';
 
 import AuthHeader from '../../components/AuthHeader';
-
-import Image from 'next/image';
-import { inter, bebas_neue } from '@/app/fonts';
+import { inter, bebas_neue, poppins } from '@/app/fonts';
 import Link from 'next/link';
 import { useState } from 'react';
-
 import { SyntheticEvent } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { foodFetch } from '@/app/services/foodFetch/foodFetch';
-import useFoodFetch from '@/app/hooks/useFoodFetch';
 import { EndpointFoodApiEnum } from '@/app/enums/foodApi/EndpointFoodApiEnum';
 
 export default function Register() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [name, setName] = useState<string>('');
+  const [businessName, setBusinessName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [notSeePassword, setNotSeePassword] = useState(true);
@@ -42,6 +39,7 @@ export default function Register() {
         email,
         password,
         name,
+        businessName,
         phone,
       },
       endPoint: EndpointFoodApiEnum.TENANT,
@@ -53,7 +51,7 @@ export default function Register() {
   }
 
   function handleShowConfirmPassword() {
-    setNotSeeConfirmPassword(!notSeePassword);
+    setNotSeeConfirmPassword(!notSeeConfirmPassword);
   }
 
   function validatePassword() {
@@ -72,7 +70,7 @@ export default function Register() {
       <Main>
         <form onSubmit={handleSubmit}>
           <FieldsetRegister>
-            <label htmlFor="email">
+            <label htmlFor="email" className={bebas_neue.className}>
               EMAIL
               <input
                 id="email"
@@ -81,11 +79,11 @@ export default function Register() {
                 onChange={e => setEmail(e.target.value)}
                 value={email}
                 minLength={1}
+                required
               />
-              {!email && <span>Insira seu email !!</span>}
             </label>
 
-            <label htmlFor="phone">
+            <label htmlFor="phone" className={bebas_neue.className}>
               TELEFONE
               <input
                 id="phone"
@@ -94,11 +92,11 @@ export default function Register() {
                 placeholder="(14)982098429"
                 onChange={e => setPhone(e.target.value)}
                 value={phone}
+                required
               />
-              {!phone && <span>Insira seu Telefone !!</span>}
             </label>
 
-            <label htmlFor="name">
+            <label htmlFor="name" className={bebas_neue.className}>
               NOME
               <input
                 id="name"
@@ -107,8 +105,21 @@ export default function Register() {
                 onChange={e => setName(e.target.value)}
                 value={name}
                 minLength={1}
+                required
               />
-              {!name && <span>Insira seu nome !!</span>}
+            </label>
+
+            <label htmlFor="businessName" className={bebas_neue.className}>
+              QUAL O NOME DA SUA EMPRESA ?
+              <input
+                id="businessName"
+                type="text"
+                placeholder="MC-Donalds"
+                onChange={e => setBusinessName(e.target.value)}
+                value={businessName}
+                minLength={1}
+                required
+              />
             </label>
 
             <label htmlFor="password" className={bebas_neue.className}>
@@ -122,6 +133,7 @@ export default function Register() {
                   value={password}
                   minLength={1}
                   onBlur={validatePassword}
+                  required
                 />
 
                 <button onClick={handleShowPassword} type="button">
@@ -132,10 +144,9 @@ export default function Register() {
                   )}
                 </button>
               </div>
-              {!password && <span>Insira sua senha !!</span>}
             </label>
 
-            <label htmlFor="confirmPassword">
+            <label htmlFor="confirmPassword" className={bebas_neue.className}>
               CONFIRMAR SENHA
               <div>
                 <input
@@ -146,6 +157,7 @@ export default function Register() {
                   value={confirmPassword}
                   minLength={1}
                   onBlur={validatePassword}
+                  required
                 />
 
                 <button onClick={handleShowConfirmPassword} type="button">
@@ -156,8 +168,9 @@ export default function Register() {
                   )}
                 </button>
               </div>
-              {!confirmPassword && <span>Confirme sua senha !!</span>}
-              {diferentPasswords && <span> {matchPasswordError}</span>}
+              {diferentPasswords && (
+                <span className={poppins.className}> {matchPasswordError}</span>
+              )}
             </label>
 
             <button type="submit">

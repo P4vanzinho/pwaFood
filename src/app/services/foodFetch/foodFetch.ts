@@ -22,16 +22,28 @@ export async function foodFetch<T = any>({
   endPoint,
   token,
   params,
+  headers = {},
 }: FoodFetchProps): Promise<null | FetchResponse<T>> {
-  console.log('foodFetch');
-
   let fetchParams;
 
   if (params) {
     fetchParams = `?${new URLSearchParams(params).toString()}`;
   }
 
-  console.log(fetchParams);
+  const isFormData = headers['Content-type'] === 'multipart/form-data';
+
+  const headersToFetch = {
+    'Content-type': 'application/json',
+    Authorization: `Bearer ${token}` ?? undefined,
+    ...headers,
+  };
+
+  if (isFormData) {
+    //@ts-expect-error
+    delete headersToFetch['Content-type'];
+  }
+
+  const bodyToFetch = isFormData ? body : JSON.stringify(body);
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL_API}/${endPoint}${
@@ -39,19 +51,21 @@ export async function foodFetch<T = any>({
     }`,
     {
       method: method ?? 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${token}` ?? undefined,
-      },
-      body: JSON.stringify(body),
+      headers: headersToFetch,
+      body: bodyToFetch as XMLHttpRequestBodyInit,
     },
   );
+
+  if (response.status === 401) {
+    return { error: 'Unauthorized' };
+  }
 
   const responseBody = await response.json();
 
   if (responseBody.error) {
     toast.error(responseBody.error, { draggable: false });
-    return null;
+
+    return responseBody.error;
   }
 
   toast.success(responseBody.message);

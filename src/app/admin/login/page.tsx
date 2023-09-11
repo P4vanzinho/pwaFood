@@ -25,7 +25,6 @@ export default function Login() {
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [notSeePassword, setNotSeePassword] = useState(true);
-  const [matchPasswordError, setMatchPasswordError] = useState<string>('');
 
   async function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
@@ -42,7 +41,7 @@ export default function Login() {
         });
       } else {
         toast.success('Parabéns !');
-        router.replace('/admin/products');
+        router.replace('/admin/produtos');
       }
     } catch (error) {
       return;
@@ -67,7 +66,7 @@ export default function Login() {
           </div>
 
           <FieldsetLogin>
-            <label htmlFor="email">
+            <label htmlFor="email" className={bebas_neue.className}>
               EMAIL
               <input
                 id="email"
@@ -76,8 +75,8 @@ export default function Login() {
                 onChange={e => setEmail(e.target.value)}
                 value={email}
                 minLength={1}
+                required
               />
-              {!email && <span>Insira seu email !!</span>}
             </label>
 
             <label htmlFor="password" className={bebas_neue.className}>
@@ -90,6 +89,7 @@ export default function Login() {
                   onChange={e => setPassword(e.target.value)}
                   value={password}
                   minLength={1}
+                  required
                 />
 
                 <button onClick={handleShowPassword} type="button">
@@ -100,7 +100,6 @@ export default function Login() {
                   )}
                 </button>
               </div>
-              {!password && <span>Insira sua senha !!</span>}
             </label>
 
             <button type="submit">

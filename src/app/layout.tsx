@@ -1,7 +1,6 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
 
 import StyledComponentsRegistry from '../lib/registry';
 
@@ -36,6 +35,9 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     overflow-x: hidden;
 
+    max-height: none;
+    min-height: 100vh;
+
     a{
       cursor: pointer;
       text-decoration: none;
@@ -50,7 +52,7 @@ const GlobalStyle = createGlobalStyle`
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={bebas_neue.className}>
+    <html lang="en">
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <body>

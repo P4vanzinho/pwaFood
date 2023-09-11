@@ -4,8 +4,10 @@ export const Container = styled.header`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  position: fixed;
+  position: sticky;
   top: 0;
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  z-index: 1;
   width: 100%;
   margin: 3.4rem 0;
   padding: 0 4.7rem;
@@ -45,16 +47,13 @@ export const MenuLinks = styled.div`
 export const AuthLinks = styled.div`
   .green_bg_white_color {
     background-color: ${({ theme }) => theme.COLORS.PRIMARY};
-    > span {
-      color: ${({ theme }) => theme.COLORS.WHITE};
-    }
+    color: ${({ theme }) => theme.COLORS.WHITE};
   }
 
   .gray_bg_black_color {
     background-color: ${({ theme }) => theme.COLORS.LIGHT};
-    > span {
-      color: ${({ theme }) => theme.COLORS.DARK};
-    }
+
+    color: ${({ theme }) => theme.COLORS.DARK};
   }
 
   display: flex;
@@ -65,10 +64,8 @@ export const AuthLinks = styled.div`
     padding: 0.9rem 2rem;
     border-radius: 2rem;
     border: none;
-
-    span {
-      font-size: 14px;
-      font-weight: 500;
-    }
+    font-size: 14px;
+    font-weight: 500;
+    height: 5rem;
   }
 `;

@@ -17,6 +17,7 @@ export const Main = styled.main`
   border: 1px solid #f5f5f5;
   border-radius: 12px;
   background: #fff;
+  margin: auto;
 
   form {
     display: flex;
@@ -146,8 +147,8 @@ export const FieldsetLogin = styled.fieldset`
     }
 
     > span {
-      font-size: 12px;
-      color: red;
+      font-size: 1.2rem;
+      color: ${({ theme }) => theme.COLORS.ERROR};
     }
   }
 
@@ -161,11 +162,11 @@ export const FieldsetLogin = styled.fieldset`
   }
 
   input:invalid {
-    border: 2px solid ${({ theme }) => theme.COLORS.ERROR};
+    outline: 2px solid ${({ theme }) => theme.COLORS.ERROR};
   }
 
   input:valid {
-    border: 2px solid ${({ theme }) => theme.COLORS.PRIMARY};
+    outline: 2px solid ${({ theme }) => theme.COLORS.PRIMARY};
   }
 
   input::placeholder {
