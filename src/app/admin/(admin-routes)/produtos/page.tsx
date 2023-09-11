@@ -1,5 +1,6 @@
 'use client';
 import { Container, Overlay } from './styles';
+import SidebarProductTemplates from '@/app/components/SidebarProductTemplate';
 import AdminAppHeader from '@/app/components/AdminAppHeader';
 import RegistrationsContainer from '@/app/components/RegistrationsContainer';
 import RegistrationButton from '@/app/components/RegistrationButton';
@@ -16,6 +17,7 @@ import { useSession } from 'next-auth/react';
 export default function Products() {
   const { data: session } = useSession();
   const [isAddButtonClicked, setIsAddButtonClicked] = useState<boolean>(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
 
   const businessId = session?.data.business[0].id;
 
@@ -26,19 +28,25 @@ export default function Products() {
 
       {businessId && <PageProductsContent businessId={businessId} />}
 
-      {isAddButtonClicked ? (
-        <RegistrationsContainer>
-          <button onClick={() => setIsAddButtonClicked(false)}>
-            <Image src="/vector.png" alt="" height={28} width={28} />
-          </button>
-        </RegistrationsContainer>
+      {isSidebarVisible === false ? (
+        isAddButtonClicked ? (
+          <RegistrationsContainer showSidebar={() => setIsSidebarVisible(true)}>
+            <button onClick={() => setIsAddButtonClicked(false)}>
+              <Image src="/vector.png" alt="" height={28} width={28} />
+            </button>
+          </RegistrationsContainer>
+        ) : (
+          <RegistrationButton>
+            <button onClick={() => setIsAddButtonClicked(true)}>
+              <IoMdAdd size={20} color="white" />
+              <span className={bebas_neue.className}>CADASTRO</span>
+            </button>
+          </RegistrationButton>
+        )
       ) : (
-        <RegistrationButton>
-          <button onClick={() => setIsAddButtonClicked(true)}>
-            <IoMdAdd size={20} color="white" />
-            <span className={bebas_neue.className}>CADASTRO</span>
-          </button>
-        </RegistrationButton>
+        <SidebarProductTemplates
+          showSidebar={() => setIsSidebarVisible(false)}
+        />
       )}
     </Container>
   );
