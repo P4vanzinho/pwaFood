@@ -17,7 +17,6 @@ export const SidebarProductTemplates = styled.div`
   gap: 7rem;
 
   > h1 {
-    font-family: Bebas Neue;
     font-size: 3.6rem;
     font-weight: 400;
     line-height: normal;
