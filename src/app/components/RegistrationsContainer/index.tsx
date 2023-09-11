@@ -8,10 +8,15 @@ import Image from 'next/image';
 
 interface Props {
   children: ReactNode;
+  showSidebar: () => void;
 }
 
-export default function RegistrationsContainer({ children }: Props) {
+export default function RegistrationsContainer({
+  children,
+  showSidebar,
+}: Props) {
   const router = useRouter();
+
   return (
     <Container>
       <div>
@@ -26,10 +31,7 @@ export default function RegistrationsContainer({ children }: Props) {
         </button>
       </div>
       <div>
-        <button
-          onClick={() => router.push('/admin/novoproduto')}
-          className={bebas_neue.className}
-        >
+        <button onClick={showSidebar} className={bebas_neue.className}>
           PRODUTO
         </button>
         <button>
