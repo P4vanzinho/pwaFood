@@ -5,6 +5,7 @@ import {
   LoadingCategoriesContainer,
   CategoryMessage,
   EndOfListMessage,
+  Button,
 } from './styles';
 
 import CategoryContainer from '@/app/components/CategoryContainer';
@@ -24,14 +25,15 @@ interface Category {
   businessId: number;
 }
 
+type ButtonSelectEnum = 'product' | 'category';
+
 export default function PageProductsContent({
   businessId,
 }: {
   businessId: number;
 }) {
-  const [borderProduct, setBorderProduct] = useState<boolean>(true);
-  const [borderCategory, setBorderCategory] = useState<boolean>(false);
-  const [isAddButtonClicked, setIsAddButtonClicked] = useState<boolean>(false);
+  const [buttonSelected, setButtonSelected] =
+    useState<ButtonSelectEnum>('product');
   const router = useRouter();
 
   const { data: categories, loading: categoriesLoading } = useFoodFetch(
@@ -56,32 +58,23 @@ export default function PageProductsContent({
           {categories && categories.length ? (
             <Main>
               <MainMenu>
-                <button
-                  className={
-                    borderProduct
-                      ? `${poppins.className} primaryBorder`
-                      : poppins.className
-                  }
+                <Button
+                  selected={buttonSelected === 'product'}
                   onClick={() => {
-                    setBorderProduct(true);
-                    setBorderCategory(false);
+                    setButtonSelected('product');
                   }}
                 >
                   <span>Produtos</span>
-                </button>
-                <button
-                  className={
-                    borderCategory
-                      ? `${poppins.className} primaryBorder`
-                      : poppins.className
-                  }
+                </Button>
+
+                <Button
+                  selected={buttonSelected === 'category'}
                   onClick={() => {
-                    setBorderProduct(false);
-                    setBorderCategory(true);
+                    setButtonSelected('category');
                   }}
                 >
                   <span>Categorias</span>
-                </button>
+                </Button>
               </MainMenu>
 
               <CategoryMessage className={poppins.className}>

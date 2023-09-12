@@ -4,12 +4,19 @@ import {
   ContentContainer,
   LogoButton,
   WelcomeAndMenuContainer,
+  Button,
 } from './styles';
 import { bebas_neue, poppins } from '../../fonts';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Image } from 'next/dist/client/image-component';
+
+type ButtonSelected =
+  | 'Cardapio'
+  | 'Promocoes'
+  | 'Pedidos'
+  | 'Configurar Whatsapp';
 
 export default function AdminAppHeader() {
   const { data: session } = useSession();
@@ -28,20 +35,29 @@ export default function AdminAppHeader() {
     new Array(quantityOfButtons).fill(false),
   );
 
-  function getTitleButtonForIndex(index?: number) {
-    switch (index) {
-      case 0:
-        return 'Cardapio';
-      case 1:
-        return 'Promocoes';
-      case 2:
-        return 'Pedidos';
-      case 3:
-        return 'Configurar Whatsapp';
-    }
-  }
+  const [buttonSelected, setButtonSelected] =
+    useState<ButtonSelected>('Cardapio');
 
-  function handleButtonsOfMenu(index: number) {
+  type Button = {
+    title: string;
+    selected: ButtonSelected;
+    route: string;
+  };
+
+  const buttons: Button[] = [
+    {
+      title: 'Cardapio',
+      selected: 'Cardapio',
+      route: '/admin/produtos',
+    },
+    {
+      title: 'Promoções',
+      selected: 'Promocoes',
+      route: '/admin/promocoes',
+    },
+  ];
+
+  /* function handleButtonsOfMenu(index: number) {
     const newButtonsState = [...linkButtons];
     newButtonsState.fill(false);
     newButtonsState[index] = true;
@@ -49,13 +65,13 @@ export default function AdminAppHeader() {
     if (index === 0) {
       router.push('/admin/produtos');
     }
-  }
+  } */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (pathname === '/admin/produtos') {
       setLinkButtons(prevButton => prevButton.map((_, index) => index === 0));
     }
-  }, [pathname]);
+  }, [pathname]); */
 
   return (
     <Container>
@@ -79,20 +95,14 @@ export default function AdminAppHeader() {
           </div>
 
           <section className={poppins.className}>
-            {Array.from({ length: quantityOfButtons }).map((_, index) => (
-              <button
+            {buttons.map((button, index) => (
+              <Button
+                selected={buttonSelected === button.selected}
                 key={index}
-                className={
-                  linkButtons[index]
-                    ? 'green_bg_white_color'
-                    : 'gray_bg_black_color'
-                }
-                onClick={() => {
-                  handleButtonsOfMenu(index);
-                }}
+                onClick={() => setButtonSelected(button.selected)}
               >
-                {getTitleButtonForIndex(index)}
-              </button>
+                {button.title}
+              </Button>
             ))}
           </section>
         </WelcomeAndMenuContainer>

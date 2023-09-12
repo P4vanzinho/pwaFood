@@ -33,34 +33,41 @@ export const NotListProductContainer = styled.div`
   }
 `;
 
-export const MainMenu = styled.div`
-  .primaryBorder {
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 3px solid ${({ theme }) => theme.COLORS.PRIMARY};
+type MainMenuProps = {
+  selected?: boolean;
+};
 
-    span {
-      color: ${({ theme }) => theme.COLORS.DARK};
-    }
-  }
-
+export const MainMenu = styled.div<MainMenuProps>`
   display: flex;
   gap: 4.5rem;
+`;
 
-  > button {
-    width: 12.6rem;
-    display: flex;
-    justify-content: center;
-    background: transparent;
-    border: none;
+type ButtonProps = {
+  selected?: boolean;
+};
 
-    > span {
-      font-size: 1.4rem;
-      font-weight: 500;
-      line-height: normal;
-      color: ${({ theme }) => theme.COLORS.GRAY};
-    }
+export const Button = styled.button<ButtonProps>`
+  width: 12.6rem;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  border: none;
+
+  ${props =>
+    props.selected &&
+    css`
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 3px solid ${props => props.theme.COLORS.PRIMARY};
+    `}
+
+  > span {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: normal;
+    color: ${({ theme, selected }) =>
+      !!selected ? theme.COLORS.DARK : theme.COLORS.GRAY};
   }
 `;
 

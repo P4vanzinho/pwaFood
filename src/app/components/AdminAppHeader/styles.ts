@@ -12,7 +12,7 @@ export const Container = styled.header`
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   z-index: 1;
 
-  .green_bg_white_color {
+  /*  .green_bg_white_color {
     background-color: ${({ theme }) => theme.COLORS.PRIMARY};
     color: ${({ theme }) => theme.COLORS.WHITE};
   }
@@ -22,7 +22,19 @@ export const Container = styled.header`
     > span {
       color: ${({ theme }) => theme.COLORS.DARK};
     }
-  }
+  } */
+`;
+
+type ButtonProps = {
+  selected?: boolean;
+};
+
+export const Button = styled.button<ButtonProps>`
+  background-color: ${props =>
+    !!props.selected ? props.theme.COLORS.PRIMARY : props.theme.WHITE};
+
+  color: ${props =>
+    !!props.selected ? props.theme.COLORS.WHITE : props.theme.DARK};
 `;
 
 export const ContentContainer = styled.div`
