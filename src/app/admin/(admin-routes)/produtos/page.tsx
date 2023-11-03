@@ -23,7 +23,6 @@ export default function Products() {
 
   return (
     <Container>
-      <AdminAppHeader />
       {isAddButtonClicked && <Overlay />}
 
       {businessId && <PageProductsContent businessId={businessId} />}

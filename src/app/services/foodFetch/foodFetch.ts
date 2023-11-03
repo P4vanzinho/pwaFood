@@ -1,4 +1,5 @@
 import { EndpointFoodApiEnum } from '@/app/enums';
+import { foodApiConfig } from '@/config';
 import { toast } from 'react-toastify';
 
 export type FoodFetchProps = {
@@ -46,9 +47,7 @@ export async function foodFetch<T = any>({
   const bodyToFetch = isFormData ? body : JSON.stringify(body);
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL_API}/${endPoint}${
-      fetchParams ? fetchParams : ''
-    }`,
+    `${foodApiConfig.url}/${endPoint}${fetchParams ? fetchParams : ''}`,
     {
       method: method ?? 'GET',
       headers: headersToFetch,

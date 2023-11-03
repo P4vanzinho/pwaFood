@@ -150,7 +150,6 @@ export default function NewCategory() {
 
   return (
     <Container>
-      <AdminAppHeader />;
       <Main>
         <form onSubmit={handleSubmit} action="">
           <h1 className={bebas_neue.className}>

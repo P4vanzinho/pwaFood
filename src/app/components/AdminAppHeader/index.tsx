@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Container,
   BusinessContainer,
@@ -8,70 +10,65 @@ import {
 } from './styles';
 import { bebas_neue, poppins } from '../../fonts';
 import { useEffect, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Image } from 'next/dist/client/image-component';
+import { socketIo } from '@/socket/io';
 
-type ButtonSelected =
-  | 'Cardapio'
-  | 'Promocoes'
-  | 'Pedidos'
-  | 'Configurar Whatsapp';
+type menuButtonSelected = 'cardapio' | 'whatsapp';
 
 export default function AdminAppHeader() {
+  useEffect(() => {
+    socketIo.on('connect', () => {});
+
+    socketIo.on('whatsapp-appState', (c: any) => {
+      alert(JSON.stringify(c));
+    });
+
+    socketIo.on('whatsapp-connectFailure', () => {
+      alert('whatsapp-connectFailure');
+    });
+
+    socketIo.on('whatsapp-disconnected', () => {
+      alert('whatsapp-disconnected');
+    });
+  }, []);
+
   const { data: session } = useSession();
   const router = useRouter();
   const business = session?.data?.business?.length
     ? session?.data?.business[0]
     : null;
 
-  const pathname = usePathname();
   const businessName = business?.name.toUpperCase();
-
   const userName = session?.data.name;
-  const quantityOfButtons = 4;
 
-  const [linkButtons, setLinkButtons] = useState(
-    new Array(quantityOfButtons).fill(false),
-  );
+  const [menuButtonSelected, setMenuButtonSelected] =
+    useState<menuButtonSelected>('cardapio');
 
-  const [buttonSelected, setButtonSelected] =
-    useState<ButtonSelected>('Cardapio');
+  const menuButtonOnClick = (menuButton: MenuButton) => {
+    setMenuButtonSelected(menuButton.selected);
+    router.push(menuButton.route);
+  };
 
-  type Button = {
+  type MenuButton = {
     title: string;
-    selected: ButtonSelected;
+    selected: menuButtonSelected;
     route: string;
   };
 
-  const buttons: Button[] = [
+  const menuButtons: MenuButton[] = [
     {
       title: 'Cardapio',
-      selected: 'Cardapio',
+      selected: 'cardapio',
       route: '/admin/produtos',
     },
     {
-      title: 'Promoções',
-      selected: 'Promocoes',
-      route: '/admin/promocoes',
+      title: 'Configurar Whatsapp',
+      selected: 'whatsapp',
+      route: '/admin/whatsapp',
     },
   ];
-
-  /* function handleButtonsOfMenu(index: number) {
-    const newButtonsState = [...linkButtons];
-    newButtonsState.fill(false);
-    newButtonsState[index] = true;
-    setLinkButtons(newButtonsState);
-    if (index === 0) {
-      router.push('/admin/produtos');
-    }
-  } */
-
-  /*   useEffect(() => {
-    if (pathname === '/admin/produtos') {
-      setLinkButtons(prevButton => prevButton.map((_, index) => index === 0));
-    }
-  }, [pathname]); */
 
   return (
     <Container>
@@ -95,13 +92,13 @@ export default function AdminAppHeader() {
           </div>
 
           <section className={poppins.className}>
-            {buttons.map((button, index) => (
+            {menuButtons.map((menuButton, index) => (
               <Button
-                selected={buttonSelected === button.selected}
                 key={index}
-                onClick={() => setButtonSelected(button.selected)}
+                selected={menuButtonSelected === menuButton.selected}
+                onClick={() => menuButtonOnClick(menuButton)}
               >
-                {button.title}
+                {menuButton.title}
               </Button>
             ))}
           </section>

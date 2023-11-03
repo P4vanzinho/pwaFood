@@ -8,8 +8,6 @@ import { bebas_neue } from './fonts';
 
 import { createGlobalStyle } from 'styled-components';
 
-import { Metadata } from 'next';
-
 import { ThemeProvider } from 'styled-components';
 
 import { theme } from './styles/theme';
@@ -28,9 +26,6 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
-    
-
   }
 
   body{
@@ -49,7 +44,6 @@ const GlobalStyle = createGlobalStyle`
       cursor: pointer;
     }
   }
-
 `;
 
 export default function RootLayout({ children }: { children: ReactNode }) {

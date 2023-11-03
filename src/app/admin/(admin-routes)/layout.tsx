@@ -1,12 +1,15 @@
-import { getServerSession } from 'next-auth';
-import { ReactNode } from 'react';
-import { authOptions } from '@/app/api/auth/authOptions';
-import { redirect } from 'next/navigation';
+import { ReactNode, useEffect } from 'react';
+import AdminAppHeader from '@/app/components/AdminAppHeader';
 
 interface PrivateLayoutProps {
   children: ReactNode;
 }
 
-export default async function PrivateLayout({ children }: PrivateLayoutProps) {
-  return <>{children}</>;
+export default function PrivateLayout({ children }: PrivateLayoutProps) {
+  return (
+    <>
+      <AdminAppHeader />
+      {children}
+    </>
+  );
 }

@@ -1,5 +1,5 @@
-import NextAuth from 'next-auth';
-import { NextAuthOptions } from 'next-auth';
+import { EndpointFoodApiEnum } from '@/app/enums/foodApi';
+import { foodApiConfig } from '@/config';
 import { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
@@ -13,9 +13,9 @@ export const authOptions: AuthOptions = {
         password: { label: 'password', type: 'password' },
       },
 
-      async authorize(credentials, req) {
+      async authorize(credentials, _req) {
         const response = await fetch(
-          'https://goldfish-app-vg4r3.ondigitalocean.app/tenant/login',
+          foodApiConfig.url + '/' + EndpointFoodApiEnum.TENANT_LOGIN,
           {
             method: 'POST',
             headers: {

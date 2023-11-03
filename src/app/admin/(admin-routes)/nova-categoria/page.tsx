@@ -46,7 +46,6 @@ export default function NewCategory() {
 
   return (
     <Container onSubmit={handleSubmit}>
-      <AdminAppHeader />;
       <Main>
         <h1 className={bebas_neue.className}>
           CADASTRO DE CATEGORIA DE PRODUTO
