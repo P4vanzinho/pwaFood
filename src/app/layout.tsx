@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 
-import StyledComponentsRegistry from '../lib/registry';
+import StyledComponentsRegistry from './registry';
 
 import { bebas_neue } from './fonts';
 
@@ -49,15 +49,16 @@ const GlobalStyle = createGlobalStyle`
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <body>
-          <StyledComponentsRegistry>
+      <StyledComponentsRegistry>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <body>
             <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
-          </StyledComponentsRegistry>
-          <ToastContainer className={bebas_neue.className} />
-        </body>
-      </ThemeProvider>
+
+            <ToastContainer className={bebas_neue.className} />
+          </body>
+        </ThemeProvider>
+      </StyledComponentsRegistry>
     </html>
   );
 }
