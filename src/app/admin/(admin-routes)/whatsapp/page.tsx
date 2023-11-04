@@ -15,8 +15,6 @@ type WhatsappStatus = {
 export default function Products() {
   const { data: session } = useSession();
 
-  console.log(session?.data.business);
-
   const [whatsappStatus, setWhatsappStatus] = useState<
     WhatsappStatus | undefined
   >();
@@ -41,8 +39,6 @@ export default function Products() {
     });
 
     socketIo.on('whatsapp-connected', (jid: string) => {
-      alert(jid);
-
       setWhatsappStatus({
         isConnected: true,
         qrCode: '',

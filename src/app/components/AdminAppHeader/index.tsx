@@ -9,14 +9,14 @@ import {
   Button,
 } from './styles';
 import { bebas_neue, poppins } from '../../fonts';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Image } from 'next/dist/client/image-component';
 import { socketIo } from '@/socket/io';
 import { foodApiConfig } from '@/config/foodApi';
 
-type menuButtonSelected = 'cardapio' | 'whatsapp';
+type MenuButtonSelected = 'cardapio' | 'whatsapp';
 
 export default function AdminAppHeader() {
   const { data: session } = useSession();
@@ -24,6 +24,31 @@ export default function AdminAppHeader() {
   const business = session?.data?.business?.length
     ? session?.data?.business[0]
     : null;
+
+  const pathname = usePathname();
+
+  const menuButtons = [
+    {
+      title: 'Cardapio',
+      selected: 'cardapio' as MenuButtonSelected,
+      route: '/admin/produtos',
+    },
+    {
+      title: 'Configurar Whatsapp',
+      selected: 'whatsapp' as MenuButtonSelected,
+      route: '/admin/whatsapp',
+    },
+  ];
+
+  const [menuButtonSelected, setMenuButtonSelected] = useState<
+    MenuButtonSelected | undefined
+  >(() => {
+    const buttonSelected = menuButtons.find(
+      button => button.route === pathname,
+    );
+
+    return buttonSelected?.selected as MenuButtonSelected;
+  });
 
   useEffect(() => {
     if (!business?.id || !session?.data.token) {
@@ -58,9 +83,6 @@ export default function AdminAppHeader() {
   const businessName = business?.name.toUpperCase();
   const userName = session?.data.name;
 
-  const [menuButtonSelected, setMenuButtonSelected] =
-    useState<menuButtonSelected>('cardapio');
-
   const menuButtonOnClick = (menuButton: MenuButton) => {
     setMenuButtonSelected(menuButton.selected);
     router.push(menuButton.route);
@@ -68,22 +90,9 @@ export default function AdminAppHeader() {
 
   type MenuButton = {
     title: string;
-    selected: menuButtonSelected;
+    selected: MenuButtonSelected;
     route: string;
   };
-
-  const menuButtons: MenuButton[] = [
-    {
-      title: 'Cardapio',
-      selected: 'cardapio',
-      route: '/admin/produtos',
-    },
-    {
-      title: 'Configurar Whatsapp',
-      selected: 'whatsapp',
-      route: '/admin/whatsapp',
-    },
-  ];
 
   return (
     <Container>
