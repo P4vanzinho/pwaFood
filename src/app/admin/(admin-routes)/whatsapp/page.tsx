@@ -9,11 +9,13 @@ import { useEffect, useState } from 'react';
 type WhatsappStatus = {
   qrCode: string;
   isConnected: boolean;
+  timeout: number;
 };
 
 export default function Products() {
   const { data: session } = useSession();
-  const businessId = session?.data.business[0].id;
+
+  console.log(session?.data.business);
 
   const [whatsappStatus, setWhatsappStatus] = useState<
     WhatsappStatus | undefined
@@ -22,26 +24,29 @@ export default function Products() {
   const [loadingWhatsappStatus, setLoadingWhatsappStatus] =
     useState<boolean>(false);
 
-  const [whatsappTimeout, setWhatsappTimeout] = useState<number | undefined>();
-  const [qrCodeExpired, setQrCodeExpired] = useState(true);
+  const [whatsappTimeout, setWhatsappTimeout] = useState<number | null>(null);
+  const [qrCodeExpired, setQrCodeExpired] = useState<boolean | null>(null);
 
   const getWhatsappStatus = () => {
     setLoadingWhatsappStatus(true);
 
-    socketIo.emit('status', function (status: any) {
+    socketIo.emit('status', function (status: WhatsappStatus) {
       setLoadingWhatsappStatus(false);
 
       if (status) {
-        setWhatsappTimeout(50);
+        setWhatsappTimeout(status.timeout ?? 30);
         setQrCodeExpired(false);
         setWhatsappStatus(status);
       }
     });
 
-    socketIo.on('whatsapp-connected', () => {
+    socketIo.on('whatsapp-connected', (jid: string) => {
+      alert(jid);
+
       setWhatsappStatus({
         isConnected: true,
         qrCode: '',
+        timeout: 0,
       });
     });
   };
@@ -84,11 +89,15 @@ export default function Products() {
               <li>Aponte a câmera do celular para o qrcpde abaixo</li>
               <div>
                 <QRCode value={whatsappStatus?.qrCode} />
+
+                {qrCodeExpired && <span>Qr code expirado</span>}
               </div>
               {!!whatsappTimeout && <span>{whatsappTimeout}</span>}
               <span>
                 {qrCodeExpired && (
-                  <button onClick={getWhatsappStatus}>Get QR code</button>
+                  <button onClick={getWhatsappStatus}>
+                    Gerar novo QR code
+                  </button>
                 )}
               </span>
             </ol>
