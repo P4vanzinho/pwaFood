@@ -9,12 +9,10 @@ import {
   Button,
 } from './styles';
 import { bebas_neue, poppins } from '../../fonts';
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Image } from 'next/dist/client/image-component';
-import { socketIo } from '@/socket/io';
-import { foodApiConfig } from '@/config/foodApi';
 
 type MenuButtonSelected = 'cardapio' | 'whatsapp';
 
@@ -49,34 +47,6 @@ export default function AdminAppHeader() {
 
     return buttonSelected?.selected as MenuButtonSelected;
   });
-
-  useEffect(() => {
-    if (!business?.id || !session?.data.token) {
-      return;
-    }
-
-    const botConfig = {
-      api: {
-        token: session?.data.token,
-        refreshToken: '',
-        baseUrl: {
-          value: foodApiConfig.url,
-          queryParameter: `businessId=${business?.id}`,
-        },
-        entryPoints: {
-          getBotResponses: '/auto-responses',
-        },
-      },
-    };
-
-    socketIo.on('connect', () => {
-      socketIo.emit('send-bot-config', JSON.stringify(botConfig));
-    });
-
-    socketIo.on('whatsapp-disconnected', () => {
-      console.log('whatsapp-disconnected');
-    });
-  }, [business?.id, session?.data.token]);
 
   const router = useRouter();
 

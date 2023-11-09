@@ -5,6 +5,7 @@ import { Wrapper, Container } from './styles';
 import { socketIo } from '@/socket/io';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { foodApiConfig } from '@/config';
 
 type WhatsappStatus = {
   qrCode: string;
@@ -15,6 +16,12 @@ type WhatsappStatus = {
 export default function Products() {
   const { data: session } = useSession();
 
+  const business = session?.data?.business?.length
+    ? session?.data?.business[0]
+    : null;
+
+  const token = session?.data?.token;
+
   const [whatsappStatus, setWhatsappStatus] = useState<
     WhatsappStatus | undefined
   >();
@@ -24,6 +31,7 @@ export default function Products() {
 
   const [whatsappTimeout, setWhatsappTimeout] = useState<number | null>(null);
   const [qrCodeExpired, setQrCodeExpired] = useState<boolean | null>(null);
+  const [showDownloadWaResponser, setShowDownloadWaResponser] = useState(false);
 
   const getWhatsappStatus = () => {
     setLoadingWhatsappStatus(true);
@@ -48,8 +56,48 @@ export default function Products() {
   };
 
   useEffect(() => {
+    if (!whatsappStatus?.isConnected || !business || !token) {
+      return;
+    }
+
+    const waAutoResponderConfig = {
+      api: {
+        token,
+        refreshToken: '',
+        url: {
+          value: `${foodApiConfig.url}/business/${business?.id}/response`,
+          verb: 'GET',
+        },
+      },
+    };
+
+    socketIo.emit(
+      'send-wa-auto-responder-config',
+      JSON.stringify(waAutoResponderConfig),
+    );
+  }, [whatsappStatus, business, token]);
+
+  useEffect(() => {
     getWhatsappStatus();
   }, []);
+
+  useEffect(() => {
+    socketIo.on('connect_error', () => {
+      setShowDownloadWaResponser(true);
+      setLoadingWhatsappStatus(false);
+      setWhatsappStatus({
+        isConnected: false,
+        qrCode: '',
+        timeout: 0,
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (whatsappStatus?.isConnected) {
+      setShowDownloadWaResponser(false);
+    }
+  }, [whatsappStatus]);
 
   useEffect(() => {
     if (!whatsappTimeout) {
@@ -72,6 +120,17 @@ export default function Products() {
   return (
     <Wrapper>
       <Container>
+        {showDownloadWaResponser && (
+          <div>
+            <h2>
+              Para o funcionamento do whatsapp auto responder, é preciso baixar
+              e instalar um aplicativo em seu computador. Clique Aqui para
+              baixá-lo.
+            </h2>
+            <button>Baixar Aplicativo</button>
+          </div>
+        )}
+
         {loadingWhatsappStatus && <h1>loading</h1>}
 
         {whatsappStatus?.qrCode && !loadingWhatsappStatus && (
@@ -100,7 +159,9 @@ export default function Products() {
           </>
         )}
 
-        {whatsappStatus?.isConnected && <h1>Whatsapp conectado.</h1>}
+        {whatsappStatus?.isConnected && (
+          <h1>Whatsapp auto responder conectado.</h1>
+        )}
       </Container>
     </Wrapper>
   );

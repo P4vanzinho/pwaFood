@@ -8,5 +8,7 @@ type ParamsString = {
 };
 
 export default function adminPage({ params }: ParamsString) {
+  console.log(params);
+
   return <> </>;
 }
