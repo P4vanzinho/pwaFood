@@ -4,17 +4,13 @@ import { FoodFetchProps, foodFetch } from '../services/foodFetch/foodFetch';
 import { EndpointFoodApiEnum } from '../enums';
 import { useRouter } from 'next/navigation';
 
-interface Upload {
-  id: number;
-}
-
-function useFoodFetch(
+function useFoodFetch<T>(
   endPoint?: EndpointFoodApiEnum,
   query?: Record<string, any>,
   shouldUseToken?: boolean,
 ) {
   const { data: session } = useSession();
-  const [data, setData] = useState<Upload | never[]>([]);
+  const [data, setData] = useState<T>();
   const [error, setError] = useState<string | undefined>();
   const [message, setMessage] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
@@ -66,13 +62,24 @@ function useFoodFetch(
       async function fetch() {
         setLoading(true);
 
-        const response = await foodFetch({
-          token: session?.data?.token,
+        let fetchParams: any = {
           endPoint,
           method,
           body,
           headers,
-        });
+        };
+
+        if (
+          shouldUseToken === undefined ||
+          (typeof shouldUseToken == 'boolean' && shouldUseToken)
+        ) {
+          fetchParams = {
+            ...fetchParams,
+            token: session?.data?.token,
+          };
+        }
+
+        const response = await foodFetch(fetchParams);
 
         setData(response?.data);
         setError(response?.error);
@@ -80,13 +87,13 @@ function useFoodFetch(
         setLoading(false);
       }
 
-      if (!session) {
+      if (shouldUseToken && !session) {
         return;
       }
 
       fetch();
     },
-    [session],
+    [session, shouldUseToken],
   );
 
   return { data, error, message, loading, request, setQueryBuilder };

@@ -1,5 +1,5 @@
 import { Container } from './styles';
-import { FaRegHeart, FaRegUser, FaSearch } from 'react-icons/fa';
+import { FaRegHeart, FaRegUser } from 'react-icons/fa';
 import { BiBasket, BiHomeAlt2, BiSearch, BiMinus } from 'react-icons/bi';
 
 export default function MenuBottom() {

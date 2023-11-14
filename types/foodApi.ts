@@ -16,7 +16,9 @@ export type FoodApiProduct = {
   updatedAt: Date;
   enabled: boolean;
   upload: FoodApiUpload | null;
+  slug: string;
   price: string | null;
+  description: string | null;
 };
 
 export type FoodApiCategory = {
