@@ -1335,6 +1335,13 @@
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
+"@types/react-currency-format@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react-currency-format/-/react-currency-format-1.0.3.tgz#5d5ea38f39741146bcb3014c861359ef725d76a8"
+  integrity sha512-q9Qj3JK9H5EnAibY2jLciXQL0w8rpklBFGz2oSqyaK2sh/xQk0jjqhGpAacCIDnEzRbmO97Q9I0tpq9+oxK28g==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@18.2.7":
   version "18.2.7"
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.7.tgz"
@@ -2366,6 +2373,11 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
+feather-icons-react@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/feather-icons-react/-/feather-icons-react-0.6.2.tgz#0f562b325b3e8ab2b936daf76e935fb9dcbd22c1"
+  integrity sha512-G677Y5nc3HzP1f5NNb5LJuZwKrI58BK4+/9O8Bl4naF9JixC+YL4trVom1F2ajnilq/EbU8JETPTNqvCzwH1qA==
+
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/file-entry-cache/-/file-entry-cache-6.0.1.tgz"
@@ -3355,6 +3367,11 @@ path-type@^4.0.0:
   resolved "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
+perfect-scrollbar@^1.5.0:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/perfect-scrollbar/-/perfect-scrollbar-1.5.5.tgz#41a211a2fb52a7191eff301432134ea47052b27f"
+  integrity sha512-dzalfutyP3e/FOpdlhVryN4AJ5XDVauVWxybSkLZmakFE2sS3y3pc4JnSprw8tGmHvkaG5Edr5T7LBTZ+WWU2g==
+
 picocolors@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/picocolors/-/picocolors-1.0.0.tgz"
@@ -3415,7 +3432,7 @@ pretty-format@^3.8.0:
   resolved "https://registry.npmjs.org/pretty-format/-/pretty-format-3.8.0.tgz"
   integrity sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==
 
-prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -3439,6 +3456,13 @@ queue-microtask@^1.2.2:
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
+react-currency-format@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-currency-format/-/react-currency-format-1.1.0.tgz#efef7f18045fc09a987de270b144f5eec8801dab"
+  integrity sha512-WWrEOIp/3GbDSk1wlhFXaBc7IHGT3IwL306DHbGP3GVr4YFa0iS5hHPbKjHa0haruGL4Ly+WG4/5jBHpUtgqZg==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
@@ -3455,15 +3479,23 @@ react-drag-drop-files@^2.3.10:
     prop-types "^15.7.2"
     styled-components "^5.3.0"
 
-react-icons@^4.10.1:
-  version "4.10.1"
-  resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.10.1.tgz"
-  integrity sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==
+react-icons@^4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.11.0.tgz#4b0e31c9bfc919608095cc429c4f1846f4d66c65"
+  integrity sha512-V+4khzYcE5EBk/BvcuYRq6V/osf11ODUM2J8hg2FDSswRrGvqiYUYPRy4OdrWaQOBj4NcpJfmHZLNaD+VH0TyA==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-perfect-scrollbar@^1.5.8:
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/react-perfect-scrollbar/-/react-perfect-scrollbar-1.5.8.tgz#380959387a325c5c9d0268afc08b3f73ed5b3078"
+  integrity sha512-bQ46m70gp/HJtiBOF3gRzBISSZn8FFGNxznTdmTG8AAwpxG1bJCyn7shrgjEvGSQ5FJEafVEiosY+ccER11OSA==
+  dependencies:
+    perfect-scrollbar "^1.5.0"
+    prop-types "^15.6.1"
 
 react-qr-code@^2.0.12:
   version "2.0.12"

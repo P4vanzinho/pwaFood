@@ -33,14 +33,20 @@ export async function foodFetch<T = any>({
 
   const isFormData = headers['Content-type'] === 'multipart/form-data';
 
-  const headersToFetch = {
+  let headersToFetch: any = {
     'Content-type': 'application/json',
-    Authorization: `Bearer ${token}` ?? undefined,
+
     ...headers,
   };
 
+  if (token) {
+    headersToFetch = {
+      ...headersToFetch,
+      Authorization: `Bearer ${token}` ?? undefined,
+    };
+  }
+
   if (isFormData) {
-    //@ts-expect-error
     delete headersToFetch['Content-type'];
   }
 

@@ -5,11 +5,10 @@ interface PrivateLayoutProps {
   children: ReactNode;
 }
 
-export default function PrivateLayout({ children }: PrivateLayoutProps) {
+export default function Home() {
   return (
     <>
-      <AdminAppHeader />
-      {children}
+      <div>produtos</div>
     </>
   );
 }

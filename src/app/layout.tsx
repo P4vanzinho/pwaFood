@@ -43,6 +43,10 @@ const GlobalStyle = createGlobalStyle`
     button{
       cursor: pointer;
     }
+
+    h2 {
+      font-size: 16rem;
+    }
   }
 `;
 

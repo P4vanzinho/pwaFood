@@ -48,9 +48,6 @@ export default function PageProductsContent({
     <>
       {categoriesLoading ? (
         <LoadingCategoriesContainer>
-          <p className={poppins.className}>
-            Carregando categorias de alimentos
-          </p>
           <LoadingIndicator />
         </LoadingCategoriesContainer>
       ) : (

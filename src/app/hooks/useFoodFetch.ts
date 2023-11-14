@@ -11,6 +11,7 @@ interface Upload {
 function useFoodFetch(
   endPoint?: EndpointFoodApiEnum,
   query?: Record<string, any>,
+  shouldUseToken?: boolean,
 ) {
   const { data: session } = useSession();
   const [data, setData] = useState<Upload | never[]>([]);
@@ -24,12 +25,22 @@ function useFoodFetch(
     async function fetch() {
       setLoading(true);
 
-      const response = await foodFetch({
-        token: session?.data?.token,
+      let fetchParams: FoodFetchProps = {
         endPoint: endPoint as EndpointFoodApiEnum,
         params: queryBuilder,
-        // body,
-      });
+      };
+
+      if (
+        shouldUseToken === undefined ||
+        (typeof shouldUseToken == 'boolean' && shouldUseToken)
+      ) {
+        fetchParams = {
+          ...fetchParams,
+          token: session?.data?.token,
+        };
+      }
+
+      const response = await foodFetch(fetchParams);
 
       setData(response?.data);
       setError(response?.error);
@@ -46,7 +57,7 @@ function useFoodFetch(
     }
 
     fetch();
-  }, [session, endPoint, queryBuilder, router]);
+  }, [session, endPoint, queryBuilder, router, shouldUseToken]);
 
   const request = useCallback(
     ({ endPoint, body, method, headers }: FoodFetchProps) => {
