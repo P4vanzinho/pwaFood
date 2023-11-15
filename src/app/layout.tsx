@@ -19,7 +19,7 @@ import '../assets/ReactToastify.css';
 const GlobalStyle = createGlobalStyle`
 
   :root{
-    font-size: 62.5%;
+    font-size: 16px;
   }
 
   *{

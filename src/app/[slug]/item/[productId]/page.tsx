@@ -7,6 +7,10 @@ import { EndpointFoodApiEnum } from '@/app/enums';
 import Title from '@/app/components/Title';
 import Text from '@/app/components/Text';
 import { FoodApiProduct } from '../../../../../types/foodApi';
+import Button from '@/app/components/Button';
+import InputQty from '@/app/components/InputQty';
+import { useEffect, useState } from 'react';
+import Price from '@/app/components/Price';
 
 type ProductProps = {
   params: {
@@ -16,7 +20,13 @@ type ProductProps = {
 };
 
 export default function Product(props: ProductProps) {
-  const { data } = useFoodFetch<FoodApiProduct>(
+  const [qty, setQty] = useState(0);
+
+  const inputQtyCallback = (value: number) => {
+    setQty(value);
+  };
+
+  const { data: product } = useFoodFetch<FoodApiProduct>(
     EndpointFoodApiEnum.PRODUCT,
     {
       businessId: props.params.slug,
@@ -25,21 +35,38 @@ export default function Product(props: ProductProps) {
     false,
   );
 
+  console.log(product);
+
+  const subTotal = product?.price ? qty * Number(product.price) : 0;
+
   return (
     <Container>
-      {!!data && (
+      {!!product && (
         <>
           <Image
-            src={data.upload?.url as any}
-            width={500}
-            height={500}
-            alt={`${data.slug} image`}
+            width={0}
+            height={0}
+            sizes="100vw"
+            src={product.upload?.url as any}
+            alt={`${product.slug} image`}
           />
 
           <div>
-            <Title>{data.name}</Title>
-            <Text>{data.description}</Text>
+            <Title>{product.name}</Title>
+            <Text>{product.description}</Text>
           </div>
+
+          <footer>
+            <div>
+              <div>
+                <InputQty callback={inputQtyCallback} initialValue={qty} />
+              </div>
+
+              <Price>{subTotal}</Price>
+            </div>
+
+            <Button disabled={!qty} text="ADICIONAR À SACOLA" />
+          </footer>
         </>
       )}
     </Container>

@@ -14,6 +14,8 @@ export const Container = styled.div`
 
   p {
     margin: 0.625rem;
+    display: inline-block;
+    width: 100%;
   }
 
   span {
