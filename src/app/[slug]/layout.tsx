@@ -1,9 +1,10 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import MenuBottom from '../components/MenuBottom';
 
 import styled from 'styled-components';
+import AppContext, { AppContextProvider } from '@/context';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,13 +26,18 @@ const Container = styled.div`
 
 interface PrivateLayoutProps {
   children: ReactNode;
+  params: {
+    slug: string;
+  };
 }
 
-export default function PublicLayout({ children }: PrivateLayoutProps) {
+export default function PublicLayout({ children, params }: PrivateLayoutProps) {
   return (
-    <Wrapper>
-      <Container>{children}</Container>
-      <MenuBottom />
-    </Wrapper>
+    <AppContextProvider>
+      <Wrapper>
+        <Container>{children}</Container>
+        <MenuBottom slug={params.slug} />
+      </Wrapper>
+    </AppContextProvider>
   );
 }

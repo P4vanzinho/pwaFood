@@ -11,6 +11,9 @@ export const Container = styled.div`
   border-radius: 10px;
   -webkit-box-shadow: 0px 4px 15px -2px rgba(0, 0, 0, 0.03);
   box-shadow: 0px 4px 15px -2px rgba(0, 0, 0, 0.03);
+  word-break: break-word;
+  word-wrap: break-word;
+  white-space: normal;
 
   p {
     margin: 0.625rem;

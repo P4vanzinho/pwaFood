@@ -1,8 +1,10 @@
 'use client';
 
-import ProductList from '../components/CategoryList';
+import CategoryList from '../components/CategoryList';
 import styled from 'styled-components';
 import Text from '../components/Text';
+import AppContext from '@/context';
+import { useContext } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -40,7 +42,7 @@ export default function Home(props: HomeProps) {
           Olá, <span>Rogério!</span>
         </Text>
       </div>
-      <ProductList businessId={props.params.slug} />
+      <CategoryList businessId={props.params.slug} />
     </Container>
   );
 }

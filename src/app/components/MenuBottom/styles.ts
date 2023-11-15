@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.WHITE};
@@ -14,32 +14,30 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
 
-  > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+type ButtonProps = {
+  selected?: boolean;
+};
 
-    width: 50px;
-    height: 100%;
+export const Button = styled.div<ButtonProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    > svg:nth-of-type(2) {
-      color: transparent;
-      position: absolute;
-      top: 50px;
-    }
+  width: 50px;
+  height: 100%;
 
-    &:hover {
-      svg {
-        color: ${({ theme }) => theme.COLORS.PRIMARY};
-      }
-    }
+  > svg:nth-of-type(1) {
+    color: ${props =>
+      props.selected ? props.theme.COLORS.PRIMARY : props.theme.COLORS.DARK};
   }
 
-  > svg {
-    color: ${({ theme }) => theme.COLORS.DARK};
-    margin: 0 auto;
-    display: block;
+  > svg:nth-of-type(2) {
+    color: ${props =>
+      props.selected ? props.theme.COLORS.PRIMARY : 'transparent'};
+    position: absolute;
+    top: 50px;
   }
 `;
