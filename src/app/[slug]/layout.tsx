@@ -4,7 +4,7 @@ import { ReactNode, useContext, useState } from 'react';
 import MenuBottom from '../components/MenuBottom';
 
 import styled from 'styled-components';
-import AppContext, { AppContextProvider } from '@/context';
+import { BagContextProvider } from '@/context/bag';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,11 +33,11 @@ interface PrivateLayoutProps {
 
 export default function PublicLayout({ children, params }: PrivateLayoutProps) {
   return (
-    <AppContextProvider>
+    <BagContextProvider>
       <Wrapper>
         <Container>{children}</Container>
         <MenuBottom slug={params.slug} />
       </Wrapper>
-    </AppContextProvider>
+    </BagContextProvider>
   );
 }

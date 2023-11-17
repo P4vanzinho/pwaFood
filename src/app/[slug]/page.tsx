@@ -3,8 +3,6 @@
 import CategoryList from '../components/CategoryList';
 import styled from 'styled-components';
 import Text from '../components/Text';
-import AppContext from '@/context';
-import { useContext } from 'react';
 
 const Container = styled.div`
   display: flex;

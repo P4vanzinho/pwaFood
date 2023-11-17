@@ -1,9 +1,12 @@
-import { Container, Button } from './styles';
+'use client';
+
+import { Container, Button, Bubble } from './styles';
 import { FaRegHeart, FaRegUser } from 'react-icons/fa';
 import { BiBasket, BiHomeAlt2, BiSearch, BiMinus } from 'react-icons/bi';
 import { useRouter, usePathname } from 'next/navigation';
-import { useContext, useMemo, useState } from 'react';
-import AppContext from '@/context';
+import { useBagContext } from '@/context/bag';
+import { ReactNode } from 'react';
+import { bebas_neue, inter } from '@/app/fonts';
 
 type MenuBottomPRops = {
   slug: string;
@@ -12,6 +15,20 @@ type MenuBottomPRops = {
 export default function MenuBottom({ slug }: MenuBottomPRops) {
   const router = useRouter();
   const path = usePathname();
+  const { total } = useBagContext();
+
+  const ViewBubble = () => {
+    return (
+      <>
+        {!!total && (
+          <Bubble className={inter.className}>
+            {' '}
+            {total.toLocaleString('pt-BR')}
+          </Bubble>
+        )}
+      </>
+    );
+  };
 
   const buttonsConfig = [
     {
@@ -26,14 +43,15 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
     },
 
     {
-      Icon: BiBasket,
-      route: '/carrinho',
-      selected: false,
-    },
-    {
       Icon: FaRegHeart,
       route: '/favorito',
       selected: false,
+    },
+    {
+      Icon: BiBasket,
+      route: '/sacola',
+      selected: false,
+      Info: ViewBubble,
     },
     {
       Icon: FaRegUser,
@@ -60,7 +78,7 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
 
   return (
     <Container>
-      {buttons.map(({ Icon, route, selected }) => (
+      {buttons.map(({ Icon, route, selected, Info }) => (
         <Button
           key={route}
           selected={selected}
@@ -68,6 +86,7 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
         >
           <Icon size={sizeIcons + 2} />
           <BiMinus />
+          {!!Info && <ViewBubble />}
         </Button>
       ))}
     </Container>

@@ -21,6 +21,7 @@ type ButtonProps = {
 };
 
 export const Button = styled.div<ButtonProps>`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,4 +41,22 @@ export const Button = styled.div<ButtonProps>`
     position: absolute;
     top: 50px;
   }
+`;
+export const Bubble = styled.div`
+  position: absolute;
+  top: 15px;
+  left: 25px;
+  color: ${props => props.theme.COLORS.WHITE};
+  background-color: ${props => props.theme.COLORS.ERROR};
+  width: auto;
+  height: 22px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 3px 6px;
+  border: 1px solid ${props => props.theme.COLORS.LIGHT};
+  z-index: 2;
+  font-size: 0.7rem;
 `;

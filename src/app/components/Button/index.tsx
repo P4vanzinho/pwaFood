@@ -2,22 +2,21 @@ import { ReactNode } from 'react';
 import { poppins } from '@/app/fonts';
 import { Container } from './styles';
 
-interface ButtonRegistrationType {
+type ButtonRegistrationType = {
   text: string;
   loading?: boolean;
   disabled?: boolean;
-}
-
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 export default function Button({
   text,
   loading,
-  disabled = false,
+  ...rest
 }: ButtonRegistrationType) {
   const pLoading = typeof loading !== 'boolean' ? false : loading;
 
   return (
     <Container className={poppins.className} loading={pLoading}>
-      <button disabled={disabled} type="button">
+      <button type="button" {...rest}>
         {text}
       </button>
     </Container>

@@ -1,6 +1,5 @@
 'use client';
 
-import AppContext from '@/context';
 import { useContext } from 'react';
 import { Container } from './styles';
 
