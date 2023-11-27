@@ -1,5 +1,5 @@
 import { lighten } from 'polished';
-import styled from 'styled-components';
+import { styled } from '@linaria/react';
 import css from 'styled-jsx/css';
 
 export const Container = styled.div`

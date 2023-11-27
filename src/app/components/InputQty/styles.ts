@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import { theme } from '@/app/styles/theme';
+import { styled } from '@linaria/react';
 import { darken, lighten } from 'polished';
 
 export const Container = styled.div`
@@ -7,7 +8,7 @@ export const Container = styled.div`
   overflow: hidden;
 
   > span {
-    color: ${({ theme }) => theme.COLORS.PRIMARY};
+    color: ${theme.COLORS.PRIMARY};
     font-size: 0.875rem;
   }
 
@@ -42,20 +43,20 @@ export const Container = styled.div`
     }
 
     &:hover {
-      background-color: ${({ theme }) => darken(0.05, theme.COLORS.LIGHT)};
+      background-color: ${darken(0.05, '#F4F4F4')};
     }
 
     > svg {
-      fill: ${({ theme }) => theme.COLORS.PRIMARY};
+      fill: ${theme.COLORS.PRIMARY};
       size: 200rem;
     }
 
     &:disabled {
-      background-color: ${props => props.theme.COLORS.LIGHT};
+      background-color: ${theme.COLORS.LIGHT};
       cursor: not-allowed;
 
       > svg {
-        fill: ${props => lighten(0.25, props.theme.COLORS.GRAY)};
+        fill: ${lighten(0.25, theme.COLORS.GRAY)};
       }
     }
   }
@@ -68,7 +69,7 @@ export const Input = styled.div`
   border-radius: 20px;
   width: 10rem;
 
-  background-color: ${props => props.theme.COLORS.LIGHT};
+  background-color: ${theme.COLORS.LIGHT};
 
   overflow: hidden;
 
@@ -83,7 +84,7 @@ export const Input = styled.div`
 
   > input {
     display: flex;
-    color: ${({ theme }) => theme.COLORS.DARK};
+    color: ${theme.COLORS.DARK};
     background-color: transparent;
     font-size: 0.875rem;
 

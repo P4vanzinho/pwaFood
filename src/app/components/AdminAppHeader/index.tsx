@@ -1,18 +1,13 @@
 'use client';
 
-import {
-  Container,
-  BusinessContainer,
-  ContentContainer,
-  LogoButton,
-  WelcomeAndMenuContainer,
-  Button,
-} from './styles';
-import { bebas_neue, poppins } from '../../fonts';
+import { Container, Greetings, Info, InfoUser, RightMenu } from './styles';
+import { poppins } from '../../fonts';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Image } from 'next/dist/client/image-component';
+import { RoutesEnum } from '@/app/enums';
+import Button from '../Button';
 
 type MenuButtonSelected = 'cardapio' | 'whatsapp';
 
@@ -29,12 +24,12 @@ export default function AdminAppHeader() {
     {
       title: 'Cardapio',
       selected: 'cardapio' as MenuButtonSelected,
-      route: '/admin/produtos',
+      route: RoutesEnum.PRODUTOS,
     },
     {
       title: 'Configurar Whatsapp',
       selected: 'whatsapp' as MenuButtonSelected,
-      route: '/admin/whatsapp',
+      route: RoutesEnum.WHATSAPP,
     },
   ];
 
@@ -50,8 +45,8 @@ export default function AdminAppHeader() {
 
   const router = useRouter();
 
-  const businessName = business?.name.toUpperCase();
-  const userName = session?.data.name;
+  const businessName = business?.name?.toUpperCase();
+  const userName = session?.data?.name;
 
   const menuButtonOnClick = (menuButton: MenuButton) => {
     setMenuButtonSelected(menuButton.selected);
@@ -66,38 +61,31 @@ export default function AdminAppHeader() {
 
   return (
     <Container>
-      <BusinessContainer>
-        <Image src="/businessLogo.png" alt="" height={24} width={24} />
-        <span className={poppins.className}>{businessName} </span>
-      </BusinessContainer>
-      <ContentContainer>
-        <LogoButton
-          className={bebas_neue.className}
-          onClick={() => router.push('/admin/produtos')}
-        >
-          <span>FOOD-</span>
-          <span>E</span>
-        </LogoButton>
+      <Info>
+        <div>
+          <Image
+            width={25}
+            height={25}
+            src="https://fooda.nyc3.digitaloceanspaces.com/develop/751df1fe-b516-4b2d-8dd4-916b54d3bd22.png"
+            alt={'logo '}
+          ></Image>
+          <span>MC-DONALDS</span>
+        </div>
 
-        <WelcomeAndMenuContainer>
-          <div className={poppins.className}>
-            <span> Olá, </span>
-            <span>{userName}</span>
-          </div>
+        <Image
+          width={97}
+          height={53}
+          src="https://fooda.nyc3.digitaloceanspaces.com/develop/390a1c4a-db76-4ff5-ab07-b316fe419633.png"
+          alt={'logo '}
+        ></Image>
+      </Info>
 
-          <section className={poppins.className}>
-            {menuButtons.map((menuButton, index) => (
-              <Button
-                key={index}
-                selected={menuButtonSelected === menuButton.selected}
-                onClick={() => menuButtonOnClick(menuButton)}
-              >
-                {menuButton.title}
-              </Button>
-            ))}
-          </section>
-        </WelcomeAndMenuContainer>
-      </ContentContainer>
+      <span>Olá, Rogerio Pavan da Silva!</span>
+
+      <RightMenu>
+        <Button text="Produtos" />
+        <Button text="Configurar Whatsapp" />
+      </RightMenu>
     </Container>
   );
 }

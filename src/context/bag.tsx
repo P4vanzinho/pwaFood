@@ -1,3 +1,5 @@
+'use client';
+
 import React, {
   ReactNode,
   createContext,
@@ -7,9 +9,12 @@ import React, {
   useState,
 } from 'react';
 
+import { v4 as uuid } from 'uuid';
+
 export type Item = {
+  id?: string;
+  productId: number;
   qty: number;
-  id: string;
   unityPrice: number;
   photo?: string;
   title: string;
@@ -20,7 +25,7 @@ type BagContextProps = {
   setItens: React.Dispatch<React.SetStateAction<Item[]>>;
   addItem: (item: Item) => void;
   editItem: (item: Item) => void;
-  removeItemByIndex: (id: number) => void;
+  removeItem: (id: string) => void;
   total: number;
 };
 
@@ -32,7 +37,7 @@ const defaultValue = {
   setItens: () => {},
   addItem: () => {},
   editItem: () => {},
-  removeItemByIndex: (_: number) => {},
+  removeItem: (_: string) => {},
 };
 
 const BagContext = createContext<BagContextProps>(defaultValue);
@@ -46,7 +51,12 @@ const BagContextProvider = ({ children }: BagContextProviderProps) => {
   const [total, setTotal] = useState(defaultTotal);
 
   const addItem = (item: Item) => {
-    setItens(current => [...current, item]);
+    const itemWithId = {
+      ...item,
+      id: uuid(),
+    };
+
+    setItens(current => [...current, itemWithId]);
   };
 
   const editItem = useCallback((item: Item) => {
@@ -66,9 +76,9 @@ const BagContextProvider = ({ children }: BagContextProviderProps) => {
     });
   }, []);
 
-  const removeItemByIndex = useCallback((index: number) => {
+  const removeItem = useCallback((id: string) => {
     setItens(currentItems => {
-      const newItems = currentItems.filter((_, i) => i !== index);
+      const newItems = currentItems.filter(item => (item.id as string) !== id);
 
       return newItems;
     });
@@ -90,7 +100,7 @@ const BagContextProvider = ({ children }: BagContextProviderProps) => {
         itens,
         setItens,
         addItem,
-        removeItemByIndex,
+        removeItem,
         editItem,
         total,
       }}

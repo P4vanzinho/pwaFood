@@ -9,9 +9,15 @@ import Title from '../Title';
 
 type CategoryListProps = {
   businessId: number | string;
+  mode?: 'private' | 'public';
 };
 
-export default function CategoryList({ businessId }: CategoryListProps) {
+export default function CategoryList({
+  businessId,
+  mode = 'public',
+}: CategoryListProps) {
+  const needsToken = mode === 'private';
+
   const { data: categories, loading: _categoriesLoading } = useFoodFetch(
     EndpointFoodApiEnum.PRODUCT_CATEGORY,
     {
@@ -19,7 +25,7 @@ export default function CategoryList({ businessId }: CategoryListProps) {
       hasProducts: true,
       businessId: businessId,
     },
-    false,
+    needsToken,
   ) as { data: FoodApiCategory[]; loading: any };
 
   return (
@@ -28,7 +34,11 @@ export default function CategoryList({ businessId }: CategoryListProps) {
         categories.map(category => (
           <>
             <Title>{category.name}</Title>
-            <ProductList key={category.id} products={category.product} />
+            <ProductList
+              key={category.id}
+              products={category.product}
+              mode={mode}
+            />
           </>
         ))}
     </Container>

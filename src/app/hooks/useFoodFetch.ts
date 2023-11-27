@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { FoodFetchProps, foodFetch } from '../services/foodFetch/foodFetch';
 import { EndpointFoodApiEnum } from '../enums';
 import { useRouter } from 'next/navigation';
+import { useLoadingContext } from '@/context/loading';
 
 function useFoodFetch<T>(
   endPoint?: EndpointFoodApiEnum,
@@ -16,6 +17,11 @@ function useFoodFetch<T>(
   const [loading, setLoading] = useState(false);
   const [queryBuilder, setQueryBuilder] = useState(query);
   const router = useRouter();
+  const { setLoading: setContextLoading } = useLoadingContext();
+
+  useEffect(() => {
+    setContextLoading(loading);
+  }, [loading, setContextLoading]);
 
   useEffect(() => {
     async function fetch() {
@@ -48,7 +54,13 @@ function useFoodFetch<T>(
       }
     }
 
-    if (!session || !endPoint) {
+    if (!endPoint) {
+      setError('Endpoint undefined');
+      return;
+    }
+
+    if (!!shouldUseToken && !session) {
+      setError('Session not found');
       return;
     }
 

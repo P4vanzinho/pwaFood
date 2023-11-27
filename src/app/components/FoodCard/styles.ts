@@ -1,12 +1,13 @@
-import styled from 'styled-components';
+import { theme } from '@/app/styles/theme';
+import { styled } from '@linaria/react';
 import Image from 'next/image';
 
 export const Container = styled.div`
-  width: 157px;
+  width: 130px;
   height: auto;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  background-color: ${theme.COLORS.WHITE};
   object-fit: cover;
   border-radius: 10px;
   -webkit-box-shadow: 0px 4px 15px -2px rgba(0, 0, 0, 0.03);
@@ -15,14 +16,25 @@ export const Container = styled.div`
   word-wrap: break-word;
   white-space: normal;
 
-  p {
-    margin: 0.625rem;
-    display: inline-block;
-    width: 100%;
-  }
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-  span {
-    margin: 0px 0.625rem 0.625rem;
+    height: 6rem;
+
+    > p {
+      margin: 0.625rem;
+      display: inline-block;
+      width: 100%;
+    }
+
+    > span {
+      display: flex;
+      margin: 0px 0.625rem 0.625rem;
+
+      width: 100%;
+    }
   }
 `;
 

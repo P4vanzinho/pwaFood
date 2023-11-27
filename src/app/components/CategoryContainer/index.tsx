@@ -41,7 +41,7 @@ export default function CategoryContainer() {
 
   return (
     <Container>
-      {categories.map(
+      {categories?.map(
         category =>
           category.product.length > 0 && (
             <SelectCategorySection key={category?.id}>

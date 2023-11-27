@@ -1,7 +1,7 @@
 'use client';
 
 import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { Container } from './styles';
+import { Container, Content } from './styles';
 import Image from 'next/image';
 import { EndpointFoodApiEnum } from '@/app/enums';
 import Title from '@/app/components/Title';
@@ -11,7 +11,7 @@ import Button from '@/app/components/Button';
 import InputQty from '@/app/components/InputQty';
 import { useContext, useState } from 'react';
 import Price from '@/app/components/Price';
-import BagContext, { BagContextProvider } from '@/context/bag';
+import BagContext from '@/context/bag';
 import { useRouter } from 'next/navigation';
 
 type ProductProps = {
@@ -43,7 +43,7 @@ export default function Product(props: ProductProps) {
 
   const buttonOnClick = () => {
     const item = {
-      id: product?.slug as string,
+      productId: product?.id as number,
       qty,
       unityPrice: Number(product?.price),
       photo: product?.upload?.url,
@@ -56,18 +56,17 @@ export default function Product(props: ProductProps) {
   };
 
   return (
-    <BagContextProvider>
-      <Container>
-        {!!product && (
-          <>
-            <Image
-              width={0}
-              height={0}
-              sizes="100vw"
-              src={product.upload?.url as any}
-              alt={`${product.slug} image`}
-            />
-
+    <Container>
+      {!!product && (
+        <>
+          <Image
+            width={0}
+            height={0}
+            sizes="100vw"
+            src={product.upload?.url as any}
+            alt={`${product.slug} image`}
+          />
+          <Content>
             <div>
               <Title>{product.name}</Title>
               <Text>{product.description}</Text>
@@ -88,9 +87,9 @@ export default function Product(props: ProductProps) {
                 onClick={buttonOnClick}
               />
             </footer>
-          </>
-        )}
-      </Container>
-    </BagContextProvider>
+          </Content>
+        </>
+      )}
+    </Container>
   );
 }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@linaria/react';
 
 export const Container = styled.div`
   width: 100%;
@@ -22,15 +22,21 @@ export const Container = styled.div`
 
   img {
     width: 100%;
-    height: 18.75rem;
+    max-width: 1200px;
+    height: auto;
+    max-height: 300px;
     object-fit: cover;
   }
 
   footer {
     position: fixed;
     width: 100%;
+    max-width: 1200px;
     bottom: 80px;
-    padding: 0px 10px;
+    padding: 10px 20px;
+
+    left: 50%;
+    transform: translateX(-50%);
 
     div:nth-of-type(2) {
       margin-top: 20px;
@@ -45,4 +51,9 @@ export const Container = styled.div`
       font-size: 1.5rem;
     }
   }
+`;
+
+export const Content = styled.div`
+  max-width: 1200px;
+  display: flex;
 `;

@@ -302,7 +302,7 @@ export default function NewCategory() {
 
           <ButtonsContainer>
             <button
-              onClick={() => router.push('/admin/produtos')}
+              onClick={() => router.push('/RoutesEnum.PRODUTOS')}
               className={poppins.className}
               type="button"
             >

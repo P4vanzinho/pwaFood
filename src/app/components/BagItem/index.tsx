@@ -1,5 +1,5 @@
 import { Item, useBagContext } from '@/context/bag';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Actions, Body, Container, InputWrapper, PhotoFood } from './styles';
 import Price from '../Price';
 import { poppins } from '@/app/fonts';
@@ -11,7 +11,7 @@ type BagItem = {
 };
 
 export default function BagItem({ item, index }: BagItem) {
-  const { editItem, removeItemByIndex } = useBagContext();
+  const { editItem, removeItem } = useBagContext();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,7 +30,7 @@ export default function BagItem({ item, index }: BagItem) {
   };
 
   const trashOnClick = () => {
-    removeItemByIndex(index);
+    removeItem(item.id as string);
   };
 
   useEffect(() => {

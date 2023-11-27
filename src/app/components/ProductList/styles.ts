@@ -1,15 +1,21 @@
-import styled from 'styled-components';
+import { theme } from '@/app/styles/theme';
+import { styled } from '@linaria/react';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
   width: 100%;
-  gap: 32px;
+
+  div:nth-of-type(n + 2) {
+    margin-left: 32px;
+  }
+
   overflow-y: hidden;
   overflow-x: scroll;
   white-space: nowrap;
   padding: 5px;
+  justify-content: flex-start;
 
   @media (min-width: 720px) {
     padding-bottom: 20px;
@@ -17,14 +23,14 @@ export const Container = styled.div`
       &::-webkit-scrollbar {
         width: 12px;
 
-        background-color: ${({ theme }) => theme.COLORS.LIGHT};
+        background-color: ${theme.COLORS.LIGHT};
         border-radius: 10px;
         height: 8px;
       }
 
       &::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background-color: ${({ theme }) => theme.COLORS.GRAY};
+        background-color: ${theme.COLORS.GRAY};
       }
     }
   }

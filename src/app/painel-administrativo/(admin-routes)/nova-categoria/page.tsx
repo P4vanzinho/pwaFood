@@ -16,7 +16,7 @@ import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
 import { useSession } from 'next-auth/react';
-import { EndpointFoodApiEnum } from '@/app/enums';
+import { EndpointFoodApiEnum, RoutesEnum } from '@/app/enums';
 
 export default function NewCategory() {
   const [checked, setChecked] = useState<boolean>(false);
@@ -74,7 +74,7 @@ export default function NewCategory() {
 
         <ButtonsContainer>
           <button
-            onClick={() => router.push('/admin/produtos')}
+            onClick={() => router.push(RoutesEnum.PRODUTOS)}
             className={poppins.className}
           >
             Cancelar

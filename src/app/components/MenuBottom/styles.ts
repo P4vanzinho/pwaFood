@@ -1,7 +1,8 @@
-import styled, { css } from 'styled-components';
+import { theme } from '@/app/styles/theme';
+import { styled } from '@linaria/react';
 
 export const Container = styled.div`
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  background-color: ${theme.COLORS.WHITE};
   height: 70px;
   width: 100%;
   max-width: 1200px;
@@ -32,12 +33,11 @@ export const Button = styled.div<ButtonProps>`
 
   > svg:nth-of-type(1) {
     color: ${props =>
-      props.selected ? props.theme.COLORS.PRIMARY : props.theme.COLORS.DARK};
+      props.selected ? theme.COLORS.PRIMARY : theme.COLORS.DARK};
   }
 
   > svg:nth-of-type(2) {
-    color: ${props =>
-      props.selected ? props.theme.COLORS.PRIMARY : 'transparent'};
+    color: ${props => (props.selected ? theme.COLORS.PRIMARY : 'transparent')};
     position: absolute;
     top: 50px;
   }
@@ -46,8 +46,8 @@ export const Bubble = styled.div`
   position: absolute;
   top: 15px;
   left: 25px;
-  color: ${props => props.theme.COLORS.WHITE};
-  background-color: ${props => props.theme.COLORS.ERROR};
+  color: ${props => theme.COLORS.WHITE};
+  background-color: ${props => theme.COLORS.ERROR};
   width: auto;
   height: 22px;
   border-radius: 10px;
@@ -56,7 +56,7 @@ export const Bubble = styled.div`
   align-items: center;
   margin: 0px;
   padding: 3px 6px;
-  border: 1px solid ${props => props.theme.COLORS.LIGHT};
+  border: 1px solid ${theme.COLORS.LIGHT};
   z-index: 2;
   font-size: 0.7rem;
 `;

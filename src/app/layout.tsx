@@ -2,67 +2,57 @@
 
 import { ReactNode } from 'react';
 
-import StyledComponentsRegistry from './registry';
-
 import { bebas_neue } from './fonts';
-
-import { createGlobalStyle } from 'styled-components';
-
-import { ThemeProvider } from 'styled-components';
-
-import { theme } from './styles/theme';
 
 import NextAuthSessionProvider from './providers/SessionProvider';
 import { ToastContainer } from 'react-toastify';
 import '../assets/ReactToastify.css';
+import { css } from '@linaria/core';
 
-const GlobalStyle = createGlobalStyle`
-
-  :root{
+const globalStyle = css`
+  :root {
     font-size: 16px;
   }
 
-  *{
+  * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
 
-  body{
+  body {
     width: 100%;
     overflow-x: hidden;
-
-    max-height: none;
     min-height: 100vh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
 
-    a{
+    > a {
       cursor: pointer;
       text-decoration: none;
     }
 
-    button{
+    > button {
       cursor: pointer;
     }
 
-    h2 {
+    > h2 {
       font-size: 16rem;
     }
   }
 `;
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <StyledComponentsRegistry>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <body>
-            <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+    <html lang="en" className={globalStyle}>
+      <body>
+        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
 
-            <ToastContainer className={bebas_neue.className} />
-          </body>
-        </ThemeProvider>
-      </StyledComponentsRegistry>
+        <ToastContainer className={bebas_neue.className} />
+      </body>
     </html>
   );
 }
+
+export default RootLayout;

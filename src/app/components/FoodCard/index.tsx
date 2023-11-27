@@ -1,20 +1,26 @@
 import { FoodApiProduct } from '../../../../types/foodApi';
 import Text from '../Text';
 import Price from '../Price';
-import { Container, PhotoFood } from './styles';
 
 import { usePathname, useRouter } from 'next/navigation';
+import { Container, PhotoFood } from './styles';
 
 type FoodCardProps = {
   data: FoodApiProduct;
+  mode: 'private' | 'public';
 };
 
-export default function FoodCard({ data }: FoodCardProps) {
+export default function FoodCard({ data, mode }: FoodCardProps) {
   const pathname = usePathname();
   const router = useRouter();
 
   const cardOnClick = () => {
-    router.push(`${pathname}/item/${data.slug}`);
+    const path =
+      mode === 'public'
+        ? `${pathname}/item/${data.slug}`
+        : `${pathname}/${data.slug}`;
+
+    router.push(path);
   };
 
   return (
@@ -28,8 +34,10 @@ export default function FoodCard({ data }: FoodCardProps) {
         />
       )}
 
-      <Text>{data.name}</Text>
-      <Price>{data.price ?? 'sob consulta'}</Price>
+      <div>
+        <Text>{data.name}</Text>
+        <Price>{data.price ?? 'sob consulta'}</Price>
+      </div>
     </Container>
   );
 }

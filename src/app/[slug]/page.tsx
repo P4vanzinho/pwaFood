@@ -1,8 +1,17 @@
 'use client';
 
 import CategoryList from '../components/CategoryList';
-import styled from 'styled-components';
 import Text from '../components/Text';
+import { getCookie } from 'cookies-next';
+import useFoodFetch from '../hooks/useFoodFetch';
+import { FoodApiBusiness } from '../../../types/foodApi';
+import { EndpointFoodApiEnum } from '../enums';
+import Image from 'next/image';
+import { poppins } from '../fonts';
+import { useState } from 'react';
+import { theme } from '../styles/theme';
+import { styled } from '@linaria/react';
+import { getPublicUser } from '@/utils/cookiePublicUser';
 
 const Container = styled.div`
   display: flex;
@@ -13,6 +22,32 @@ const Container = styled.div`
   justify-content: center;
   padding: 1rem;
 
+  > header {
+    margin: 10px 0px 20px 5px;
+    display: flex;
+    align-items: center;
+
+    > p {
+      font-size: 0.75rem;
+      color: ${theme.COLORS.ERROR};
+      font-weight: 600;
+      margin-left: 2px;
+    }
+
+    > img {
+      width: 1.563rem;
+      height: 1.563rem;
+      border-radius: 5px;
+    }
+
+    > span {
+      margin-left: 5px;
+      font-size: 0.75rem;
+      color: ${theme.COLORS.GRAY};
+      font-weight: 600;
+    }
+  }
+
   > div {
     margin: 10px 0px 20px;
 
@@ -21,7 +56,7 @@ const Container = styled.div`
     }
 
     span {
-      color: ${({ theme }) => theme.COLORS.PRIMARY};
+      color: ${theme.COLORS.PRIMARY};
     }
   }
 `;
@@ -33,11 +68,43 @@ type HomeProps = {
 };
 
 export default function Home(props: HomeProps) {
+  const user = getPublicUser();
+
+  const { data } = useFoodFetch<FoodApiBusiness>(
+    `${EndpointFoodApiEnum.BUSINESS}/${props.params.slug}`,
+  );
+
   return (
     <Container>
+      <header>
+        {!!data?.upload?.url && (
+          <Image
+            src={data?.upload?.url}
+            width={30}
+            height={30}
+            alt={`${data?.name}_logo`}
+          ></Image>
+        )}
+
+        {!!data?.name && (
+          <>
+            <span className={poppins.className}>{data.name.toUpperCase()}</span>
+          </>
+        )}
+
+        <p className={poppins.className}>
+          {data?.status === 'close' ? '(FECHADO)' : ''}
+        </p>
+      </header>
+
       <div>
         <Text>
-          Olá, <span>Rogério!</span>
+          Olá
+          {!!user?.name && (
+            <>
+              ,<span> {user?.name}!</span>
+            </>
+          )}
         </Text>
       </div>
       <CategoryList businessId={props.params.slug} />

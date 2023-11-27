@@ -6,7 +6,7 @@ export type FoodFetchProps = {
   body?: unknown;
   headers?: Record<string, string>;
   method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'UPDATE';
-  endPoint: EndpointFoodApiEnum;
+  endPoint: EndpointFoodApiEnum | string;
   token?: string;
   params?: Record<string, any>;
 };

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@linaria/react';
 
 export const Container = styled.header`
   align-items: center;
@@ -9,18 +9,18 @@ export const Container = styled.header`
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   z-index: 1;
   width: 100%;
-  margin: 3.4rem 0;
-  padding: 0 4.7rem;
+  padding: 50px;
+  height: 10px;
 `;
 
-export const LogoButton = styled.button`
+export const Logo = styled.button`
   display: flex;
   border: none;
   padding: none;
   background-color: transparent;
 
   > span {
-    font-size: 4.4rem;
+    font-size: 2.75rem;
     font-weight: 400;
     color: ${({ theme }) => theme.COLORS.DARK};
   }
@@ -30,42 +30,24 @@ export const LogoButton = styled.button`
   }
 `;
 
-export const MenuLinks = styled.div`
+export const MenuTopCenter = styled.div`
   display: flex;
-  gap: 6rem;
   align-items: center;
-  position: relative;
-  left: 6rem;
+  position: absolute;
+  justify-content: center;
+  gap: 50px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
 
   > a {
     text-decoration: none;
-    font-size: 2.4rem;
+    font-size: 1.5rem;
     color: ${({ theme }) => theme.COLORS.DARK};
   }
 `;
 
-export const AuthLinks = styled.div`
-  .green_bg_white_color {
-    background-color: ${({ theme }) => theme.COLORS.PRIMARY};
-    color: ${({ theme }) => theme.COLORS.WHITE};
-  }
-
-  .gray_bg_black_color {
-    background-color: ${({ theme }) => theme.COLORS.LIGHT};
-
-    color: ${({ theme }) => theme.COLORS.DARK};
-  }
-
+export const RightTopMenu = styled.div`
   display: flex;
-  height: 100%;
-  gap: 3rem;
-
-  > button {
-    padding: 0.9rem 2rem;
-    border-radius: 2rem;
-    border: none;
-    font-size: 14px;
-    font-weight: 500;
-    height: 5rem;
-  }
+  gap: 50px;
 `;

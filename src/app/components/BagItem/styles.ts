@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import { theme } from '@/app/styles/theme';
+import { styled } from '@linaria/react';
 import Image from 'next/image';
 
 export const Container = styled.div`
@@ -45,8 +46,8 @@ export const Actions = styled.div`
 
   > button {
     width: 100%;
-    justify-content: start;
-    align-items: end;
+    justify-content: flex-start;
+    align-items: flex-end;
     height: 2rem;
 
     border: none;
@@ -59,11 +60,11 @@ export const Actions = styled.div`
       justify-content: center;
       align-items: center;
       padding: 5px;
-      background-color: ${({ theme }) => theme.COLORS.ERROR};
+      background-color: ${theme.COLORS.ERROR};
       border-radius: 5px;
 
       > svg {
-        color: ${({ theme }) => theme.COLORS.WHITE};
+        color: ${theme.COLORS.WHITE};
         font-size: 0.8rem;
       }
     }
@@ -74,7 +75,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   height: 2rem;
-  align-items: end;
+  align-items: flex-end;
 
   > input {
     display: flex;
