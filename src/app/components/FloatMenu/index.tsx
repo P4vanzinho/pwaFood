@@ -1,8 +1,8 @@
 'use client';
 
 import { Button, Container, ButtonContainer } from './styles';
-import { useState, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { bebas_neue, poppins } from '@/app/fonts';
 import Image from 'next/image';
 import Modal from '../Modal';
@@ -16,6 +16,8 @@ export default function FloatMenu() {
 
   const [showModal, setShowModal] = useState(false);
 
+  const pathname = usePathname();
+
   const registerOnClick = () => {
     setShowModal(current => !current);
   };
@@ -25,14 +27,23 @@ export default function FloatMenu() {
       {!!showModal && (
         <Modal onClickCallback={() => setShowModal(false)}>
           <Container>
-            <div onClick={() => router.push(RoutesEnum.NOVA_CATEGORIA)}>
-              <button className={bebas_neue.className}>CATEGORIA</button>
+            <div
+              className={classnames({
+                disabled: pathname === RoutesEnum.NOVA_CATEGORIA,
+              })}
+              onClick={() => router.push(RoutesEnum.NOVA_CATEGORIA)}
+            >
+              <button className={bebas_neue.className}>
+                <span>CATEGORIA</span>
+              </button>
               <button>
                 <Image src="/notebook.png" alt="" height={24} width={24} />
               </button>
             </div>
             <div>
-              <button className={bebas_neue.className}>PRODUTO</button>
+              <button className={bebas_neue.className}>
+                <span>PRODUTO</span>
+              </button>
               <button>
                 <Image src="/gift.png" alt="" height={24} width={24} />
               </button>

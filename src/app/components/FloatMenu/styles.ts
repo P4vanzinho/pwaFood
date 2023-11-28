@@ -1,6 +1,11 @@
 import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
 
+const disabled = {
+  pointerEvents: 'none',
+  opacity: 0.07,
+};
+
 export const Container = styled.div`
   width: 19rem;
   display: flex;
@@ -12,16 +17,16 @@ export const Container = styled.div`
   justify-content: flex-end;
   align-items: flex-end;
 
-  div {
+  > div {
     height: 5rem;
     display: flex;
     align-items: center;
     gap: 12px;
     margin-top: 10px;
 
-    &:hover {
-      cursor: pointer;
+    cursor: pointer;
 
+    &:hover {
       > button {
         transform: translate(0px, -5px);
         transition: all ease-in-out 80ms;
@@ -32,6 +37,15 @@ export const Container = styled.div`
     > button {
       border: none;
       cursor: pointer;
+
+      > span {
+        color: ${() => theme.COLORS.DARK};
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.05;
     }
 
     > button:nth-of-type(1) {
