@@ -19,8 +19,19 @@ export const Container = styled.div`
     gap: 12px;
     margin-top: 10px;
 
+    &:hover {
+      cursor: pointer;
+
+      > button {
+        transform: translate(0px, -5px);
+        transition: all ease-in-out 80ms;
+        cursor: pointer;
+      }
+    }
+
     > button {
       border: none;
+      cursor: pointer;
     }
 
     > button:nth-of-type(1) {
@@ -50,16 +61,42 @@ export const Container = styled.div`
 
 const higherZIndex = `{
   z-index: 999;
-  width:  3.375rem;
-  height: 3.375rem;
-  right: 70px;
-
-  &.animate {
-    animation-duration: 0.04s;
-    animation-name: animate-fade;
-    animation-delay: 0s;
+ 
+  > button {
+    width:  3.375rem;
+    height: 3.375rem;
   }
 }`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  width: 15rem;
+  height: 5rem;
+  position: fixed;
+  bottom: 50px;
+  right: 55px;
+  z-index: 2;
+  align-items: center;
+  justify-content: flex-end;
+
+  &.higherZIndex {
+    ${higherZIndex}
+  }
+
+  > button {
+    transition: all ease-in-out 80ms;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    > button {
+      box-shadow: 0px 37px 20px -15px rgba(0, 0, 0, 0.2);
+      transform: translate(0px, -5px);
+      cursor: pointer;
+    }
+  }
+`;
 
 export const Button = styled.button`
   width: 12rem;
@@ -76,10 +113,8 @@ export const Button = styled.button`
   background-color: ${() => theme.COLORS.PRIMARY};
   border: none;
   padding: 20px;
-  position: fixed;
-  bottom: 50px;
-  right: 55px;
-  z-index: 2;
+
+  box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.4);
 
   > div {
     display: flex;
@@ -92,22 +127,10 @@ export const Button = styled.button`
   > span {
     display: flex;
     align-items: center;
+
     > svg {
       scale: 1.4;
       margin-right: 10px;
-    }
-  }
-
-  &.higherZIndex {
-    ${higherZIndex}
-  }
-
-  @keyframes animate-fade {
-    0% {
-      width: 12rem;
-    }
-    100% {
-      width: 3.375rem;
     }
   }
 `;

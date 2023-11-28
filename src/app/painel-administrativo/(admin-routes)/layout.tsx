@@ -1,12 +1,8 @@
-'use client';
-
 import AuthHeader from '@/app/components/AuthHeader';
 import { ReactNode } from 'react';
 
 import { styled } from '@linaria/react';
 import FloatMenu from '@/app/components/FloatMenu';
-import { usePathname } from 'next/navigation';
-import { RoutesEnum } from '@/app/enums';
 
 const Container = styled.div`
   height: calc(100vh - 100px);
@@ -31,17 +27,15 @@ const Main = styled.main`
 `;
 
 export default function PrivateLayout({ children }: AuthHeaderProps) {
-  const pathname = usePathname();
+  /*   const pathname = usePathname();
 
   console.log(pathname);
 
-  const shouldShowFloatMenu = pathname !== RoutesEnum.NOVA_CATEGORIA;
-
-  return (
+  const shouldShowFloatMenu = pathname !== RoutesEnum.NOVA_CATEGORIA */ return (
     <Container>
       <AuthHeader />
       <Main>{children}</Main>
-      {!!shouldShowFloatMenu && <FloatMenu />}
+      <FloatMenu />
     </Container>
   );
 }

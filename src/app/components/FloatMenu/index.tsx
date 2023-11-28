@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Container } from './styles';
+import { Button, Container, ButtonContainer } from './styles';
 import { useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { bebas_neue, poppins } from '@/app/fonts';
@@ -10,11 +10,6 @@ import classnames from 'classnames';
 import { IoCloseSharp } from 'react-icons/io5';
 import { MdOutlineAdd } from 'react-icons/md';
 import { RoutesEnum } from '@/app/enums';
-
-interface Props {
-  // children: ReactNode;
-  //showSidebar: () => void;
-}
 
 export default function FloatMenu() {
   const router = useRouter();
@@ -45,27 +40,23 @@ export default function FloatMenu() {
           </Container>
         </Modal>
       )}
-
-      <Button
-        type="button"
-        className={classnames(
-          poppins.className,
-          { higherZIndex: showModal },
-          { animate: true },
-        )}
-        onClick={registerOnClick}
-      >
-        {!!showModal ? (
-          <div>
-            {' '}
-            <IoCloseSharp />
-          </div>
-        ) : (
-          <span>
-            <MdOutlineAdd /> CADASTRO
-          </span>
-        )}
-      </Button>
+      <ButtonContainer className={classnames({ higherZIndex: showModal })}>
+        <Button
+          type="button"
+          className={classnames(poppins.className, { higherZIndex: showModal })}
+          onClick={registerOnClick}
+        >
+          {!!showModal ? (
+            <div>
+              <IoCloseSharp />
+            </div>
+          ) : (
+            <span>
+              <MdOutlineAdd /> CADASTRO
+            </span>
+          )}
+        </Button>
+      </ButtonContainer>
     </>
   );
 }
