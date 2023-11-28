@@ -17,6 +17,8 @@ import { useRouter } from 'next/navigation';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
 import { useSession } from 'next-auth/react';
 import { EndpointFoodApiEnum, RoutesEnum } from '@/app/enums';
+import Title from '@/app/components/Title';
+import Button from '@/app/components/Button';
 
 export default function NewCategory() {
   const [checked, setChecked] = useState<boolean>(false);
@@ -47,11 +49,10 @@ export default function NewCategory() {
   return (
     <Container onSubmit={handleSubmit}>
       <Main>
-        <h1 className={bebas_neue.className}>
-          CADASTRO DE CATEGORIA DE PRODUTO
-        </h1>
+        <Title>CADASTRO DE CATEGORIA DE PRODUTO</Title>
+
         <label htmlFor="title" className={bebas_neue.className}>
-          Titulo
+          Título
           <input
             id="title"
             className={poppins.className}
@@ -73,19 +74,13 @@ export default function NewCategory() {
         </ToggleSwitchContainer>
 
         <ButtonsContainer>
-          <button
+          <Button
             onClick={() => router.push(RoutesEnum.PRODUTOS)}
             className={poppins.className}
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            className={poppins.className}
-            onClick={handleCategory}
-          >
-            Salvar
-          </button>
+            text="Cancelar"
+          />
+
+          <Button type="submit" className={poppins.className} text="Salvar" />
         </ButtonsContainer>
       </Main>
     </Container>

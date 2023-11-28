@@ -27,8 +27,11 @@ export default function Button({
     >
       <button
         type="button"
-        className={classnames({ loading: pLoading })}
         {...rest}
+        className={classnames({
+          loading: pLoading,
+          [rest.className as string]: true,
+        })}
       >
         {text}
       </button>

@@ -1,7 +1,7 @@
 'use client';
 
 import { inter } from '@/app/fonts';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 import { Container } from './styles';
 

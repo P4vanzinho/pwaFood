@@ -1,5 +1,6 @@
-import { fadein } from '@/app/styles/animations';
-import styled, { css } from 'styled-components';
+import { theme } from '@/app/styles/theme';
+
+import { styled } from '@linaria/react';
 import { darken, lighten } from 'polished';
 
 type InputProps = {
@@ -15,24 +16,24 @@ export const Container = styled.div<InputProps>`
 
   > label {
     font-size: 0.75rem;
-    color: ${({ theme }) => theme.COLORS.PRIMARY};
+    color: ${() => theme.COLORS.PRIMARY};
   }
 
   &:has(input:focus) {
     > label {
-      color: ${({ theme }) => darken(0.1, theme.COLORS.PRIMARY)};
+      color: ${() => darken(0.1, theme.COLORS.PRIMARY)};
     }
   }
 
   &:has(input:invalid) {
     > label {
-      color: ${({ theme }) => darken(0.1, theme.COLORS.ERROR)};
+      color: ${() => darken(0.1, theme.COLORS.ERROR)};
     }
   }
 
   &:has(input:valid) {
     > label {
-      color: ${({ theme }) => theme.COLORS.PRIMARY};
+      color: ${() => theme.COLORS.PRIMARY};
     }
   }
 
@@ -42,31 +43,31 @@ export const Container = styled.div<InputProps>`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    border: 2px solid ${({ theme }) => theme.COLORS.PRIMARY};
+    border: 2px solid ${() => theme.COLORS.PRIMARY};
     margin-top: 7px;
     overflow: hidden;
 
     &:has(> input:focus) {
-      border: 2px solid ${({ theme }) => darken(0.1, theme.COLORS.PRIMARY)};
+      border: 2px solid ${() => darken(0.1, theme.COLORS.PRIMARY)};
 
       svg {
-        fill: ${({ theme }) => darken(0.1, theme.COLORS.PRIMARY)};
+        fill: ${() => darken(0.1, theme.COLORS.PRIMARY)};
       }
     }
 
     &:has(> input:invalid) {
-      border: 2px solid ${({ theme }) => darken(0.1, theme.COLORS.ERROR)};
+      border: 2px solid ${() => darken(0.1, theme.COLORS.ERROR)};
 
       svg {
-        fill: ${({ theme }) => darken(0.1, theme.COLORS.ERROR)};
+        fill: ${() => darken(0.1, theme.COLORS.ERROR)};
       }
     }
 
     &:has(> input:valid) {
-      border: 2px solid ${({ theme }) => theme.COLORS.PRIMARY};
+      border: 2px solid ${() => theme.COLORS.PRIMARY};
 
       svg {
-        fill: ${({ theme }) => darken(0.1, theme.COLORS.PRIMARY)};
+        fill: ${() => darken(0.1, theme.COLORS.PRIMARY)};
       }
     }
 
@@ -77,7 +78,7 @@ export const Container = styled.div<InputProps>`
       padding: 0 1.678rem;
       border: 0;
       outline: 0;
-      color: ${({ theme }) => theme.COLORS.DARK};
+      color: ${() => theme.COLORS.DARK};
 
       &:focus {
         outline: none !important;
@@ -85,7 +86,7 @@ export const Container = styled.div<InputProps>`
       }
 
       &::placeholder {
-        color: ${({ theme }) => theme.COLORS.GRAY};
+        color: ${() => theme.COLORS.GRAY};
       }
     }
 
@@ -97,7 +98,7 @@ export const Container = styled.div<InputProps>`
 
       svg {
         scale: 100px !important;
-        fill: ${({ theme, type }) => theme.COLORS.PRIMARY};
+        fill: ${() => theme.COLORS.PRIMARY};
       }
     }
   }

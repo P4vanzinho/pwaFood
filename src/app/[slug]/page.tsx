@@ -2,13 +2,11 @@
 
 import CategoryList from '../components/CategoryList';
 import Text from '../components/Text';
-import { getCookie } from 'cookies-next';
 import useFoodFetch from '../hooks/useFoodFetch';
 import { FoodApiBusiness } from '../../../types/foodApi';
 import { EndpointFoodApiEnum } from '../enums';
 import Image from 'next/image';
 import { poppins } from '../fonts';
-import { useState } from 'react';
 import { theme } from '../styles/theme';
 import { styled } from '@linaria/react';
 import { getPublicUser } from '@/utils/cookiePublicUser';

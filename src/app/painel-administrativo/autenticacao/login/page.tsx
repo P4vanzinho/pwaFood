@@ -11,8 +11,8 @@ import GoogleSignInButton from '@/app/components/GoogleSignInButton';
 
 import { poppins, inter, bebas_neue } from '@/app/fonts';
 import Link from 'next/link';
-import React, { useState, SyntheticEvent } from 'react';
-import { signIn } from 'next-auth/react';
+import React, { useState, SyntheticEvent, useEffect } from 'react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import Button from '@/app/components/Button';
@@ -21,11 +21,14 @@ import Input from '@/app/components/Input';
 
 export default function Login() {
   const router = useRouter();
-
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [loading, setLoading] = useState(false);
+  const { data } = useSession();
 
   async function handleSubmit(event: SyntheticEvent) {
+    setLoading(true);
+
     event.preventDefault();
 
     try {
@@ -38,14 +41,20 @@ export default function Login() {
         toast.error(result?.error, {
           theme: 'colored',
         });
+
+        setLoading(false);
       } else {
-        toast.success('Parabéns !');
+        toast.success('Bem-vindo!');
         router.replace(RoutesEnum.PRODUTOS);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       return;
     }
   }
+
+  useEffect(() => {}, []);
 
   return (
     <Container>
@@ -81,6 +90,7 @@ export default function Login() {
             className={bebas_neue.className}
             type="submit"
             text="ENTRAR"
+            loading={loading}
           />
         </FieldsetLogin>
 

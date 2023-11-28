@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useLoadingContext } from '@/context/loading';
 
 function useFoodFetch<T>(
-  endPoint?: EndpointFoodApiEnum,
+  endPoint?: string,
   query?: Record<string, any>,
   shouldUseToken?: boolean,
 ) {

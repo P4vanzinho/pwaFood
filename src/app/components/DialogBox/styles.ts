@@ -1,15 +1,16 @@
 import { lighten } from 'polished';
 import { styled } from '@linaria/react';
 import css from 'styled-jsx/css';
+import { theme } from '@/app/styles/theme';
 
 export const Container = styled.div`
   height: 140px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  background-color: ${() => theme.COLORS.WHITE};
   padding-bottom: 25px;
-  color: ${({ theme }) => theme.COLORS.DARK};
+  color: ${() => theme.COLORS.DARK};
   border-radius: 5px;
 
   h2 {
@@ -37,7 +38,7 @@ export const Close = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${({ theme }) => theme.COLORS.LIGHT};
+    background-color: ${() => theme.COLORS.LIGHT};
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -54,8 +55,8 @@ export const Content = styled.div`
 
   > div {
     padding: 10px;
-    background-color: ${({ theme }) => theme.COLORS.LIGHT};
-    border: 1px solid ${({ theme }) => lighten(0.8, theme.COLORS.WARNING)};
+    background-color: ${() => theme.COLORS.LIGHT};
+    border: 1px solid ${() => lighten(0.8, theme.COLORS.WARNING)};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,20 +79,4 @@ export const Button = styled.div<ButtonProps>`
   border-radius: 8px;
   padding: 2px 10px;
   font-size: 0.9rem;
-
-  ${({ mode, theme }) => {
-    const backgroundColor =
-      mode === 'danger' ? theme.COLORS.ERROR : theme.COLORS.WHITE;
-
-    const color = mode === 'danger' ? theme.COLORS.WHITE : theme.COLORS.DARK;
-
-    const borderColor =
-      mode === 'danger' ? theme.COLORS.ERROR : theme.COLORS.GRAY;
-
-    return css`
-      color: ${color};
-      background-color: ${backgroundColor};
-      border: 0.2px solid ${borderColor};
-    `;
-  }};
 `;

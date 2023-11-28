@@ -1,10 +1,10 @@
 'use client';
 
 import AuthHeader from '@/app/components/AuthHeader';
-import { lighten } from 'polished';
 import { ReactNode } from 'react';
 
 import { styled } from '@linaria/react';
+import FloatMenu from '@/app/components/FloatMenu';
 
 const Container = styled.div`
   height: calc(100vh - 100px);
@@ -33,6 +33,7 @@ export default function PrivateLayout({ children }: AuthHeaderProps) {
     <Container>
       <AuthHeader />
       <Main>{children}</Main>
+      <FloatMenu />
     </Container>
   );
 }

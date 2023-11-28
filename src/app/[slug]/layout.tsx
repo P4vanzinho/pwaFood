@@ -39,8 +39,6 @@ interface PublicLayoutProps {
 }
 
 function PublicLayout(props: PublicLayoutProps) {
-  console.log(props);
-
   const searchParams = useSearchParams();
 
   const token = searchParams.get('u');

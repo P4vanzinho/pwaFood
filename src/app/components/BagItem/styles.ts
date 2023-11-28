@@ -20,6 +20,8 @@ export const PhotoFood = styled(Image)`
   -webkit-box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
   box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
   padding: 5px;
+  width: 7rem;
+  height: 5rem;
 `;
 
 export const Body = styled.div`

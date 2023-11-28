@@ -1,3 +1,4 @@
+import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
 
 export const Container = styled.div`
@@ -34,7 +35,7 @@ export const ForgetPasswordContainer = styled.div`
       margin-left: 5px;
       font-size: 0.875rem;
       font-weight: 700;
-      color: ${({ theme }) => theme.COLORS.PRIMARY_LIGHT};
+      color: ${theme.COLORS.PRIMARY_LIGHT};
     }
   }
 `;
@@ -51,7 +52,7 @@ export const Or = styled.div`
   justify-content: center;
   align-items: center;
 
-  color: ${({ theme }) => theme.COLORS.GRAY};
+  color: ${theme.COLORS.GRAY};
 
   > span {
     margin: 0px 10px;
@@ -62,6 +63,6 @@ export const Or = styled.div`
     width: 100%;
     min-height: 1px;
     height: 1px;
-    background: ${({ theme }) => theme.COLORS.GRAY};
+    background: ${theme.COLORS.GRAY};
   }
 `;

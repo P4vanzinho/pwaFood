@@ -38,6 +38,7 @@ export default function BagItem({ item, index }: BagItem) {
       ...item,
       qty: inputValue,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue, editItem]);
 
   return (
@@ -45,8 +46,8 @@ export default function BagItem({ item, index }: BagItem) {
       <div>
         <PhotoFood
           src={item.photo as string}
-          height={80}
-          width={80}
+          height={120}
+          width={100}
           alt={item.title + '_photo'}
         />
 

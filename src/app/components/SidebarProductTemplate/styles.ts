@@ -1,9 +1,10 @@
+import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
 
 export const Container = styled.div`
   height: 100%;
   width: 56rem;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  background-color: ${() => theme.COLORS.WHITE};
   display: flex;
   flex-direction: column;
   gap: 7.7rem;
@@ -21,7 +22,7 @@ export const Container = styled.div`
       font-size: 3.6rem;
       font-weight: 400;
       line-height: normal;
-      color: ${({ theme }) => theme.COLORS.DARK};
+      color: ${() => theme.COLORS.DARK};
     }
 
     button {
@@ -50,7 +51,7 @@ export const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.COLORS.LIGHT};
+  background-color: ${() => theme.COLORS.LIGHT};
   border-radius: 8px;
 `;
 
@@ -63,7 +64,7 @@ export const DescriptionsContainer = styled.div`
     font-size: 1.8rem;
     font-weight: 600;
     line-height: normal;
-    color: ${({ theme }) => theme.COLORS.SECUNDARY_DARK};
+    color: ${() => theme.COLORS.SECUNDARY_DARK};
     text-align: start;
   }
 
@@ -71,6 +72,6 @@ export const DescriptionsContainer = styled.div`
     font-size: 1.4rem;
     font-weight: 400;
     line-height: 150%;
-    color: ${({ theme }) => theme.COLORS.GRAY};
+    color: ${() => theme.COLORS.GRAY};
   }
 `;

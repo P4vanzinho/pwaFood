@@ -1,3 +1,4 @@
+import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
 
 export const Container = styled.header`
@@ -6,7 +7,7 @@ export const Container = styled.header`
   justify-content: space-between;
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  background-color: ${theme.COLORS.WHITE};
   z-index: 1;
   width: 100%;
   padding: 50px;
@@ -22,11 +23,11 @@ export const Logo = styled.button`
   > span {
     font-size: 2.75rem;
     font-weight: 400;
-    color: ${({ theme }) => theme.COLORS.DARK};
+    color: ${theme.COLORS.DARK};
   }
 
   > span:nth-of-type(3) {
-    color: ${({ theme }) => theme.COLORS.PRIMARY};
+    color: ${theme.COLORS.PRIMARY};
   }
 `;
 
@@ -43,7 +44,7 @@ export const MenuTopCenter = styled.div`
   > a {
     text-decoration: none;
     font-size: 1.5rem;
-    color: ${({ theme }) => theme.COLORS.DARK};
+    color: ${theme.COLORS.DARK};
   }
 `;
 
