@@ -1,5 +1,6 @@
 import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
+import { darken, grayscale } from 'polished';
 
 export const Container = styled.form`
   *:focus {
@@ -94,9 +95,18 @@ export const Switch = styled.div`
   position: relative;
   width: 4.438rem;
   height: 2rem;
-  background: #b3b3b3;
+  background: ${() => theme.COLORS.GRAY};
   border-radius: 32px;
   padding: 4px;
+
+  @keyframes color_change {
+    from {
+      background-color: ${() => theme.COLORS.GRAY};
+    }
+    to {
+      background-color: ${() => darken(0.2, theme.COLORS.PRIMARY)};
+    }
+  }
 
   &:before {
     content: '';
@@ -112,10 +122,12 @@ export const Switch = styled.div`
     filter: drop-shadow(-2px 1px 6px rgba(0, 0, 0, 0.25));
   }
 
-  /* ${Input} Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo styled-components.*/
+  /* Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo styled-components.*/
   /*seleciona apenas os elementos input do tipo checkbox ou radio que estão marcados (ou seja, quando o botão switch é clicado).*/
   ${Input}:checked + & {
-    background-color: ${() => theme.COLORS.PRIMARY_DARK};
+    background: ${() => theme.COLORS.PRIMARY};
+
+    animation: color_change 0.5s both;
 
     &:before {
       left: calc(100% - (28px + 4px));

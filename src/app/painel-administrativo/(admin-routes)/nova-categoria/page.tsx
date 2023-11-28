@@ -1,6 +1,5 @@
 'use client';
 
-import AdminAppHeader from '@/app/components/AdminAppHeader';
 import {
   Container,
   Main,
@@ -65,7 +64,7 @@ export default function NewCategory() {
 
         <ToggleSwitchContainer>
           <ToggleSwitch>
-            <p className={poppins.className}>Exibir a categoria no cardapio</p>
+            <p className={poppins.className}>Exibir a categoria no cardápio</p>
             <Label>
               <Input type="checkbox" onChange={() => setChecked(!checked)} />
               <Switch />
@@ -75,7 +74,7 @@ export default function NewCategory() {
 
         <ButtonsContainer>
           <Button
-            onClick={() => router.push(RoutesEnum.PRODUTOS)}
+            onClick={() => router.back()}
             className={poppins.className}
             text="Cancelar"
           />

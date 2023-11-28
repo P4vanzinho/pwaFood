@@ -1,7 +1,6 @@
 'use client';
 
-import { Container, Greetings, Info, InfoUser, RightMenu } from './styles';
-import { poppins } from '../../fonts';
+import { Container, Info, RightMenu } from './styles';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';

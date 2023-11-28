@@ -8,6 +8,8 @@ import NextAuthSessionProvider from './providers/SessionProvider';
 import { ToastContainer } from 'react-toastify';
 import '../assets/ReactToastify.css';
 import { css } from '@linaria/core';
+import { LoadingContextProvider } from '@/context/loading';
+import FullScreenLoading from './components/FullScreenLoading';
 
 const globalStyle = css`
   :root {
@@ -47,9 +49,12 @@ function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={globalStyle}>
       <body>
-        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
-
-        <ToastContainer className={bebas_neue.className} />
+        <LoadingContextProvider>
+          <FullScreenLoading>
+            <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+            <ToastContainer className={bebas_neue.className} />
+          </FullScreenLoading>
+        </LoadingContextProvider>
       </body>
     </html>
   );

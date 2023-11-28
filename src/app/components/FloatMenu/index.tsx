@@ -30,13 +30,8 @@ export default function FloatMenu() {
       {!!showModal && (
         <Modal onClickCallback={() => setShowModal(false)}>
           <Container>
-            <div>
-              <button
-                onClick={() => router.push(RoutesEnum.NOVA_CATEGORIA)}
-                className={bebas_neue.className}
-              >
-                CATEGORIA
-              </button>
+            <div onClick={() => router.push(RoutesEnum.NOVA_CATEGORIA)}>
+              <button className={bebas_neue.className}>CATEGORIA</button>
               <button>
                 <Image src="/notebook.png" alt="" height={24} width={24} />
               </button>

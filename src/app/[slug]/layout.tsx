@@ -50,14 +50,10 @@ function PublicLayout(props: PublicLayoutProps) {
   return (
     <OrderContextProvider>
       <BagContextProvider>
-        <LoadingContextProvider>
-          <FullScreenLoading>
-            <Wrapper>
-              <Container>{props.children}</Container>
-              <MenuBottom slug={props.params.slug} />
-            </Wrapper>
-          </FullScreenLoading>
-        </LoadingContextProvider>
+        <Wrapper>
+          <Container>{props.children}</Container>
+          <MenuBottom slug={props.params.slug} />
+        </Wrapper>
       </BagContextProvider>
     </OrderContextProvider>
   );
