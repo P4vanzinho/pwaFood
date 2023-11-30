@@ -1,5 +1,6 @@
 import { EndpointFoodApiEnum } from '@/app/enums';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
+import { useSession } from 'next-auth/react';
 
 interface Category {
   id: number;
@@ -13,6 +14,8 @@ export default function SelectCategoryOptions({
 }: {
   businessId: number;
 }) {
+  const data = useSession();
+
   const { data: categories } = useFoodFetch(
     EndpointFoodApiEnum.PRODUCT_CATEGORY,
     {

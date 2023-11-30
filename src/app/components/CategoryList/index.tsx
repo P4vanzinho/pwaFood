@@ -23,7 +23,7 @@ export default function CategoryList({
     {
       injectProducts: true,
       hasProducts: true,
-      businessId: businessId,
+      businessId,
     },
     needsToken,
   ) as { data: FoodApiCategory[]; loading: any };

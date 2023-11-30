@@ -48,10 +48,6 @@ const globalStyle = css`
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-
-    > h2 {
-      font-size: 16rem;
-    }
   }
 
   @keyframes scrollUp {

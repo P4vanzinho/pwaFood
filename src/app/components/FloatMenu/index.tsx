@@ -1,12 +1,12 @@
 'use client';
 
+import classnames from 'classnames';
 import { Button, Container, ButtonContainer } from './styles';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { bebas_neue, poppins } from '@/app/fonts';
 import Image from 'next/image';
 import Modal from '../Modal';
-import classnames from 'classnames';
 import { IoCloseSharp } from 'react-icons/io5';
 import { MdOutlineAdd } from 'react-icons/md';
 import { RoutesEnum } from '@/app/enums';

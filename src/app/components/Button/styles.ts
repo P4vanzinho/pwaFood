@@ -1,4 +1,3 @@
-import { lighten } from 'polished';
 import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
 
