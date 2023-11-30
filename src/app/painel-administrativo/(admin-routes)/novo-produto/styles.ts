@@ -1,3 +1,4 @@
+import { theme } from '@/app/styles/theme';
 import styled, { keyframes } from 'styled-components';
 
 const spinAnimation = keyframes`
@@ -19,7 +20,7 @@ export const Container = styled.div`
   position: relative;
 
   *:focus {
-    outline-color: ${({ theme }) => theme.COLORS.PRIMARY};
+    outline-color: ${() => theme.COLORS.PRIMARY};
   }
 `;
 
@@ -31,7 +32,7 @@ export const Main = styled.main`
     font-size: 3.6rem;
     font-weight: 400;
     line-height: normal;
-    border-bottom: 1px solid ${({ theme }) => theme.COLORS.DARK};
+    border-bottom: 1px solid ${() => theme.COLORS.DARK};
     margin-bottom: 1.4rem;
   }
 
@@ -45,18 +46,18 @@ export const Main = styled.main`
       font-size: 12px;
       font-weight: 400;
       line-height: normal;
-      color: ${({ theme }) => theme.COLORS.DARK};
+      color: ${() => theme.COLORS.DARK};
     }
     label:nth-of-type(2) {
       margin-bottom: 3.9rem;
     }
 
     input:invalid {
-      outline: 2px solid ${({ theme }) => theme.COLORS.ERROR};
+      outline: 2px solid ${() => theme.COLORS.ERROR};
     }
 
     input:valid {
-      outline: 2px solid ${({ theme }) => theme.COLORS.PRIMARY};
+      outline: 2px solid ${() => theme.COLORS.PRIMARY};
     }
   }
 `;
@@ -69,12 +70,12 @@ export const TitleLabel = styled.label`
   font-size: 12px;
   font-weight: 400;
   line-height: normal;
-  color: ${({ theme }) => theme.COLORS.DARK};
+  color: ${() => theme.COLORS.DARK};
 
   > input {
     border: none;
     border-radius: 1.5rem;
-    background-color: ${({ theme }) => theme.COLORS.LIGHT};
+    background-color: ${() => theme.COLORS.LIGHT};
     height: 4rem;
     display: flex;
     align-items: center;
@@ -83,13 +84,13 @@ export const TitleLabel = styled.label`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: ${({ theme }) => theme.COLORS.DARK};
+    color: ${() => theme.COLORS.DARK};
   }
 
   > div {
     width: 100%;
     border-radius: 1.5rem;
-    background-color: ${({ theme }) => theme.COLORS.LIGHT};
+    background-color: ${() => theme.COLORS.LIGHT};
     height: 4rem;
     display: flex;
     align-items: center;
@@ -100,7 +101,7 @@ export const TitleLabel = styled.label`
 `;
 
 export const ImageProductContainer = styled.div`
-  border: 1px solid ${({ theme }) => theme.COLORS.GRAY};
+  border: 1px solid ${() => theme.COLORS.GRAY};
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -128,7 +129,7 @@ export const ImageProductContainer = styled.div`
     font-size: 18px;
     font-weight: 500;
     line-height: normal;
-    color: ${({ theme }) => theme.COLORS.DARK};
+    color: ${() => theme.COLORS.DARK};
   }
 
   > div {
@@ -144,13 +145,13 @@ export const ImageProductContainer = styled.div`
       font-size: 14px;
       font-weight: 500;
       line-height: normal;
-      color: ${({ theme }) => theme.COLORS.GRAY};
+      color: ${() => theme.COLORS.GRAY};
     }
 
     div {
       height: 1px;
       width: 12.2rem;
-      background-color: ${({ theme }) => theme.COLORS.GRAY};
+      background-color: ${() => theme.COLORS.GRAY};
     }
   }
 
@@ -161,9 +162,9 @@ export const ImageProductContainer = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    background-color: ${({ theme }) => theme.COLORS.GRAY};
+    background-color: ${() => theme.COLORS.GRAY};
     border: none;
-    color: ${({ theme }) => theme.COLORS.WHITE};
+    color: ${() => theme.COLORS.WHITE};
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -184,7 +185,7 @@ export const LoadingIndicator = styled.span`
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid ${({ theme }) => theme.COLORS.WARNING};
+  border: 2px solid ${() => theme.COLORS.WARNING};
   border-top-color: transparent;
   border-radius: 50%;
   animation: ${spinAnimation} 1s linear infinite;
@@ -200,7 +201,7 @@ export const SelectCategoryLabel = styled.label`
 export const SelectContainer = styled.div`
   width: 100%;
   border-radius: 1.5rem;
-  background-color: ${({ theme }) => theme.COLORS.LIGHT};
+  background-color: ${() => theme.COLORS.LIGHT};
   height: 4rem;
   display: flex;
   align-items: center;
@@ -216,7 +217,7 @@ export const SelectContainer = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: ${({ theme }) => theme.COLORS.DARK};
+    color: ${() => theme.COLORS.DARK};
     background-color: transparent;
 
     &::placeholder {
@@ -224,7 +225,7 @@ export const SelectContainer = styled.div`
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-      color: ${({ theme }) => theme.COLORS.GRAY};
+      color: ${() => theme.COLORS.GRAY};
     }
   }
 `;
@@ -240,7 +241,7 @@ export const DescriptionLabel = styled.label`
     min-height: 10rem;
     padding: 1.9rem 1.75rem 1.1rem;
     border-radius: 1.5rem;
-    background-color: ${({ theme }) => theme.COLORS.LIGHT};
+    background-color: ${() => theme.COLORS.LIGHT};
     height: 4rem;
     position: relative;
 
@@ -255,10 +256,10 @@ export const DescriptionLabel = styled.label`
       font-size: 14px;
       font-weight: 400;
       line-height: normal;
-      color: ${({ theme }) => theme.COLORS.DARK};
+      color: ${() => theme.COLORS.DARK};
 
       &::placeholder {
-        color: ${({ theme }) => theme.COLORS.GRAY};
+        color: ${() => theme.COLORS.GRAY};
       }
       &::-webkit-scrollbar {
         display: none;
@@ -269,7 +270,7 @@ export const DescriptionLabel = styled.label`
       position: absolute;
       right: 2.3rem;
       bottom: 1.1rem;
-      color: ${({ theme }) => theme.COLORS.DARK};
+      color: ${() => theme.COLORS.DARK};
       font-size: 12px;
       font-weight: 500;
       line-height: normal;
@@ -288,13 +289,13 @@ export const ToggleSwitch = styled.div`
   gap: 5rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${({ theme }) => theme.COLORS.LIGHT};
+  border: 1px solid ${() => theme.COLORS.LIGHT};
   border-radius: 15px;
   height: 6rem;
   position: relative;
 
   > p {
-    color: ${({ theme }) => theme.COLORS.DARK};
+    color: ${() => theme.COLORS.DARK};
     font-size: 18px;
     font-weight: 500;
     line-height: normal;
@@ -338,7 +339,7 @@ export const Switch = styled.div`
   /* ${InputCheckBoxInToggle} Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo styled-components.*/
   /*seleciona apenas os elementos input do tipo checkbox ou radio que estão marcados (ou seja, quando o botão switch é clicado).*/
   ${InputCheckBoxInToggle}:checked + & {
-    background-color: ${({ theme }) => theme.COLORS.PRIMARY_DARK};
+    background-color: ${() => theme.COLORS.PRIMARY_DARK};
 
     &:before {
       left: calc(100% - (28px + 4px));
@@ -354,7 +355,7 @@ export const PriceLabel = styled.label`
   > input {
     border: none;
     border-radius: 1.5rem;
-    background-color: ${({ theme }) => theme.COLORS.LIGHT};
+    background-color: ${() => theme.COLORS.LIGHT};
     height: 4rem;
     width: 100%;
     display: flex;
@@ -364,22 +365,22 @@ export const PriceLabel = styled.label`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: ${({ theme }) => theme.COLORS.DARK};
+    color: ${() => theme.COLORS.DARK};
   }
 
   input:invalid {
-    outline: 2px solid ${({ theme }) => theme.COLORS.ERROR};
+    outline: 2px solid ${() => theme.COLORS.ERROR};
   }
 
   > span {
     font-size: 1.4rem;
-    color: ${({ theme }) => theme.COLORS.ERROR};
+    color: ${() => theme.COLORS.ERROR};
     font-weight: 500;
   }
 `;
 
 export const LoadingUploadWarningMessage = styled.div`
-  color: ${({ theme }) => theme.COLORS.WARNING};
+  color: ${() => theme.COLORS.WARNING};
   font-size: 1.4rem;
   margin-left: auto;
   text-align: end;
@@ -412,12 +413,12 @@ export const ButtonsContainer = styled.div`
   }
 
   button:nth-of-type(1) {
-    background-color: ${({ theme }) => theme.COLORS.GRAY};
-    color: ${({ theme }) => theme.COLORS.WHITE};
+    background-color: ${() => theme.COLORS.GRAY};
+    color: ${() => theme.COLORS.WHITE};
   }
 
   button:nth-of-type(2) {
-    background-color: ${({ theme }) => theme.COLORS.PRIMARY};
-    color: ${({ theme }) => theme.COLORS.WHITE};
+    background-color: ${() => theme.COLORS.PRIMARY};
+    color: ${() => theme.COLORS.WHITE};
   }
 `;

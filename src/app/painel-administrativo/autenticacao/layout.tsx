@@ -24,7 +24,7 @@ const Main = styled.main`
   width: 350px;
   margin: 0 auto;
   padding: 3.2rem 2.4rem;
-  border: 1px solid ${lighten(0.34, theme.COLORS.GRAY)};
+  border: 1px solid ${() => lighten(0.34, theme.COLORS.GRAY)};
   border-radius: 12px;
 `;
 
