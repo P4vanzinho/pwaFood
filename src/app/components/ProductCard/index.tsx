@@ -18,7 +18,7 @@ export default function ProductCard({ data, mode }: ProductCardProps) {
     const path =
       mode === 'public'
         ? `${pathname}/item/${data.slug}`
-        : `${pathname}/${data.slug}`;
+        : `/painel-administrativo/produto/${data.slug}`;
 
     router.push(path);
   };

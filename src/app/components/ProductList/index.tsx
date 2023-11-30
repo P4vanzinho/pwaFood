@@ -4,15 +4,14 @@ import { FoodApiProduct } from '../../../../types/foodApi';
 
 type ProductListProps = {
   products: FoodApiProduct[];
-  mode: 'private' | 'public';
 };
 
-export default function ProductList({ products, mode }: ProductListProps) {
+export default function ProductList({ products }: ProductListProps) {
   return (
     <Container>
       {!!products?.length &&
         products.map(product => (
-          <ProductCard key={product.id} mode={mode} data={product} />
+          <ProductCard key={product.id} data={product} />
         ))}
     </Container>
   );

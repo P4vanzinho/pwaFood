@@ -5,5 +5,6 @@ export enum RoutesEnum {
   SIGNUP = `${defaultRoute}/autenticacao/registro`,
   PRODUTOS = `${defaultRoute}/produtos`,
   WHATSAPP = `${defaultRoute}/whatsapp`,
-  CATEGORIA_CADASTRO = `${defaultRoute}/categoria/cadastro`,
+  CATEGORIA_CADASTRO = `${defaultRoute}/categoria`,
+  CADASTRO_PRODUTO = `${defaultRoute}/produto`,
 }

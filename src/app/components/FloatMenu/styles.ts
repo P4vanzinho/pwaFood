@@ -1,11 +1,6 @@
 import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
 
-const disabled = {
-  pointerEvents: 'none',
-  opacity: 0.07,
-};
-
 export const Container = styled.div`
   width: 19rem;
   display: flex;

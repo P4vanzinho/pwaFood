@@ -7,8 +7,6 @@ export const Container = styled.div`
   bottom: 10px;
   right: 10px;
 
-  z-index: 999;
-
   > span {
     color: ${() => lighten(0.5, theme.COLORS.DARK)};
     font-size: 0.6rem;

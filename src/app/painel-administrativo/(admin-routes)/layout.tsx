@@ -1,4 +1,3 @@
-import AuthHeader from '@/app/components/AuthHeader';
 import { ReactNode } from 'react';
 
 import { styled } from '@linaria/react';

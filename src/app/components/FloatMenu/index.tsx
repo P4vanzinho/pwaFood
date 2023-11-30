@@ -40,7 +40,12 @@ export default function FloatMenu() {
                 <Image src="/notebook.png" alt="" height={24} width={24} />
               </button>
             </div>
-            <div>
+            <div
+              className={classnames({
+                disabled: pathname === RoutesEnum.CADASTRO_PRODUTO,
+              })}
+              onClick={() => router.push(RoutesEnum.CADASTRO_PRODUTO)}
+            >
               <button className={bebas_neue.className}>
                 <span>PRODUTO</span>
               </button>

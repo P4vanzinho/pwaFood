@@ -21,12 +21,12 @@ import Button from '@/app/components/Button';
 
 type CategoryProps = {
   params: {
-    mode: 'cadastro' | 'edicao';
+    slug?: string;
   };
 };
 
 export default function Category({ params }: CategoryProps) {
-  console.log(params);
+  const mode = params?.slug ? 'edit' : 'register';
 
   const [checked, setChecked] = useState<boolean>(false);
   const [categoryName, setCategoryName] = useState<string>('');
@@ -37,16 +37,22 @@ export default function Category({ params }: CategoryProps) {
 
   const { request: requestRegisterCategory, error, message } = useFoodFetch();
 
-  function handleCategory() {
-    requestRegisterCategory({
-      method: 'POST',
-      body: {
-        businessId: businessID,
-        name: categoryName,
-        enabled: checked,
-      },
-      endPoint: EndpointFoodApiEnum.PRODUCT_CATEGORY,
-    });
+  function handleCategoryOnClick() {
+    if (mode === 'edit') {
+      // chamar rota de edicao
+    } else {
+      // chamar rota de cadastro
+
+      requestRegisterCategory({
+        method: 'POST',
+        body: {
+          businessId: businessID,
+          name: categoryName,
+          enabled: checked,
+        },
+        endPoint: EndpointFoodApiEnum.PRODUCT_CATEGORY,
+      });
+    }
   }
 
   function handleSubmit(event: SyntheticEvent) {
@@ -54,7 +60,7 @@ export default function Category({ params }: CategoryProps) {
   }
 
   const title =
-    params.mode === 'cadastro'
+    mode === 'register'
       ? 'CADASTRO DE CATEGORIA DE PRODUTO'
       : 'EDIÇÃO DA CATEGORIA DE PRODUTO';
 
@@ -92,7 +98,12 @@ export default function Category({ params }: CategoryProps) {
             text="Cancelar"
           />
 
-          <Button type="submit" className={poppins.className} text="Salvar" />
+          <Button
+            type="submit"
+            className={poppins.className}
+            text="Salvar"
+            onClick={handleCategoryOnClick}
+          />
         </ButtonsContainer>
       </Main>
     </Container>

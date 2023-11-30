@@ -9,9 +9,9 @@ import Text from '@/app/components/Text';
 import { FoodApiProduct } from '../../../../../types/foodApi';
 import Button from '@/app/components/Button';
 import InputQty from '@/app/components/InputQty';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import Price from '@/app/components/Price';
-import BagContext from '@/context/bag';
+import { useBagContext } from '@/context/bag';
 import { useRouter } from 'next/navigation';
 
 type ProductProps = {
@@ -23,7 +23,7 @@ type ProductProps = {
 
 export default function Product(props: ProductProps) {
   const [qty, setQty] = useState(0);
-  const { addItem } = useContext(BagContext);
+  const { addItem } = useBagContext();
   const router = useRouter();
 
   const inputQtyCallback = (value: number) => {
