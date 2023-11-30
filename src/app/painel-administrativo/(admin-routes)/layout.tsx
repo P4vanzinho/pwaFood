@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 
 import { styled } from '@linaria/react';
 import FloatMenu from '@/app/components/FloatMenu';
+import PrivateHeader from '@/app/components/PrivateHeader';
 
 const Container = styled.div`
   height: calc(100vh - 100px);
@@ -21,19 +22,15 @@ const Main = styled.main`
   height: auto;
   width: 100%;
   margin: 0 auto;
-  padding: 3.2rem 2.4rem;
+  padding: 20px 40px;
   border: lighten(0.34, #222);
   border-radius: 12px;
 `;
 
 export default function PrivateLayout({ children }: AuthHeaderProps) {
-  /*   const pathname = usePathname();
-
-  console.log(pathname);
-
-  const shouldShowFloatMenu = pathname !== RoutesEnum.NOVA_CATEGORIA */ return (
+  return (
     <Container>
-      <AuthHeader />
+      <PrivateHeader />
       <Main>{children}</Main>
       <FloatMenu />
     </Container>

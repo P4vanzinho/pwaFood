@@ -8,13 +8,20 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${theme.COLORS.WHITE};
-  object-fit: cover;
   border-radius: 10px;
   -webkit-box-shadow: 0px 4px 15px -2px rgba(0, 0, 0, 0.03);
   box-shadow: 0px 4px 15px -2px rgba(0, 0, 0, 0.03);
   word-break: break-word;
   word-wrap: break-word;
   white-space: normal;
+  cursor: pointer;
+  overflow: hidden;
+  transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 250ms;
+  animation: scrollUp cubic-bezier(0.68, -0.55, 0.27, 1.55) 10s forwards;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   > div {
     display: flex;
@@ -41,6 +48,7 @@ export const Container = styled.div`
 export const PhotoFood = styled(Image)`
   object-fit: cover;
   border-radius: 10px;
+
   -webkit-box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
   box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
 `;

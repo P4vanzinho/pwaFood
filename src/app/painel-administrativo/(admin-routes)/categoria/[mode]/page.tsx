@@ -19,7 +19,15 @@ import { EndpointFoodApiEnum, RoutesEnum } from '@/app/enums';
 import Title from '@/app/components/Title';
 import Button from '@/app/components/Button';
 
-export default function NewCategory() {
+type CategoryProps = {
+  params: {
+    mode: 'cadastro' | 'edicao';
+  };
+};
+
+export default function Category({ params }: CategoryProps) {
+  console.log(params);
+
   const [checked, setChecked] = useState<boolean>(false);
   const [categoryName, setCategoryName] = useState<string>('');
   const { data: session } = useSession();
@@ -45,10 +53,15 @@ export default function NewCategory() {
     event.preventDefault();
   }
 
+  const title =
+    params.mode === 'cadastro'
+      ? 'CADASTRO DE CATEGORIA DE PRODUTO'
+      : 'EDIÇÃO DA CATEGORIA DE PRODUTO';
+
   return (
     <Container onSubmit={handleSubmit}>
       <Main>
-        <Title>CADASTRO DE CATEGORIA DE PRODUTO</Title>
+        <Title>{title}</Title>
 
         <label htmlFor="title" className={bebas_neue.className}>
           Título
@@ -56,7 +69,7 @@ export default function NewCategory() {
             id="title"
             className={poppins.className}
             type="text"
-            placeholder="De um titulo a sua categoria"
+            placeholder="Dê um título à categoria"
             onChange={e => setCategoryName(e.target.value)}
             value={categoryName}
           />
@@ -64,7 +77,7 @@ export default function NewCategory() {
 
         <ToggleSwitchContainer>
           <ToggleSwitch>
-            <p className={poppins.className}>Exibir a categoria no cardápio</p>
+            <p className={poppins.className}>Exibir categoria no cardápio</p>
             <Label>
               <Input type="checkbox" onChange={() => setChecked(!checked)} />
               <Switch />

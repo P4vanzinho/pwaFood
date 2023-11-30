@@ -29,9 +29,9 @@ export default function FloatMenu() {
           <Container>
             <div
               className={classnames({
-                disabled: pathname === RoutesEnum.NOVA_CATEGORIA,
+                disabled: pathname === RoutesEnum.CATEGORIA_CADASTRO,
               })}
-              onClick={() => router.push(RoutesEnum.NOVA_CATEGORIA)}
+              onClick={() => router.push(RoutesEnum.CATEGORIA_CADASTRO)}
             >
               <button className={bebas_neue.className}>
                 <span>CATEGORIA</span>

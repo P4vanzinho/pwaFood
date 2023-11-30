@@ -20,6 +20,7 @@ export const Container = styled.div<ButtonProps>`
   margin-right: auto;
 
   > button {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
