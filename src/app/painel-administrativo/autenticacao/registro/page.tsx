@@ -9,6 +9,7 @@ import { foodFetch } from '@/app/services/foodFetch/foodFetch';
 import { EndpointFoodApiEnum } from '@/app/enums/foodApi/EndpointFoodApiEnum';
 import Input from '@/app/components/Input';
 import Button from '@/app/components/Button';
+import { useLoadingContext } from '@/context/loading';
 
 export default function Register() {
   const [password, setPassword] = useState<string>('');
@@ -20,6 +21,8 @@ export default function Register() {
   const [notSeePassword, setNotSeePassword] = useState(true);
   const [notSeeConfirmPassword, setNotSeeConfirmPassword] = useState(true);
   const [matchPasswordError, setMatchPasswordError] = useState<string>('');
+
+  const { loading, setLoading } = useLoadingContext();
 
   const diferentPasswords =
     password && confirmPassword && password !== confirmPassword;

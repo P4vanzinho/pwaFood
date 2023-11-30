@@ -10,6 +10,7 @@ import { styled } from '@linaria/react';
 import { theme } from '../styles/theme';
 import { useSearchParams } from 'next/navigation';
 import { setPublicUserByToken } from '@/utils/cookiePublicUser';
+import Version from '../components/Version';
 
 const Wrapper = styled.div`
   display: flex;
@@ -48,14 +49,17 @@ function PublicLayout(props: PublicLayoutProps) {
   }
 
   return (
-    <OrderContextProvider>
-      <BagContextProvider>
-        <Wrapper>
-          <Container>{props.children}</Container>
-          <MenuBottom slug={props.params.slug} />
-        </Wrapper>
-      </BagContextProvider>
-    </OrderContextProvider>
+    <>
+      <Version />
+      <OrderContextProvider>
+        <BagContextProvider>
+          <Wrapper>
+            <Container>{props.children}</Container>
+            <MenuBottom slug={props.params.slug} />
+          </Wrapper>
+        </BagContextProvider>
+      </OrderContextProvider>
+    </>
   );
 }
 

@@ -5,8 +5,7 @@ import { FaRegHeart, FaRegUser } from 'react-icons/fa';
 import { BiBasket, BiHomeAlt2, BiSearch, BiMinus } from 'react-icons/bi';
 import { useRouter, usePathname } from 'next/navigation';
 import { useBagContext } from '@/context/bag';
-import { ReactNode } from 'react';
-import { bebas_neue, inter } from '@/app/fonts';
+import { inter } from '@/app/fonts';
 
 type MenuBottomPRops = {
   slug: string;
@@ -22,7 +21,6 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
       <>
         {!!total && (
           <Bubble className={inter.className}>
-            {' '}
             {total.toLocaleString('pt-BR')}
           </Bubble>
         )}

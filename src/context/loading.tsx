@@ -11,7 +11,7 @@ type LoadingContextProps = {
   loading: boolean;
 };
 
-const defaultLoading = true;
+const defaultLoading = false;
 
 const defaultValue = {
   setLoading: () => {},

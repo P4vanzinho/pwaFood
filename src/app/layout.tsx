@@ -1,9 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-
 import { bebas_neue } from './fonts';
-
 import NextAuthSessionProvider from './providers/SessionProvider';
 import { ToastContainer } from 'react-toastify';
 import '../assets/ReactToastify.css';
@@ -20,6 +18,11 @@ const globalStyle = css`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+  }
+
+  button,
+  a {
+    cursor: pointer;
   }
 
   body {
@@ -44,15 +47,6 @@ const globalStyle = css`
     strong {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-    }
-
-    > a {
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    > button {
-      cursor: pointer;
     }
 
     > h2 {

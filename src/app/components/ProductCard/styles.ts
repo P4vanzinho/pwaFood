@@ -3,8 +3,8 @@ import { styled } from '@linaria/react';
 import Image from 'next/image';
 
 export const Container = styled.div`
-  width: 130px;
   height: auto;
+  width: 130px;
   display: flex;
   flex-direction: column;
   background-color: ${theme.COLORS.WHITE};
@@ -15,9 +15,7 @@ export const Container = styled.div`
   word-wrap: break-word;
   white-space: normal;
   cursor: pointer;
-  overflow: hidden;
   transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 250ms;
-  animation: scrollUp cubic-bezier(0.68, -0.55, 0.27, 1.55) 10s forwards;
 
   &:hover {
     transform: scale(1.05);

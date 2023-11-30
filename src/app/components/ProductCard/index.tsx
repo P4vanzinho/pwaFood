@@ -5,12 +5,12 @@ import Price from '../Price';
 import { usePathname, useRouter } from 'next/navigation';
 import { Container, PhotoFood } from './styles';
 
-type FoodCardProps = {
+type ProductCardProps = {
   data: FoodApiProduct;
   mode: 'private' | 'public';
 };
 
-export default function FoodCard({ data, mode }: FoodCardProps) {
+export default function ProductCard({ data, mode }: ProductCardProps) {
   const pathname = usePathname();
   const router = useRouter();
 

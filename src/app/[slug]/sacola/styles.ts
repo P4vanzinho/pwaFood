@@ -1,5 +1,6 @@
 import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -20,10 +21,20 @@ export const Container = styled.div`
       border: none;
       background-color: ${theme.COLORS.WHITE};
       margin-top: 30px;
+      padding: 20px 20px 20px 0px;
+
+      &:hover {
+        > span {
+          font-weight: 600;
+          color: ${() => darken(0.2, theme.COLORS.ERROR)};
+        }
+      }
 
       > span {
         color: ${theme.COLORS.ERROR};
         font-weight: 600;
+        transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 250ms;
+        cursor: pointer;
       }
     }
   }

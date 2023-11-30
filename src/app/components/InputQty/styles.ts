@@ -1,6 +1,6 @@
 import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
-import { darken, lighten } from 'polished';
+import { lighten } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -27,7 +27,6 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     border: none;
-
     padding: 0;
     width: 50%;
     height: 100%;
@@ -43,7 +42,7 @@ export const Container = styled.div`
     }
 
     &:hover {
-      background-color: ${darken(0.05, '#F4F4F4')};
+      background-color: ${() => lighten(0.2, theme.COLORS.GRAY)};
     }
 
     > svg {
@@ -56,7 +55,7 @@ export const Container = styled.div`
       cursor: not-allowed;
 
       > svg {
-        fill: ${lighten(0.25, theme.COLORS.GRAY)};
+        fill: ${() => lighten(0.25, theme.COLORS.GRAY)};
       }
     }
   }
@@ -64,13 +63,10 @@ export const Container = styled.div`
 
 export const Input = styled.div`
   display: flex;
-
   height: 2.5rem;
   border-radius: 20px;
   width: 10rem;
-
   background-color: ${theme.COLORS.LIGHT};
-
   overflow: hidden;
 
   > div {
@@ -87,7 +83,6 @@ export const Input = styled.div`
     color: ${theme.COLORS.DARK};
     background-color: transparent;
     font-size: 0.875rem;
-
     width: 80px;
     height: 10px;
     padding: 0px;

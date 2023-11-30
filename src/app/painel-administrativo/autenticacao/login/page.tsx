@@ -24,12 +24,11 @@ export default function Login() {
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  const { data } = useSession();
 
   async function handleSubmit(event: SyntheticEvent) {
-    setLoading(true);
-
     event.preventDefault();
+
+    setLoading(true);
 
     try {
       const result = await signIn('credentials', {

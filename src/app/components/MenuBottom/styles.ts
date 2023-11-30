@@ -41,13 +41,15 @@ export const Button = styled.div<ButtonProps>`
     position: absolute;
     top: 50px;
   }
+
+  cursor: pointer;
 `;
 export const Bubble = styled.div`
   position: absolute;
   top: 15px;
   left: 25px;
-  color: ${props => theme.COLORS.WHITE};
-  background-color: ${props => theme.COLORS.ERROR};
+  color: ${() => theme.COLORS.WHITE};
+  background-color: ${() => theme.COLORS.ERROR};
   width: auto;
   height: 22px;
   border-radius: 10px;

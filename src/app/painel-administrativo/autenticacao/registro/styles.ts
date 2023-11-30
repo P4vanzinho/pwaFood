@@ -1,3 +1,4 @@
+import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
 
 export const Container = styled.div`
@@ -50,7 +51,7 @@ export const ForgetPasswordContainer = styled.div`
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.8rem;
-    color: ${({ theme }) => theme.COLORS.PRIMARY_LIGHT};
+    color: ${({}) => theme.COLORS.PRIMARY_LIGHT};
   }
 `;
 

@@ -1,6 +1,7 @@
 import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
 import Image from 'next/image';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   width: 100%;
@@ -20,7 +21,7 @@ export const PhotoFood = styled(Image)`
   -webkit-box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
   box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
   padding: 5px;
-  width: 7rem;
+  width: 6rem;
   height: 5rem;
 `;
 
@@ -56,6 +57,11 @@ export const Actions = styled.div`
     background-color: transparent;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+
+    &:hover > div {
+      background-color: ${() => darken(0.2, theme.COLORS.ERROR)};
+    }
 
     > div {
       display: flex;
@@ -65,9 +71,10 @@ export const Actions = styled.div`
       background-color: ${theme.COLORS.ERROR};
       border-radius: 5px;
 
+      transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 250ms;
+
       > svg {
         color: ${theme.COLORS.WHITE};
-        font-size: 0.8rem;
       }
     }
   }
@@ -78,6 +85,9 @@ export const InputWrapper = styled.div`
   flex-direction: row;
   height: 2rem;
   align-items: flex-end;
+  align-self: flex-end;
+
+  cursor: pointer;
 
   > input {
     display: flex;

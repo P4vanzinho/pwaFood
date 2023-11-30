@@ -7,10 +7,9 @@ import { IoTrashBinSharp, IoChevronDownOutline } from 'react-icons/io5';
 
 type BagItem = {
   item: Item;
-  index: number;
 };
 
-export default function BagItem({ item, index }: BagItem) {
+export default function BagItem({ item }: BagItem) {
   const { editItem, removeItem } = useBagContext();
 
   const inputRef = useRef<HTMLInputElement>(null);

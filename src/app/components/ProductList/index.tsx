@@ -1,4 +1,4 @@
-import FoodCard from '../FoodCard';
+import ProductCard from '../ProductCard';
 import { Container } from './styles';
 import { FoodApiProduct } from '../../../../types/foodApi';
 
@@ -12,7 +12,7 @@ export default function ProductList({ products, mode }: ProductListProps) {
     <Container>
       {!!products?.length &&
         products.map(product => (
-          <FoodCard key={product.id} mode={mode} data={product} />
+          <ProductCard key={product.id} mode={mode} data={product} />
         ))}
     </Container>
   );

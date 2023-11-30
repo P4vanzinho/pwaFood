@@ -89,8 +89,8 @@ export default function Bag({ params }: BagProps) {
       <div>
         <Title>Sacola</Title>
 
-        {itens.map((item, index) => (
-          <BagItem key={item.id} index={index} item={item} />
+        {itens.map(item => (
+          <BagItem key={item.id} item={item} />
         ))}
 
         <button className={inter.className} onClick={addItemOnClick}>
