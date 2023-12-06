@@ -1,6 +1,4 @@
 'use client';
-
-import AdminAppHeader from '@/app/components/AdminAppHeader';
 import {
   Container,
   Main,
