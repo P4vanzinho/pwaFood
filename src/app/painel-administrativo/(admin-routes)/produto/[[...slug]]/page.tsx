@@ -88,44 +88,43 @@ export default function Product(props: ProductProps) {
           />
           {/* </FoodTitleLabel> */}
           <FileUploader
-            children={
-              <ImageProductContainer>
-                <Image
-                  src="/productImage.png"
-                  alt=""
-                  height={51}
-                  width={51}
-                ></Image>
+          // handleChange={OnChangeUploadFile}
+          // name="file"
+          // types={fileTypes}
+          >
+            <ImageProductContainer>
+              <Image
+                src="/productImage.png"
+                alt=""
+                height={51}
+                width={51}
+              ></Image>
 
-                <p className={poppins.className}>Arraste uma imagem</p>
+              <p className={poppins.className}>Arraste uma imagem</p>
 
-                <div>
-                  <div></div>
-                  <span className={poppins.className}>ou</span>
-                  <div></div>
-                </div>
+              <div>
+                <div></div>
+                <span className={poppins.className}>ou</span>
+                <div></div>
+              </div>
 
-                <button
-                  // disabled={`!loadingNewProductUpload`}
-                  className={poppins.className}
-                >
-                  <input
-                    type="file"
-                    // onChange={e => {
-                    //   const selectedFile = e.target.files && e.target.files[0];
-                    //   if (selectedFile) {
-                    //     OnChangeUploadFile(selectedFile);
-                    //   }
-                    // }}
-                  />
-                  Selecione do computador
-                </button>
-              </ImageProductContainer>
-            }
-            // handleChange={OnChangeUploadFile}
-            // name="file"
-            // types={fileTypes}
-          />
+              <button
+                // disabled={`!loadingNewProductUpload`}
+                className={poppins.className}
+              >
+                <input
+                  type="file"
+                  // onChange={e => {
+                  //   const selectedFile = e.target.files && e.target.files[0];
+                  //   if (selectedFile) {
+                  //     OnChangeUploadFile(selectedFile);
+                  //   }
+                  // }}
+                />
+                Selecione do computador
+              </button>
+            </ImageProductContainer>
+          </FileUploader>
           <SelectCategoryLabel
             htmlFor="foodCategory"
             className={bebas_neue.className}
