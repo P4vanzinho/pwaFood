@@ -53,8 +53,6 @@ export default function Login() {
     }
   }
 
-  useEffect(() => {}, []);
-
   return (
     <Container>
       <form onSubmit={handleSubmit}>
