@@ -67,7 +67,7 @@ export default function FloatMenu() {
               <IoCloseSharp />
             </div>
           ) : (
-            <span>
+            <span className={bebas_neue.className}>
               <MdOutlineAdd /> CADASTRO
             </span>
           )}
