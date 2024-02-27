@@ -15,6 +15,27 @@ export const Container = styled.div`
   }
 `;
 
+export const FieldsetContainer = styled.fieldset`
+  border: none;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+    color: ${() => theme.COLORS.DARK};
+    gap: 0.625rem;
+
+    input {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+  }
+`;
+
 export const FormContainer = styled.div`
   width: 38.375rem;
   margin: 0 auto;
@@ -163,11 +184,6 @@ export const ImageWithoutUpload = styled.div`
 `;
 
 export const ImageWithUpload = styled.div`
-  .canvasDimensions {
-    width: 127px;
-    height: 127px;
-  }
-
   width: 100%;
   height: 100%;
   display: flex;
@@ -186,38 +202,49 @@ export const ImageWithUpload = styled.div`
   image {
     object-fit: cover;
   }
+`;
 
-  > div {
+export const ImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 127px;
+`;
+
+export const ButtonsImageContainer = styled.div`
+  display: flex;
+  gap: 3rem;
+  background-color: transparent;
+  height: 2.438rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+
+  > button {
+    height: 100%;
+    border-radius: 1.25rem;
+    width: 7.125rem;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: ${() => theme.COLORS.WHITE};
+    background-color: ${() => theme.COLORS.GRAY};
+    border: none;
     display: flex;
-    gap: 3rem;
-    background-color: transparent;
-    height: 2.438rem;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    position: relative;
 
-    > button {
+    input {
+      width: 100%;
       height: 100%;
-      border-radius: 1.25rem;
-      width: 7.125rem;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      color: ${() => theme.COLORS.WHITE};
-      background-color: ${() => theme.COLORS.GRAY};
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      input {
-        width: 100%;
-        position: absolute;
-        left: 0;
-        opacity: 0;
-        cursor: pointer;
-      }
+      left: 0;
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
     }
   }
 `;
@@ -416,7 +443,7 @@ export const PriceLabel = styled.label`
   }
 `;
 
-export const ButtonsContainer = styled.div`
+export const FormButtonsContainer = styled.div`
   width: 15.875rem;
   display: flex;
   gap: 1.5rem;
