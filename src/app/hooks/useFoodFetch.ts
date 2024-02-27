@@ -68,7 +68,7 @@ function useFoodFetch<T>(
   }, [session, endPoint, queryBuilder, router, shouldUseToken]);
 
   const request = useCallback(
-    ({ endPoint, body, method, headers }: FoodFetchProps) => {
+    ({ endPoint, body, method, headers, params }: FoodFetchProps) => {
       setLoading(true);
 
       async function fetch() {
@@ -79,6 +79,7 @@ function useFoodFetch<T>(
           method,
           body,
           headers,
+          params,
         };
 
         if (
