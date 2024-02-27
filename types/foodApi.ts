@@ -19,6 +19,7 @@ export type FoodApiProduct = {
   slug: string;
   price: string | null;
   description: string | null;
+  businessId: number | string;
 };
 
 export type FoodApiCategory = {
