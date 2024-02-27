@@ -5,6 +5,7 @@ import {
   Container,
   FormContainer,
   ImageProductContainer,
+  ImageContainer,
   SelectCategoryLabel,
   SelectContainer,
   DescriptionLabel,
@@ -13,11 +14,13 @@ import {
   LabelToglleSwitch,
   InputCheckBoxInToggle,
   Switch,
-  ButtonsContainer,
+  FormButtonsContainer,
   ImageWithoutUpload,
   ImageWithUpload,
+  ButtonsImageContainer,
 } from './styles';
 
+import { useSession } from 'next-auth/react';
 import Title from '@/app/components/Title';
 import {
   ChangeEvent,
@@ -33,28 +36,28 @@ import Input from '@/app/components/Input';
 import Button from '@/app/components/Button';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
 import { EndpointFoodApiEnum } from '@/app/enums';
-import { FoodApiCategory, FoodApiUpload } from '../../../../types/foodApi';
+import {
+  FoodApiCategory,
+  FoodApiProduct,
+  FoodApiUpload,
+} from '../../../../types/foodApi';
 import AvatarEditor from 'react-avatar-editor';
 import Dropzone from 'react-dropzone';
 
 type ProductPageProps = {
-  props?: {
-    params?: {
-      slug: string;
-    };
-  };
-
+  productId: string;
   businessId: number | string;
   mode?: 'private' | 'public';
+  modePage: string;
 };
 
 export default function ProductPage({
-  props,
+  productId,
+  modePage,
   businessId,
   mode = 'private',
 }: ProductPageProps) {
   const needsToken = mode === 'private';
-  const modePage = props?.params?.slug ? 'edit' : 'register';
 
   const title =
     modePage === `register` ? `CADASTRO DE PRODUTO` : `EDIÇÃO DE PRODUTO`;
@@ -70,10 +73,12 @@ export default function ProductPage({
   const [categorySelected, setCategorySelected] = useState<
     FoodApiCategory | undefined
   >(undefined);
+  const { data: session } = useSession();
 
-  const [uploadName, setUploadName] = useState<string | undefined>('');
+  const [uploadName, setUploadName] = useState<string>('');
   const [isUploadedImage, setIsUploadedImage] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   const emptyingValues = () => {
     setFoodTitle(``);
@@ -87,24 +92,6 @@ export default function ProductPage({
     setFile(null);
   };
 
-  useEffect(() => {
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append('upload', file, file.name);
-
-    requestNewProductUpload({
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Content-type': 'multipart/form-data',
-      },
-      endPoint: EndpointFoodApiEnum.UPLOAD,
-    });
-
-    console.log(`upload`, upload);
-  }, [file]);
-
   //Categories request
   const { data: categories } = useFoodFetch<FoodApiCategory[]>(
     EndpointFoodApiEnum.PRODUCT_CATEGORY,
@@ -116,16 +103,25 @@ export default function ProductPage({
     needsToken,
   );
 
-  //Upload request
+  const { data: product } = useFoodFetch<FoodApiProduct>(
+    EndpointFoodApiEnum.PRODUCT,
+    {
+      businessId,
+      productId,
+    },
+    false,
+  );
+
   const {
     request: requestNewProductUpload,
     loading: loadingNewProductUpload,
     data: upload,
   } = useFoodFetch<FoodApiUpload>();
 
-  //Register product request
   const { request: requestRegisterNewProduct, loading: newProductLoading } =
     useFoodFetch();
+
+  const { request: requestPatchProduct } = useFoodFetch();
 
   function handleTextAreaLength(event: ChangeEvent<HTMLTextAreaElement>) {
     setRemaining(textAreaMaxLength - event.target.value.length);
@@ -144,35 +140,61 @@ export default function ProductPage({
 
   function onChangeUploadFile(acceptedFiles: File[]) {
     const selectedFile = acceptedFiles[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
+  }
 
-    setFile(selectedFile || null);
+  function onChangeClickableInput(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (file) {
+      setFile(file);
+    }
+    console.log(file, `file`);
   }
 
   function handleRemoveUpload() {
     setUploadName('');
-    setIsUploadedImage(() => false);
+    setIsUploadedImage(false);
+    setFile(null);
   }
 
-  function handleNewProduct() {
-    requestRegisterNewProduct({
-      method: 'POST',
-      body: {
-        categoryId: categorySelected?.id,
-        name: foodTitle,
-        price,
-        description,
-        uploadId: upload?.id,
-        enabled: checked,
-      },
-      endPoint: EndpointFoodApiEnum.PRODUCT,
-    });
+  function handleRequest() {
+    if (modePage == 'edit' && businessId) {
+      requestPatchProduct({
+        method: 'PATCH',
+        body: {
+          categoryId: categorySelected?.id,
+          name: foodTitle,
+          price,
+          description,
+          uploadId: upload?.id,
+          enabled: checked,
+        },
+        params: { businessId, productId: `x-burger` },
+        endPoint: EndpointFoodApiEnum.PRODUCT,
+      });
+    } else {
+      requestRegisterNewProduct({
+        method: 'POST',
+        body: {
+          categoryId: categorySelected?.id,
+          name: foodTitle,
+          price,
+          description,
+          uploadId: upload?.id,
+          enabled: checked,
+        },
+        endPoint: EndpointFoodApiEnum.PRODUCT,
+      });
+    }
 
     emptyingValues();
   }
 
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
-    handleNewProduct();
+    handleRequest();
   }
 
   //Selecionando categoria
@@ -184,14 +206,6 @@ export default function ProductPage({
 
     setCategorySelected(foundCategory);
   }, [categories, category, categorySelected]);
-
-  useEffect(() => {
-    if (!file) return;
-    setIsUploadedImage(() => true);
-    setUploadName(upload?.name);
-
-    console.log(`upload`, upload);
-  }, [upload]);
 
   useEffect(() => {
     if (!file) return;
@@ -207,10 +221,41 @@ export default function ProductPage({
       },
       endPoint: EndpointFoodApiEnum.UPLOAD,
     });
-
-    console.log(`upload`, upload);
   }, [file]);
 
+  //Selecionando categoria
+  useEffect(() => {
+    if (categories && categories.length === 1) {
+      setCategory(() => categories[0].name);
+    }
+    const foundCategory = categories?.find(prev => prev.name === category);
+
+    setCategorySelected(foundCategory);
+  }, [categories, category, categorySelected]);
+
+  useEffect(() => {
+    if (product && product.upload && imageLoaded === false) {
+      console.log(`passei pela verificacao`);
+      setUploadName(product.upload.url);
+      console.log(`setei uploadName`);
+      setImageLoaded(true);
+    }
+  }, [product]);
+
+  useEffect(() => {
+    if (!file && modePage === `register`) return;
+
+    setIsUploadedImage(() => true);
+    setUploadName(
+      ` https://fooda.nyc3.digitaloceanspaces.com/develop/${upload?.name}`,
+    );
+    console.log(`upload?.name`, upload?.name);
+  }, [upload]);
+
+  //useEffect debugger
+  useEffect(() => {
+    console.log(` file`, file);
+  }, [file]);
   return (
     <Container>
       <FormContainer>
@@ -228,33 +273,95 @@ export default function ProductPage({
             />
             {/* </FoodTitleLabel> */}
 
-            {isUploadedImage ? (
+            {isUploadedImage && product?.upload ? (
               <ImageProductContainer>
                 <ImageWithUpload>
                   <p className={poppins.className}>
                     Como será visualizado pelo cliente
                   </p>
 
-                  <AvatarEditor
-                    image={`https://fooda.nyc3.digitaloceanspaces.com/develop/${uploadName}`}
-                    height={127}
-                    width={127}
-                    scale={1}
-                    className="canvasDimensions"
-                  />
+                  <Dropzone
+                    noKeyboard
+                    onDrop={acceptedFiles => onChangeUploadFile(acceptedFiles)}
+                    noClick={true}
+                  >
+                    {({ getRootProps, getInputProps }) => (
+                      <ImageContainer {...getRootProps()}>
+                        <AvatarEditor
+                          image={uploadName}
+                          height={127}
+                          width={127}
+                          scale={1}
+                          border={0}
+                        />
+                        <input {...getInputProps()} />
+                        EDITAR
+                      </ImageContainer>
+                    )}
+                  </Dropzone>
 
-                  <div>
-                    <button className={poppins.className}> EDITAR</button>
+                  <ButtonsImageContainer>
                     <button
+                      type="button"
                       className={poppins.className}
                       onClick={handleRemoveUpload}
                     >
                       REMOVER
                     </button>
-                  </div>
+
+                    <button type="button" className={poppins.className}>
+                      EDITAR
+                      <input type="file" onChange={onChangeClickableInput} />
+                    </button>
+                  </ButtonsImageContainer>
                 </ImageWithUpload>
               </ImageProductContainer>
             ) : (
+              // <Dropzone
+              //   noKeyboard
+              //   onDrop={acceptedFiles => onChangeUploadFile(acceptedFiles)}
+              // >
+              //   {({ getRootProps, getInputProps }) => (
+              //     <ImageProductContainer {...getRootProps()}>
+              //       <ImageWithUpload>
+              //         <p className={poppins.className}>
+              //           Como será visualizado pelo cliente
+              //         </p>
+
+              //         <AvatarEditor
+              //           image={
+              //             product?.upload
+              //               ? product.upload.url
+              //               : `https://fooda.nyc3.digitaloceanspaces.com/develop/${uploadName}`
+              //           }
+              //           height={127}
+              //           width={127}
+              //           scale={1}
+              //           border={0}
+              //           className="canvasDimensions"
+              //         />
+
+              //         <div>
+              //           <button type="button" className={poppins.className}>
+              //             <input
+              //               onChange={onChangeUploadFile}
+              //               type="file"
+              //               {...getInputProps()}
+              //             />
+              //             EDITAR
+              //           </button>
+              //           <button
+              //             type="button"
+              //             className={poppins.className}
+              //             onClick={handleRemoveUpload}
+              //           >
+              //             REMOVER
+              //           </button>
+              //         </div>
+              //       </ImageWithUpload>
+              //     </ImageProductContainer>
+              //   )}
+              // </Dropzone>
               <Dropzone
                 noKeyboard
                 onDrop={acceptedFiles => onChangeUploadFile(acceptedFiles)}
@@ -274,7 +381,7 @@ export default function ProductPage({
                         <span className={poppins.className}>ou</span>
                         <div></div>
                       </div>
-                      <button className={poppins.className}>
+                      <button className={poppins.className} type="button">
                         <input
                           onChange={onChangeUploadFile}
                           type="file"
@@ -366,10 +473,10 @@ export default function ProductPage({
             )}
           </fieldset>
 
-          <ButtonsContainer>
+          <FormButtonsContainer>
             <Button text={`Cancelar`} />
             <Button text={`Salvar`} type="submit" />
-          </ButtonsContainer>
+          </FormButtonsContainer>
         </form>
       </FormContainer>
     </Container>
