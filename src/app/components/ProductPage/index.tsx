@@ -20,7 +20,6 @@ import {
   ButtonsImageContainer,
 } from './styles';
 
-import { useSession } from 'next-auth/react';
 import Title from '@/app/components/Title';
 import {
   ChangeEvent,
@@ -73,7 +72,6 @@ export default function ProductPage({
   const [categorySelected, setCategorySelected] = useState<
     FoodApiCategory | undefined
   >(undefined);
-  const { data: session } = useSession();
 
   const [uploadName, setUploadName] = useState<string>('');
   const [isUploadedImage, setIsUploadedImage] = useState<boolean>(false);
@@ -138,19 +136,14 @@ export default function ProductPage({
     }
   }
 
-  function onChangeUploadFile(acceptedFiles: File[]) {
-    const selectedFile = acceptedFiles[0];
+  function onChangeFile(
+    acceptedFiles?: File[],
+    event?: ChangeEvent<HTMLInputElement>,
+  ) {
+    const selectedFile = event?.target?.files?.[0] || acceptedFiles?.[0];
     if (selectedFile) {
       setFile(selectedFile);
     }
-  }
-
-  function onChangeClickableInput(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (file) {
-      setFile(file);
-    }
-    console.log(file, `file`);
   }
 
   function handleRemoveUpload() {
@@ -197,7 +190,6 @@ export default function ProductPage({
     handleRequest();
   }
 
-  //Selecionando categoria
   useEffect(() => {
     if (categories && categories.length === 1) {
       setCategory(() => categories[0].name);
@@ -223,7 +215,7 @@ export default function ProductPage({
     });
   }, [file]);
 
-  //Selecionando categoria
+  //Select category
   useEffect(() => {
     if (categories && categories.length === 1) {
       setCategory(() => categories[0].name);
@@ -252,10 +244,6 @@ export default function ProductPage({
     console.log(`upload?.name`, upload?.name);
   }, [upload]);
 
-  //useEffect debugger
-  useEffect(() => {
-    console.log(` file`, file);
-  }, [file]);
   return (
     <Container>
       <FormContainer>
@@ -282,7 +270,7 @@ export default function ProductPage({
 
                   <Dropzone
                     noKeyboard
-                    onDrop={acceptedFiles => onChangeUploadFile(acceptedFiles)}
+                    onDrop={acceptedFiles => onChangeFile(acceptedFiles)}
                     noClick={true}
                   >
                     {({ getRootProps, getInputProps }) => (
@@ -311,60 +299,18 @@ export default function ProductPage({
 
                     <button type="button" className={poppins.className}>
                       EDITAR
-                      <input type="file" onChange={onChangeClickableInput} />
+                      <input
+                        type="file"
+                        onChange={event => onChangeFile(undefined, event)}
+                      />
                     </button>
                   </ButtonsImageContainer>
                 </ImageWithUpload>
               </ImageProductContainer>
             ) : (
-              // <Dropzone
-              //   noKeyboard
-              //   onDrop={acceptedFiles => onChangeUploadFile(acceptedFiles)}
-              // >
-              //   {({ getRootProps, getInputProps }) => (
-              //     <ImageProductContainer {...getRootProps()}>
-              //       <ImageWithUpload>
-              //         <p className={poppins.className}>
-              //           Como será visualizado pelo cliente
-              //         </p>
-
-              //         <AvatarEditor
-              //           image={
-              //             product?.upload
-              //               ? product.upload.url
-              //               : `https://fooda.nyc3.digitaloceanspaces.com/develop/${uploadName}`
-              //           }
-              //           height={127}
-              //           width={127}
-              //           scale={1}
-              //           border={0}
-              //           className="canvasDimensions"
-              //         />
-
-              //         <div>
-              //           <button type="button" className={poppins.className}>
-              //             <input
-              //               onChange={onChangeUploadFile}
-              //               type="file"
-              //               {...getInputProps()}
-              //             />
-              //             EDITAR
-              //           </button>
-              //           <button
-              //             type="button"
-              //             className={poppins.className}
-              //             onClick={handleRemoveUpload}
-              //           >
-              //             REMOVER
-              //           </button>
-              //         </div>
-              //       </ImageWithUpload>
-              //     </ImageProductContainer>
-              //   )}
-              // </Dropzone>
               <Dropzone
                 noKeyboard
-                onDrop={acceptedFiles => onChangeUploadFile(acceptedFiles)}
+                onDrop={acceptedFiles => onChangeFile(acceptedFiles)}
               >
                 {({ getRootProps, getInputProps }) => (
                   <ImageProductContainer {...getRootProps()}>
@@ -383,7 +329,7 @@ export default function ProductPage({
                       </div>
                       <button className={poppins.className} type="button">
                         <input
-                          onChange={onChangeUploadFile}
+                          onChange={event => onChangeFile(undefined, event)}
                           type="file"
                           {...getInputProps()}
                         />
