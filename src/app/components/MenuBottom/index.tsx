@@ -6,6 +6,7 @@ import { BiBasket, BiHomeAlt2, BiSearch, BiMinus } from 'react-icons/bi';
 import { useRouter, usePathname } from 'next/navigation';
 import { useBagContext } from '@/context/bag';
 import { inter } from '@/app/fonts';
+import { centsToUnities } from '@/utils/money';
 
 type MenuBottomPRops = {
   slug: string;
@@ -21,7 +22,7 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
       <>
         {!!total && (
           <Bubble className={inter.className}>
-            {total.toLocaleString('pt-BR')}
+            {centsToUnities(total).toLocaleString('pt-BR')}
           </Bubble>
         )}
       </>

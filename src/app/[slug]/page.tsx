@@ -91,7 +91,7 @@ export default function Home(props: HomeProps) {
         )}
 
         <p className={poppins.className}>
-          {data?.status === 'close' ? '(FECHADO)' : ''}
+          {data?.status === 'close' ? '( FECHADO )' : ''}
         </p>
       </header>
 
