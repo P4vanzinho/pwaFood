@@ -4,13 +4,23 @@ import { jwtDecode } from 'jwt-decode';
 type PublicUser = {
   name?: string;
   whatsapp?: string;
-  address?: {};
+  address?: {
+    cep: string;
+    street: string;
+    streetNumber: string;
+    neighborhood: string;
+    addressDetails?: string;
+    city: string;
+    state: string;
+  };
 };
 
 const key = 'u';
 
 function getPublicUser(): PublicUser | null {
   const stringObject = getCookie(key);
+
+  console.log(stringObject);
 
   if (!stringObject) {
     return null;
@@ -27,4 +37,15 @@ function setPublicUserByToken(token: string): void {
   }
 }
 
-export { getPublicUser, setPublicUserByToken };
+function setPublicUser({ name, address, whatsapp }: PublicUser) {
+  setCookie(
+    key,
+    JSON.stringify({
+      name,
+      address,
+      whatsapp,
+    }),
+  );
+}
+
+export { getPublicUser, setPublicUserByToken, setPublicUser };

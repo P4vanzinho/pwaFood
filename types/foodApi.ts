@@ -72,4 +72,35 @@ export type FoodApiBusiness = {
   whatsapp: string | null;
   status: 'open' | 'close';
   name: string;
+  address?: FoodApiAddress;
+};
+
+export type FoodApiAddressGettingByPostalCode = {
+  cep: string;
+  state: string;
+  city: string;
+  neighborhood: string;
+  street: string;
+};
+
+export type FoodApiAddress = {
+  id: string;
+  cep: string;
+  state: string;
+  city: string;
+  neighborhood: string;
+  street: string;
+  number: string;
+  lat: string;
+  long: string;
+};
+
+export type FoodApiDeliveryFee = {
+  cep: string;
+  city: string;
+  neighborhood: string;
+  state: string;
+  street: string;
+  streetNumber: string;
+  deliveryFee: number;
 };

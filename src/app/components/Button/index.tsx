@@ -33,7 +33,7 @@ export default function Button({
           [rest.className as string]: true,
         })}
       >
-        {text}
+        {text?.toUpperCase()}
       </button>
     </Container>
   );

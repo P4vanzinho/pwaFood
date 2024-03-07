@@ -6,7 +6,7 @@ export const theme = {
     SECUNDARY_DARK: '#54595E',
     DARK: '#2D2D2D',
     SUCCESS: '#2FDB5F',
-    WARNING: '#F1C75D',
+    WARNING: '#F99928',
     PRIMARY: '#2FDBBC',
     PRIMARY_LIGHT: '#67E5CE',
     PRIMARY_DARK: '#1EAE94',

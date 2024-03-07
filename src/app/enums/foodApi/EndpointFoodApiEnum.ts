@@ -5,4 +5,6 @@ export enum EndpointFoodApiEnum {
   TENANT_LOGIN = 'tenant/login',
   BUSINESS = 'business',
   UPLOAD = 'upload',
+  ADDRESS = 'address',
+  ORDER = 'order',
 }
