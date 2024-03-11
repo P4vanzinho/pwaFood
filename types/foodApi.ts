@@ -35,6 +35,7 @@ export type FoodApiCategory = {
 export type FoodApiOrder = {
   id: number;
   checkId: string;
+  paymentLink: string;
   raw: {
     whatsapp: string;
   };
@@ -53,6 +54,8 @@ export type FoodApiOrder = {
   business: {
     name: string;
     whatsapp: string;
+    storeUrl: string;
+    sucessPaymentUrl: string;
   };
   cityAddress: string;
   address2?: string;

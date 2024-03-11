@@ -13,6 +13,7 @@ import { EndpointFoodApiEnum } from '@/app/enums';
 import { useEffect, useState } from 'react';
 import { useOrderContext } from '@/context/order';
 import { getPublicUser } from '@/utils/cookiePublicUser';
+import Link from 'next/link';
 
 type BagProps = {
   params: {
@@ -81,7 +82,7 @@ export default function Bag({ params }: BagProps) {
     }
 
     setLoading(false);
-    router.replace(`/${params.slug}/pedido/sucesso`);
+    document.location.href = current.paymentLink;
   }, [current, params.slug, router]);
 
   return (

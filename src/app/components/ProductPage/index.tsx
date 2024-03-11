@@ -49,7 +49,6 @@ type ProductPageProps = {
   mode?: 'private' | 'public';
   modePage: string;
 };
-
 export default function ProductPage({
   productId,
   modePage,
@@ -215,6 +214,16 @@ export default function ProductPage({
     });
   }, [file]);
 
+  useEffect(() => {
+    if (!file && modePage === `register`) return;
+
+    setIsUploadedImage(() => true);
+    setUploadName(
+      ` https://fooda.nyc3.digitaloceanspaces.com/develop/${upload?.name}`,
+    );
+    console.log(`upload?.name`, upload?.name);
+  }, [upload]);
+
   //Select category
   useEffect(() => {
     if (categories && categories.length === 1) {
@@ -227,22 +236,9 @@ export default function ProductPage({
 
   useEffect(() => {
     if (product && product.upload && imageLoaded === false) {
-      console.log(`passei pela verificacao`);
       setUploadName(product.upload.url);
-      console.log(`setei uploadName`);
-      setImageLoaded(true);
     }
   }, [product]);
-
-  useEffect(() => {
-    if (!file && modePage === `register`) return;
-
-    setIsUploadedImage(() => true);
-    setUploadName(
-      ` https://fooda.nyc3.digitaloceanspaces.com/develop/${upload?.name}`,
-    );
-    console.log(`upload?.name`, upload?.name);
-  }, [upload]);
 
   return (
     <Container>
