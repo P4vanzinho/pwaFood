@@ -163,7 +163,7 @@ export default function ProductPage({
           uploadId: upload?.id,
           enabled: checked,
         },
-        params: { businessId, productId: `x-burger` },
+        params: { businessId, productId },
         endPoint: EndpointFoodApiEnum.PRODUCT,
       });
     } else {
@@ -238,6 +238,7 @@ export default function ProductPage({
     if (product && product.upload && imageLoaded === false) {
       setUploadName(product.upload.url);
     }
+
   }, [product]);
 
   return (
@@ -257,7 +258,7 @@ export default function ProductPage({
             />
             {/* </FoodTitleLabel> */}
 
-            {isUploadedImage && product?.upload ? (
+            {isUploadedImage || product?.upload ? (
               <ImageProductContainer>
                 <ImageWithUpload>
                   <p className={poppins.className}>
@@ -279,7 +280,7 @@ export default function ProductPage({
                           border={0}
                         />
                         <input {...getInputProps()} />
-                        EDITAR
+                     
                       </ImageContainer>
                     )}
                   </Dropzone>
