@@ -211,6 +211,10 @@ export const ImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 127px;
+  
+  >canvas{ 
+    border-radius: 0.625rem
+  }
 `;
 
 export const ButtonsImageContainer = styled.div`
