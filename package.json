@@ -13,7 +13,6 @@
     "@callstack/react-theme-provider": "^3.0.9",
     "@linaria/core": "^5.0.2",
     "@linaria/react": "^5.0.3",
-    "@react-input/mask": "^1.0.22",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
