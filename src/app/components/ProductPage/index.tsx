@@ -34,7 +34,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import Input from '@/app/components/Input';
 import Button from '@/app/components/Button';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { EndpointFoodApiEnum } from '@/app/enums';
+import { EndpointFoodApiEnum, RoutesEnum } from '@/app/enums';
 import {
   FoodApiCategory,
   FoodApiProduct,
@@ -42,6 +42,7 @@ import {
 } from '../../../../types/foodApi';
 import AvatarEditor from 'react-avatar-editor';
 import Dropzone from 'react-dropzone';
+import {useRouter} from 'next/navigation';
 
 type ProductPageProps = {
   productId: string;
@@ -55,7 +56,9 @@ export default function ProductPage({
   businessId,
   mode = 'private',
 }: ProductPageProps) {
+  
   const needsToken = mode === 'private';
+  const router=useRouter()
 
   const title =
     modePage === `register` ? `CADASTRO DE PRODUTO` : `EDIÇÃO DE PRODUTO`;
@@ -65,7 +68,6 @@ export default function ProductPage({
   const [remaining, setRemaining] = useState<number>(textAreaMaxLength);
   const [checked, setChecked] = useState<boolean>(false);
   const [price, setPrice] = useState<string>('');
-  const [priceIsValid, setPriceIsValid] = useState<boolean>(false);
   const [description, setDescription] = useState<string>('');
   const [category, setCategory] = useState<string>('');
   const [categorySelected, setCategorySelected] = useState<
@@ -75,9 +77,8 @@ export default function ProductPage({
   const [uploadName, setUploadName] = useState<string>('');
   const [isUploadedImage, setIsUploadedImage] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
-  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
-  const emptyingValues = () => {
+  const emptyingInputs = () => {
     setFoodTitle(``);
     setChecked(false);
     setPrice(``);
@@ -89,7 +90,6 @@ export default function ProductPage({
     setFile(null);
   };
 
-  //Categories request
   const { data: categories } = useFoodFetch<FoodApiCategory[]>(
     EndpointFoodApiEnum.PRODUCT_CATEGORY,
     {
@@ -124,17 +124,6 @@ export default function ProductPage({
     setRemaining(textAreaMaxLength - event.target.value.length);
   }
 
-  function handleInputPrice(event: React.FormEvent<HTMLInputElement>) {
-    const target = event.target as HTMLInputElement;
-    const value = target.value;
-    if (!/^[\d,]*$/.test(value)) {
-      setPriceIsValid(true);
-      target.value = value.replace(/[^\d,]/g, '');
-    } else {
-      setPriceIsValid(false);
-    }
-  }
-
   function onChangeFile(
     acceptedFiles?: File[],
     event?: ChangeEvent<HTMLInputElement>,
@@ -151,16 +140,19 @@ export default function ProductPage({
     setFile(null);
   }
 
+
   function handleRequest() {
-    if (modePage == 'edit' && businessId) {
+    const priceInCents = (parseFloat(price) * 100).toString();
+   
+    if (modePage == 'edit' && product) {
       requestPatchProduct({
         method: 'PATCH',
         body: {
           categoryId: categorySelected?.id,
           name: foodTitle,
-          price,
+          price: priceInCents,
           description,
-          uploadId: upload?.id,
+          uploadId: product? product?.upload?.id : upload?.id, 
           enabled: checked,
         },
         params: { businessId, productId },
@@ -181,7 +173,7 @@ export default function ProductPage({
       });
     }
 
-    emptyingValues();
+    emptyingInputs();
   }
 
   function handleSubmit(event: SyntheticEvent) {
@@ -190,7 +182,7 @@ export default function ProductPage({
   }
 
   useEffect(() => {
-    if (categories && categories.length === 1) {
+    if (categories && !categorySelected) {
       setCategory(() => categories[0].name);
     }
     const foundCategory = categories?.find(prev => prev.name === category);
@@ -221,10 +213,10 @@ export default function ProductPage({
     setUploadName(
       ` https://fooda.nyc3.digitaloceanspaces.com/develop/${upload?.name}`,
     );
-    console.log(`upload?.name`, upload?.name);
-  }, [upload]);
+    console.log(`upload?.id`, upload?.id);
+  }, [file, modePage, upload]);
 
-  //Select category
+
   useEffect(() => {
     if (categories && categories.length === 1) {
       setCategory(() => categories[0].name);
@@ -235,11 +227,21 @@ export default function ProductPage({
   }, [categories, category, categorySelected]);
 
   useEffect(() => {
-    if (product && product.upload && imageLoaded === false) {
-      setUploadName(product.upload.url);
-    }
+  if (product && product.upload ) {
+    setUploadName(product.upload.url);
+  }
 
-  }, [product]);
+  if (product && typeof product.price === 'string') {
+    const priceInCents = parseInt(product.price);
+    const priceInReal = (priceInCents / 100).toFixed(2);
+    setPrice(priceInReal.toString());
+  }
+
+  setIsUploadedImage(!!product?.upload);
+  setFoodTitle(product?.name || ``);
+  setChecked(product?.enabled || false);
+  setDescription(product?.description || ``);
+}, [product]);
 
   return (
     <Container>
@@ -258,7 +260,7 @@ export default function ProductPage({
             />
             {/* </FoodTitleLabel> */}
 
-            {isUploadedImage || product?.upload ? (
+            {isUploadedImage && product?.upload ? (
               <ImageProductContainer>
                 <ImageWithUpload>
                   <p className={poppins.className}>
@@ -408,16 +410,15 @@ export default function ProductPage({
               placeholder="Exemplo: 15,25"
               onChange={e => setPrice(e.target.value)}
               value={price}
-              onInput={handleInputPrice}
+              min="0"
+           
             />
 
-            {priceIsValid && (
-              <span> O preco de seu prato precisa ser um número</span>
-            )}
+          
           </fieldset>
 
           <FormButtonsContainer>
-            <Button text={`Cancelar`} />
+            <Button text={`Cancelar`} onClick={()=>router.replace(RoutesEnum.PRODUTOS)}/>
             <Button text={`Salvar`} type="submit" />
           </FormButtonsContainer>
         </form>
