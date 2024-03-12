@@ -216,6 +216,7 @@ export default function ProductPage({
     console.log(`upload?.id`, upload?.id);
   }, [file, modePage, upload]);
 
+  
 
   useEffect(() => {
     if (categories && categories.length === 1) {
@@ -240,8 +241,11 @@ export default function ProductPage({
   setIsUploadedImage(!!product?.upload);
   setFoodTitle(product?.name || ``);
   setChecked(product?.enabled || false);
+  
   setDescription(product?.description || ``);
-}, [product]);
+}, [ product]);
+
+useEffect(()=>{console.log(checked,`checked`)},[checked])
 
   return (
     <Container>
@@ -397,6 +401,7 @@ export default function ProductPage({
                   <InputCheckBoxInToggle
                     type="checkbox"
                     onChange={() => setChecked(!checked)}
+                    checked={checked}
                   />
                   <Switch />
                 </LabelToglleSwitch>
