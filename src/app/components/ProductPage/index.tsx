@@ -213,7 +213,7 @@ export default function ProductPage({
     setUploadName(
       ` https://fooda.nyc3.digitaloceanspaces.com/develop/${upload?.name}`,
     );
-    console.log(`upload?.id`, upload?.id);
+   
   }, [file, modePage, upload]);
 
   
@@ -245,7 +245,7 @@ export default function ProductPage({
   setDescription(product?.description || ``);
 }, [ product]);
 
-useEffect(()=>{console.log(checked,`checked`)},[checked])
+
 
   return (
     <Container>

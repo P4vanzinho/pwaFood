@@ -20,7 +20,7 @@ export default function Product(props: ProductProps) {
   const businessId = session?.data.business[0].id;
   const modePage = props?.params?.slug ? 'edit' : 'register';
 
-  console.log(modePage);
+
 
   //Categories request
 
