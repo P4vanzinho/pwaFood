@@ -33,7 +33,7 @@ export default function CategoryList({
       {!!categories?.length &&
         categories.map(category => (
           <>
-            <Title>{category.name}</Title>
+            <Title  key={category.id}>{category.name}</Title>
             <ProductList
               key={category.id}
               products={category.product}
