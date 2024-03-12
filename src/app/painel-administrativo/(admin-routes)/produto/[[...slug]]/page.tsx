@@ -30,7 +30,7 @@ export default function Product(props: ProductProps) {
         />
       ) : (
         <div>
-          <h1>Crie alguma categoria de alimentos antes de criar um produto.</h1>
+          <h1>Crie alguma categoria antes de criar um produto.</h1>
         </div>
       )}
     </Container>
