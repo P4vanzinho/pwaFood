@@ -1,5 +1,6 @@
 import { theme } from '@/app/styles/theme';
 import { styled } from '@linaria/react';
+import { darken } from 'polished';
 
 type ButtonProps = {
   selected: boolean;
@@ -7,7 +8,7 @@ type ButtonProps = {
 };
 
 const disabled = `{
-  background-color: ${theme.COLORS.LIGHT};
+  background-color: ${darken(0.03, theme.COLORS.LIGHT)};
   color: ${theme.COLORS.GRAY};
   cursor: not-allowed;
   opacity: 0.9;

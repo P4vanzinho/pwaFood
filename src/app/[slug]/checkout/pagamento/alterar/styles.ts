@@ -9,11 +9,15 @@ export const ChangeLink = styled(Link)`
 `;
 
 export const Container = styled.div`
-  overflow: auto;
-
   > label {
     color: ${theme.COLORS.DARK};
     font-size: 0.75rem;
+  }
+
+  & > div {
+    overflow: auto;
+    height: 90%;
+    padding-bottom: 170px;
   }
 
   & > footer {
@@ -21,7 +25,7 @@ export const Container = styled.div`
     position: fixed;
     width: 100%;
     max-width: 1200px;
-    height: 8rem;
+    height: 4rem;
     bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
@@ -30,9 +34,8 @@ export const Container = styled.div`
   }
 `;
 
-export const PaymentData = styled.div`
-  margin-top: 25px;
-  height: 100%;
+export const RadioGroup = styled.div`
+  margin-top: 40px;
 
   & > div {
     display: flex;
@@ -45,14 +48,14 @@ export const PaymentData = styled.div`
   }
 
   & > section {
+    margin-top: 15px;
     font-size: 1.063rem;
     width: 100%;
     background-color: ${theme.COLORS.WHITE};
-    border-radius: 20px;
     padding: 25px;
-    margin-top: 15px;
+    border-radius: 20px;
 
-    & > p {
+    & > div {
       padding-bottom: 15px;
       border-color: ${() => lighten(0.25, theme.COLORS.GRAY)};
       border-style: solid;
@@ -60,8 +63,6 @@ export const PaymentData = styled.div`
       border-right: none;
       border-left: none;
       border-top: none;
-      font-weight: 400;
-      color: ${() => lighten(0.25, theme.COLORS.DARK)};
 
       &:nth-of-type(n + 2) {
         margin-top: 15px;
@@ -70,40 +71,7 @@ export const PaymentData = styled.div`
       &:nth-last-of-type(1) {
         border: none;
         padding-bottom: 0px;
-        color: ${theme.COLORS.DARK};
-      }
-
-      &:nth-of-type(1) {
-        color: ${theme.COLORS.DARK};
       }
     }
   }
-`;
-
-export const Total = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: end;
-  align-items: flex-end;
-
-  & > div {
-    > caption {
-      font-size: 0.75rem;
-      font-weight: lighter;
-      color: ${theme.COLORS.PRIMARY};
-    }
-    > span {
-      color: ${theme.COLORS.DARK};
-      font-size: 1.375rem;
-    }
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: end;
-    align-items: flex-end;
-  }
-
-  margin-bottom: 30px;
 `;

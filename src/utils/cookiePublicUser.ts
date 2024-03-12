@@ -13,14 +13,21 @@ type PublicUser = {
     city: string;
     state: string;
   };
+  preferences?: {
+    payment?: {
+      method?: string;
+      cardBrand?: string;
+    };
+    delivery?: {
+      method?: 'pickup' | 'delivery';
+    };
+  };
 };
 
 const key = 'u';
 
 function getPublicUser(): PublicUser | null {
   const stringObject = getCookie(key);
-
-  console.log(stringObject);
 
   if (!stringObject) {
     return null;
@@ -37,13 +44,16 @@ function setPublicUserByToken(token: string): void {
   }
 }
 
-function setPublicUser({ name, address, whatsapp }: PublicUser) {
+function setPublicUser({ name, address, whatsapp, preferences }: PublicUser) {
+  const current = getPublicUser();
+
   setCookie(
     key,
     JSON.stringify({
-      name,
-      address,
-      whatsapp,
+      name: name ?? current?.name,
+      address: address ?? current?.address,
+      whatsapp: whatsapp ?? current?.whatsapp,
+      preferences: preferences ?? current?.preferences,
     }),
   );
 }

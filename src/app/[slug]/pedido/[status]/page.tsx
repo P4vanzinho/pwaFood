@@ -17,10 +17,6 @@ type PedidoStatusProps = {
   };
 };
 
-/* const c = publicSign({
-  orderId: order.checkId,
-}); */
-
 export default function PedidoStatus({ params }: PedidoStatusProps) {
   const { current } = useOrderContext();
 

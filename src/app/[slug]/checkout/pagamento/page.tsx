@@ -10,15 +10,9 @@ import { inter, poppins } from '@/app/fonts';
 import { useBagContext } from '@/context/bag';
 import { centsToUnities } from '@/utils/money';
 import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { EndpointFoodApiEnum } from '@/app/enums';
-import {
-  FoodApiBusiness,
-  FoodApiDeliveryFee,
-  FoodApiOrder,
-} from '../../../../../types/foodApi';
+import { FoodApiDeliveryFee, FoodApiOrder } from '../../../../../types/foodApi';
 import { useOrderContext } from '@/context/order';
 import { isMobile } from 'react-device-detect';
-import RadioButton from '@/app/components/RadioButton';
 
 type CheckoutProps = {
   params: {
@@ -28,48 +22,20 @@ type CheckoutProps = {
 
 export default function Checkout({ params }: CheckoutProps) {
   const user = getPublicUser();
-  const router = useRouter();
-  const [deliveryFee, setDeliveryFee] = useState(800);
-  const { total: totalBag, itens } = useBagContext();
-  const { request: deliveryRequest, data: deliveryFeeData } =
-    useFoodFetch<FoodApiDeliveryFee>();
   const { request: orderRequest, data: order } = useFoodFetch<FoodApiOrder>();
-
-  const total = totalBag + deliveryFee;
-
-  const [radioSelected, setRadioSelected] = useState('delivery');
+  const { currentOrder, setCurrentOrder } = useOrderContext();
 
   useEffect(() => {
-    if (!deliveryFeeData?.deliveryFee) {
+    console.log(order?.id);
+    console.log(order?.business?.whatsapp);
+    console.log(order?.business?.whatsapp);
+
+    if (!order?.raw?.whatsapp || !order.business.whatsapp) {
       return;
     }
 
-    setDeliveryFee(deliveryFeeData.deliveryFee);
-  }, [deliveryFeeData]);
-
-  useEffect(() => {
-    if (!totalBag) {
-      router.replace(`/${params?.slug}`);
-    }
-  }, [totalBag, params?.slug, router]);
-
-  const { current, setCurrent } = useOrderContext();
-
-  useEffect(() => {
-    if (!order?.id) {
-      return;
-    }
-
-    setCurrent(order);
-  }, [order, setCurrent]);
-
-  useEffect(() => {
-    if (!current?.id) {
-      return;
-    }
-
-    const phoneNumber = current.business.whatsapp;
-    const message = current.raw.whatsapp;
+    const phoneNumber = order.business.whatsapp;
+    const message = order.raw.whatsapp;
 
     let url = isMobile
       ? `whatsapp://send?phone=${phoneNumber}&text=${encodeURI(message)}`
@@ -82,38 +48,51 @@ export default function Checkout({ params }: CheckoutProps) {
     }
 
     window.open(url);
-  }, [current]);
+  }, [order]);
 
-  const radioButtonCallback = (id: string) => {
-    setRadioSelected(id);
-  };
+  useEffect(() => {
+    if (!order) return;
+
+    setCurrentOrder(currentOrder => ({
+      ...currentOrder,
+      business: {
+        name: order?.business?.name,
+        whatsapp: order?.business?.whatsapp,
+      },
+    }));
+  }, [order, setCurrentOrder]);
 
   const sendOrderOnClick = () => {
+    if (!currentOrder) {
+      return;
+    }
+
+    const { total, deliveryFee, businessId, business, ...body } = currentOrder;
+
     orderRequest({
-      endPoint: `${params.slug}/order`,
-      body: {
-        user: {
-          homeType: 'house',
-          whatsapp: user?.whatsapp,
-          name: user?.name,
-          address: {
-            street: user?.address?.street,
-            state: user?.address?.state,
-            number: user?.address?.streetNumber,
-            city: user?.address?.city,
-            address2: user?.address?.addressDetails,
-          },
-        },
-        businessId: params.slug,
-        items: itens.map(item => ({
-          price: item.unityPrice,
-          productId: item.productId,
-          qty: item.qty,
-        })),
-      },
+      endPoint: `${businessId}/order`,
+      body,
       method: 'POST',
     });
   };
+
+  const paymentMethodsText: Record<string, string> = {
+    credit: 'Cartão de crédito',
+    debit: 'Cartão de débito',
+    pix: 'PIX',
+  };
+
+  const cardBrandText: Record<string, string> = {
+    master: 'Mastercard',
+    visa: 'VISA',
+    elo: 'Elo',
+  };
+
+  const showCardBrand =
+    user?.preferences?.payment?.method === 'credit' ||
+    user?.preferences?.payment?.method === 'debit';
+
+  const showSendOrderButton = !!currentOrder?.total;
 
   return (
     <Container>
@@ -123,23 +102,26 @@ export default function Checkout({ params }: CheckoutProps) {
         <PaymentData>
           <div>
             <label className={poppins.className}>Método de pagamento</label>
-            {radioSelected === 'delivery' && (
-              <ChangeLink
-                className={poppins.className}
-                href={`/${params?.slug}/checkout/pagamento/alterar`}
-              >
-                alterar
-              </ChangeLink>
-            )}
+
+            <ChangeLink
+              className={poppins.className}
+              href={`/${params?.slug}/checkout/pagamento/alterar`}
+            >
+              alterar
+            </ChangeLink>
           </div>
           <section>
-            <p>Cartão de crédito</p>
-
-            <div>
-              <p>Trazer maquininha de cartão</p>
-            </div>
-
-            <p>Mastercard</p>
+            <p>
+              {!!user?.preferences?.payment?.method &&
+                paymentMethodsText[user?.preferences?.payment?.method]}
+            </p>
+            <p>Trazer maquininha de cartão</p>
+            {!!showCardBrand && (
+              <p>
+                {user?.preferences?.payment?.cardBrand &&
+                  cardBrandText[user?.preferences?.payment?.cardBrand]}
+              </p>
+            )}
           </section>
         </PaymentData>
       </div>
@@ -147,24 +129,19 @@ export default function Checkout({ params }: CheckoutProps) {
         <Total className={inter.className}>
           <label>Total</label>
           <div>
-            {!!deliveryFee && (
+            {!!currentOrder?.deliveryFee && (
               <caption>
-                frete +
-                {centsToUnities(deliveryFee).toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
+                frete +{centsToUnities(currentOrder?.deliveryFee)}
               </caption>
             )}
-            <span>
-              {centsToUnities(total).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </span>
+            <span>{centsToUnities(currentOrder?.total ?? 0)}</span>
           </div>
         </Total>
-        <Button text="Enviar pedido" onClick={sendOrderOnClick} />
+        <Button
+          disabled={!showSendOrderButton}
+          text="Enviar pedido"
+          onClick={sendOrderOnClick}
+        />
       </footer>
     </Container>
   );

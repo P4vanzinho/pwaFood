@@ -1,7 +1,15 @@
 import { bebas_neue } from '@/app/fonts';
 import { Container } from './styles';
-import { MdAlternateEmail, MdPhoneAndroid } from 'react-icons/md';
+import {
+  MdAlternateEmail,
+  MdPhoneAndroid,
+  MdOutlinePhoneEnabled,
+} from 'react-icons/md';
+
 import { PiTextTBold } from 'react-icons/pi';
+import { HiIdentification } from 'react-icons/hi';
+import { PiCurrencyDollarSimpleFill } from 'react-icons/pi';
+import { Bs123 } from 'react-icons/bs';
 
 type HTMLInputTypeAttribute =
   | 'button'
@@ -52,8 +60,12 @@ export default function Input({ label, value, ...rest }: InputProps) {
   const icon: Icon = {
     password: <MdAlternateEmail />,
     email: <MdAlternateEmail />,
-    tel: <MdPhoneAndroid />,
+    tel: <MdOutlinePhoneEnabled />,
     text: <PiTextTBold />,
+    cellphone: <MdPhoneAndroid />,
+    cpf: <HiIdentification />,
+    cep: <Bs123 />,
+    currency: <PiCurrencyDollarSimpleFill />,
   };
 
   const maskByType: MaskByType = {
@@ -64,7 +76,10 @@ export default function Input({ label, value, ...rest }: InputProps) {
         .replace(/(-\d{3})\d+?$/, '$1');
     },
     currency: (value: string) => {
-      return String(value);
+      return value
+        .replace(/\D/g, '')
+        .replace(/(\d+)(\d{2})$/, '$1,$2')
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
     },
     cpf: (value: string) => {
       return value
@@ -88,6 +103,13 @@ export default function Input({ label, value, ...rest }: InputProps) {
         .replace(/(\d{2})(\d)/, '($1) $2')
         .replace(/(\d{5})(\d)/, '$1-$2')
         .replace(/(-\d{4})\d+?$/, '$1');
+    },
+    date: (value: string) => {
+      return value
+        .replace(/\D/g, '')
+        .replace(/(\d{2})(\d)/, '$1/$2')
+        .replace(/(\d{2})(\d)/, '$1/$2')
+        .replace(/(\d{4})(\d)/, '$1');
     },
   };
 

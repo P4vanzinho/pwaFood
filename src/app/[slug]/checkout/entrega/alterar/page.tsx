@@ -3,7 +3,7 @@
 import { Container } from './styles';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
-import { setPublicUser } from '@/utils/cookiePublicUser';
+import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { bebas_neue } from '@/app/fonts';
 import { useRouter } from 'next/navigation';
@@ -26,10 +26,21 @@ type DataDelivery = FoodApiAddressGettingByPostalCode & {
 };
 
 export default function PersonalData({ params }: PersonalDataProps) {
+  const user = getPublicUser();
+  let dataDeliveryInitial: DataDelivery = {} as DataDelivery;
+
+  if (user) {
+    dataDeliveryInitial = {
+      ...user.address,
+      name: user.name ?? '',
+      whatsapp: user.whatsapp ?? '',
+    } as DataDelivery;
+  }
+
   const router = useRouter();
   const { data: address, request } =
     useFoodFetch<FoodApiAddressGettingByPostalCode>();
-  const [dataDelivery, setDataDelivery] = useState({} as DataDelivery);
+  const [dataDelivery, setDataDelivery] = useState(dataDeliveryInitial);
 
   const inputOnChange = (inputId: string, currentValue: string) => {
     if (inputId === 'cep' && currentValue.length === 9) {
@@ -157,7 +168,7 @@ export default function PersonalData({ params }: PersonalDataProps) {
       },
     });
 
-    router.push(`/${params?.slug}/checkout`);
+    router.push(`/${params?.slug}/checkout/entrega`);
   }
 
   return (
@@ -176,7 +187,11 @@ export default function PersonalData({ params }: PersonalDataProps) {
             value={input.value}
           />
         ))}
-        <Button className={bebas_neue.className} type="submit" text="ENVIAR" />
+        <Button
+          className={bebas_neue.className}
+          type="submit"
+          text="ADICIONAR ENDEREÇO"
+        />
       </form>
     </Container>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { getPublicUser } from '@/utils/cookiePublicUser';
+import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser';
 import {
   Container,
   DeliveryData,
@@ -22,6 +22,7 @@ import {
   FoodApiDeliveryFee,
 } from '../../../../../types/foodApi';
 import RadioButton from '@/app/components/RadioButton';
+import { useOrderContext } from '@/context/order';
 
 type CheckoutProps = {
   params: {
@@ -32,17 +33,31 @@ type CheckoutProps = {
 export default function Checkout({ params }: CheckoutProps) {
   const user = getPublicUser();
   const router = useRouter();
-  const [deliveryFee, setDeliveryFee] = useState(800);
-  const { total: totalBag, itens } = useBagContext();
+  const [deliveryFee, setDeliveryFee] = useState(0);
+  const { total: totalBag } = useBagContext();
   const { request: deliveryRequest, data: deliveryFeeData } =
     useFoodFetch<FoodApiDeliveryFee>();
   const { request: businessRequest, data: business } =
     useFoodFetch<FoodApiBusiness>();
   const total = totalBag + deliveryFee;
 
-  const [radioSelected, setRadioSelected] = useState('delivery');
+  const { setCurrentOrder } = useOrderContext();
+
+  const [radioSelected, setRadioSelected] = useState<'delivery' | 'pickup'>(
+    user?.preferences?.delivery?.method ?? 'delivery',
+  );
 
   useEffect(() => {
+    setPublicUser({
+      ...user,
+      preferences: {
+        ...user?.preferences,
+        delivery: {
+          method: radioSelected,
+        },
+      },
+    });
+
     if (radioSelected === 'delivery') {
       if (deliveryFeeData) {
         setDeliveryFee(deliveryFeeData.deliveryFee);
@@ -89,7 +104,7 @@ export default function Checkout({ params }: CheckoutProps) {
   }, [totalBag, params?.slug, router]);
 
   const radioButtonCallback = (id: string) => {
-    setRadioSelected(id);
+    setRadioSelected(id as any);
   };
 
   const deliveryAddressData = {
@@ -115,6 +130,34 @@ export default function Checkout({ params }: CheckoutProps) {
       radioSelected === 'delivery'
         ? user?.address?.state
         : business?.address?.state,
+  };
+
+  const sendDataButtonOnClick = () => {
+    const route = user?.preferences?.payment
+      ? `/${params?.slug}/checkout/pagamento`
+      : `/${params?.slug}/checkout/pagamento/alterar`;
+
+    setCurrentOrder(order => ({
+      ...order,
+      businessId: params?.slug,
+      user: {
+        name: user?.name,
+        whatsapp: user?.whatsapp,
+        address: {
+          cep: user?.address?.cep,
+          city: user?.address?.city,
+          neighborhood: user?.address?.neighborhood,
+          number: user?.address?.streetNumber,
+          state: user?.address?.state,
+          street: user?.address?.street,
+          addressDetails: user?.address?.addressDetails,
+        },
+      },
+      deliveryFee,
+      total: totalBag + deliveryFee,
+    }));
+
+    router.push(route);
   };
 
   return (
@@ -188,25 +231,14 @@ export default function Checkout({ params }: CheckoutProps) {
           <label>Total</label>
           <div>
             {!!deliveryFee && (
-              <caption>
-                frete +
-                {centsToUnities(deliveryFee).toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-              </caption>
+              <caption>frete +{centsToUnities(deliveryFee)}</caption>
             )}
-            <span>
-              {centsToUnities(total).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </span>
+            <span>{centsToUnities(total)}</span>
           </div>
         </Total>
         <Button
           text="Confirmar dados de entrega"
-          onClick={() => router.push(`/${params?.slug}/checkout/pagamento`)}
+          onClick={sendDataButtonOnClick}
         />
       </footer>
     </Container>
