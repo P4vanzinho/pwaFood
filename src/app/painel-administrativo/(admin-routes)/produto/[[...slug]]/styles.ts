@@ -11,7 +11,7 @@ export const Container = styled.div`
   height: 100%;
 
   *:focus {
-    outline-color: ${() => theme.COLORS.PRIMARY};
+    outline-color: ${theme.COLORS.PRIMARY};
   }
 `;
 
@@ -30,7 +30,7 @@ export const FormContainer = styled.div`
       font-size: 12px;
       font-weight: 400;
       line-height: normal;
-      color: ${() => theme.COLORS.DARK};
+      color: ${ theme.COLORS.DARK};
       gap: 0.625rem;
     }
   }
@@ -44,7 +44,7 @@ export const FoodTitleLabel = styled.label`
   > input {
     border: none;
     border-radius: 0.938rem;
-    background-color: ${() => theme.COLORS.LIGHT};
+    background-color: ${ theme.COLORS.LIGHT};
     height: 2.5rem;
     display: flex;
     align-items: center;
@@ -53,13 +53,13 @@ export const FoodTitleLabel = styled.label`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: ${() => theme.COLORS.DARK};
+    color: ${ theme.COLORS.DARK};
   }
 
   > div {
     width: 100%;
     border-radius: 0.938rem;
-    background-color: ${() => theme.COLORS.LIGHT};
+    background-color: ${ theme.COLORS.LIGHT};
     height: 2.5rem;
     display: flex;
     align-items: center;
@@ -70,7 +70,7 @@ export const FoodTitleLabel = styled.label`
 `;
 
 export const ImageProductContainer = styled.div`
-  border: 1px solid ${() => theme.COLORS.GRAY};
+  border: 1px solid ${ theme.COLORS.GRAY};
   border-radius: 15px;
   display: flex;
   margin-top: 0.938rem;
@@ -100,7 +100,7 @@ export const ImageProductContainer = styled.div`
     font-size: 18px;
     font-weight: 500;
     line-height: normal;
-    color: ${() => theme.COLORS.DARK};
+    color: ${ theme.COLORS.DARK};
   }
 
   > div {
@@ -116,13 +116,13 @@ export const ImageProductContainer = styled.div`
       font-size: 14px;
       font-weight: 500;
       line-height: normal;
-      color: ${() => theme.COLORS.GRAY};
+      color: ${ theme.COLORS.GRAY};
     }
 
     div {
       height: 1px;
       width: 7.625rem;
-      background-color: ${() => theme.COLORS.GRAY};
+      background-color: ${ theme.COLORS.GRAY};
     }
   }
 
@@ -133,9 +133,9 @@ export const ImageProductContainer = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    background-color: ${() => theme.COLORS.GRAY};
+    background-color: ${ theme.COLORS.GRAY};
     border: none;
-    color: ${() => theme.COLORS.WHITE};
+    color: ${ theme.COLORS.WHITE};
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -162,7 +162,7 @@ export const SelectCategoryLabel = styled.label`
 export const SelectContainer = styled.div`
   width: 100%;
   border-radius: 0.938rem;
-  background-color: ${() => theme.COLORS.LIGHT};
+  background-color: ${ theme.COLORS.LIGHT};
   height: 2.5rem;
   display: flex;
   align-items: center;
@@ -170,7 +170,7 @@ export const SelectContainer = styled.div`
   align-items: center;
   justify-content: center;
   svg {
-    color: ${() => theme.COLORS.GRAY};
+    color: ${ theme.COLORS.GRAY};
   }
 
   select {
@@ -181,7 +181,7 @@ export const SelectContainer = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: ${() => theme.COLORS.DARK};
+    color: ${ theme.COLORS.DARK};
     background-color: transparent;
     outline: none;
     appearance: none;
@@ -191,7 +191,7 @@ export const SelectContainer = styled.div`
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-      color: ${() => theme.COLORS.GRAY};
+      color: ${ theme.COLORS.GRAY};
     }
   }
 `;
@@ -207,7 +207,7 @@ export const DescriptionLabel = styled.label`
     min-height: 6.25rem;
     padding: 1.188em 1.094rem 0.688rem;
     border-radius: 0.938rem;
-    background-color: ${() => theme.COLORS.LIGHT};
+    background-color: ${ theme.COLORS.LIGHT};
     height: 2.5rem;
     position: relative;
 
@@ -222,10 +222,10 @@ export const DescriptionLabel = styled.label`
       font-size: 14px;
       font-weight: 400;
       line-height: normal;
-      color: ${() => theme.COLORS.DARK};
+      color: ${ theme.COLORS.DARK};
 
       &::placeholder {
-        color: ${() => theme.COLORS.GRAY};
+        color: ${ theme.COLORS.GRAY};
       }
       &::-webkit-scrollbar {
         display: none;
@@ -236,7 +236,7 @@ export const DescriptionLabel = styled.label`
       position: absolute;
       right: 1.438rem;
       bottom: 0.688rem;
-      color: ${() => theme.COLORS.DARK};
+      color: ${ theme.COLORS.DARK};
       font-size: 12px;
       font-weight: 500;
       line-height: normal;
@@ -255,13 +255,13 @@ export const ToggleSwitch = styled.div`
   gap: 3.125rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${() => theme.COLORS.LIGHT};
+  border: 1px solid ${ theme.COLORS.LIGHT};
   border-radius: 15px;
   height: 3.75rem;
   position: relative;
 
   > p {
-    color: ${() => theme.COLORS.DARK};
+    color: ${ theme.COLORS.DARK};
     font-size: 18px;
     font-weight: 500;
     line-height: normal;
@@ -304,7 +304,7 @@ export const Switch = styled.div`
   /* ${InputCheckBoxInToggle} Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo linaria.*/
   /*seleciona apenas os elementos input do tipo checkbox ou radio que estão marcados (ou seja, quando o botão switch é clicado).*/
   ${InputCheckBoxInToggle}:checked + & {
-    background-color: ${() => theme.COLORS.PRIMARY_DARK};
+    background-color: ${ theme.COLORS.PRIMARY_DARK};
 
     &:before {
       left: calc(100% - (28px + 4px));
@@ -320,7 +320,7 @@ export const PriceLabel = styled.label`
   > input {
     border: none;
     border-radius: 0.938rem;
-    background-color: ${() => theme.COLORS.LIGHT};
+    background-color: ${ theme.COLORS.LIGHT};
     height: 2.5rem;
     width: 100%;
     display: flex;
@@ -330,16 +330,16 @@ export const PriceLabel = styled.label`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: ${() => theme.COLORS.DARK};
+    color: ${ theme.COLORS.DARK};
   }
 
   input:invalid {
-    outline: 2px solid ${() => theme.COLORS.ERROR};
+    outline: 2px solid ${ theme.COLORS.ERROR};
   }
 
   > span {
     font-size: 0.875rem;
-    color: ${() => theme.COLORS.ERROR};
+    color: ${ theme.COLORS.ERROR};
     font-weight: 500;
   }
 `;
