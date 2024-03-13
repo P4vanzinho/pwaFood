@@ -411,12 +411,10 @@ export default function ProductPage({
             <Input
               className={poppins.className}
               id="price"
-              type="text"
+              type="currency"
               placeholder="Exemplo: 15,25"
               onChange={e => setPrice(e.target.value)}
               value={price}
-              min="0"
-           
             />
 
           
