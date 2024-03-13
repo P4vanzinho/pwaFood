@@ -231,7 +231,7 @@ export default function Checkout({ params }: CheckoutProps) {
           <label>Total</label>
           <div>
             {!!deliveryFee && (
-              <caption>frete +{centsToUnities(deliveryFee)}</caption>
+              <caption>entrega +{centsToUnities(deliveryFee)}</caption>
             )}
             <span>{centsToUnities(total)}</span>
           </div>
