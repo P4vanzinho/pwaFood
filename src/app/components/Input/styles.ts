@@ -1,10 +1,11 @@
 import { theme } from '@/app/styles/theme';
 
 import { styled } from '@linaria/react';
-import { darken, lighten } from 'polished';
+import { darken } from 'polished';
+import { HTMLInputTypeAttribute } from 'react';
 
 type InputProps = {
-  type: 'password';
+  type: HTMLInputTypeAttribute;
 };
 
 export const Container = styled.div<InputProps>`

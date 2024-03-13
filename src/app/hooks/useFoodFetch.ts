@@ -74,7 +74,7 @@ function useFoodFetch<T>(
       async function fetch() {
         setLoading(true);
 
-        let fetchParams: any = {
+        let fetchParams: FoodFetchProps = {
           endPoint,
           method,
           body,

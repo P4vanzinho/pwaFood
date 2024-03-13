@@ -1,16 +1,44 @@
 'use client';
 
 import React, { ReactNode, createContext, useContext, useState } from 'react';
-import { FoodApiOrder } from '../../types/foodApi';
+import { FoodApiBusiness } from '../../types/foodApi';
+
+type OrderItem = {
+  price: number;
+  productId: string | number;
+  qty: number;
+};
+
+type CurrentOrder = {
+  total?: number;
+  deliveryFee?: number;
+  user?: {
+    whatsapp?: string;
+    name?: string;
+    address?: {
+      street?: string;
+      state?: string;
+      number?: string;
+      city?: string;
+      cep?: string;
+      neighborhood?: string;
+      addressDetails?: string;
+    };
+  };
+  businessId?: string;
+  items?: OrderItem[];
+  business?: Partial<FoodApiBusiness>;
+  id?: string;
+};
 
 type OrderContextProps = {
-  current: FoodApiOrder | null;
-  setCurrent: React.Dispatch<React.SetStateAction<FoodApiOrder | null>>;
+  currentOrder: CurrentOrder | null;
+  setCurrentOrder: React.Dispatch<React.SetStateAction<CurrentOrder | null>>;
 };
 
 const defaultValue = {
-  current: null,
-  setCurrent: () => {},
+  currentOrder: null,
+  setCurrentOrder: () => {},
 };
 
 const OrderContext = createContext<OrderContextProps>(defaultValue);
@@ -20,15 +48,15 @@ type OrderContextProviderProps = {
 };
 
 const OrderContextProvider = ({ children }: OrderContextProviderProps) => {
-  const [current, setCurrent] = useState<FoodApiOrder | null>(
-    defaultValue.current,
+  const [currentOrder, setCurrentOrder] = useState<CurrentOrder | null>(
+    defaultValue.currentOrder,
   );
 
   return (
     <OrderContext.Provider
       value={{
-        current,
-        setCurrent,
+        currentOrder,
+        setCurrentOrder,
       }}
     >
       {children}
