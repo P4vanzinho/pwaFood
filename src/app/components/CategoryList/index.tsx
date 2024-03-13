@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { EndpointFoodApiEnum } from '@/app/enums';
-import { Container } from './styles';
-import { FoodApiCategory } from '../../../../types/foodApi';
-import ProductList from '../ProductList';
-import Title from '../Title';
+import useFoodFetch from '@/app/hooks/useFoodFetch'
+import { EndpointFoodApiEnum } from '@/app/enums'
+import { Container } from './styles'
+import { FoodApiCategory } from '../../../../types/foodApi'
+import ProductList from '../ProductList'
+import Title from '../Title'
 
 type CategoryListProps = {
-  businessId: number | string;
-  mode?: 'private' | 'public';
-};
+  businessId: number | string
+  mode?: 'private' | 'public'
+}
 
 export default function CategoryList({
   businessId,
   mode = 'public',
 }: CategoryListProps) {
-  const needsToken = mode === 'private';
+  const needsToken = mode === 'private'
 
-  const { data: categories, loading: _categoriesLoading } = useFoodFetch(
+  const { data: categories } = useFoodFetch(
     EndpointFoodApiEnum.PRODUCT_CATEGORY,
     {
       injectProducts: true,
@@ -26,14 +26,14 @@ export default function CategoryList({
       businessId,
     },
     needsToken,
-  ) as { data: FoodApiCategory[]; loading: any };
+  ) as { data: FoodApiCategory[] }
 
   return (
     <Container>
       {!!categories?.length &&
-        categories.map(category => (
+        categories.map((category) => (
           <>
-            <Title  key={category.id}>{category.name}</Title>
+            <Title key={category.id}>{category.name}</Title>
             <ProductList
               key={category.id}
               products={category.product}
@@ -42,5 +42,5 @@ export default function CategoryList({
           </>
         ))}
     </Container>
-  );
+  )
 }
