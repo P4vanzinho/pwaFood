@@ -264,7 +264,7 @@ export default function ProductPage({
             />
             {/* </FoodTitleLabel> */}
 
-            {isUploadedImage && product?.upload ? (
+            {isUploadedImage || product?.upload ? (
               <ImageProductContainer>
                 <ImageWithUpload>
                   <p className={poppins.className}>
@@ -415,9 +415,7 @@ export default function ProductPage({
               placeholder="Exemplo: 15,25"
               onChange={e => setPrice(e.target.value)}
               value={price}
-            />
-
-          
+            />          
           </fieldset>
 
           <FormButtonsContainer>
