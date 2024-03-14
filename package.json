@@ -54,6 +54,7 @@
     "@linaria/webpack-loader": "^5.0.4",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/cookie": "^0.5.1",
+    "@types/dropzone": "^5.7.8",
     "@types/js-cookie": "^3.0.3",
     "@types/react-avatar-editor": "^13.0.2",
     "@types/react-currency-format": "^1.0.3",
