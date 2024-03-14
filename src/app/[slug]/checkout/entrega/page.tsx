@@ -1,51 +1,51 @@
-'use client'
+"use client";
 
-import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser'
+import { getPublicUser, setPublicUser } from "@/utils/cookiePublicUser";
 import {
   Container,
   DeliveryData,
   Total,
   ChangeLink,
   DeliveryMethod,
-} from './styles'
-import Title from '@/app/components/Title'
-import Button from '@/app/components/Button'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { inter, poppins } from '@/app/fonts'
-import { useBagContext } from '@/context/bag'
-import { centsToUnities } from '@/utils/money'
-import useFoodFetch from '@/app/hooks/useFoodFetch'
-import { EndpointFoodApiEnum } from '@/app/enums'
+} from "./styles";
+import Title from "@/app/components/Title";
+import Button from "@/app/components/Button";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { inter, poppins } from "@/app/fonts";
+import { useBagContext } from "@/context/bag";
+import { centsToUnities } from "@/utils/money";
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { EndpointFoodApiEnum } from "@/app/enums";
 import {
   FoodApiBusiness,
   FoodApiDeliveryFee,
-} from '../../../../../types/foodApi'
-import RadioButton from '@/app/components/RadioButton'
-import { useOrderContext } from '@/context/order'
+} from "../../../../../types/foodApi";
+import RadioButton from "@/app/components/RadioButton";
+import { useOrderContext } from "@/context/order";
 
 type CheckoutProps = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 export default function Checkout({ params }: CheckoutProps) {
-  const user = getPublicUser()
-  const router = useRouter()
-  const [deliveryFee, setDeliveryFee] = useState(0)
-  const { total: totalBag } = useBagContext()
+  const user = getPublicUser();
+  const router = useRouter();
+  const [deliveryFee, setDeliveryFee] = useState(0);
+  const { total: totalBag } = useBagContext();
   const { request: deliveryRequest, data: deliveryFeeData } =
-    useFoodFetch<FoodApiDeliveryFee>()
+    useFoodFetch<FoodApiDeliveryFee>();
   const { request: businessRequest, data: business } =
-    useFoodFetch<FoodApiBusiness>()
-  const total = totalBag + deliveryFee
+    useFoodFetch<FoodApiBusiness>();
+  const total = totalBag + deliveryFee;
 
-  const { setCurrentOrder } = useOrderContext()
+  const { setCurrentOrder } = useOrderContext();
 
-  const [radioSelected, setRadioSelected] = useState<'delivery' | 'pickup'>(
-    user?.preferences?.delivery?.method ?? 'delivery',
-  )
+  const [radioSelected, setRadioSelected] = useState<"delivery" | "pickup">(
+    user?.preferences?.delivery?.method ?? "delivery",
+  );
 
   useEffect(() => {
     setPublicUser({
@@ -56,12 +56,12 @@ export default function Checkout({ params }: CheckoutProps) {
           method: radioSelected,
         },
       },
-    })
+    });
 
-    if (radioSelected === 'delivery') {
+    if (radioSelected === "delivery") {
       if (deliveryFeeData) {
-        setDeliveryFee(deliveryFeeData.deliveryFee)
-        return
+        setDeliveryFee(deliveryFeeData.deliveryFee);
+        return;
       }
 
       deliveryRequest({
@@ -76,66 +76,66 @@ export default function Checkout({ params }: CheckoutProps) {
           name: user?.name,
           state: user?.address?.state,
         },
-      })
-    } else if (radioSelected === 'pickup') {
-      setDeliveryFee(0)
+      });
+    } else if (radioSelected === "pickup") {
+      setDeliveryFee(0);
 
       if (!business) {
         businessRequest({
           endPoint: `${EndpointFoodApiEnum.BUSINESS}/${params.slug}`,
-        })
+        });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [radioSelected])
+  }, [radioSelected]);
 
   useEffect(() => {
     if (!deliveryFeeData?.deliveryFee) {
-      return
+      return;
     }
 
-    setDeliveryFee(deliveryFeeData.deliveryFee)
-  }, [deliveryFeeData])
+    setDeliveryFee(deliveryFeeData.deliveryFee);
+  }, [deliveryFeeData]);
 
   useEffect(() => {
     if (!totalBag) {
-      router.replace(`/${params?.slug}`)
+      router.replace(`/${params?.slug}`);
     }
-  }, [totalBag, params?.slug, router])
+  }, [totalBag, params?.slug, router]);
 
   const radioButtonCallback = (id: string) => {
-    setRadioSelected(id as any)
-  }
+    setRadioSelected(id as any);
+  };
 
   const deliveryAddressData = {
     street:
-      radioSelected === 'delivery'
+      radioSelected === "delivery"
         ? user?.address?.street
         : business?.address?.street,
     streetNumber:
-      radioSelected === 'delivery'
+      radioSelected === "delivery"
         ? user?.address?.streetNumber
         : business?.address?.number,
     neighborhood:
-      radioSelected === 'delivery'
+      radioSelected === "delivery"
         ? user?.address?.neighborhood
         : business?.address?.neighborhood,
     addressDetails:
-      radioSelected === 'delivery' ? user?.address?.addressDetails : '',
+      radioSelected === "delivery" ? user?.address?.addressDetails : "",
     city:
-      radioSelected === 'delivery'
+      radioSelected === "delivery"
         ? user?.address?.city
         : business?.address?.city,
     state:
-      radioSelected === 'delivery'
+      radioSelected === "delivery"
         ? user?.address?.state
         : business?.address?.state,
-  }
+  };
 
   const sendDataButtonOnClick = () => {
     const route = user?.preferences?.payment
       ? `/${params?.slug}/checkout/pagamento`
-      : `/${params?.slug}/checkout/pagamento/alterar`
+      : `/${params?.slug}/checkout/pagamento/alterar`;
 
     setCurrentOrder((order) => ({
       ...order,
@@ -155,10 +155,10 @@ export default function Checkout({ params }: CheckoutProps) {
       },
       deliveryFee,
       total: totalBag + deliveryFee,
-    }))
+    }));
 
-    router.push(route)
-  }
+    router.push(route);
+  };
 
   return (
     <Container>
@@ -168,7 +168,7 @@ export default function Checkout({ params }: CheckoutProps) {
         <DeliveryData>
           <div>
             <label className={poppins.className}>Dados de entrega</label>
-            {radioSelected === 'delivery' && (
+            {radioSelected === "delivery" && (
               <ChangeLink
                 className={poppins.className}
                 href={`/${params?.slug}/checkout/entrega/alterar`}
@@ -187,12 +187,12 @@ export default function Checkout({ params }: CheckoutProps) {
                   {`${deliveryAddressData.street}, ${
                     deliveryAddressData.streetNumber
                   }, ${deliveryAddressData.neighborhood}. ${
-                    deliveryAddressData.addressDetails ?? ''
+                    deliveryAddressData.addressDetails ?? ""
                   } ${deliveryAddressData.city}/${deliveryAddressData.state}`}
                 </p>
               </div>
 
-              <p>{user?.whatsapp ?? ''}</p>
+              <p>{user?.whatsapp ?? ""}</p>
             </section>
           )}
         </DeliveryData>
@@ -200,7 +200,7 @@ export default function Checkout({ params }: CheckoutProps) {
         <DeliveryMethod>
           <div>
             <label className={poppins.className}>Método de entrega</label>
-            {radioSelected === 'delivery' && (
+            {radioSelected === "delivery" && (
               <ChangeLink
                 className={poppins.className}
                 href={`/${params?.slug}/checkout/pagamento/alterar`}
@@ -214,13 +214,13 @@ export default function Checkout({ params }: CheckoutProps) {
             <RadioButton
               id="delivery"
               label="Entrega a domicílio"
-              checked={radioSelected === 'delivery'}
+              checked={radioSelected === "delivery"}
               onCallback={radioButtonCallback}
             />
             <RadioButton
               id="pickup"
               label="Retirar no estabelecimento"
-              checked={radioSelected === 'pickup'}
+              checked={radioSelected === "pickup"}
               onCallback={radioButtonCallback}
             />
           </section>
@@ -242,5 +242,5 @@ export default function Checkout({ params }: CheckoutProps) {
         />
       </footer>
     </Container>
-  )
+  );
 }

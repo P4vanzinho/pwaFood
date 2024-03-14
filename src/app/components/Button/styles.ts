@@ -1,18 +1,18 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
-import { darken } from 'polished'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import { darken } from "polished";
 
 type ButtonProps = {
-  selected: boolean
-  enabledSelect: boolean
-}
+  selected: boolean;
+  enabledSelect: boolean;
+};
 
 const disabled = `{
   background-color: ${darken(0.03, theme.COLORS.LIGHT)};
   color: ${theme.COLORS.GRAY};
   cursor: not-allowed;
   opacity: 0.9;
-}`
+}`;
 
 export const Container = styled.div<ButtonProps>`
   width: 100%;
@@ -46,4 +46,4 @@ export const Container = styled.div<ButtonProps>`
       ${disabled}
     }
   }
-`
+`;

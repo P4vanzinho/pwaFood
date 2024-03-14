@@ -1,12 +1,12 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
-import Link from 'next/link'
-import { lighten } from 'polished'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import Link from "next/link";
+import { lighten } from "polished";
 
 export const ChangeLink = styled(Link)`
   color: ${theme.COLORS.WARNING};
   font-size: 1.063rem;
-`
+`;
 
 export const Container = styled.div`
   > label {
@@ -32,7 +32,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
   }
-`
+`;
 
 export const RadioGroup = styled.div`
   margin-top: 40px;
@@ -74,4 +74,4 @@ export const RadioGroup = styled.div`
       }
     }
   }
-`
+`;

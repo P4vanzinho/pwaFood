@@ -1,1 +1,1 @@
-export * from './EndpointFoodApiEnum'
+export * from "./EndpointFoodApiEnum";

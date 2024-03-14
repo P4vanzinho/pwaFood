@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { bebasNeue, poppins } from '@/app/fonts'
+import { bebasNeue, poppins } from "@/app/fonts";
 import {
   Container,
   FormContainer,
@@ -18,70 +18,70 @@ import {
   ImageWithoutUpload,
   ImageWithUpload,
   ButtonsImageContainer,
-} from './styles'
+} from "./styles";
 
-import Title from '@/app/components/Title'
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
-import Image from 'next/image'
+import Title from "@/app/components/Title";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import Image from "next/image";
 
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
-import Input from '@/app/components/Input'
-import Button from '@/app/components/Button'
-import useFoodFetch from '@/app/hooks/useFoodFetch'
-import { EndpointFoodApiEnum, RoutesEnum } from '@/app/enums'
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import Input from "@/app/components/Input";
+import Button from "@/app/components/Button";
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { EndpointFoodApiEnum, RoutesEnum } from "@/app/enums";
 import {
   FoodApiCategory,
   FoodApiProduct,
   FoodApiUpload,
-} from '../../../../types/foodApi'
-import AvatarEditor from 'react-avatar-editor'
-import Dropzone from 'react-dropzone'
-import { useRouter } from 'next/navigation'
+} from "../../../../types/foodApi";
+import AvatarEditor from "react-avatar-editor";
+import Dropzone from "react-dropzone";
+import { useRouter } from "next/navigation";
 
 type ProductPageProps = {
-  productId: string
-  businessId: number | string
-  mode?: 'private' | 'public'
-  modePage: string
-}
+  productId: string;
+  businessId: number | string;
+  mode?: "private" | "public";
+  modePage: string;
+};
 export default function ProductPage({
   productId,
   modePage,
   businessId,
-  mode = 'private',
+  mode = "private",
 }: ProductPageProps) {
-  const needsToken = mode === 'private'
-  const router = useRouter()
+  const needsToken = mode === "private";
+  const router = useRouter();
 
   const title =
-    modePage === `register` ? `CADASTRO DE PRODUTO` : `EDIÇÃO DE PRODUTO`
+    modePage === `register` ? `CADASTRO DE PRODUTO` : `EDIÇÃO DE PRODUTO`;
 
-  const [foodTitle, setFoodTitle] = useState<string>(``)
-  const textAreaMaxLength = 300
-  const [remaining, setRemaining] = useState<number>(textAreaMaxLength)
-  const [checked, setChecked] = useState<boolean>(false)
-  const [price, setPrice] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [category, setCategory] = useState<string>('')
+  const [foodTitle, setFoodTitle] = useState<string>(``);
+  const textAreaMaxLength = 300;
+  const [remaining, setRemaining] = useState<number>(textAreaMaxLength);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [price, setPrice] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [categorySelected, setCategorySelected] = useState<
     FoodApiCategory | undefined
-  >(undefined)
+  >(undefined);
 
-  const [uploadName, setUploadName] = useState<string>('')
-  const [isUploadedImage, setIsUploadedImage] = useState<boolean>(false)
-  const [file, setFile] = useState<File | null>(null)
+  const [uploadName, setUploadName] = useState<string>("");
+  const [isUploadedImage, setIsUploadedImage] = useState<boolean>(false);
+  const [file, setFile] = useState<File | null>(null);
 
   const emptyingInputs = () => {
-    setFoodTitle(``)
-    setChecked(false)
-    setPrice(``)
-    setDescription(``)
-    setCategory(``)
-    setCategorySelected(undefined)
-    setUploadName(``)
-    setIsUploadedImage(false)
-    setFile(null)
-  }
+    setFoodTitle(``);
+    setChecked(false);
+    setPrice(``);
+    setDescription(``);
+    setCategory(``);
+    setCategorySelected(undefined);
+    setUploadName(``);
+    setIsUploadedImage(false);
+    setFile(null);
+  };
 
   const { data: categories } = useFoodFetch<FoodApiCategory[]>(
     EndpointFoodApiEnum.PRODUCT_CATEGORY,
@@ -91,7 +91,7 @@ export default function ProductPage({
       businessId,
     },
     needsToken,
-  )
+  );
 
   const { data: product } = useFoodFetch<FoodApiProduct>(
     EndpointFoodApiEnum.PRODUCT,
@@ -100,41 +100,41 @@ export default function ProductPage({
       productId,
     },
     false,
-  )
+  );
 
   const { request: requestNewProductUpload, data: upload } =
-    useFoodFetch<FoodApiUpload>()
+    useFoodFetch<FoodApiUpload>();
 
-  const { request: requestRegisterNewProduct } = useFoodFetch()
+  const { request: requestRegisterNewProduct } = useFoodFetch();
 
-  const { request: requestPatchProduct } = useFoodFetch()
+  const { request: requestPatchProduct } = useFoodFetch();
 
   function handleTextAreaLength(event: ChangeEvent<HTMLTextAreaElement>) {
-    setRemaining(textAreaMaxLength - event.target.value.length)
+    setRemaining(textAreaMaxLength - event.target.value.length);
   }
 
   function onChangeFile(
     acceptedFiles?: File[],
     event?: ChangeEvent<HTMLInputElement>,
   ) {
-    const selectedFile = event?.target?.files?.[0] || acceptedFiles?.[0]
+    const selectedFile = event?.target?.files?.[0] || acceptedFiles?.[0];
     if (selectedFile) {
-      setFile(selectedFile)
+      setFile(selectedFile);
     }
   }
 
   function handleRemoveUpload() {
-    setUploadName('')
-    setIsUploadedImage(false)
-    setFile(null)
+    setUploadName("");
+    setIsUploadedImage(false);
+    setFile(null);
   }
 
   function handleRequest() {
-    const priceInCents = (parseFloat(price) * 100).toString()
+    const priceInCents = (parseFloat(price) * 100).toString();
 
-    if (modePage === 'edit' && product) {
+    if (modePage === "edit" && product) {
       requestPatchProduct({
-        method: 'PATCH',
+        method: "PATCH",
         body: {
           categoryId: categorySelected?.id,
           name: foodTitle,
@@ -145,10 +145,10 @@ export default function ProductPage({
         },
         params: { businessId, productId },
         endPoint: EndpointFoodApiEnum.PRODUCT,
-      })
+      });
     } else {
       requestRegisterNewProduct({
-        method: 'POST',
+        method: "POST",
         body: {
           categoryId: categorySelected?.id,
           name: foodTitle,
@@ -158,77 +158,77 @@ export default function ProductPage({
           enabled: checked,
         },
         endPoint: EndpointFoodApiEnum.PRODUCT,
-      })
+      });
     }
 
-    emptyingInputs()
+    emptyingInputs();
   }
 
   function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault()
-    handleRequest()
+    event.preventDefault();
+    handleRequest();
   }
 
   useEffect(() => {
     if (categories && !categorySelected) {
-      setCategory(() => categories[0].name)
+      setCategory(() => categories[0].name);
     }
-    const foundCategory = categories?.find((prev) => prev.name === category)
+    const foundCategory = categories?.find((prev) => prev.name === category);
 
-    setCategorySelected(foundCategory)
-  }, [categories, category, categorySelected])
+    setCategorySelected(foundCategory);
+  }, [categories, category, categorySelected]);
 
   useEffect(() => {
-    if (!file) return
+    if (!file) return;
 
-    const formData = new FormData()
-    formData.append('upload', file, file.name)
+    const formData = new FormData();
+    formData.append("upload", file, file.name);
 
     requestNewProductUpload({
-      method: 'POST',
+      method: "POST",
       body: formData,
       headers: {
-        'Content-type': 'multipart/form-data',
+        "Content-type": "multipart/form-data",
       },
       endPoint: EndpointFoodApiEnum.UPLOAD,
-    })
-  }, [file])
+    });
+  }, [file]);
 
   useEffect(() => {
-    if (!file && modePage === `register`) return
+    if (!file && modePage === `register`) return;
 
-    setIsUploadedImage(() => true)
+    setIsUploadedImage(() => true);
     setUploadName(
       ` https://fooda.nyc3.digitaloceanspaces.com/develop/${upload?.name}`,
-    )
-  }, [file, modePage, upload])
+    );
+  }, [file, modePage, upload]);
 
   useEffect(() => {
     if (categories && categories.length === 1) {
-      setCategory(() => categories[0].name)
+      setCategory(() => categories[0].name);
     }
-    const foundCategory = categories?.find((prev) => prev.name === category)
+    const foundCategory = categories?.find((prev) => prev.name === category);
 
-    setCategorySelected(foundCategory)
-  }, [categories, category, categorySelected])
+    setCategorySelected(foundCategory);
+  }, [categories, category, categorySelected]);
 
   useEffect(() => {
     if (product && product.upload) {
-      setUploadName(product.upload.url)
+      setUploadName(product.upload.url);
     }
 
-    if (product && typeof product.price === 'string') {
-      const priceInCents = parseInt(product.price)
-      const priceInReal = (priceInCents / 100).toFixed(2)
-      setPrice(priceInReal.toString())
+    if (product && typeof product.price === "string") {
+      const priceInCents = parseInt(product.price);
+      const priceInReal = (priceInCents / 100).toFixed(2);
+      setPrice(priceInReal.toString());
     }
 
-    setIsUploadedImage(!!product?.upload)
-    setFoodTitle(product?.name || ``)
-    setChecked(product?.enabled || false)
+    setIsUploadedImage(!!product?.upload);
+    setFoodTitle(product?.name || ``);
+    setChecked(product?.enabled || false);
 
-    setDescription(product?.description || ``)
-  }, [product])
+    setDescription(product?.description || ``);
+  }, [product]);
 
   return (
     <Container>
@@ -301,7 +301,7 @@ export default function ProductPage({
                   <ImageProductContainer {...getRootProps()}>
                     <ImageWithoutUpload>
                       <Image
-                        src={'/productImage.png'}
+                        src={"/productImage.png"}
                         alt="Imagem exemplo"
                         height={51}
                         width={51}
@@ -410,5 +410,5 @@ export default function ProductPage({
         </form>
       </FormContainer>
     </Container>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
-import { poppins } from '@/app/fonts'
-import { Container } from './styles'
+import { useEffect, useState } from "react";
+import { poppins } from "@/app/fonts";
+import { Container } from "./styles";
 
 type RadioButtonProps = {
-  id: string
-  checked?: boolean
-  label: string
-  onCallback: (id: string) => void
-}
+  id: string;
+  checked?: boolean;
+  label: string;
+  onCallback: (id: string) => void;
+};
 
 export default function RadioButton({
   onCallback,
@@ -16,8 +16,8 @@ export default function RadioButton({
   ...rest
 }: RadioButtonProps) {
   const onClick = () => {
-    onCallback(id)
-  }
+    onCallback(id);
+  };
 
   return (
     <Container
@@ -31,5 +31,5 @@ export default function RadioButton({
       </div>
       <span>{label}</span>
     </Container>
-  )
+  );
 }

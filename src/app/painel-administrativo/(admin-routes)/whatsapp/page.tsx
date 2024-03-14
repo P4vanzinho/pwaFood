@@ -1,121 +1,121 @@
-'use client'
+"use client";
 
-import QRCode from 'react-qr-code'
-import { Wrapper, Container } from './styles'
-import { socketIo } from '@/socket/io'
-import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
-import { foodApiConfig } from '@/config'
+import QRCode from "react-qr-code";
+import { Wrapper, Container } from "./styles";
+import { socketIo } from "@/socket/io";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { foodApiConfig } from "@/config";
 
 type WhatsappStatus = {
-  qrCode: string
-  isConnected: boolean
-  timeout: number
-}
+  qrCode: string;
+  isConnected: boolean;
+  timeout: number;
+};
 
 export default function Products() {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
   const business = session?.data?.business?.length
     ? session?.data?.business[0]
-    : null
+    : null;
 
-  const token = session?.data?.token
+  const token = session?.data?.token;
 
   const [whatsappStatus, setWhatsappStatus] = useState<
     WhatsappStatus | undefined
-  >()
+  >();
 
   const [loadingWhatsappStatus, setLoadingWhatsappStatus] =
-    useState<boolean>(false)
+    useState<boolean>(false);
 
-  const [whatsappTimeout, setWhatsappTimeout] = useState<number | null>(null)
-  const [qrCodeExpired, setQrCodeExpired] = useState<boolean | null>(null)
-  const [showDownloadWaResponser, setShowDownloadWaResponser] = useState(false)
+  const [whatsappTimeout, setWhatsappTimeout] = useState<number | null>(null);
+  const [qrCodeExpired, setQrCodeExpired] = useState<boolean | null>(null);
+  const [showDownloadWaResponser, setShowDownloadWaResponser] = useState(false);
 
   const getWhatsappStatus = () => {
-    setLoadingWhatsappStatus(true)
+    setLoadingWhatsappStatus(true);
 
-    socketIo.emit('status', function (status: WhatsappStatus) {
-      setLoadingWhatsappStatus(false)
+    socketIo.emit("status", function (status: WhatsappStatus) {
+      setLoadingWhatsappStatus(false);
 
       if (status) {
-        setWhatsappTimeout(status.timeout ?? 30)
-        setQrCodeExpired(false)
-        setWhatsappStatus(status)
+        setWhatsappTimeout(status.timeout ?? 30);
+        setQrCodeExpired(false);
+        setWhatsappStatus(status);
       }
-    })
+    });
 
-    socketIo.on('whatsapp-connected', (jid: string) => {
+    socketIo.on("whatsapp-connected", (jid: string) => {
       setWhatsappStatus({
         isConnected: true,
-        qrCode: '',
+        qrCode: "",
         timeout: 0,
-      })
-    })
-  }
+      });
+    });
+  };
 
   useEffect(() => {
     if (!whatsappStatus?.isConnected || !business || !token) {
-      return
+      return;
     }
 
     const waAutoResponderConfig = {
       api: {
         token,
-        refreshToken: '',
+        refreshToken: "",
         url: {
           value: `${foodApiConfig.url}/business/${business?.id}/response`,
-          verb: 'GET',
+          verb: "GET",
         },
       },
-    }
+    };
 
     socketIo.emit(
-      'send-wa-auto-responder-config',
+      "send-wa-auto-responder-config",
       JSON.stringify(waAutoResponderConfig),
-    )
-  }, [whatsappStatus, business, token])
+    );
+  }, [whatsappStatus, business, token]);
 
   useEffect(() => {
-    getWhatsappStatus()
-  }, [])
+    getWhatsappStatus();
+  }, []);
 
   useEffect(() => {
-    socketIo.on('connect_error', () => {
-      setShowDownloadWaResponser(true)
-      setLoadingWhatsappStatus(false)
+    socketIo.on("connect_error", () => {
+      setShowDownloadWaResponser(true);
+      setLoadingWhatsappStatus(false);
       setWhatsappStatus({
         isConnected: false,
-        qrCode: '',
+        qrCode: "",
         timeout: 0,
-      })
-    })
-  }, [])
+      });
+    });
+  }, []);
 
   useEffect(() => {
     if (whatsappStatus?.isConnected) {
-      setShowDownloadWaResponser(false)
+      setShowDownloadWaResponser(false);
     }
-  }, [whatsappStatus])
+  }, [whatsappStatus]);
 
   useEffect(() => {
     if (!whatsappTimeout) {
-      return
+      return;
     }
 
     const interval = setInterval(() => {
       setWhatsappTimeout((current) => {
         if (current === 1) {
-          setQrCodeExpired(true)
+          setQrCodeExpired(true);
         }
 
-        return current && current > 0 ? current - 1 : 0
-      })
-    }, 1000)
+        return current && current > 0 ? current - 1 : 0;
+      });
+    }, 1000);
 
-    return () => clearInterval(interval)
-  }, [whatsappTimeout])
+    return () => clearInterval(interval);
+  }, [whatsappTimeout]);
 
   return (
     <Wrapper>
@@ -164,5 +164,5 @@ export default function Products() {
         )}
       </Container>
     </Wrapper>
-  )
+  );
 }

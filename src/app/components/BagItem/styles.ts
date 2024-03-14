@@ -1,7 +1,7 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
-import Image from 'next/image'
-import { darken } from 'polished'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import Image from "next/image";
+import { darken } from "polished";
 
 export const Container = styled.div`
   width: 100%;
@@ -13,7 +13,7 @@ export const Container = styled.div`
     display: flex;
     width: 100%;
   }
-`
+`;
 
 export const PhotoFood = styled(Image)`
   object-fit: cover;
@@ -23,7 +23,7 @@ export const PhotoFood = styled(Image)`
   padding: 5px;
   width: 6rem;
   height: 5rem;
-`
+`;
 
 export const Body = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ export const Body = styled.div`
     font-size: 1.1rem;
     font-weight: 500;
   }
-`
+`;
 
 export const Actions = styled.div`
   display: flex;
@@ -78,7 +78,7 @@ export const Actions = styled.div`
       }
     }
   }
-`
+`;
 
 export const InputWrapper = styled.div`
   display: flex;
@@ -96,4 +96,4 @@ export const InputWrapper = styled.div`
     border: none;
     font-size: 0.875rem;
   }
-`
+`;

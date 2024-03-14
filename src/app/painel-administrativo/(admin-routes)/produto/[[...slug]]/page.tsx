@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-import { bebasNeue, poppins } from '@/app/fonts'
+import { bebasNeue, poppins } from "@/app/fonts";
 import {
   Container,
   FormContainer,
@@ -21,114 +21,114 @@ import {
   ImageWithoutUpload,
   ImageWithUpload,
   ButtonsImageContainer,
-} from './styles'
+} from "./styles";
 
-import Title from '@/app/components/Title'
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
-import Image from 'next/image'
+import Title from "@/app/components/Title";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import Image from "next/image";
 
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
-import Input from '@/app/components/Input'
-import Button from '@/app/components/Button'
-import useFoodFetch from '@/app/hooks/useFoodFetch'
-import { EndpointFoodApiEnum, RoutesEnum } from '@/app/enums'
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import Input from "@/app/components/Input";
+import Button from "@/app/components/Button";
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { EndpointFoodApiEnum, RoutesEnum } from "@/app/enums";
 import {
   FoodApiCategory,
   FoodApiProduct,
   FoodApiUpload,
-} from '../../../../../../types/foodApi'
+} from "../../../../../../types/foodApi";
 
-import AvatarEditor from 'react-avatar-editor'
-import Dropzone from 'react-dropzone'
+import AvatarEditor from "react-avatar-editor";
+import Dropzone from "react-dropzone";
 
 type ProductProps = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 export default function Product(props: ProductProps) {
-  const { data: session } = useSession()
-  const businessId = session?.data.business[0].id
-  const modePage = props?.params?.slug ? 'edit' : 'register'
+  const { data: session } = useSession();
+  const businessId = session?.data.business[0].id;
+  const modePage = props?.params?.slug ? "edit" : "register";
 
-  const router = useRouter()
+  const router = useRouter();
 
   const title =
-    modePage === `register` ? `CADASTRO DE PRODUTO` : `EDIÇÃO DE PRODUTO`
+    modePage === `register` ? `CADASTRO DE PRODUTO` : `EDIÇÃO DE PRODUTO`;
 
-  const [foodTitle, setFoodTitle] = useState<string>(``)
-  const textAreaMaxLength = 300
-  const [remaining, setRemaining] = useState<number>(textAreaMaxLength)
-  const [checked, setChecked] = useState<boolean>(false)
-  const [price, setPrice] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [category, setCategory] = useState<string>('')
+  const [foodTitle, setFoodTitle] = useState<string>(``);
+  const textAreaMaxLength = 300;
+  const [remaining, setRemaining] = useState<number>(textAreaMaxLength);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [price, setPrice] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [categorySelected, setCategorySelected] = useState<
     FoodApiCategory | undefined
-  >(undefined)
+  >(undefined);
 
-  const [uploadUrl, setUploadUrl] = useState<string>('')
-  const [file, setFile] = useState<File | null>(null)
-  const productId = props?.params?.slug
+  const [uploadUrl, setUploadUrl] = useState<string>("");
+  const [file, setFile] = useState<File | null>(null);
+  const productId = props?.params?.slug;
 
   const emptyingInputs = () => {
-    setFoodTitle(``)
-    setChecked(false)
-    setPrice(``)
-    setDescription(``)
-    setCategory(``)
-    setCategorySelected(undefined)
-    setUploadUrl(``)
-    setFile(null)
-  }
+    setFoodTitle(``);
+    setChecked(false);
+    setPrice(``);
+    setDescription(``);
+    setCategory(``);
+    setCategorySelected(undefined);
+    setUploadUrl(``);
+    setFile(null);
+  };
 
   const { data: categories, request: categoriesRequest } =
-    useFoodFetch<FoodApiCategory[]>()
+    useFoodFetch<FoodApiCategory[]>();
 
   const { data: product, request: productRequest } =
-    useFoodFetch<FoodApiProduct>()
+    useFoodFetch<FoodApiProduct>();
 
   const { request: requestNewProductUpload, data: upload } =
-    useFoodFetch<FoodApiUpload>()
+    useFoodFetch<FoodApiUpload>();
 
   const {
     request: requestRegisterNewProduct,
     loading: loadingNewProduct,
     data: responseNewProduct,
-  } = useFoodFetch<FoodApiProduct>()
+  } = useFoodFetch<FoodApiProduct>();
 
   const {
     request: requestPatchProduct,
     data: responsePatchProduct,
     loading: loadingPatchProduct,
-  } = useFoodFetch<FoodApiProduct>()
+  } = useFoodFetch<FoodApiProduct>();
 
   function handleTextAreaLength(event: ChangeEvent<HTMLTextAreaElement>) {
-    setRemaining(textAreaMaxLength - event.target.value.length)
+    setRemaining(textAreaMaxLength - event.target.value.length);
   }
 
   function onChangeFile(
     acceptedFiles?: File[],
     event?: ChangeEvent<HTMLInputElement>,
   ) {
-    const selectedFile = event?.target?.files?.[0] || acceptedFiles?.[0]
+    const selectedFile = event?.target?.files?.[0] || acceptedFiles?.[0];
     if (selectedFile) {
-      setFile(selectedFile)
+      setFile(selectedFile);
     }
   }
 
   function handleRemoveUpload() {
-    setUploadUrl('')
-    setFile(null)
+    setUploadUrl("");
+    setFile(null);
   }
 
   function handleRequest() {
-    const priceInCents = (parseFloat(price) * 100).toString()
+    const priceInCents = (parseFloat(price) * 100).toString();
 
-    if (modePage === 'edit' && product) {
+    if (modePage === "edit" && product) {
       requestPatchProduct({
-        method: 'PATCH',
+        method: "PATCH",
         body: {
           categoryId: categorySelected?.id,
           name: foodTitle,
@@ -139,10 +139,10 @@ export default function Product(props: ProductProps) {
         },
         params: { businessId, productId },
         endPoint: EndpointFoodApiEnum.PRODUCT,
-      })
+      });
     } else {
       requestRegisterNewProduct({
-        method: 'POST',
+        method: "POST",
         body: {
           categoryId: categorySelected?.id,
           name: foodTitle,
@@ -152,27 +152,27 @@ export default function Product(props: ProductProps) {
           enabled: checked,
         },
         endPoint: EndpointFoodApiEnum.PRODUCT,
-      })
+      });
     }
   }
 
   function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault()
-    handleRequest()
+    event.preventDefault();
+    handleRequest();
   }
 
   useEffect(() => {
-    if (!responseNewProduct) return
-    emptyingInputs()
-  }, [responseNewProduct])
+    if (!responseNewProduct) return;
+    emptyingInputs();
+  }, [responseNewProduct]);
 
   useEffect(() => {
-    if (!responsePatchProduct) return
-    router.replace(RoutesEnum.PRODUTOS)
-  }, [responsePatchProduct])
+    if (!responsePatchProduct) return;
+    router.replace(RoutesEnum.PRODUTOS);
+  }, [responsePatchProduct]);
 
   useEffect(() => {
-    if (!businessId) return
+    if (!businessId) return;
 
     categoriesRequest({
       endPoint: EndpointFoodApiEnum.PRODUCT_CATEGORY,
@@ -181,11 +181,11 @@ export default function Product(props: ProductProps) {
         hasProducts: true,
         businessId,
       },
-    })
-  }, [businessId, categoriesRequest])
+    });
+  }, [businessId, categoriesRequest]);
 
   useEffect(() => {
-    if (!businessId) return
+    if (!businessId) return;
 
     productRequest({
       endPoint: EndpointFoodApiEnum.PRODUCT,
@@ -193,55 +193,55 @@ export default function Product(props: ProductProps) {
         productId,
         businessId,
       },
-    })
-  }, [businessId, productRequest])
+    });
+  }, [businessId, productRequest]);
 
   useEffect(() => {
     if (categories && !categorySelected) {
-      setCategory(() => categories[0].name)
+      setCategory(() => categories[0].name);
     }
-    const foundCategory = categories?.find((prev) => prev.name === category)
+    const foundCategory = categories?.find((prev) => prev.name === category);
 
-    setCategorySelected(foundCategory)
-  }, [categories, category, categorySelected])
+    setCategorySelected(foundCategory);
+  }, [categories, category, categorySelected]);
 
   useEffect(() => {
-    if (!file) return
+    if (!file) return;
 
-    const formData = new FormData()
-    formData.append('upload', file, file.name)
+    const formData = new FormData();
+    formData.append("upload", file, file.name);
 
     requestNewProductUpload({
-      method: 'POST',
+      method: "POST",
       body: formData,
       headers: {
-        'Content-type': 'multipart/form-data',
+        "Content-type": "multipart/form-data",
       },
       endPoint: EndpointFoodApiEnum.UPLOAD,
-    })
-  }, [file])
+    });
+  }, [file]);
 
   useEffect(() => {
-    if (!upload) return
-    setUploadUrl(upload?.url)
-  }, [upload])
+    if (!upload) return;
+    setUploadUrl(upload?.url);
+  }, [upload]);
 
   useEffect(() => {
-    setFoodTitle(product?.name || ``)
-    setChecked(!!product?.enabled)
-    setPrice(product?.price || ``)
-    setDescription(product?.description || ``)
-    setUploadUrl(product?.upload?.url || ``)
-  }, [product])
+    setFoodTitle(product?.name || ``);
+    setChecked(!!product?.enabled);
+    setPrice(product?.price || ``);
+    setDescription(product?.description || ``);
+    setUploadUrl(product?.upload?.url || ``);
+  }, [product]);
 
   useEffect(() => {
     if (categories && categories.length) {
-      setCategory(() => categories[0].name)
+      setCategory(() => categories[0].name);
     }
-    const foundCategory = categories?.find((prev) => prev.name === category)
+    const foundCategory = categories?.find((prev) => prev.name === category);
 
-    setCategorySelected(foundCategory)
-  }, [categories, category, categorySelected])
+    setCategorySelected(foundCategory);
+  }, [categories, category, categorySelected]);
 
   return (
     <Container>
@@ -314,7 +314,7 @@ export default function Product(props: ProductProps) {
                   <ImageProductContainer {...getRootProps()}>
                     <ImageWithoutUpload>
                       <Image
-                        src={'/productImage.png'}
+                        src={"/productImage.png"}
                         alt="Imagem exemplo"
                         height={51}
                         width={51}
@@ -427,5 +427,5 @@ export default function Product(props: ProductProps) {
         </form>
       </FormContainer>
     </Container>
-  )
+  );
 }

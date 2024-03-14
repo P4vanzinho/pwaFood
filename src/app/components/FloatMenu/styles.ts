@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
 
 export const Container = styled.div`
   width: 19rem;
@@ -66,7 +66,7 @@ export const Container = styled.div`
       background-color: ${() => theme.COLORS.LIGHT};
     }
   }
-`
+`;
 
 const higherZIndex = `{
   z-index: 999;
@@ -75,7 +75,7 @@ const higherZIndex = `{
     width:  3.375rem;
     height: 3.375rem;
   }
-}`
+}`;
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -105,7 +105,7 @@ export const ButtonContainer = styled.div`
       cursor: pointer;
     }
   }
-`
+`;
 
 export const Button = styled.button`
   width: 12rem;
@@ -142,4 +142,4 @@ export const Button = styled.button`
       margin-right: 10px;
     }
   }
-`
+`;

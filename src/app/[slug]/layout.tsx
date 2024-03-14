@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
-import MenuBottom from '../components/MenuBottom'
-import { BagContextProvider } from '@/context/bag'
-import { LoadingContextProvider } from '@/context/loading'
-import FullScreenLoading from '../components/FullScreenLoading'
-import { OrderContextProvider } from '@/context/order'
-import { styled } from '@linaria/react'
-import { theme } from '../styles/theme'
-import { useSearchParams } from 'next/navigation'
-import { setPublicUserByToken } from '@/utils/cookiePublicUser'
-import Version from '../components/Version'
+import { ReactNode } from "react";
+import MenuBottom from "../components/MenuBottom";
+import { BagContextProvider } from "@/context/bag";
+import { LoadingContextProvider } from "@/context/loading";
+import FullScreenLoading from "../components/FullScreenLoading";
+import { OrderContextProvider } from "@/context/order";
+import { styled } from "@linaria/react";
+import { theme } from "../styles/theme";
+import { useSearchParams } from "next/navigation";
+import { setPublicUserByToken } from "@/utils/cookiePublicUser";
+import Version from "../components/Version";
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   padding: 0;
   align-items: center;
   background-color: ${theme.COLORS.LIGHT};
-`
+`;
 
 const Container = styled.div`
   display: flex;
@@ -29,22 +29,22 @@ const Container = styled.div`
   max-width: 1200px;
   min-height: 100vh;
   background-color: ${theme.COLORS.WHITE};
-`
+`;
 
 interface PublicLayoutProps {
-  children: ReactNode
+  children: ReactNode;
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
 
 function PublicLayout(props: PublicLayoutProps) {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
-  const token = searchParams.get('u')
+  const token = searchParams.get("u");
 
   if (token) {
-    setPublicUserByToken(token)
+    setPublicUserByToken(token);
   }
 
   return (
@@ -59,7 +59,7 @@ function PublicLayout(props: PublicLayoutProps) {
         </BagContextProvider>
       </OrderContextProvider>
     </>
-  )
+  );
 }
 
-export default PublicLayout
+export default PublicLayout;

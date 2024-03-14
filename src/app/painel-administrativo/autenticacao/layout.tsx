@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import AuthHeader from '@/app/components/AuthHeader'
-import { lighten } from 'polished'
-import { ReactNode } from 'react'
-import { styled } from '@linaria/react'
-import { theme } from '@/app/styles/theme'
+import AuthHeader from "@/app/components/AuthHeader";
+import { lighten } from "polished";
+import { ReactNode } from "react";
+import { styled } from "@linaria/react";
+import { theme } from "@/app/styles/theme";
 
 const Container = styled.div`
   height: calc(100vh - 100px);
   width: 100%;
-`
+`;
 
 type AuthHeaderProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 const Main = styled.main`
   display: flex;
@@ -26,7 +26,7 @@ const Main = styled.main`
   padding: 3.2rem 2.4rem;
   border: 1px solid ${() => lighten(0.34, theme.COLORS.GRAY)};
   border-radius: 12px;
-`
+`;
 
 export default function AuthLayout({ children }: AuthHeaderProps) {
   return (
@@ -34,5 +34,5 @@ export default function AuthLayout({ children }: AuthHeaderProps) {
       <AuthHeader />
       <Main>{children}</Main>
     </Container>
-  )
+  );
 }

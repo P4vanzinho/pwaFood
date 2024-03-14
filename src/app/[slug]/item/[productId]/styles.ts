@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react'
+import { styled } from "@linaria/react";
 
 export const Container = styled.div`
   width: 100%;
@@ -51,9 +51,9 @@ export const Container = styled.div`
       font-size: 1.5rem;
     }
   }
-`
+`;
 
 export const Content = styled.div`
   max-width: 1200px;
   display: flex;
-`
+`;

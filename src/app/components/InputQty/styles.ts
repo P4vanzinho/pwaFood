@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
-import { lighten } from 'polished'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import { lighten } from "polished";
 
 export const Container = styled.div`
   display: flex;
@@ -59,7 +59,7 @@ export const Container = styled.div`
       }
     }
   }
-`
+`;
 
 export const Input = styled.div`
   display: flex;
@@ -95,4 +95,4 @@ export const Input = styled.div`
     appearance: textfield;
     -webkit-appearance: none;
   }
-`
+`;

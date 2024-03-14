@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
 
 export const Container = styled.div`
   height: 100%;
@@ -35,7 +35,7 @@ export const Container = styled.div`
       }
     }
   }
-`
+`;
 
 export const SelectButton = styled.button`
   width: 100%;
@@ -43,7 +43,7 @@ export const SelectButton = styled.button`
   gap: 2.4rem;
   background: transparent;
   border: none;
-`
+`;
 
 export const ImageContainer = styled.div`
   width: 5.6rem;
@@ -53,7 +53,7 @@ export const ImageContainer = styled.div`
   align-items: center;
   background-color: ${() => theme.COLORS.LIGHT};
   border-radius: 8px;
-`
+`;
 
 export const DescriptionsContainer = styled.div`
   display: flex;
@@ -74,4 +74,4 @@ export const DescriptionsContainer = styled.div`
     line-height: 150%;
     color: ${() => theme.COLORS.GRAY};
   }
-`
+`;

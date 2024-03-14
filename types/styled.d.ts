@@ -1,4 +1,4 @@
-import 'styled-components';
+import "styled-components";
 
 export type ThemeColors = {
   WHITE: string;
@@ -14,7 +14,7 @@ export type ThemeColors = {
   ERROR: string;
 };
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
     COLORS: ThemeColors;
   }

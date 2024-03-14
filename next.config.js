@@ -1,4 +1,4 @@
-const withLinaria = require('next-with-linaria');
+const withLinaria = require("next-with-linaria");
 
 const nextConfig = {
   reactStrictMode: true,
@@ -8,8 +8,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'fooda.nyc3.digitaloceanspaces.com',
+        protocol: "https",
+        hostname: "fooda.nyc3.digitaloceanspaces.com",
       },
     ],
   },

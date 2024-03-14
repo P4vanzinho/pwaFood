@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Container,
@@ -9,60 +9,60 @@ import {
   Input,
   Switch,
   ButtonsContainer,
-} from './styles'
-import { poppins, bebasNeue } from '@/app/fonts'
-import { SyntheticEvent, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import useFoodFetch from '@/app/hooks/useFoodFetch'
-import { useSession } from 'next-auth/react'
-import { EndpointFoodApiEnum, RoutesEnum } from '@/app/enums'
-import Title from '@/app/components/Title'
-import Button from '@/app/components/Button'
+} from "./styles";
+import { poppins, bebasNeue } from "@/app/fonts";
+import { SyntheticEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { useSession } from "next-auth/react";
+import { EndpointFoodApiEnum, RoutesEnum } from "@/app/enums";
+import Title from "@/app/components/Title";
+import Button from "@/app/components/Button";
 
 type CategoryProps = {
   params: {
-    slug?: string
-  }
-}
+    slug?: string;
+  };
+};
 
 export default function Category({ params }: CategoryProps) {
-  const mode = params?.slug ? 'edit' : 'register'
+  const mode = params?.slug ? "edit" : "register";
 
-  const [checked, setChecked] = useState<boolean>(false)
-  const [categoryName, setCategoryName] = useState<string>('')
-  const { data: session } = useSession()
-  const router = useRouter()
+  const [checked, setChecked] = useState<boolean>(false);
+  const [categoryName, setCategoryName] = useState<string>("");
+  const { data: session } = useSession();
+  const router = useRouter();
 
-  const businessID = session?.data?.business[0]?.id
+  const businessID = session?.data?.business[0]?.id;
 
-  const { request: requestRegisterCategory, error, message } = useFoodFetch()
+  const { request: requestRegisterCategory, error, message } = useFoodFetch();
 
   function handleCategoryOnClick() {
-    if (mode === 'edit') {
+    if (mode === "edit") {
       // chamar rota de edicao
     } else {
       // chamar rota de cadastro
 
       requestRegisterCategory({
-        method: 'POST',
+        method: "POST",
         body: {
           businessId: businessID,
           name: categoryName,
           enabled: checked,
         },
         endPoint: EndpointFoodApiEnum.PRODUCT_CATEGORY,
-      })
+      });
     }
   }
 
   function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault()
+    event.preventDefault();
   }
 
   const title =
-    mode === 'register'
-      ? 'CADASTRO DE CATEGORIA DE PRODUTO'
-      : 'EDIÇÃO DA CATEGORIA DE PRODUTO'
+    mode === "register"
+      ? "CADASTRO DE CATEGORIA DE PRODUTO"
+      : "EDIÇÃO DA CATEGORIA DE PRODUTO";
 
   return (
     <Container onSubmit={handleSubmit}>
@@ -107,5 +107,5 @@ export default function Category({ params }: CategoryProps) {
         </ButtonsContainer>
       </Main>
     </Container>
-  )
+  );
 }

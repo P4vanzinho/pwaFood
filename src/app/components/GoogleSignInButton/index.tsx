@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { inter } from '@/app/fonts'
-import { signIn } from 'next-auth/react'
+import { inter } from "@/app/fonts";
+import { signIn } from "next-auth/react";
 
-import { Container } from './styles'
+import { Container } from "./styles";
 
 export default function GoogleSignInButton() {
   return (
     <>
       <Container
         className={inter.className}
-        onClick={() => signIn('google')}
+        onClick={() => signIn("google")}
         type="button"
       >
         <svg
@@ -48,5 +48,5 @@ export default function GoogleSignInButton() {
         <span>Entrar com uma conta do Google</span>
       </Container>
     </>
-  )
+  );
 }

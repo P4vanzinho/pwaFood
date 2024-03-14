@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
-import { bebasNeue } from './fonts'
-import NextAuthSessionProvider from './providers/SessionProvider'
-import { ToastContainer } from 'react-toastify'
-import '../assets/ReactToastify.css'
-import { css } from '@linaria/core'
-import { LoadingContextProvider } from '@/context/loading'
-import FullScreenLoading from './components/FullScreenLoading'
+import { ReactNode } from "react";
+import { bebasNeue } from "./fonts";
+import NextAuthSessionProvider from "./providers/SessionProvider";
+import { ToastContainer } from "react-toastify";
+import "../assets/ReactToastify.css";
+import { css } from "@linaria/core";
+import { LoadingContextProvider } from "@/context/loading";
+import FullScreenLoading from "./components/FullScreenLoading";
 
 const globalStyle = css`
   :root {
@@ -160,7 +160,7 @@ const globalStyle = css`
       /*transform: translateY(0px) ;*/
     }
   }
-`
+`;
 
 function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -174,7 +174,7 @@ function RootLayout({ children }: { children: ReactNode }) {
         </LoadingContextProvider>
       </body>
     </html>
-  )
+  );
 }
 
-export default RootLayout
+export default RootLayout;

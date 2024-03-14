@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
-import { darken } from 'polished'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import { darken } from "polished";
 
 export const Container = styled.div`
   display: flex;
@@ -53,4 +53,4 @@ export const Container = styled.div`
     left: 50%;
     transform: translateX(-50%);
   }
-`
+`;

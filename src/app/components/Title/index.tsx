@@ -1,11 +1,11 @@
-import { ReactNode } from 'react'
-import { bebasNeue } from '@/app/fonts'
-import { Text } from './styles'
+import { ReactNode } from "react";
+import { bebasNeue } from "@/app/fonts";
+import { Text } from "./styles";
 
 interface ButtonRegistrationType {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export default function Title({ children }: ButtonRegistrationType) {
-  return <Text className={bebasNeue.className}>{children}</Text>
+  return <Text className={bebasNeue.className}>{children}</Text>;
 }

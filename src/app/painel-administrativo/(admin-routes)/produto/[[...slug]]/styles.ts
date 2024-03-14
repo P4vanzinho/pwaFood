@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
 
 export const Container = styled.div`
   width: 100%;
@@ -13,7 +13,7 @@ export const Container = styled.div`
   *:focus {
     outline-color: ${() => theme.COLORS.PRIMARY};
   }
-`
+`;
 
 export const FieldsetContainer = styled.fieldset`
   border: none;
@@ -34,7 +34,7 @@ export const FieldsetContainer = styled.fieldset`
       display: none;
     }
   }
-`
+`;
 
 export const FormContainer = styled.div`
   width: 38.375rem;
@@ -65,7 +65,7 @@ export const FormContainer = styled.div`
       }
     }
   }
-`
+`;
 
 export const FoodTitleLabel = styled.label`
   display: flex;
@@ -98,7 +98,7 @@ export const FoodTitleLabel = styled.label`
     align-items: center;
     justify-content: center;
   }
-`
+`;
 
 export const ImageProductContainer = styled.div`
   border-radius: 15px;
@@ -115,7 +115,7 @@ export const ImageProductContainer = styled.div`
     margin: none;
     outline: none;
   }
-`
+`;
 export const ImageWithoutUpload = styled.div`
   width: 100%;
   height: 100%;
@@ -185,7 +185,7 @@ export const ImageWithoutUpload = styled.div`
       height: 100%;
     }
   }
-`
+`;
 
 export const ImageWithUpload = styled.div`
   width: 100%;
@@ -206,7 +206,7 @@ export const ImageWithUpload = styled.div`
   image {
     object-fit: cover;
   }
-`
+`;
 
 export const ImageContainer = styled.div`
   width: 100%;
@@ -219,7 +219,7 @@ export const ImageContainer = styled.div`
   > canvas {
     border-radius: 0.625rem;
   }
-`
+`;
 
 export const ButtonsImageContainer = styled.div`
   display: flex;
@@ -255,14 +255,14 @@ export const ButtonsImageContainer = styled.div`
       cursor: pointer;
     }
   }
-`
+`;
 
 export const SelectCategoryLabel = styled.label`
   margin-bottom: 1.563rem;
   display: flex;
   gap: 1rem;
   flex-direction: column;
-`
+`;
 
 export const SelectContainer = styled.div`
   width: 100%;
@@ -300,7 +300,7 @@ export const SelectContainer = styled.div`
       color: ${() => theme.COLORS.GRAY};
     }
   }
-`
+`;
 
 export const DescriptionLabel = styled.label`
   margin-bottom: 2.5rem;
@@ -349,12 +349,12 @@ export const DescriptionLabel = styled.label`
       line-height: normal;
     }
   }
-`
+`;
 
 export const ToggleSwitchContainer = styled.div`
   width: 100%;
   margin-bottom: 1.25rem;
-`
+`;
 
 export const ToggleSwitch = styled.div`
   width: 100%;
@@ -373,18 +373,18 @@ export const ToggleSwitch = styled.div`
     font-weight: 500;
     line-height: normal;
   }
-`
+`;
 
 export const LabelToglleSwitch = styled.label`
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
-`
+`;
 export const InputCheckBoxInToggle = styled.input`
   opacity: 0;
   position: absolute;
-`
+`;
 
 export const Switch = styled.div`
   position: relative;
@@ -395,7 +395,7 @@ export const Switch = styled.div`
   padding: 4px;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     width: 28px;
     height: 28px;
@@ -417,7 +417,7 @@ export const Switch = styled.div`
       left: calc(100% - (28px + 4px));
     }
   }
-`
+`;
 
 export const PriceLabel = styled.label`
   display: flex;
@@ -449,7 +449,7 @@ export const PriceLabel = styled.label`
     color: ${() => theme.COLORS.ERROR};
     font-weight: 500;
   }
-`
+`;
 
 export const FormButtonsContainer = styled.div`
   width: 15.875rem;
@@ -464,4 +464,4 @@ export const FormButtonsContainer = styled.div`
       background-color: ${() => theme.COLORS.GRAY};
     }
   }
-`
+`;

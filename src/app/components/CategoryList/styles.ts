@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react'
+import { styled } from "@linaria/react";
 
 export const Container = styled.div`
   height: 100%;
@@ -12,4 +12,4 @@ export const Container = styled.div`
     margin-bottom: 6px;
     margin-left: 5px;
   }
-`
+`;

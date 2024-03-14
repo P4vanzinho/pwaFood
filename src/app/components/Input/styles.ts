@@ -1,12 +1,12 @@
-import { theme } from '@/app/styles/theme'
+import { theme } from "@/app/styles/theme";
 
-import { styled } from '@linaria/react'
-import { darken } from 'polished'
-import { HTMLInputTypeAttribute } from 'react'
+import { styled } from "@linaria/react";
+import { darken } from "polished";
+import { HTMLInputTypeAttribute } from "react";
 
 type InputProps = {
-  type: HTMLInputTypeAttribute
-}
+  type: HTMLInputTypeAttribute;
+};
 
 export const Container = styled.div<InputProps>`
   display: flex;
@@ -103,4 +103,4 @@ export const Container = styled.div<InputProps>`
       }
     }
   }
-`
+`;

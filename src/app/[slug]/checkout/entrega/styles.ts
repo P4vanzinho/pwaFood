@@ -1,12 +1,12 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
-import Link from 'next/link'
-import { lighten } from 'polished'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import Link from "next/link";
+import { lighten } from "polished";
 
 export const ChangeLink = styled(Link)`
   color: ${theme.COLORS.WARNING};
   font-size: 1.063rem;
-`
+`;
 
 export const Container = styled.div`
   > label {
@@ -32,7 +32,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
   }
-`
+`;
 
 export const DeliveryData = styled.div`
   margin-top: 25px;
@@ -79,7 +79,7 @@ export const DeliveryData = styled.div`
       margin-top: 15px;
     }
   }
-`
+`;
 
 export const DeliveryMethod = styled.div`
   margin-top: 40px;
@@ -116,7 +116,7 @@ export const DeliveryMethod = styled.div`
       margin-top: 15px;
     }
   }
-`
+`;
 
 export const Total = styled.div`
   display: flex;
@@ -144,7 +144,7 @@ export const Total = styled.div`
   }
 
   margin-bottom: 30px;
-`
+`;
 
 export const Payment = styled.div`
   margin-top: 5rem;
@@ -154,8 +154,8 @@ export const Payment = styled.div`
     flex-direction: row;
     justify-content: space-between;
   }
-`
+`;
 
 export const ToogleSwitchContainer = styled.div`
   padding: 40px;
-`
+`;

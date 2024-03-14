@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import React, { ReactNode, createContext, useContext, useState } from 'react'
+import React, { ReactNode, createContext, useContext, useState } from "react";
 
 type LoadingContextProviderProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 type LoadingContextProps = {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  loading: boolean
-}
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  loading: boolean;
+};
 
-const defaultLoading = false
+const defaultLoading = false;
 
 const defaultValue = {
   setLoading: () => {},
   loading: defaultLoading,
-}
+};
 
-const LoadingContext = createContext<LoadingContextProps>(defaultValue)
+const LoadingContext = createContext<LoadingContextProps>(defaultValue);
 
 const LoadingContextProvider = ({ children }: LoadingContextProviderProps) => {
-  const [loading, setLoading] = useState(defaultLoading)
+  const [loading, setLoading] = useState(defaultLoading);
 
   return (
     <LoadingContext.Provider
@@ -32,12 +32,12 @@ const LoadingContextProvider = ({ children }: LoadingContextProviderProps) => {
     >
       {children}
     </LoadingContext.Provider>
-  )
-}
+  );
+};
 
 export const useLoadingContext = () => {
-  return useContext(LoadingContext)
-}
+  return useContext(LoadingContext);
+};
 
-export { LoadingContextProvider }
-export default LoadingContext
+export { LoadingContextProvider };
+export default LoadingContext;

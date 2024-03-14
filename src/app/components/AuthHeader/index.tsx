@@ -1,24 +1,24 @@
-'use client'
-import { Container, Logo, MenuTopCenter, RightTopMenu } from './styles'
+"use client";
+import { Container, Logo, MenuTopCenter, RightTopMenu } from "./styles";
 
-import { bebasNeue, poppins } from '../../fonts'
-import { useRouter, usePathname } from 'next/navigation'
+import { bebasNeue, poppins } from "../../fonts";
+import { useRouter, usePathname } from "next/navigation";
 
-import Link from 'next/link'
-import { useState, useEffect, ReactNode } from 'react'
-import Button from '../Button'
-import { RoutesEnum } from '@/app/enums'
+import Link from "next/link";
+import { useState, useEffect, ReactNode } from "react";
+import Button from "../Button";
+import { RoutesEnum } from "@/app/enums";
 
 export default function AuthHeader() {
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
   function handleSignIn() {
-    router.push(RoutesEnum.LOGIN)
+    router.push(RoutesEnum.LOGIN);
   }
 
   function handleSignUp() {
-    router.push(RoutesEnum.SIGNUP)
+    router.push(RoutesEnum.SIGNUP);
   }
 
   return (
@@ -50,5 +50,5 @@ export default function AuthHeader() {
         />
       </RightTopMenu>
     </Container>
-  )
+  );
 }

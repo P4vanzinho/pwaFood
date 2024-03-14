@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
-import { lighten } from 'polished'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import { lighten } from "polished";
 
 export const Container = styled.header`
   align-items: center;
@@ -14,7 +14,7 @@ export const Container = styled.header`
   width: 100%;
   padding: 20px 40px;
   align-items: center;
-`
+`;
 
 export const Logo = styled.button`
   display: flex;
@@ -52,11 +52,11 @@ export const Logo = styled.button`
       color: ${theme.COLORS.PRIMARY};
     }
   }
-`
+`;
 
 const selected = `
   color: ${theme.COLORS.DARK};
-`
+`;
 
 export const MenuTopCenter = styled.div`
   display: flex;
@@ -81,9 +81,9 @@ export const MenuTopCenter = styled.div`
       ${selected}
     }
   }
-`
+`;
 
 export const RightTopMenu = styled.div`
   display: flex;
   gap: 50px;
-`
+`;

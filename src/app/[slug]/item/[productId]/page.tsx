@@ -1,34 +1,34 @@
-'use client'
+"use client";
 
-import useFoodFetch from '@/app/hooks/useFoodFetch'
-import { Container, Content } from './styles'
-import Image from 'next/image'
-import { EndpointFoodApiEnum } from '@/app/enums'
-import Title from '@/app/components/Title'
-import Text from '@/app/components/Text'
-import { FoodApiProduct } from '../../../../../types/foodApi'
-import Button from '@/app/components/Button'
-import InputQty from '@/app/components/InputQty'
-import { useState } from 'react'
-import Price from '@/app/components/Price'
-import { useBagContext } from '@/context/bag'
-import { useRouter } from 'next/navigation'
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { Container, Content } from "./styles";
+import Image from "next/image";
+import { EndpointFoodApiEnum } from "@/app/enums";
+import Title from "@/app/components/Title";
+import Text from "@/app/components/Text";
+import { FoodApiProduct } from "../../../../../types/foodApi";
+import Button from "@/app/components/Button";
+import InputQty from "@/app/components/InputQty";
+import { useState } from "react";
+import Price from "@/app/components/Price";
+import { useBagContext } from "@/context/bag";
+import { useRouter } from "next/navigation";
 
 type ProductProps = {
   params: {
-    slug: string
-    productId: string
-  }
-}
+    slug: string;
+    productId: string;
+  };
+};
 
 export default function Product(props: ProductProps) {
-  const [qty, setQty] = useState(0)
-  const { addItem } = useBagContext()
-  const router = useRouter()
+  const [qty, setQty] = useState(0);
+  const { addItem } = useBagContext();
+  const router = useRouter();
 
   const inputQtyCallback = (value: number) => {
-    setQty(value)
-  }
+    setQty(value);
+  };
 
   const { data: product } = useFoodFetch<FoodApiProduct>(
     EndpointFoodApiEnum.PRODUCT,
@@ -37,9 +37,9 @@ export default function Product(props: ProductProps) {
       productId: props.params.productId,
     },
     false,
-  )
+  );
 
-  const subTotal = product?.price ? qty * Number(product.price) : 0
+  const subTotal = product?.price ? qty * Number(product.price) : 0;
 
   const buttonOnClick = () => {
     const item = {
@@ -48,12 +48,12 @@ export default function Product(props: ProductProps) {
       unityPrice: Number(product?.price),
       photo: product?.upload?.url,
       title: product?.name as string,
-    }
+    };
 
-    addItem(item)
+    addItem(item);
 
-    router.push(`/${props.params.slug}/sacola`)
-  }
+    router.push(`/${props.params.slug}/sacola`);
+  };
 
   return (
     <Container>
@@ -91,5 +91,5 @@ export default function Product(props: ProductProps) {
         </>
       )}
     </Container>
-  )
+  );
 }

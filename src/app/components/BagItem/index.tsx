@@ -1,44 +1,44 @@
-import { Item, useBagContext } from '@/context/bag'
-import { useEffect, useRef, useState } from 'react'
-import { Actions, Body, Container, InputWrapper, PhotoFood } from './styles'
-import Price from '../Price'
-import { poppins } from '@/app/fonts'
-import { IoTrashBinSharp, IoChevronDownOutline } from 'react-icons/io5'
+import { Item, useBagContext } from "@/context/bag";
+import { useEffect, useRef, useState } from "react";
+import { Actions, Body, Container, InputWrapper, PhotoFood } from "./styles";
+import Price from "../Price";
+import { poppins } from "@/app/fonts";
+import { IoTrashBinSharp, IoChevronDownOutline } from "react-icons/io5";
 
 type BagItem = {
-  item: Item
-}
+  item: Item;
+};
 
 export default function BagItem({ item }: BagItem) {
-  const { editItem, removeItem } = useBagContext()
+  const { editItem, removeItem } = useBagContext();
 
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const inputOnClick = () => {
-    inputRef?.current?.focus()
-  }
+    inputRef?.current?.focus();
+  };
 
-  const [inputValue, setInputValue] = useState(item.qty)
+  const [inputValue, setInputValue] = useState(item.qty);
 
   const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(Number(e.currentTarget.value))
-  }
+    setInputValue(Number(e.currentTarget.value));
+  };
 
   const inputOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    e.currentTarget.select()
-  }
+    e.currentTarget.select();
+  };
 
   const trashOnClick = () => {
-    removeItem(item.id as string)
-  }
+    removeItem(item.id as string);
+  };
 
   useEffect(() => {
     editItem({
       ...item,
       qty: inputValue,
-    })
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValue, editItem])
+  }, [inputValue, editItem]);
 
   return (
     <Container>
@@ -47,7 +47,7 @@ export default function BagItem({ item }: BagItem) {
           src={item.photo as string}
           height={120}
           width={100}
-          alt={item.title + '_photo'}
+          alt={item.title + "_photo"}
         />
 
         <Body>
@@ -74,5 +74,5 @@ export default function BagItem({ item }: BagItem) {
         </InputWrapper>
       </Actions>
     </Container>
-  )
+  );
 }

@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { useContext } from 'react'
-import { Container } from './styles'
+import { useContext } from "react";
+import { Container } from "./styles";
 
 type SearchProductProps = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 export default function SearchProduct({ params }: SearchProductProps) {
-  return <Container>buscar {params.slug}</Container>
+  return <Container>buscar {params.slug}</Container>;
 }

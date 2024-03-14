@@ -1,145 +1,145 @@
-'use client'
+"use client";
 
-import { Container } from './styles'
-import Input from '../../../../components/Input'
-import Button from '../../../../components/Button'
-import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser'
-import { SyntheticEvent, useEffect, useState } from 'react'
-import { bebasNeue } from '@/app/fonts'
-import { useRouter } from 'next/navigation'
-import Title from '@/app/components/Title'
-import useFoodFetch from '@/app/hooks/useFoodFetch'
-import { EndpointFoodApiEnum } from '@/app/enums'
-import { FoodApiAddressGettingByPostalCode } from '../../../../../../types/foodApi'
+import { Container } from "./styles";
+import Input from "../../../../components/Input";
+import Button from "../../../../components/Button";
+import { getPublicUser, setPublicUser } from "@/utils/cookiePublicUser";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { bebasNeue } from "@/app/fonts";
+import { useRouter } from "next/navigation";
+import Title from "@/app/components/Title";
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { EndpointFoodApiEnum } from "@/app/enums";
+import { FoodApiAddressGettingByPostalCode } from "../../../../../../types/foodApi";
 
 type PersonalDataProps = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 type DataDelivery = FoodApiAddressGettingByPostalCode & {
-  name: string
-  whatsapp: string
-  streetNumber: string
-  addressDetails?: string
-}
+  name: string;
+  whatsapp: string;
+  streetNumber: string;
+  addressDetails?: string;
+};
 
 export default function PersonalData({ params }: PersonalDataProps) {
-  const user = getPublicUser()
-  let dataDeliveryInitial: DataDelivery = {} as DataDelivery
+  const user = getPublicUser();
+  let dataDeliveryInitial: DataDelivery = {} as DataDelivery;
 
   if (user) {
     dataDeliveryInitial = {
       ...user.address,
-      name: user.name ?? '',
-      whatsapp: user.whatsapp ?? '',
-    } as DataDelivery
+      name: user.name ?? "",
+      whatsapp: user.whatsapp ?? "",
+    } as DataDelivery;
   }
 
-  const router = useRouter()
+  const router = useRouter();
   const { data: address, request } =
-    useFoodFetch<FoodApiAddressGettingByPostalCode>()
-  const [dataDelivery, setDataDelivery] = useState(dataDeliveryInitial)
+    useFoodFetch<FoodApiAddressGettingByPostalCode>();
+  const [dataDelivery, setDataDelivery] = useState(dataDeliveryInitial);
 
   const inputOnChange = (inputId: string, currentValue: string) => {
-    if (inputId === 'cep' && currentValue.length === 9) {
+    if (inputId === "cep" && currentValue.length === 9) {
       request({
         endPoint: `${EndpointFoodApiEnum.ADDRESS}/${currentValue}`,
-        method: 'GET',
-      })
+        method: "GET",
+      });
     }
 
     setDataDelivery((dataDelivery) => ({
       ...dataDelivery,
       [inputId]: currentValue,
-    }))
-  }
+    }));
+  };
 
   useEffect(() => {
     if (!address) {
-      return
+      return;
     }
 
     setDataDelivery((dataDelivery) => ({
       ...dataDelivery,
       ...address,
-    }))
-  }, [address])
+    }));
+  }, [address]);
 
   const inputs = [
     {
-      placeHolder: 'Digite o seu nome',
-      id: 'name',
-      label: 'nome',
-      type: 'text',
+      placeHolder: "Digite o seu nome",
+      id: "name",
+      label: "nome",
+      type: "text",
       value: dataDelivery.name,
       required: true,
     },
     {
-      placeHolder: 'Digite o número do seu WhatsApp',
-      id: 'whatsapp',
-      label: 'whatsapp',
-      type: 'cellphone',
+      placeHolder: "Digite o número do seu WhatsApp",
+      id: "whatsapp",
+      label: "whatsapp",
+      type: "cellphone",
       value: dataDelivery.whatsapp,
       required: true,
     },
     {
-      placeHolder: 'Digite o CEP do endereço de entrega',
-      id: 'cep',
-      label: 'CEP',
-      type: 'cep',
+      placeHolder: "Digite o CEP do endereço de entrega",
+      id: "cep",
+      label: "CEP",
+      type: "cep",
       value: dataDelivery.cep,
       required: true,
     },
     {
-      placeHolder: 'Digite o endereço',
-      id: 'street',
-      label: 'Endereço',
-      type: 'text',
+      placeHolder: "Digite o endereço",
+      id: "street",
+      label: "Endereço",
+      type: "text",
       value: dataDelivery.street,
       required: true,
     },
     {
-      placeHolder: 'Digite o número do endereço',
-      label: 'Número',
-      id: 'streetNumber',
-      type: 'text',
+      placeHolder: "Digite o número do endereço",
+      label: "Número",
+      id: "streetNumber",
+      type: "text",
       value: dataDelivery.streetNumber,
       required: true,
     },
     {
-      placeHolder: 'Digite o bairro',
-      label: 'Bairro',
-      id: 'neighborhood',
-      type: 'text',
+      placeHolder: "Digite o bairro",
+      label: "Bairro",
+      id: "neighborhood",
+      type: "text",
       value: dataDelivery.neighborhood,
       required: true,
     },
 
     {
-      placeHolder: 'Ex: Apartamento 302',
-      label: 'Complemento',
-      id: 'addressDetails',
-      type: 'text',
+      placeHolder: "Ex: Apartamento 302",
+      label: "Complemento",
+      id: "addressDetails",
+      type: "text",
       value: dataDelivery.addressDetails,
       required: false,
     },
     {
-      placeHolder: 'Cidade',
-      id: 'city',
-      label: 'Digite a cidade',
+      placeHolder: "Cidade",
+      id: "city",
+      label: "Digite a cidade",
       value: dataDelivery.city,
       required: true,
-      type: 'text',
+      type: "text",
     },
-  ]
+  ];
 
   async function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (!Object.keys(dataDelivery).length) {
-      return
+      return;
     }
 
     const {
@@ -152,7 +152,7 @@ export default function PersonalData({ params }: PersonalDataProps) {
       streetNumber,
       whatsapp,
       addressDetails,
-    } = dataDelivery
+    } = dataDelivery;
 
     setPublicUser({
       whatsapp,
@@ -166,9 +166,9 @@ export default function PersonalData({ params }: PersonalDataProps) {
         city,
         state,
       },
-    })
+    });
 
-    router.push(`/${params?.slug}/checkout/entrega`)
+    router.push(`/${params?.slug}/checkout/entrega`);
   }
 
   return (
@@ -194,5 +194,5 @@ export default function PersonalData({ params }: PersonalDataProps) {
         />
       </form>
     </Container>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
-import { styled } from '@linaria/react'
-import { theme } from '@/app/styles/theme'
-import { AiOutlineLeft } from 'react-icons/ai'
-import { poppins } from '@/app/fonts'
-import { useRouter } from 'next/navigation'
+import { ReactNode } from "react";
+import { styled } from "@linaria/react";
+import { theme } from "@/app/styles/theme";
+import { AiOutlineLeft } from "react-icons/ai";
+import { poppins } from "@/app/fonts";
+import { useRouter } from "next/navigation";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   padding: 0;
   align-items: center;
   background-color: ${theme.COLORS.LIGHT};
-`
+`;
 
 const Container = styled.div`
   overflow: auto;
@@ -25,7 +25,7 @@ const Container = styled.div`
   max-width: 1200px;
   min-height: calc(100vh - 6rem);
   padding: 1rem 1rem;
-`
+`;
 
 const HeaderNavigation = styled.div`
   display: flex;
@@ -43,17 +43,17 @@ const HeaderNavigation = styled.div`
     font-size: 0.875rem;
     color: ${theme.COLORS.DARK};
   }
-`
+`;
 
 interface CheckoutLayoutProps {
-  children: ReactNode
+  children: ReactNode;
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
 
 function CheckoutLayout(props: CheckoutLayoutProps) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <>
@@ -66,7 +66,7 @@ function CheckoutLayout(props: CheckoutLayoutProps) {
         <Container>{props.children}</Container>
       </Wrapper>
     </>
-  )
+  );
 }
 
-export default CheckoutLayout
+export default CheckoutLayout;

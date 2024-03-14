@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme'
-import { styled } from '@linaria/react'
-import { lighten } from 'polished'
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import { lighten } from "polished";
 
 export const Container = styled.div`
   position: fixed;
@@ -12,4 +12,4 @@ export const Container = styled.div`
     font-size: 0.6rem;
     font-weight: lighter;
   }
-`
+`;
