@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { ReactNode } from 'react';
-import { styled } from '@linaria/react';
-import { theme } from '@/app/styles/theme';
-import { AiOutlineLeft } from 'react-icons/ai';
-import { poppins } from '@/app/fonts';
-import { useRouter } from 'next/navigation';
+import { ReactNode } from "react";
+import { styled } from "@linaria/react";
+import { theme } from "@/app/styles/theme";
+import { AiOutlineLeft } from "react-icons/ai";
+import { poppins } from "@/app/fonts";
+import { useRouter } from "next/navigation";
 
 const Wrapper = styled.div`
   display: flex;

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { ReactNode } from 'react';
-import { bebas_neue } from './fonts';
-import NextAuthSessionProvider from './providers/SessionProvider';
-import { ToastContainer } from 'react-toastify';
-import '../assets/ReactToastify.css';
-import { css } from '@linaria/core';
-import { LoadingContextProvider } from '@/context/loading';
-import FullScreenLoading from './components/FullScreenLoading';
+import { ReactNode } from "react";
+import { bebasNeue } from "./fonts";
+import NextAuthSessionProvider from "./providers/SessionProvider";
+import { ToastContainer } from "react-toastify";
+import "../assets/ReactToastify.css";
+import { css } from "@linaria/core";
+import { LoadingContextProvider } from "@/context/loading";
+import FullScreenLoading from "./components/FullScreenLoading";
 
 const globalStyle = css`
   :root {
@@ -169,7 +169,7 @@ function RootLayout({ children }: { children: ReactNode }) {
         <LoadingContextProvider>
           <FullScreenLoading>
             <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
-            <ToastContainer className={bebas_neue.className} />
+            <ToastContainer className={bebasNeue.className} />
           </FullScreenLoading>
         </LoadingContextProvider>
       </body>

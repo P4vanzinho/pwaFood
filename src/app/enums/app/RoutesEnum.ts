@@ -1,4 +1,4 @@
-const defaultRoute = '/painel-administrativo';
+const defaultRoute = "/painel-administrativo";
 
 export enum RoutesEnum {
   LOGIN = `${defaultRoute}/autenticacao/login`,

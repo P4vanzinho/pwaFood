@@ -1,44 +1,44 @@
-import { bebas_neue } from '@/app/fonts';
-import { Container } from './styles';
+import { bebasNeue } from "@/app/fonts";
+import { Container } from "./styles";
 import {
   MdAlternateEmail,
   MdPhoneAndroid,
   MdOutlinePhoneEnabled,
-} from 'react-icons/md';
+} from "react-icons/md";
 
-import { PiTextTBold } from 'react-icons/pi';
-import { HiIdentification } from 'react-icons/hi';
-import { PiCurrencyDollarSimpleFill } from 'react-icons/pi';
-import { Bs123 } from 'react-icons/bs';
+import { PiTextTBold, PiCurrencyDollarSimpleFill } from "react-icons/pi";
+import { HiIdentification } from "react-icons/hi";
+
+import { Bs123 } from "react-icons/bs";
 
 type HTMLInputTypeAttribute =
-  | 'button'
-  | 'checkbox'
-  | 'color'
-  | 'date'
-  | 'datetime-local'
-  | 'email'
-  | 'file'
-  | 'hidden'
-  | 'image'
-  | 'month'
-  | 'number'
-  | 'password'
-  | 'radio'
-  | 'range'
-  | 'reset'
-  | 'search'
-  | 'submit'
-  | 'tel'
-  | 'text'
-  | 'time'
-  | 'url'
-  | 'week'
-  | 'cep'
-  | 'currency'
-  | 'cpf'
-  | 'cnpj'
-  | 'cellphone'
+  | "button"
+  | "checkbox"
+  | "color"
+  | "date"
+  | "datetime-local"
+  | "email"
+  | "file"
+  | "hidden"
+  | "image"
+  | "month"
+  | "number"
+  | "password"
+  | "radio"
+  | "range"
+  | "reset"
+  | "search"
+  | "submit"
+  | "tel"
+  | "text"
+  | "time"
+  | "url"
+  | "week"
+  | "cep"
+  | "currency"
+  | "cpf"
+  | "cnpj"
+  | "cellphone"
   | string;
 
 type InputProps = {
@@ -71,45 +71,45 @@ export default function Input({ label, value, ...rest }: InputProps) {
   const maskByType: MaskByType = {
     cep: (value: string) => {
       return value
-        .replace(/\D/g, '')
-        .replace(/(\d{5})(\d)/, '$1-$2')
-        .replace(/(-\d{3})\d+?$/, '$1');
+        .replace(/\D/g, "")
+        .replace(/(\d{5})(\d)/, "$1-$2")
+        .replace(/(-\d{3})\d+?$/, "$1");
     },
     currency: (value: string) => {
       return value
-        .replace(/\D/g, '')
-        .replace(/(\d+)(\d{2})$/, '$1,$2')
-        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        .replace(/\D/g, "")
+        .replace(/(\d+)(\d{2})$/, "$1,$2")
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
     },
     cpf: (value: string) => {
       return value
-        .replace(/\D/g, '')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1-$2')
-        .replace(/(-\d{2})\d+?$/, '$1');
+        .replace(/\D/g, "")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1-$2")
+        .replace(/(-\d{2})\d+?$/, "$1");
     },
     cnpj: (value: string) => {
       return value
-        .replace(/\D/g, '')
-        .replace(/(\d{2})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1/$2')
-        .replace(/(\d{4})(\d)/, '$1-$2');
+        .replace(/\D/g, "")
+        .replace(/(\d{2})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1/$2")
+        .replace(/(\d{4})(\d)/, "$1-$2");
     },
     cellphone: (value: string) => {
       return value
-        .replace(/\D/g, '')
-        .replace(/(\d{2})(\d)/, '($1) $2')
-        .replace(/(\d{5})(\d)/, '$1-$2')
-        .replace(/(-\d{4})\d+?$/, '$1');
+        .replace(/\D/g, "")
+        .replace(/(\d{2})(\d)/, "($1) $2")
+        .replace(/(\d{5})(\d)/, "$1-$2")
+        .replace(/(-\d{4})\d+?$/, "$1");
     },
     date: (value: string) => {
       return value
-        .replace(/\D/g, '')
-        .replace(/(\d{2})(\d)/, '$1/$2')
-        .replace(/(\d{2})(\d)/, '$1/$2')
-        .replace(/(\d{4})(\d)/, '$1');
+        .replace(/\D/g, "")
+        .replace(/(\d{2})(\d)/, "$1/$2")
+        .replace(/(\d{2})(\d)/, "$1/$2")
+        .replace(/(\d{4})(\d)/, "$1");
     },
   };
 
@@ -122,7 +122,7 @@ export default function Input({ label, value, ...rest }: InputProps) {
     }
 
     if (!value) {
-      return '';
+      return "";
     }
 
     const fn = maskByType[type];
@@ -133,8 +133,8 @@ export default function Input({ label, value, ...rest }: InputProps) {
 
   return (
     <Container type={rest.type}>
-      <label className={bebas_neue.className}>
-        {label} {rest.required && '*'}
+      <label className={bebasNeue.className}>
+        {label} {rest.required && "*"}
       </label>
 
       <div>

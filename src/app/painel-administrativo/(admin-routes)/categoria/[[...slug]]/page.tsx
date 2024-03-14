@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Container,
@@ -9,15 +9,15 @@ import {
   Input,
   Switch,
   ButtonsContainer,
-} from './styles';
-import { poppins, bebas_neue } from '@/app/fonts';
-import { SyntheticEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { useSession } from 'next-auth/react';
-import { EndpointFoodApiEnum, RoutesEnum } from '@/app/enums';
-import Title from '@/app/components/Title';
-import Button from '@/app/components/Button';
+} from "./styles";
+import { poppins, bebasNeue } from "@/app/fonts";
+import { SyntheticEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { useSession } from "next-auth/react";
+import { EndpointFoodApiEnum, RoutesEnum } from "@/app/enums";
+import Title from "@/app/components/Title";
+import Button from "@/app/components/Button";
 
 type CategoryProps = {
   params: {
@@ -26,10 +26,10 @@ type CategoryProps = {
 };
 
 export default function Category({ params }: CategoryProps) {
-  const mode = params?.slug ? 'edit' : 'register';
+  const mode = params?.slug ? "edit" : "register";
 
   const [checked, setChecked] = useState<boolean>(false);
-  const [categoryName, setCategoryName] = useState<string>('');
+  const [categoryName, setCategoryName] = useState<string>("");
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -38,13 +38,13 @@ export default function Category({ params }: CategoryProps) {
   const { request: requestRegisterCategory, error, message } = useFoodFetch();
 
   function handleCategoryOnClick() {
-    if (mode === 'edit') {
+    if (mode === "edit") {
       // chamar rota de edicao
     } else {
       // chamar rota de cadastro
 
       requestRegisterCategory({
-        method: 'POST',
+        method: "POST",
         body: {
           businessId: businessID,
           name: categoryName,
@@ -60,23 +60,23 @@ export default function Category({ params }: CategoryProps) {
   }
 
   const title =
-    mode === 'register'
-      ? 'CADASTRO DE CATEGORIA DE PRODUTO'
-      : 'EDIÇÃO DA CATEGORIA DE PRODUTO';
+    mode === "register"
+      ? "CADASTRO DE CATEGORIA DE PRODUTO"
+      : "EDIÇÃO DA CATEGORIA DE PRODUTO";
 
   return (
     <Container onSubmit={handleSubmit}>
       <Main>
         <Title>{title}</Title>
 
-        <label htmlFor="title" className={bebas_neue.className}>
+        <label htmlFor="title" className={bebasNeue.className}>
           Título
           <input
             id="title"
             className={poppins.className}
             type="text"
             placeholder="Dê um título à categoria"
-            onChange={e => setCategoryName(e.target.value)}
+            onChange={(e) => setCategoryName(e.target.value)}
             value={categoryName}
           />
         </label>

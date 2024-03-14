@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, {
   ReactNode,
@@ -7,9 +7,9 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from 'react';
+} from "react";
 
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 export type Item = {
   id?: string;
@@ -56,12 +56,12 @@ const BagContextProvider = ({ children }: BagContextProviderProps) => {
       id: uuid(),
     };
 
-    setItens(current => [...current, itemWithId]);
+    setItens((current) => [...current, itemWithId]);
   };
 
   const editItem = useCallback((item: Item) => {
-    setItens(currentItems => {
-      return currentItems.map(currentItem => {
+    setItens((currentItems) => {
+      return currentItems.map((currentItem) => {
         if (currentItem.id === item.id) {
           const itemEdited = {
             ...currentItem,
@@ -77,8 +77,10 @@ const BagContextProvider = ({ children }: BagContextProviderProps) => {
   }, []);
 
   const removeItem = useCallback((id: string) => {
-    setItens(currentItems => {
-      const newItems = currentItems.filter(item => (item.id as string) !== id);
+    setItens((currentItems) => {
+      const newItems = currentItems.filter(
+        (item) => (item.id as string) !== id,
+      );
 
       return newItems;
     });
@@ -87,7 +89,7 @@ const BagContextProvider = ({ children }: BagContextProviderProps) => {
   useEffect(() => {
     let total = 0;
 
-    itens.forEach(item => {
+    itens.forEach((item) => {
       total = total + item.unityPrice * item.qty;
     });
 

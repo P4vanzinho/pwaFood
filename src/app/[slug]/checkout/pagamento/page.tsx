@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { getPublicUser } from '@/utils/cookiePublicUser';
-import { Container, PaymentData, Total, ChangeLink } from './styles';
-import Title from '@/app/components/Title';
-import Button from '@/app/components/Button';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { inter, poppins } from '@/app/fonts';
-import { useBagContext } from '@/context/bag';
-import { centsToUnities } from '@/utils/money';
-import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { FoodApiDeliveryFee, FoodApiOrder } from '../../../../../types/foodApi';
-import { useOrderContext } from '@/context/order';
-import { isMobile } from 'react-device-detect';
+import { getPublicUser } from "@/utils/cookiePublicUser";
+import { Container, PaymentData, Total, ChangeLink } from "./styles";
+import Title from "@/app/components/Title";
+import Button from "@/app/components/Button";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { inter, poppins } from "@/app/fonts";
+import { useBagContext } from "@/context/bag";
+import { centsToUnities } from "@/utils/money";
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { FoodApiDeliveryFee, FoodApiOrder } from "../../../../../types/foodApi";
+import { useOrderContext } from "@/context/order";
+import { isMobile } from "react-device-detect";
 
 type CheckoutProps = {
   params: {
@@ -53,7 +53,7 @@ export default function Checkout({ params }: CheckoutProps) {
   useEffect(() => {
     if (!order) return;
 
-    setCurrentOrder(currentOrder => ({
+    setCurrentOrder((currentOrder) => ({
       ...currentOrder,
       business: {
         name: order?.business?.name,
@@ -72,25 +72,25 @@ export default function Checkout({ params }: CheckoutProps) {
     orderRequest({
       endPoint: `${businessId}/order`,
       body,
-      method: 'POST',
+      method: "POST",
     });
   };
 
   const paymentMethodsText: Record<string, string> = {
-    credit: 'Cartão de crédito',
-    debit: 'Cartão de débito',
-    pix: 'PIX',
+    credit: "Cartão de crédito",
+    debit: "Cartão de débito",
+    pix: "PIX",
   };
 
   const cardBrandText: Record<string, string> = {
-    master: 'Mastercard',
-    visa: 'VISA',
-    elo: 'Elo',
+    master: "Mastercard",
+    visa: "VISA",
+    elo: "Elo",
   };
 
   const showCardBrand =
-    user?.preferences?.payment?.method === 'credit' ||
-    user?.preferences?.payment?.method === 'debit';
+    user?.preferences?.payment?.method === "credit" ||
+    user?.preferences?.payment?.method === "debit";
 
   const showSendOrderButton = !!currentOrder?.total;
 

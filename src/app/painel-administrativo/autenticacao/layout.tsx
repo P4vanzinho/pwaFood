@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import AuthHeader from '@/app/components/AuthHeader';
-import { lighten } from 'polished';
-import { ReactNode } from 'react';
-import { styled } from '@linaria/react';
-import { theme } from '@/app/styles/theme';
+import AuthHeader from "@/app/components/AuthHeader";
+import { lighten } from "polished";
+import { ReactNode } from "react";
+import { styled } from "@linaria/react";
+import { theme } from "@/app/styles/theme";
 
 const Container = styled.div`
   height: calc(100vh - 100px);

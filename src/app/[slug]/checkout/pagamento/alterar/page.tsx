@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser';
-import { Container, RadioGroup } from './styles';
-import Title from '@/app/components/Title';
-import Button from '@/app/components/Button';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { poppins } from '@/app/fonts';
+import { getPublicUser, setPublicUser } from "@/utils/cookiePublicUser";
+import { Container, RadioGroup } from "./styles";
+import Title from "@/app/components/Title";
+import Button from "@/app/components/Button";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { poppins } from "@/app/fonts";
 
-import RadioButton from '@/app/components/RadioButton';
+import RadioButton from "@/app/components/RadioButton";
 
 type CheckoutProps = {
   params: {
@@ -50,14 +50,14 @@ export default function Checkout({ params }: CheckoutProps) {
   };
 
   const needsCardBranch =
-    paymentMethodSelected === 'credit' || paymentMethodSelected === 'debit';
+    paymentMethodSelected === "credit" || paymentMethodSelected === "debit";
 
   const enabledButton = needsCardBranch
     ? !!(paymentMethodSelected && paymentCardBrandSelected)
     : !!paymentMethodSelected;
 
   useEffect(() => {
-    if (paymentMethodSelected === 'pix') {
+    if (paymentMethodSelected === "pix") {
       setPaymentCardBrandSelected(undefined);
     }
   }, [paymentMethodSelected]);
@@ -78,19 +78,19 @@ export default function Checkout({ params }: CheckoutProps) {
             <RadioButton
               id="credit"
               label="Cartão de crédito"
-              checked={paymentMethodSelected === 'credit'}
+              checked={paymentMethodSelected === "credit"}
               onCallback={paymentMethodRadioCallback}
             />
             <RadioButton
               id="debit"
               label="Cartão de débito"
-              checked={paymentMethodSelected === 'debit'}
+              checked={paymentMethodSelected === "debit"}
               onCallback={paymentMethodRadioCallback}
             />
             <RadioButton
               id="pix"
               label="Pix"
-              checked={paymentMethodSelected === 'pix'}
+              checked={paymentMethodSelected === "pix"}
               onCallback={paymentMethodRadioCallback}
             />
           </section>
@@ -108,19 +108,19 @@ export default function Checkout({ params }: CheckoutProps) {
               <RadioButton
                 id="master"
                 label="Mastercard"
-                checked={paymentCardBrandSelected === 'master'}
+                checked={paymentCardBrandSelected === "master"}
                 onCallback={cardBrandRadioCallback}
               />
               <RadioButton
                 id="visa"
                 label="VISA"
-                checked={paymentCardBrandSelected === 'visa'}
+                checked={paymentCardBrandSelected === "visa"}
                 onCallback={cardBrandRadioCallback}
               />
               <RadioButton
                 id="elo"
                 label="Elo"
-                checked={paymentCardBrandSelected === 'elo'}
+                checked={paymentCardBrandSelected === "elo"}
                 onCallback={cardBrandRadioCallback}
               />
             </section>

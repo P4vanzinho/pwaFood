@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
-import { poppins } from '@/app/fonts';
-import { Container } from './styles';
-import classnames from 'classnames';
+import { ReactNode } from "react";
+import { poppins } from "@/app/fonts";
+import { Container } from "./styles";
+import classnames from "classnames";
 
 type ButtonRegistrationType = {
   text: string;
@@ -17,7 +17,7 @@ export default function Button({
   enabledSelect = false,
   ...rest
 }: ButtonRegistrationType) {
-  const pLoading = typeof loading !== 'boolean' ? false : loading;
+  const pLoading = typeof loading !== "boolean" ? false : loading;
 
   return (
     <Container

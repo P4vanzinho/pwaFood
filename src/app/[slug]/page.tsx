@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import CategoryList from '../components/CategoryList';
-import Text from '../components/Text';
-import useFoodFetch from '../hooks/useFoodFetch';
-import { FoodApiBusiness } from '../../../types/foodApi';
-import { EndpointFoodApiEnum } from '../enums';
-import Image from 'next/image';
-import { poppins } from '../fonts';
-import { theme } from '../styles/theme';
-import { styled } from '@linaria/react';
-import { getPublicUser } from '@/utils/cookiePublicUser';
+import CategoryList from "../components/CategoryList";
+import Text from "../components/Text";
+import useFoodFetch from "../hooks/useFoodFetch";
+import { FoodApiBusiness } from "../../../types/foodApi";
+import { EndpointFoodApiEnum } from "../enums";
+import Image from "next/image";
+import { poppins } from "../fonts";
+import { theme } from "../styles/theme";
+import { styled } from "@linaria/react";
+import { getPublicUser } from "@/utils/cookiePublicUser";
 
 const Container = styled.div`
   display: flex;
@@ -91,7 +91,7 @@ export default function Home(props: HomeProps) {
         )}
 
         <p className={poppins.className}>
-          {data?.status === 'close' ? '( FECHADO )' : ''}
+          {data?.status === "close" ? "( FECHADO )" : ""}
         </p>
       </header>
 

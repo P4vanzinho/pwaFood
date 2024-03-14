@@ -1,40 +1,45 @@
-import { theme } from '@/app/styles/theme';
-import styled, { keyframes } from 'styled-components';
-
-const spinAnimation = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
 
 export const Container = styled.div`
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
   height: 100%;
-  position: relative;
 
   *:focus {
     outline-color: ${() => theme.COLORS.PRIMARY};
   }
 `;
 
-export const Main = styled.main`
-  width: 61.4rem;
-  margin: 7.2rem auto 14.4rem;
+export const FieldsetContainer = styled.fieldset`
+  border: none;
+  width: auto;
+  display: flex;
+  flex-direction: column;
 
-  h1 {
-    font-size: 3.6rem;
+  label {
+    font-size: 12px;
     font-weight: 400;
     line-height: normal;
-    border-bottom: 1px solid ${() => theme.COLORS.DARK};
-    margin-bottom: 1.4rem;
+    color: ${() => theme.COLORS.DARK};
+    gap: 0.625rem;
+
+    input {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
   }
+`;
+
+export const FormContainer = styled.div`
+  width: 38.375rem;
+  margin: 0 auto;
+  height: 100%;
 
   fieldset {
     border: none;
@@ -47,39 +52,30 @@ export const Main = styled.main`
       font-weight: 400;
       line-height: normal;
       color: ${() => theme.COLORS.DARK};
-    }
-    label:nth-of-type(2) {
-      margin-bottom: 3.9rem;
-    }
+      gap: 0.625rem;
 
-    input:invalid {
-      outline: 2px solid ${() => theme.COLORS.ERROR};
-    }
-
-    input:valid {
-      outline: 2px solid ${() => theme.COLORS.PRIMARY};
+      input {
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
     }
   }
 `;
 
-export const TitleLabel = styled.label`
+export const FoodTitleLabel = styled.label`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 2.1rem;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: normal;
-  color: ${() => theme.COLORS.DARK};
+  margin: 0.875rem 0;
 
   > input {
     border: none;
-    border-radius: 1.5rem;
+    border-radius: 0.938rem;
     background-color: ${() => theme.COLORS.LIGHT};
-    height: 4rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
-    padding: 0 1.4rem;
+    padding: 0 0.875rem;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -89,9 +85,9 @@ export const TitleLabel = styled.label`
 
   > div {
     width: 100%;
-    border-radius: 1.5rem;
+    border-radius: 0.938rem;
     background-color: ${() => theme.COLORS.LIGHT};
-    height: 4rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     display: flex;
@@ -101,29 +97,30 @@ export const TitleLabel = styled.label`
 `;
 
 export const ImageProductContainer = styled.div`
-  border: 1px solid ${() => theme.COLORS.GRAY};
   border-radius: 15px;
   display: flex;
+  margin-top: 0.938rem;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 4rem 0;
-  gap: 1rem;
+  padding: 2.5rem 0;
+  gap: 0.625rem;
   outline: none;
+  margin-bottom: 2.438rem;
   &:focus {
     margin: none;
     outline: none;
   }
+`;
+export const ImageWithoutUpload = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
 
-  section {
-    height: 100px;
-    background-color: red;
-  }
-
-  button {
-    height: 100px;
-    width: 100px;
-  }
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.625rem;
 
   > p:nth-of-type(1) {
     font-size: 18px;
@@ -132,12 +129,16 @@ export const ImageProductContainer = styled.div`
     color: ${() => theme.COLORS.DARK};
   }
 
+  image {
+    object-fit: cover;
+  }
+
   > div {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.5rem;
     padding: 0;
     background-color: transparent;
-    height: 3.4rem;
+    height: 2.125rem;
     align-items: center;
     justify-content: center;
 
@@ -150,14 +151,14 @@ export const ImageProductContainer = styled.div`
 
     div {
       height: 1px;
-      width: 12.2rem;
+      width: 7.625rem;
       background-color: ${() => theme.COLORS.GRAY};
     }
   }
 
   > button {
-    width: 22.3rem;
-    height: 4rem;
+    width: 13.938rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -177,37 +178,102 @@ export const ImageProductContainer = styled.div`
       left: 0;
       opacity: 0;
       cursor: pointer;
+      height: 100%;
     }
   }
 `;
 
-export const LoadingIndicator = styled.span`
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid ${() => theme.COLORS.WARNING};
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: ${spinAnimation} 1s linear infinite;
-  margin-right: 8px;
+export const ImageWithUpload = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  > p:nth-of-type(1) {
+    font-size: 14px;
+    font-weight: 400;
+    color: ${() => theme.COLORS.DARK};
+  }
+
+  image {
+    object-fit: cover;
+  }
+`;
+
+export const ImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 127px;
+
+  > canvas {
+    border-radius: 0.625rem;
+  }
+`;
+
+export const ButtonsImageContainer = styled.div`
+  display: flex;
+  gap: 3rem;
+  background-color: transparent;
+  height: 2.438rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+
+  > button {
+    height: 100%;
+    border-radius: 1.25rem;
+    width: 7.125rem;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: ${() => theme.COLORS.WHITE};
+    background-color: ${() => theme.COLORS.GRAY};
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    input {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const SelectCategoryLabel = styled.label`
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.563rem;
   display: flex;
   gap: 1rem;
   flex-direction: column;
 `;
+
 export const SelectContainer = styled.div`
   width: 100%;
-  border-radius: 1.5rem;
+  border: ${() => theme.COLORS.PRIMARY} 2px solid;
+  border-radius: 0.938rem;
   background-color: ${() => theme.COLORS.LIGHT};
-  height: 4rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  svg {
+    color: ${() => theme.COLORS.GRAY};
+  }
 
   select {
     width: 100%;
@@ -219,6 +285,8 @@ export const SelectContainer = styled.div`
     line-height: normal;
     color: ${() => theme.COLORS.DARK};
     background-color: transparent;
+    outline: none;
+    appearance: none;
 
     &::placeholder {
       font-size: 14px;
@@ -233,17 +301,18 @@ export const SelectContainer = styled.div`
 export const DescriptionLabel = styled.label`
   margin-bottom: 2.5rem;
   display: flex;
-  gap: 1rem;
+  gap: 0, 625rem;
   flex-direction: column;
 
   > div {
     width: 100%;
-    min-height: 10rem;
-    padding: 1.9rem 1.75rem 1.1rem;
-    border-radius: 1.5rem;
+    min-height: 6.25rem;
+    padding: 1.188em 1.094rem 0.688rem;
+    border-radius: 0.938rem;
     background-color: ${() => theme.COLORS.LIGHT};
-    height: 4rem;
+    height: 2.5rem;
     position: relative;
+    border: 2px solid ${() => theme.COLORS.PRIMARY};
 
     textarea {
       border: none;
@@ -268,8 +337,8 @@ export const DescriptionLabel = styled.label`
 
     > span {
       position: absolute;
-      right: 2.3rem;
-      bottom: 1.1rem;
+      right: 1.438rem;
+      bottom: 0.688rem;
       color: ${() => theme.COLORS.DARK};
       font-size: 12px;
       font-weight: 500;
@@ -280,18 +349,18 @@ export const DescriptionLabel = styled.label`
 
 export const ToggleSwitchContainer = styled.div`
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 `;
 
 export const ToggleSwitch = styled.div`
   width: 100%;
   display: flex;
-  gap: 5rem;
+  gap: 3.125rem;
   align-items: center;
   justify-content: center;
   border: 1px solid ${() => theme.COLORS.LIGHT};
   border-radius: 15px;
-  height: 6rem;
+  height: 3.75rem;
   position: relative;
 
   > p {
@@ -308,7 +377,6 @@ export const LabelToglleSwitch = styled.label`
   gap: 10px;
   cursor: pointer;
 `;
-
 export const InputCheckBoxInToggle = styled.input`
   opacity: 0;
   position: absolute;
@@ -316,14 +384,14 @@ export const InputCheckBoxInToggle = styled.input`
 
 export const Switch = styled.div`
   position: relative;
-  width: 7.1778rem;
-  height: 3.23rem;
+  width: 4.486rem;
+  height: 2.019rem;
   background: #b3b3b3;
   border-radius: 32px;
   padding: 4px;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     width: 28px;
     height: 28px;
@@ -336,7 +404,7 @@ export const Switch = styled.div`
     filter: drop-shadow(-2px 1px 6px rgba(0, 0, 0, 0.25));
   }
 
-  /* ${InputCheckBoxInToggle} Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo styled-components.*/
+  /* ${InputCheckBoxInToggle} Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo linaria.*/
   /*seleciona apenas os elementos input do tipo checkbox ou radio que estão marcados (ou seja, quando o botão switch é clicado).*/
   ${InputCheckBoxInToggle}:checked + & {
     background-color: ${() => theme.COLORS.PRIMARY_DARK};
@@ -354,13 +422,13 @@ export const PriceLabel = styled.label`
 
   > input {
     border: none;
-    border-radius: 1.5rem;
+    border-radius: 0.938rem;
     background-color: ${() => theme.COLORS.LIGHT};
-    height: 4rem;
+    height: 2.5rem;
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0 1.4rem;
+    padding: 0 0.875rem;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -373,52 +441,23 @@ export const PriceLabel = styled.label`
   }
 
   > span {
-    font-size: 1.4rem;
+    font-size: 0.875rem;
     color: ${() => theme.COLORS.ERROR};
     font-weight: 500;
   }
 `;
 
-export const LoadingUploadWarningMessage = styled.div`
-  color: ${() => theme.COLORS.WARNING};
-  font-size: 1.4rem;
-  margin-left: auto;
-  text-align: end;
-  width: 100%;
-`;
-
-export const ButtonsContainer = styled.div`
-  width: 25.4rem;
+export const FormButtonsContainer = styled.div`
+  width: 15.875rem;
   display: flex;
-  gap: 2.4rem;
+  gap: 1.5rem;
   align-self: flex-end;
   margin-left: auto;
-  margin-top: 4.1rem;
+  margin-top: 2.563rem;
 
-  button {
-    width: 11.5rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: normal;
-  }
-
-  button[disabled] {
-    opacity: 0.6;
-  }
-
-  button:nth-of-type(1) {
-    background-color: ${() => theme.COLORS.GRAY};
-    color: ${() => theme.COLORS.WHITE};
-  }
-
-  button:nth-of-type(2) {
-    background-color: ${() => theme.COLORS.PRIMARY};
-    color: ${() => theme.COLORS.WHITE};
+  > div:nth-of-type(1) {
+    button:nth-child(1) {
+      background-color: ${() => theme.COLORS.GRAY};
+    }
   }
 `;

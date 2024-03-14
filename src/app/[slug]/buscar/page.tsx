@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useContext } from 'react';
-import { Container } from './styles';
+import { useContext } from "react";
+import { Container } from "./styles";
 
 type SearchProductProps = {
   params: {

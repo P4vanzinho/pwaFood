@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { ReactNode } from 'react';
-import MenuBottom from '../components/MenuBottom';
-import { BagContextProvider } from '@/context/bag';
-import { LoadingContextProvider } from '@/context/loading';
-import FullScreenLoading from '../components/FullScreenLoading';
-import { OrderContextProvider } from '@/context/order';
-import { styled } from '@linaria/react';
-import { theme } from '../styles/theme';
-import { useSearchParams } from 'next/navigation';
-import { setPublicUserByToken } from '@/utils/cookiePublicUser';
-import Version from '../components/Version';
+import { ReactNode } from "react";
+import MenuBottom from "../components/MenuBottom";
+import { BagContextProvider } from "@/context/bag";
+import { LoadingContextProvider } from "@/context/loading";
+import FullScreenLoading from "../components/FullScreenLoading";
+import { OrderContextProvider } from "@/context/order";
+import { styled } from "@linaria/react";
+import { theme } from "../styles/theme";
+import { useSearchParams } from "next/navigation";
+import { setPublicUserByToken } from "@/utils/cookiePublicUser";
+import Version from "../components/Version";
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,7 +41,7 @@ interface PublicLayoutProps {
 function PublicLayout(props: PublicLayoutProps) {
   const searchParams = useSearchParams();
 
-  const token = searchParams.get('u');
+  const token = searchParams.get("u");
 
   if (token) {
     setPublicUserByToken(token);

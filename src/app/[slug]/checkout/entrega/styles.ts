@@ -1,7 +1,7 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import Link from 'next/link';
-import { lighten } from 'polished';
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import Link from "next/link";
+import { lighten } from "polished";
 
 export const ChangeLink = styled(Link)`
   color: ${theme.COLORS.WARNING};

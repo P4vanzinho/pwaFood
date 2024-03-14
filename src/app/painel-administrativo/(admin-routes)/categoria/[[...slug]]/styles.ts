@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import { darken, grayscale } from 'polished';
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import { darken, grayscale } from "polished";
 
 export const Container = styled.form`
   *:focus {
@@ -109,7 +109,7 @@ export const Switch = styled.div`
   }
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     width: 28px;
     height: 28px;

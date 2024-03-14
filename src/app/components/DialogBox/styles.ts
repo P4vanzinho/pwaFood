@@ -1,7 +1,7 @@
-import { lighten } from 'polished';
-import { styled } from '@linaria/react';
-import css from 'styled-jsx/css';
-import { theme } from '@/app/styles/theme';
+import { lighten } from "polished";
+import { styled } from "@linaria/react";
+import css from "styled-jsx/css";
+import { theme } from "@/app/styles/theme";
 
 export const Container = styled.div`
   height: 140px;
@@ -72,7 +72,7 @@ export const Content = styled.div`
 `;
 
 type ButtonProps = {
-  mode: 'danger' | 'border';
+  mode: "danger" | "border";
 };
 
 export const Button = styled.div<ButtonProps>`

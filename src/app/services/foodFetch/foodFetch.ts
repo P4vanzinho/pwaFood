@@ -1,11 +1,11 @@
-import { EndpointFoodApiEnum } from '@/app/enums';
-import { foodApiConfig } from '@/config';
-import { toast } from 'react-toastify';
+import { EndpointFoodApiEnum } from "@/app/enums";
+import { foodApiConfig } from "@/config";
+import { toast } from "react-toastify";
 
 export type FoodFetchProps = {
   body?: unknown;
   headers?: Record<string, string>;
-  method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'UPDATE';
+  method?: "GET" | "POST" | "PATCH" | "DELETE" | "UPDATE";
   endPoint: EndpointFoodApiEnum | string;
   token?: string;
   params?: Record<string, any>;
@@ -31,10 +31,10 @@ export async function foodFetch<T = any>({
     fetchParams = `?${new URLSearchParams(params).toString()}`;
   }
 
-  const isFormData = headers['Content-type'] === 'multipart/form-data';
+  const isFormData = headers["Content-type"] === "multipart/form-data";
 
   let headersToFetch: any = {
-    'Content-type': 'application/json',
+    "Content-type": "application/json",
 
     ...headers,
   };
@@ -47,22 +47,22 @@ export async function foodFetch<T = any>({
   }
 
   if (isFormData) {
-    delete headersToFetch['Content-type'];
+    delete headersToFetch["Content-type"];
   }
 
   const bodyToFetch = isFormData ? body : JSON.stringify(body);
 
   const response = await fetch(
-    `${foodApiConfig.url}/${endPoint}${fetchParams ? fetchParams : ''}`,
+    `${foodApiConfig.url}/${endPoint}${fetchParams || ""}`,
     {
-      method: method ?? 'GET',
+      method: method ?? "GET",
       headers: headersToFetch,
       body: bodyToFetch as XMLHttpRequestBodyInit,
     },
   );
 
   if (response.status === 401) {
-    return { error: 'Unauthorized' };
+    return { error: "Unauthorized" };
   }
 
   const responseBody = await response.json();

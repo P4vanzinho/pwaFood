@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import Title from '@/app/components/Title';
-import { Container } from './styles';
-import { useBagContext } from '@/context/bag';
-import Button from '@/app/components/Button';
-import { inter } from '@/app/fonts';
-import BagItem from '@/app/components/BagItem';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { getPublicUser } from '@/utils/cookiePublicUser';
-import { useOrderContext } from '@/context/order';
+import Title from "@/app/components/Title";
+import { Container } from "./styles";
+import { useBagContext } from "@/context/bag";
+import Button from "@/app/components/Button";
+import { inter } from "@/app/fonts";
+import BagItem from "@/app/components/BagItem";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { getPublicUser } from "@/utils/cookiePublicUser";
+import { useOrderContext } from "@/context/order";
 
 type BagProps = {
   params: {
@@ -37,7 +37,7 @@ export default function Bag({ params }: BagProps) {
       ? `/${params?.slug}/checkout/entrega/alterar`
       : `/${params?.slug}/checkout/entrega`;
 
-    const orderItems = items.map(item => ({
+    const orderItems = items.map((item) => ({
       price: item.unityPrice,
       productId: item.productId,
       qty: item.qty,
@@ -57,7 +57,7 @@ export default function Bag({ params }: BagProps) {
         <div>
           <Title>Sacola</Title>
 
-          {items.map(item => (
+          {items.map((item) => (
             <BagItem key={item.id} item={item} />
           ))}
 

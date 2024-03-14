@@ -1,9 +1,9 @@
-import { Item, useBagContext } from '@/context/bag';
-import { useEffect, useRef, useState } from 'react';
-import { Actions, Body, Container, InputWrapper, PhotoFood } from './styles';
-import Price from '../Price';
-import { poppins } from '@/app/fonts';
-import { IoTrashBinSharp, IoChevronDownOutline } from 'react-icons/io5';
+import { Item, useBagContext } from "@/context/bag";
+import { useEffect, useRef, useState } from "react";
+import { Actions, Body, Container, InputWrapper, PhotoFood } from "./styles";
+import Price from "../Price";
+import { poppins } from "@/app/fonts";
+import { IoTrashBinSharp, IoChevronDownOutline } from "react-icons/io5";
 
 type BagItem = {
   item: Item;
@@ -47,7 +47,7 @@ export default function BagItem({ item }: BagItem) {
           src={item.photo as string}
           height={120}
           width={100}
-          alt={item.title + '_photo'}
+          alt={item.title + "_photo"}
         />
 
         <Body>

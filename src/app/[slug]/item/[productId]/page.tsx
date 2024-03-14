@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { Container, Content } from './styles';
-import Image from 'next/image';
-import { EndpointFoodApiEnum } from '@/app/enums';
-import Title from '@/app/components/Title';
-import Text from '@/app/components/Text';
-import { FoodApiProduct } from '../../../../../types/foodApi';
-import Button from '@/app/components/Button';
-import InputQty from '@/app/components/InputQty';
-import { useState } from 'react';
-import Price from '@/app/components/Price';
-import { useBagContext } from '@/context/bag';
-import { useRouter } from 'next/navigation';
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { Container, Content } from "./styles";
+import Image from "next/image";
+import { EndpointFoodApiEnum } from "@/app/enums";
+import Title from "@/app/components/Title";
+import Text from "@/app/components/Text";
+import { FoodApiProduct } from "../../../../../types/foodApi";
+import Button from "@/app/components/Button";
+import InputQty from "@/app/components/InputQty";
+import { useState } from "react";
+import Price from "@/app/components/Price";
+import { useBagContext } from "@/context/bag";
+import { useRouter } from "next/navigation";
 
 type ProductProps = {
   params: {

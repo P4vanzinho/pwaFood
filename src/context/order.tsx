@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { ReactNode, createContext, useContext, useState } from 'react';
-import { FoodApiBusiness } from '../../types/foodApi';
+import React, { ReactNode, createContext, useContext, useState } from "react";
+import { FoodApiBusiness } from "../../types/foodApi";
 
 type OrderItem = {
   price: number;

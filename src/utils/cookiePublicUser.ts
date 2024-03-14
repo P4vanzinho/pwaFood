@@ -1,5 +1,5 @@
-import { getCookie, setCookie } from 'cookies-next';
-import { jwtDecode } from 'jwt-decode';
+import { getCookie, setCookie } from "cookies-next";
+import { jwtDecode } from "jwt-decode";
 
 type PublicUser = {
   name?: string;
@@ -19,12 +19,12 @@ type PublicUser = {
       cardBrand?: string;
     };
     delivery?: {
-      method?: 'pickup' | 'delivery';
+      method?: "pickup" | "delivery";
     };
   };
 };
 
-const key = 'u';
+const key = "u";
 
 function getPublicUser(): PublicUser | null {
   const stringObject = getCookie(key);

@@ -1,8 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-
 import { bebasNeue, poppins } from "@/app/fonts";
 import {
   Container,
@@ -36,22 +33,24 @@ import {
   FoodApiCategory,
   FoodApiProduct,
   FoodApiUpload,
-} from "../../../../../../types/foodApi";
-
+} from "../../../../types/foodApi";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
+import { useRouter } from "next/navigation";
 
-type ProductProps = {
-  params: {
-    slug: string;
-  };
+type ProductPageProps = {
+  productId: string;
+  businessId: number | string;
+  mode?: "private" | "public";
+  modePage: string;
 };
-
-export default function Product(props: ProductProps) {
-  const { data: session } = useSession();
-  const businessId = session?.data.business[0].id;
-  const modePage = props?.params?.slug ? "edit" : "register";
-
+export default function ProductPage({
+  productId,
+  modePage,
+  businessId,
+  mode = "private",
+}: ProductPageProps) {
+  const needsToken = mode === "private";
   const router = useRouter();
 
   const title =
@@ -68,9 +67,9 @@ export default function Product(props: ProductProps) {
     FoodApiCategory | undefined
   >(undefined);
 
-  const [uploadUrl, setUploadUrl] = useState<string>("");
+  const [uploadName, setUploadName] = useState<string>("");
+  const [isUploadedImage, setIsUploadedImage] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
-  const productId = props?.params?.slug;
 
   const emptyingInputs = () => {
     setFoodTitle(``);
@@ -79,30 +78,36 @@ export default function Product(props: ProductProps) {
     setDescription(``);
     setCategory(``);
     setCategorySelected(undefined);
-    setUploadUrl(``);
+    setUploadName(``);
+    setIsUploadedImage(false);
     setFile(null);
   };
 
-  const { data: categories, request: categoriesRequest } =
-    useFoodFetch<FoodApiCategory[]>();
+  const { data: categories } = useFoodFetch<FoodApiCategory[]>(
+    EndpointFoodApiEnum.PRODUCT_CATEGORY,
+    {
+      injectProducts: true,
+      hasProducts: true,
+      businessId,
+    },
+    needsToken,
+  );
 
-  const { data: product, request: productRequest } =
-    useFoodFetch<FoodApiProduct>();
+  const { data: product } = useFoodFetch<FoodApiProduct>(
+    EndpointFoodApiEnum.PRODUCT,
+    {
+      businessId,
+      productId,
+    },
+    false,
+  );
 
   const { request: requestNewProductUpload, data: upload } =
     useFoodFetch<FoodApiUpload>();
 
-  const {
-    request: requestRegisterNewProduct,
-    loading: loadingNewProduct,
-    data: responseNewProduct,
-  } = useFoodFetch<FoodApiProduct>();
+  const { request: requestRegisterNewProduct } = useFoodFetch();
 
-  const {
-    request: requestPatchProduct,
-    data: responsePatchProduct,
-    loading: loadingPatchProduct,
-  } = useFoodFetch<FoodApiProduct>();
+  const { request: requestPatchProduct } = useFoodFetch();
 
   function handleTextAreaLength(event: ChangeEvent<HTMLTextAreaElement>) {
     setRemaining(textAreaMaxLength - event.target.value.length);
@@ -119,7 +124,8 @@ export default function Product(props: ProductProps) {
   }
 
   function handleRemoveUpload() {
-    setUploadUrl("");
+    setUploadName("");
+    setIsUploadedImage(false);
     setFile(null);
   }
 
@@ -154,47 +160,14 @@ export default function Product(props: ProductProps) {
         endPoint: EndpointFoodApiEnum.PRODUCT,
       });
     }
+
+    emptyingInputs();
   }
 
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     handleRequest();
   }
-
-  useEffect(() => {
-    if (!responseNewProduct) return;
-    emptyingInputs();
-  }, [responseNewProduct]);
-
-  useEffect(() => {
-    if (!responsePatchProduct) return;
-    router.replace(RoutesEnum.PRODUTOS);
-  }, [responsePatchProduct]);
-
-  useEffect(() => {
-    if (!businessId) return;
-
-    categoriesRequest({
-      endPoint: EndpointFoodApiEnum.PRODUCT_CATEGORY,
-      params: {
-        injectProducts: true,
-        hasProducts: true,
-        businessId,
-      },
-    });
-  }, [businessId, categoriesRequest]);
-
-  useEffect(() => {
-    if (!businessId) return;
-
-    productRequest({
-      endPoint: EndpointFoodApiEnum.PRODUCT,
-      params: {
-        productId,
-        businessId,
-      },
-    });
-  }, [businessId, productRequest]);
 
   useEffect(() => {
     if (categories && !categorySelected) {
@@ -222,26 +195,40 @@ export default function Product(props: ProductProps) {
   }, [file]);
 
   useEffect(() => {
-    if (!upload) return;
-    setUploadUrl(upload?.url);
-  }, [upload]);
+    if (!file && modePage === `register`) return;
+
+    setIsUploadedImage(() => true);
+    setUploadName(
+      ` https://fooda.nyc3.digitaloceanspaces.com/develop/${upload?.name}`,
+    );
+  }, [file, modePage, upload]);
 
   useEffect(() => {
-    setFoodTitle(product?.name || ``);
-    setChecked(!!product?.enabled);
-    setPrice(product?.price || ``);
-    setDescription(product?.description || ``);
-    setUploadUrl(product?.upload?.url || ``);
-  }, [product]);
-
-  useEffect(() => {
-    if (categories && categories.length) {
+    if (categories && categories.length === 1) {
       setCategory(() => categories[0].name);
     }
     const foundCategory = categories?.find((prev) => prev.name === category);
 
     setCategorySelected(foundCategory);
   }, [categories, category, categorySelected]);
+
+  useEffect(() => {
+    if (product && product.upload) {
+      setUploadName(product.upload.url);
+    }
+
+    if (product && typeof product.price === "string") {
+      const priceInCents = parseInt(product.price);
+      const priceInReal = (priceInCents / 100).toFixed(2);
+      setPrice(priceInReal.toString());
+    }
+
+    setIsUploadedImage(!!product?.upload);
+    setFoodTitle(product?.name || ``);
+    setChecked(product?.enabled || false);
+
+    setDescription(product?.description || ``);
+  }, [product]);
 
   return (
     <Container>
@@ -260,7 +247,7 @@ export default function Product(props: ProductProps) {
             />
             {/* </FoodTitleLabel> */}
 
-            {uploadUrl ? (
+            {isUploadedImage || product?.upload ? (
               <ImageProductContainer>
                 <ImageWithUpload>
                   <p className={poppins.className}>
@@ -275,7 +262,7 @@ export default function Product(props: ProductProps) {
                     {({ getRootProps, getInputProps }) => (
                       <ImageContainer {...getRootProps()}>
                         <AvatarEditor
-                          image={uploadUrl}
+                          image={uploadName}
                           height={127}
                           width={127}
                           scale={1}
@@ -418,11 +405,7 @@ export default function Product(props: ProductProps) {
               text={`Cancelar`}
               onClick={() => router.replace(RoutesEnum.PRODUTOS)}
             />
-            <Button
-              text={`Salvar`}
-              type="submit"
-              loading={loadingPatchProduct || loadingNewProduct}
-            />
+            <Button text={`Salvar`} type="submit" />
           </FormButtonsContainer>
         </form>
       </FormContainer>

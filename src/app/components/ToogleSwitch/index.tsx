@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Container,
   InputCheckBoxInToggle,
   LabelToglleSwitch,
   Switch,
   ToggleSwitch,
-} from './styles';
-import { poppins } from '@/app/fonts';
+} from "./styles";
+import { poppins } from "@/app/fonts";
 
 interface ButtonRegistrationType {
   text: string;

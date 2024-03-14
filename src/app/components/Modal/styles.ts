@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from "@linaria/react";
 
 export const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.85);

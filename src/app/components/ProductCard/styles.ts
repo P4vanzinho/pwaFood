@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import Image from 'next/image';
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import Image from "next/image";
 
 export const Container = styled.div`
   height: auto;

@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { FoodFetchProps, foodFetch } from '../services/foodFetch/foodFetch';
-import { EndpointFoodApiEnum } from '../enums';
-import { useRouter } from 'next/navigation';
-import { useLoadingContext } from '@/context/loading';
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSession } from "next-auth/react";
+import { FoodFetchProps, foodFetch } from "../services/foodFetch/foodFetch";
+import { EndpointFoodApiEnum } from "../enums";
+import { useRouter } from "next/navigation";
+import { useLoadingContext } from "@/context/loading";
 
 function useFoodFetch<T>(
   endPoint?: string,
@@ -34,7 +34,7 @@ function useFoodFetch<T>(
 
       if (
         shouldUseToken === undefined ||
-        (typeof shouldUseToken == 'boolean' && shouldUseToken)
+        (typeof shouldUseToken === "boolean" && shouldUseToken)
       ) {
         fetchParams = {
           ...fetchParams,
@@ -49,18 +49,18 @@ function useFoodFetch<T>(
       setMessage(response?.message);
       setLoading(false);
 
-      if (response?.error === 'Unauthorized') {
-        router.push('/admin/login');
+      if (response?.error === "Unauthorized") {
+        router.push("/admin/login");
       }
     }
 
     if (!endPoint) {
-      setError('Endpoint undefined');
+      setError("Endpoint undefined");
       return;
     }
 
     if (!!shouldUseToken && !session) {
-      setError('Session not found');
+      setError("Session not found");
       return;
     }
 
@@ -84,7 +84,7 @@ function useFoodFetch<T>(
 
         if (
           shouldUseToken === undefined ||
-          (typeof shouldUseToken == 'boolean' && shouldUseToken)
+          (typeof shouldUseToken === "boolean" && shouldUseToken)
         ) {
           fetchParams = {
             ...fetchParams,

@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Container, Button, Bubble } from './styles';
-import { FaRegHeart, FaRegUser } from 'react-icons/fa';
-import { BiBasket, BiHomeAlt2, BiSearch, BiMinus } from 'react-icons/bi';
-import { useRouter, usePathname } from 'next/navigation';
-import { useBagContext } from '@/context/bag';
-import { inter } from '@/app/fonts';
-import { centsToUnities } from '@/utils/money';
+import { Container, Button, Bubble } from "./styles";
+import { FaRegHeart, FaRegUser } from "react-icons/fa";
+import { BiBasket, BiHomeAlt2, BiSearch, BiMinus } from "react-icons/bi";
+import { useRouter, usePathname } from "next/navigation";
+import { useBagContext } from "@/context/bag";
+import { inter } from "@/app/fonts";
+import { centsToUnities } from "@/utils/money";
 
 type MenuBottomPRops = {
   slug: string;
@@ -22,7 +22,7 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
       <>
         {!!total && (
           <Bubble className={inter.className}>
-            {centsToUnities(total).toLocaleString('pt-BR')}
+            {centsToUnities(total).toLocaleString("pt-BR")}
           </Bubble>
         )}
       </>
@@ -32,36 +32,36 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
   const buttonsConfig = [
     {
       Icon: BiHomeAlt2,
-      route: '/',
+      route: "/",
       selected: false,
     },
     {
       Icon: BiSearch,
-      route: '/buscar',
+      route: "/buscar",
       selected: false,
     },
 
     {
       Icon: FaRegHeart,
-      route: '/favorito',
+      route: "/favorito",
       selected: false,
     },
     {
       Icon: BiBasket,
-      route: '/sacola',
+      route: "/sacola",
       selected: false,
       Info: ViewBubble,
     },
     {
       Icon: FaRegUser,
-      route: '/usuario',
+      route: "/usuario",
       selected: false,
     },
   ];
 
-  const buttons = buttonsConfig.map(button => {
-    const replaced = path.replace(slug, '').replace('/', '').replace('/', '');
-    const selected = replaced === button.route.replace('/', '');
+  const buttons = buttonsConfig.map((button) => {
+    const replaced = path.replace(slug, "").replace("/", "").replace("/", "");
+    const selected = replaced === button.route.replace("/", "");
 
     return {
       ...button,

@@ -1,7 +1,7 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import Image from 'next/image';
-import { darken } from 'polished';
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import Image from "next/image";
+import { darken } from "polished";
 
 export const Container = styled.div`
   width: 100%;

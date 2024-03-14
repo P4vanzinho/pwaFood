@@ -1,13 +1,13 @@
-'use client';
-import { Container, Logo, MenuTopCenter, RightTopMenu } from './styles';
+"use client";
+import { Container, Logo, MenuTopCenter, RightTopMenu } from "./styles";
 
-import { bebas_neue, poppins } from '../../fonts';
-import { useRouter, usePathname } from 'next/navigation';
+import { bebasNeue, poppins } from "../../fonts";
+import { useRouter, usePathname } from "next/navigation";
 
-import Link from 'next/link';
-import { useState, useEffect, ReactNode } from 'react';
-import Button from '../Button';
-import { RoutesEnum } from '@/app/enums';
+import Link from "next/link";
+import { useState, useEffect, ReactNode } from "react";
+import Button from "../Button";
+import { RoutesEnum } from "@/app/enums";
 
 export default function AuthHeader() {
   const router = useRouter();
@@ -23,13 +23,13 @@ export default function AuthHeader() {
 
   return (
     <Container>
-      <Logo className={bebas_neue.className}>
+      <Logo className={bebasNeue.className}>
         <span>FOOD</span>
         <span>-</span>
         <span>E</span>
       </Logo>
 
-      <MenuTopCenter className={bebas_neue.className}>
+      <MenuTopCenter className={bebasNeue.className}>
         <Link href="">PRODUTOS</Link>
         <Link href="">PREÇOS</Link>
         <Link href="">COMO USAR ?</Link>

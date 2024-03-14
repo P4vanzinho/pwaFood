@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { poppins } from '@/app/fonts';
-import { Paragraph } from './styles';
+import { ReactNode } from "react";
+import { poppins } from "@/app/fonts";
+import { Paragraph } from "./styles";
 
 interface ButtonRegistrationType {
   children: ReactNode;

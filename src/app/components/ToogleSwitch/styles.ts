@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
 
 export const Container = styled.div`
   width: 100%;
@@ -21,7 +21,7 @@ export const ToggleSwitch = styled.div<ToogleSwitchProps>`
 
   > p {
     color: ${({ switched }) =>
-      !!switched ? theme.COLORS.DARK : theme.COLORS.GRAY};
+      switched ? theme.COLORS.DARK : theme.COLORS.GRAY};
     font-size: 18px;
     font-weight: 500;
     line-height: normal;
@@ -48,7 +48,7 @@ export const Switch = styled.div`
   border-radius: 32px;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     width: 23px;
     height: 23px;

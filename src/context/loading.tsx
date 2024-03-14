@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useState } from "react";
 
 type LoadingContextProviderProps = {
   children: ReactNode;

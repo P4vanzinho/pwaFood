@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { Container } from './styles';
-import Input from '../../../../components/Input';
-import Button from '../../../../components/Button';
-import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser';
-import { SyntheticEvent, useEffect, useState } from 'react';
-import { bebas_neue } from '@/app/fonts';
-import { useRouter } from 'next/navigation';
-import Title from '@/app/components/Title';
-import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { EndpointFoodApiEnum } from '@/app/enums';
-import { FoodApiAddressGettingByPostalCode } from '../../../../../../types/foodApi';
+import { Container } from "./styles";
+import Input from "../../../../components/Input";
+import Button from "../../../../components/Button";
+import { getPublicUser, setPublicUser } from "@/utils/cookiePublicUser";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { bebasNeue } from "@/app/fonts";
+import { useRouter } from "next/navigation";
+import Title from "@/app/components/Title";
+import useFoodFetch from "@/app/hooks/useFoodFetch";
+import { EndpointFoodApiEnum } from "@/app/enums";
+import { FoodApiAddressGettingByPostalCode } from "../../../../../../types/foodApi";
 
 type PersonalDataProps = {
   params: {
@@ -32,8 +32,8 @@ export default function PersonalData({ params }: PersonalDataProps) {
   if (user) {
     dataDeliveryInitial = {
       ...user.address,
-      name: user.name ?? '',
-      whatsapp: user.whatsapp ?? '',
+      name: user.name ?? "",
+      whatsapp: user.whatsapp ?? "",
     } as DataDelivery;
   }
 
@@ -43,14 +43,14 @@ export default function PersonalData({ params }: PersonalDataProps) {
   const [dataDelivery, setDataDelivery] = useState(dataDeliveryInitial);
 
   const inputOnChange = (inputId: string, currentValue: string) => {
-    if (inputId === 'cep' && currentValue.length === 9) {
+    if (inputId === "cep" && currentValue.length === 9) {
       request({
         endPoint: `${EndpointFoodApiEnum.ADDRESS}/${currentValue}`,
-        method: 'GET',
+        method: "GET",
       });
     }
 
-    setDataDelivery(dataDelivery => ({
+    setDataDelivery((dataDelivery) => ({
       ...dataDelivery,
       [inputId]: currentValue,
     }));
@@ -61,7 +61,7 @@ export default function PersonalData({ params }: PersonalDataProps) {
       return;
     }
 
-    setDataDelivery(dataDelivery => ({
+    setDataDelivery((dataDelivery) => ({
       ...dataDelivery,
       ...address,
     }));
@@ -69,69 +69,69 @@ export default function PersonalData({ params }: PersonalDataProps) {
 
   const inputs = [
     {
-      placeHolder: 'Digite o seu nome',
-      id: 'name',
-      label: 'nome',
-      type: 'text',
+      placeHolder: "Digite o seu nome",
+      id: "name",
+      label: "nome",
+      type: "text",
       value: dataDelivery.name,
       required: true,
     },
     {
-      placeHolder: 'Digite o número do seu WhatsApp',
-      id: 'whatsapp',
-      label: 'whatsapp',
-      type: 'cellphone',
+      placeHolder: "Digite o número do seu WhatsApp",
+      id: "whatsapp",
+      label: "whatsapp",
+      type: "cellphone",
       value: dataDelivery.whatsapp,
       required: true,
     },
     {
-      placeHolder: 'Digite o CEP do endereço de entrega',
-      id: 'cep',
-      label: 'CEP',
-      type: 'cep',
+      placeHolder: "Digite o CEP do endereço de entrega",
+      id: "cep",
+      label: "CEP",
+      type: "cep",
       value: dataDelivery.cep,
       required: true,
     },
     {
-      placeHolder: 'Digite o endereço',
-      id: 'street',
-      label: 'Endereço',
-      type: 'text',
+      placeHolder: "Digite o endereço",
+      id: "street",
+      label: "Endereço",
+      type: "text",
       value: dataDelivery.street,
       required: true,
     },
     {
-      placeHolder: 'Digite o número do endereço',
-      label: 'Número',
-      id: 'streetNumber',
-      type: 'text',
+      placeHolder: "Digite o número do endereço",
+      label: "Número",
+      id: "streetNumber",
+      type: "text",
       value: dataDelivery.streetNumber,
       required: true,
     },
     {
-      placeHolder: 'Digite o bairro',
-      label: 'Bairro',
-      id: 'neighborhood',
-      type: 'text',
+      placeHolder: "Digite o bairro",
+      label: "Bairro",
+      id: "neighborhood",
+      type: "text",
       value: dataDelivery.neighborhood,
       required: true,
     },
 
     {
-      placeHolder: 'Ex: Apartamento 302',
-      label: 'Complemento',
-      id: 'addressDetails',
-      type: 'text',
+      placeHolder: "Ex: Apartamento 302",
+      label: "Complemento",
+      id: "addressDetails",
+      type: "text",
       value: dataDelivery.addressDetails,
       required: false,
     },
     {
-      placeHolder: 'Cidade',
-      id: 'city',
-      label: 'Digite a cidade',
+      placeHolder: "Cidade",
+      id: "city",
+      label: "Digite a cidade",
       value: dataDelivery.city,
       required: true,
-      type: 'text',
+      type: "text",
     },
   ];
 
@@ -175,20 +175,20 @@ export default function PersonalData({ params }: PersonalDataProps) {
     <Container>
       <Title>Dados de entrega</Title>
       <form onSubmit={handleSubmit}>
-        {inputs.map(input => (
+        {inputs.map((input) => (
           <Input
             key={input.label}
             id={input.label}
             label={input.label}
             placeholder={input.placeHolder}
             type={input.type}
-            onChange={e => inputOnChange(input.id, e.currentTarget.value)}
+            onChange={(e) => inputOnChange(input.id, e.currentTarget.value)}
             required={input.required}
             value={input.value}
           />
         ))}
         <Button
-          className={bebas_neue.className}
+          className={bebasNeue.className}
           type="submit"
           text="ADICIONAR ENDEREÇO"
         />

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { poppins } from '@/app/fonts';
-import { Container } from './styles';
+import { useEffect, useState } from "react";
+import { poppins } from "@/app/fonts";
+import { Container } from "./styles";
 
 type RadioButtonProps = {
   id: string;

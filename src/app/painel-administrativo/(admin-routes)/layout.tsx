@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-import { styled } from '@linaria/react';
-import FloatMenu from '@/app/components/FloatMenu';
-import PrivateHeader from '@/app/components/PrivateHeader';
+import { styled } from "@linaria/react";
+import FloatMenu from "@/app/components/FloatMenu";
+import PrivateHeader from "@/app/components/PrivateHeader";
 
 const Container = styled.div`
   height: calc(100vh - 100px);

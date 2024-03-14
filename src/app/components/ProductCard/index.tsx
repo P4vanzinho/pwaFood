@@ -1,13 +1,13 @@
-import { FoodApiProduct } from '../../../../types/foodApi';
-import Text from '../Text';
-import Price from '../Price';
+import { FoodApiProduct } from "../../../../types/foodApi";
+import Text from "../Text";
+import Price from "../Price";
 
-import { usePathname, useRouter } from 'next/navigation';
-import { Container, PhotoFood } from './styles';
+import { usePathname, useRouter } from "next/navigation";
+import { Container, PhotoFood } from "./styles";
 
 type ProductCardProps = {
   data: FoodApiProduct;
-  mode: 'private' | 'public';
+  mode: "private" | "public";
 };
 
 export default function ProductCard({ data, mode }: ProductCardProps) {
@@ -16,7 +16,7 @@ export default function ProductCard({ data, mode }: ProductCardProps) {
 
   const cardOnClick = () => {
     const path =
-      mode === 'public'
+      mode === "public"
         ? `${pathname}/item/${data.slug}`
         : `/painel-administrativo/produto/${data.slug}`;
 
@@ -36,7 +36,7 @@ export default function ProductCard({ data, mode }: ProductCardProps) {
 
       <div>
         <Text>{data.name}</Text>
-        <Price>{data.price ?? 'sob consulta'}</Price>
+        <Price>{data.price ?? "sob consulta"}</Price>
       </div>
     </Container>
   );

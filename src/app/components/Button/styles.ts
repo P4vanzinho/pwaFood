@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import { darken } from 'polished';
+import { theme } from "@/app/styles/theme";
+import { styled } from "@linaria/react";
+import { darken } from "polished";
 
 type ButtonProps = {
   selected: boolean;
@@ -29,8 +29,8 @@ export const Container = styled.div<ButtonProps>`
       selected
         ? theme.COLORS.PRIMARY
         : enabledSelect
-        ? theme.COLORS.GRAY
-        : theme.COLORS.PRIMARY};
+          ? theme.COLORS.GRAY
+          : theme.COLORS.PRIMARY};
     color: ${theme.COLORS.WHITE};
     height: 2.5rem;
     font-size: 1.125rem;

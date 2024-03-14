@@ -19,6 +19,7 @@ export type FoodApiProduct = {
   slug: string;
   price: string | null;
   description: string | null;
+  businessId: number | string;
 };
 
 export type FoodApiCategory = {
@@ -65,24 +66,6 @@ export type FoodApiOrder = {
   createdAt: Date;
 };
 
-export type FoodApiBusiness = {
-  upload: {
-    url: string;
-  } | null;
-  whatsapp: string | null;
-  status: 'open' | 'close';
-  name: string;
-  address?: FoodApiAddress;
-};
-
-export type FoodApiAddressGettingByPostalCode = {
-  cep: string;
-  state: string;
-  city: string;
-  neighborhood: string;
-  street: string;
-};
-
 export type FoodApiAddress = {
   id: string;
   cep: string;
@@ -93,6 +76,24 @@ export type FoodApiAddress = {
   number: string;
   lat: string;
   long: string;
+};
+
+export type FoodApiBusiness = {
+  upload: {
+    url: string;
+  } | null;
+  whatsapp: string | null;
+  status: "open" | "close";
+  name: string;
+  address?: FoodApiAddress;
+};
+
+export type FoodApiAddressGettingByPostalCode = {
+  cep: string;
+  state: string;
+  city: string;
+  neighborhood: string;
+  street: string;
 };
 
 export type FoodApiDeliveryFee = {

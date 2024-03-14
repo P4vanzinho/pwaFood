@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { ReactNode, useEffect } from 'react';
-import Modal from '../Modal';
-import { Content } from './styles';
-import { useLoadingContext } from '@/context/loading';
-import LoadingIndicator from '../LoadingIndicator';
+import { ReactNode, useEffect } from "react";
+import Modal from "../Modal";
+import { Content } from "./styles";
+import { useLoadingContext } from "@/context/loading";
+import LoadingIndicator from "../LoadingIndicator";
 
 type FullScreenLoadingProps = {
   children: ReactNode;
@@ -16,7 +16,7 @@ export default function FullScreenLoading({
   const { loading } = useLoadingContext();
 
   useEffect(() => {
-    document.body.style.overflow = loading ? 'hidden' : 'unset';
+    document.body.style.overflow = loading ? "hidden" : "unset";
   }, [loading]);
 
   return (
