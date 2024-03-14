@@ -52,7 +52,6 @@
   "devDependencies": {
     "@linaria/babel-preset": "^5.0.4",
     "@linaria/webpack-loader": "^5.0.4",
-    "@rocketseat/eslint-config": "^2.2.2",
     "@types/cookie": "^0.5.1",
     "@types/dropzone": "^5.7.8",
     "@types/js-cookie": "^3.0.3",
@@ -64,6 +63,7 @@
     "eslint": "^8.57.0",
     "husky": "^8.0.3",
     "prettier": "^3.1.0",
-    "prettier-eslint": "^16.1.2"
+    "prettier-eslint": "^16.1.2",
+    "eslint-config-next": "^14.1.3"
   }
 }
