@@ -1,8 +1,8 @@
-import { EndpointFoodApiEnum } from '@/app/enums/foodApi';
-import { foodApiConfig } from '@/config';
-import { AuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import GoogleProvider from 'next-auth/providers/google';
+import { EndpointFoodApiEnum } from '@/app/enums/foodApi'
+import { foodApiConfig } from '@/config'
+import { AuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -26,14 +26,14 @@ export const authOptions: AuthOptions = {
               password: credentials?.password,
             }),
           },
-        );
+        )
 
-        const body = await response.json();
+        const body = await response.json()
 
         if (body.data) {
-          return body;
+          return body
         } else {
-          throw new Error(body.error);
+          throw new Error(body.error)
         }
       },
     }),
@@ -46,16 +46,16 @@ export const authOptions: AuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      user && (token.user = user);
-      return token;
+      user && (token.user = user)
+      return token
     },
     async session({ session, token }) {
-      session = token.user as any;
-      return session;
+      session = token.user as any
+      return session
     },
   },
 
   pages: {
     signIn: '/admin/login',
   },
-};
+}

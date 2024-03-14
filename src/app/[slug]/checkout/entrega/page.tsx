@@ -1,51 +1,51 @@
-'use client';
+'use client'
 
-import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser';
+import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser'
 import {
   Container,
   DeliveryData,
   Total,
   ChangeLink,
   DeliveryMethod,
-} from './styles';
-import Title from '@/app/components/Title';
-import Button from '@/app/components/Button';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { inter, poppins } from '@/app/fonts';
-import { useBagContext } from '@/context/bag';
-import { centsToUnities } from '@/utils/money';
-import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { EndpointFoodApiEnum } from '@/app/enums';
+} from './styles'
+import Title from '@/app/components/Title'
+import Button from '@/app/components/Button'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { inter, poppins } from '@/app/fonts'
+import { useBagContext } from '@/context/bag'
+import { centsToUnities } from '@/utils/money'
+import useFoodFetch from '@/app/hooks/useFoodFetch'
+import { EndpointFoodApiEnum } from '@/app/enums'
 import {
   FoodApiBusiness,
   FoodApiDeliveryFee,
-} from '../../../../../types/foodApi';
-import RadioButton from '@/app/components/RadioButton';
-import { useOrderContext } from '@/context/order';
+} from '../../../../../types/foodApi'
+import RadioButton from '@/app/components/RadioButton'
+import { useOrderContext } from '@/context/order'
 
 type CheckoutProps = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export default function Checkout({ params }: CheckoutProps) {
-  const user = getPublicUser();
-  const router = useRouter();
-  const [deliveryFee, setDeliveryFee] = useState(0);
-  const { total: totalBag } = useBagContext();
+  const user = getPublicUser()
+  const router = useRouter()
+  const [deliveryFee, setDeliveryFee] = useState(0)
+  const { total: totalBag } = useBagContext()
   const { request: deliveryRequest, data: deliveryFeeData } =
-    useFoodFetch<FoodApiDeliveryFee>();
+    useFoodFetch<FoodApiDeliveryFee>()
   const { request: businessRequest, data: business } =
-    useFoodFetch<FoodApiBusiness>();
-  const total = totalBag + deliveryFee;
+    useFoodFetch<FoodApiBusiness>()
+  const total = totalBag + deliveryFee
 
-  const { setCurrentOrder } = useOrderContext();
+  const { setCurrentOrder } = useOrderContext()
 
   const [radioSelected, setRadioSelected] = useState<'delivery' | 'pickup'>(
     user?.preferences?.delivery?.method ?? 'delivery',
-  );
+  )
 
   useEffect(() => {
     setPublicUser({
@@ -56,12 +56,12 @@ export default function Checkout({ params }: CheckoutProps) {
           method: radioSelected,
         },
       },
-    });
+    })
 
     if (radioSelected === 'delivery') {
       if (deliveryFeeData) {
-        setDeliveryFee(deliveryFeeData.deliveryFee);
-        return;
+        setDeliveryFee(deliveryFeeData.deliveryFee)
+        return
       }
 
       deliveryRequest({
@@ -76,36 +76,36 @@ export default function Checkout({ params }: CheckoutProps) {
           name: user?.name,
           state: user?.address?.state,
         },
-      });
+      })
     } else if (radioSelected === 'pickup') {
-      setDeliveryFee(0);
+      setDeliveryFee(0)
 
       if (!business) {
         businessRequest({
           endPoint: `${EndpointFoodApiEnum.BUSINESS}/${params.slug}`,
-        });
+        })
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [radioSelected]);
+  }, [radioSelected])
 
   useEffect(() => {
     if (!deliveryFeeData?.deliveryFee) {
-      return;
+      return
     }
 
-    setDeliveryFee(deliveryFeeData.deliveryFee);
-  }, [deliveryFeeData]);
+    setDeliveryFee(deliveryFeeData.deliveryFee)
+  }, [deliveryFeeData])
 
   useEffect(() => {
     if (!totalBag) {
-      router.replace(`/${params?.slug}`);
+      router.replace(`/${params?.slug}`)
     }
-  }, [totalBag, params?.slug, router]);
+  }, [totalBag, params?.slug, router])
 
   const radioButtonCallback = (id: string) => {
-    setRadioSelected(id as any);
-  };
+    setRadioSelected(id as any)
+  }
 
   const deliveryAddressData = {
     street:
@@ -130,14 +130,14 @@ export default function Checkout({ params }: CheckoutProps) {
       radioSelected === 'delivery'
         ? user?.address?.state
         : business?.address?.state,
-  };
+  }
 
   const sendDataButtonOnClick = () => {
     const route = user?.preferences?.payment
       ? `/${params?.slug}/checkout/pagamento`
-      : `/${params?.slug}/checkout/pagamento/alterar`;
+      : `/${params?.slug}/checkout/pagamento/alterar`
 
-    setCurrentOrder(order => ({
+    setCurrentOrder((order) => ({
       ...order,
       businessId: params?.slug,
       user: {
@@ -155,10 +155,10 @@ export default function Checkout({ params }: CheckoutProps) {
       },
       deliveryFee,
       total: totalBag + deliveryFee,
-    }));
+    }))
 
-    router.push(route);
-  };
+    router.push(route)
+  }
 
   return (
     <Container>
@@ -242,5 +242,5 @@ export default function Checkout({ params }: CheckoutProps) {
         />
       </footer>
     </Container>
-  );
+  )
 }

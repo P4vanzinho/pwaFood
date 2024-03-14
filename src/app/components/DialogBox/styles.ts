@@ -1,7 +1,7 @@
-import { lighten } from 'polished';
-import { styled } from '@linaria/react';
-import css from 'styled-jsx/css';
-import { theme } from '@/app/styles/theme';
+import { lighten } from 'polished'
+import { styled } from '@linaria/react'
+import css from 'styled-jsx/css'
+import { theme } from '@/app/styles/theme'
 
 export const Container = styled.div`
   height: 140px;
@@ -25,7 +25,7 @@ export const Container = styled.div`
     justify-content: space-between;
     margin-top: 10px;
   }
-`;
+`
 
 export const Close = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ export const Close = styled.div`
     height: 20px;
     border-radius: 50%;
   }
-`;
+`
 
 export const Content = styled.div`
   display: flex;
@@ -69,14 +69,14 @@ export const Content = styled.div`
     width: 100%;
     margin-left: 20px;
   }
-`;
+`
 
 type ButtonProps = {
-  mode: 'danger' | 'border';
-};
+  mode: 'danger' | 'border'
+}
 
 export const Button = styled.div<ButtonProps>`
   border-radius: 8px;
   padding: 2px 10px;
   font-size: 0.9rem;
-`;
+`

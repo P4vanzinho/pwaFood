@@ -1,55 +1,55 @@
-'use client';
+'use client'
 
-import Title from '@/app/components/Title';
-import { Container } from './styles';
-import { useBagContext } from '@/context/bag';
-import Button from '@/app/components/Button';
-import { inter } from '@/app/fonts';
-import BagItem from '@/app/components/BagItem';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { getPublicUser } from '@/utils/cookiePublicUser';
-import { useOrderContext } from '@/context/order';
+import Title from '@/app/components/Title'
+import { Container } from './styles'
+import { useBagContext } from '@/context/bag'
+import Button from '@/app/components/Button'
+import { inter } from '@/app/fonts'
+import BagItem from '@/app/components/BagItem'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { getPublicUser } from '@/utils/cookiePublicUser'
+import { useOrderContext } from '@/context/order'
 
 type BagProps = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export default function Bag({ params }: BagProps) {
-  const user = getPublicUser();
-  const { setCurrentOrder } = useOrderContext();
-  const needsPersonalData = !user?.whatsapp || !user?.address || !user.name;
+  const user = getPublicUser()
+  const { setCurrentOrder } = useOrderContext()
+  const needsPersonalData = !user?.whatsapp || !user?.address || !user.name
   // TODO fix itens text
-  const { itens: items, total } = useBagContext();
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const { itens: items, total } = useBagContext()
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const addItemOnClick = () => {
-    router.push(`/${params.slug}`);
-  };
+    router.push(`/${params.slug}`)
+  }
 
   const paymentMethodButtonOnClick = () => {
-    setLoading(true);
+    setLoading(true)
 
     const route = needsPersonalData
       ? `/${params?.slug}/checkout/entrega/alterar`
-      : `/${params?.slug}/checkout/entrega`;
+      : `/${params?.slug}/checkout/entrega`
 
-    const orderItems = items.map(item => ({
+    const orderItems = items.map((item) => ({
       price: item.unityPrice,
       productId: item.productId,
       qty: item.qty,
-    }));
+    }))
 
     setCurrentOrder({
       businessId: params.slug,
       items: orderItems,
-    });
+    })
 
-    router.push(route);
-  };
+    router.push(route)
+  }
 
   return (
     <>
@@ -57,7 +57,7 @@ export default function Bag({ params }: BagProps) {
         <div>
           <Title>Sacola</Title>
 
-          {items.map(item => (
+          {items.map((item) => (
             <BagItem key={item.id} item={item} />
           ))}
 
@@ -76,5 +76,5 @@ export default function Bag({ params }: BagProps) {
         </footer>
       </Container>
     </>
-  );
+  )
 }

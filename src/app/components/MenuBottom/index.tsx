@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { Container, Button, Bubble } from './styles';
-import { FaRegHeart, FaRegUser } from 'react-icons/fa';
-import { BiBasket, BiHomeAlt2, BiSearch, BiMinus } from 'react-icons/bi';
-import { useRouter, usePathname } from 'next/navigation';
-import { useBagContext } from '@/context/bag';
-import { inter } from '@/app/fonts';
-import { centsToUnities } from '@/utils/money';
+import { Container, Button, Bubble } from './styles'
+import { FaRegHeart, FaRegUser } from 'react-icons/fa'
+import { BiBasket, BiHomeAlt2, BiSearch, BiMinus } from 'react-icons/bi'
+import { useRouter, usePathname } from 'next/navigation'
+import { useBagContext } from '@/context/bag'
+import { inter } from '@/app/fonts'
+import { centsToUnities } from '@/utils/money'
 
 type MenuBottomPRops = {
-  slug: string;
-};
+  slug: string
+}
 
 export default function MenuBottom({ slug }: MenuBottomPRops) {
-  const router = useRouter();
-  const path = usePathname();
-  const { total } = useBagContext();
+  const router = useRouter()
+  const path = usePathname()
+  const { total } = useBagContext()
 
   const ViewBubble = () => {
     return (
@@ -26,8 +26,8 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
           </Bubble>
         )}
       </>
-    );
-  };
+    )
+  }
 
   const buttonsConfig = [
     {
@@ -57,23 +57,23 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
       route: '/usuario',
       selected: false,
     },
-  ];
+  ]
 
-  const buttons = buttonsConfig.map(button => {
-    const replaced = path.replace(slug, '').replace('/', '').replace('/', '');
-    const selected = replaced === button.route.replace('/', '');
+  const buttons = buttonsConfig.map((button) => {
+    const replaced = path.replace(slug, '').replace('/', '').replace('/', '')
+    const selected = replaced === button.route.replace('/', '')
 
     return {
       ...button,
       selected,
-    };
-  });
+    }
+  })
 
-  const sizeIcons = 22;
+  const sizeIcons = 22
 
   const buttonOnClick = (route: string) => {
-    router.push(`/${slug}/${route}`);
-  };
+    router.push(`/${slug}/${route}`)
+  }
 
   return (
     <Container>
@@ -89,5 +89,5 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
         </Button>
       ))}
     </Container>
-  );
+  )
 }

@@ -1,2 +1,2 @@
-export * from './foodApi';
-export * from './waBot';
+export * from './foodApi'
+export * from './waBot'

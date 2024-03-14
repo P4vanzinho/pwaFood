@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
 
 export const Container = styled.div`
   display: flex;
@@ -50,4 +50,4 @@ export const Container = styled.div`
     border-radius: 10px;
     background-color: transparent;
   }
-`;
+`

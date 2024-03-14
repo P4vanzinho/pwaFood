@@ -1,39 +1,39 @@
-'use client';
+'use client'
 
-import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser';
-import { Container, RadioGroup } from './styles';
-import Title from '@/app/components/Title';
-import Button from '@/app/components/Button';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { poppins } from '@/app/fonts';
+import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser'
+import { Container, RadioGroup } from './styles'
+import Title from '@/app/components/Title'
+import Button from '@/app/components/Button'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { poppins } from '@/app/fonts'
 
-import RadioButton from '@/app/components/RadioButton';
+import RadioButton from '@/app/components/RadioButton'
 
 type CheckoutProps = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export default function Checkout({ params }: CheckoutProps) {
-  const user = getPublicUser();
-  const router = useRouter();
+  const user = getPublicUser()
+  const router = useRouter()
 
   const [paymentMethodSelected, setPaymentMethodSelected] = useState<
     string | undefined
-  >();
+  >()
   const [paymentCardBrandSelected, setPaymentCardBrandSelected] = useState<
     string | undefined
-  >();
+  >()
 
   const paymentMethodRadioCallback = (id: string) => {
-    setPaymentMethodSelected(id);
-  };
+    setPaymentMethodSelected(id)
+  }
 
   const cardBrandRadioCallback = (id: string) => {
-    setPaymentCardBrandSelected(id);
-  };
+    setPaymentCardBrandSelected(id)
+  }
 
   const addPaymentOnClick = () => {
     setPublicUser({
@@ -44,23 +44,23 @@ export default function Checkout({ params }: CheckoutProps) {
           cardBrand: paymentCardBrandSelected,
         },
       },
-    });
+    })
 
-    router.push(`/${params?.slug}/checkout/pagamento`);
-  };
+    router.push(`/${params?.slug}/checkout/pagamento`)
+  }
 
   const needsCardBranch =
-    paymentMethodSelected === 'credit' || paymentMethodSelected === 'debit';
+    paymentMethodSelected === 'credit' || paymentMethodSelected === 'debit'
 
   const enabledButton = needsCardBranch
     ? !!(paymentMethodSelected && paymentCardBrandSelected)
-    : !!paymentMethodSelected;
+    : !!paymentMethodSelected
 
   useEffect(() => {
     if (paymentMethodSelected === 'pix') {
-      setPaymentCardBrandSelected(undefined);
+      setPaymentCardBrandSelected(undefined)
     }
-  }, [paymentMethodSelected]);
+  }, [paymentMethodSelected])
 
   return (
     <Container>
@@ -135,5 +135,5 @@ export default function Checkout({ params }: CheckoutProps) {
         />
       </footer>
     </Container>
-  );
+  )
 }

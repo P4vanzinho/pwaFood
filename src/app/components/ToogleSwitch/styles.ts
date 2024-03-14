@@ -1,14 +1,14 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
 
 export const Container = styled.div`
   width: 100%;
   margin-bottom: 2rem;
-`;
+`
 
 type ToogleSwitchProps = {
-  switched?: boolean;
-};
+  switched?: boolean
+}
 
 export const ToggleSwitch = styled.div<ToogleSwitchProps>`
   width: 100%;
@@ -21,24 +21,24 @@ export const ToggleSwitch = styled.div<ToogleSwitchProps>`
 
   > p {
     color: ${({ switched }) =>
-      !!switched ? theme.COLORS.DARK : theme.COLORS.GRAY};
+      switched ? theme.COLORS.DARK : theme.COLORS.GRAY};
     font-size: 18px;
     font-weight: 500;
     line-height: normal;
   }
-`;
+`
 
 export const LabelToglleSwitch = styled.label`
   display: flex;
   align-items: center;
   gap: 5px;
   cursor: pointer;
-`;
+`
 
 export const InputCheckBoxInToggle = styled.input`
   opacity: 0;
   position: absolute;
-`;
+`
 
 export const Switch = styled.div`
   position: relative;
@@ -70,4 +70,4 @@ export const Switch = styled.div`
       left: calc(100% - (23px + 4px));
     }
   }
-`;
+`

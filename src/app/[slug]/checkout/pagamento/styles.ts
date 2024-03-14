@@ -1,12 +1,12 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import Link from 'next/link';
-import { lighten } from 'polished';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
+import Link from 'next/link'
+import { lighten } from 'polished'
 
 export const ChangeLink = styled(Link)`
   color: ${theme.COLORS.WARNING};
   font-size: 1.063rem;
-`;
+`
 
 export const Container = styled.div`
   overflow: auto;
@@ -28,7 +28,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
   }
-`;
+`
 
 export const PaymentData = styled.div`
   margin-top: 25px;
@@ -78,7 +78,7 @@ export const PaymentData = styled.div`
       }
     }
   }
-`;
+`
 
 export const Total = styled.div`
   display: flex;
@@ -106,4 +106,4 @@ export const Total = styled.div`
   }
 
   margin-bottom: 30px;
-`;
+`

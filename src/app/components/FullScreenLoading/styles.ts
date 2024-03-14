@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@linaria/react'
 
 export const Content = styled.span`
   position: absolute;
@@ -6,4 +6,4 @@ export const Content = styled.span`
   bottom: 0;
   min-width: 100%;
   z-index: 999;
-`;
+`

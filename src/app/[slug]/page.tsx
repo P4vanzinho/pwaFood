@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import CategoryList from '../components/CategoryList';
-import Text from '../components/Text';
-import useFoodFetch from '../hooks/useFoodFetch';
-import { FoodApiBusiness } from '../../../types/foodApi';
-import { EndpointFoodApiEnum } from '../enums';
-import Image from 'next/image';
-import { poppins } from '../fonts';
-import { theme } from '../styles/theme';
-import { styled } from '@linaria/react';
-import { getPublicUser } from '@/utils/cookiePublicUser';
+import CategoryList from '../components/CategoryList'
+import Text from '../components/Text'
+import useFoodFetch from '../hooks/useFoodFetch'
+import { FoodApiBusiness } from '../../../types/foodApi'
+import { EndpointFoodApiEnum } from '../enums'
+import Image from 'next/image'
+import { poppins } from '../fonts'
+import { theme } from '../styles/theme'
+import { styled } from '@linaria/react'
+import { getPublicUser } from '@/utils/cookiePublicUser'
 
 const Container = styled.div`
   display: flex;
@@ -57,20 +57,20 @@ const Container = styled.div`
       color: ${theme.COLORS.PRIMARY};
     }
   }
-`;
+`
 
 type HomeProps = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export default function Home(props: HomeProps) {
-  const user = getPublicUser();
+  const user = getPublicUser()
 
   const { data } = useFoodFetch<FoodApiBusiness>(
     `${EndpointFoodApiEnum.BUSINESS}/${props.params.slug}`,
-  );
+  )
 
   return (
     <Container>
@@ -107,5 +107,5 @@ export default function Home(props: HomeProps) {
       </div>
       <CategoryList businessId={props.params.slug} />
     </Container>
-  );
+  )
 }

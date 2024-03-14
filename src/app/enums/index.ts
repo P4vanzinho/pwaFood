@@ -1,2 +1,2 @@
-export * from './foodApi';
-export * from './app';
+export * from './foodApi'
+export * from './app'

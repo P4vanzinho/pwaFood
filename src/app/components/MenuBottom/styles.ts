@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
 
 export const Container = styled.div`
   background-color: ${theme.COLORS.WHITE};
@@ -15,11 +15,11 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
+`
 
 type ButtonProps = {
-  selected?: boolean;
-};
+  selected?: boolean
+}
 
 export const Button = styled.div<ButtonProps>`
   position: relative;
@@ -32,18 +32,19 @@ export const Button = styled.div<ButtonProps>`
   height: 100%;
 
   > svg:nth-of-type(1) {
-    color: ${props =>
+    color: ${(props) =>
       props.selected ? theme.COLORS.PRIMARY : theme.COLORS.DARK};
   }
 
   > svg:nth-of-type(2) {
-    color: ${props => (props.selected ? theme.COLORS.PRIMARY : 'transparent')};
+    color: ${(props) =>
+      props.selected ? theme.COLORS.PRIMARY : 'transparent'};
     position: absolute;
     top: 50px;
   }
 
   cursor: pointer;
-`;
+`
 export const Bubble = styled.div`
   position: absolute;
   top: 15px;
@@ -61,4 +62,4 @@ export const Bubble = styled.div`
   border: 1px solid ${theme.COLORS.LIGHT};
   z-index: 2;
   font-size: 0.7rem;
-`;
+`

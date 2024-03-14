@@ -1,9 +1,9 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
 
 type ContainerProps = {
-  status: 'sucesso' | 'erro';
-};
+  status: 'sucesso' | 'erro'
+}
 
 export const Container = styled.div<ContainerProps>`
   position: absolute;
@@ -43,4 +43,4 @@ export const Container = styled.div<ContainerProps>`
     background-color: ${theme.COLORS.WHITE};
     color: ${theme.COLORS.DARK};
   }
-`;
+`

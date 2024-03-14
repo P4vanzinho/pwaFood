@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
 
 export const Container = styled.span`
   display: inline-block;
@@ -20,4 +20,4 @@ export const Container = styled.span`
       transform: rotate(360deg);
     }
   }
-`;
+`

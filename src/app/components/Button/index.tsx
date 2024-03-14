@@ -1,15 +1,15 @@
-import { ReactNode } from 'react';
-import { poppins } from '@/app/fonts';
-import { Container } from './styles';
-import classnames from 'classnames';
+import { ReactNode } from 'react'
+import { poppins } from '@/app/fonts'
+import { Container } from './styles'
+import classnames from 'classnames'
 
 type ButtonRegistrationType = {
-  text: string;
-  loading?: boolean;
-  disabled?: boolean;
-  selected?: boolean;
-  enabledSelect?: boolean;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+  text: string
+  loading?: boolean
+  disabled?: boolean
+  selected?: boolean
+  enabledSelect?: boolean
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 export default function Button({
   text,
   loading,
@@ -17,7 +17,7 @@ export default function Button({
   enabledSelect = false,
   ...rest
 }: ButtonRegistrationType) {
-  const pLoading = typeof loading !== 'boolean' ? false : loading;
+  const pLoading = typeof loading !== 'boolean' ? false : loading
 
   return (
     <Container
@@ -36,5 +36,5 @@ export default function Button({
         {text?.toUpperCase()}
       </button>
     </Container>
-  );
+  )
 }

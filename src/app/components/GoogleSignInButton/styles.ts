@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import { darken, lighten } from 'polished';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
+import { darken, lighten } from 'polished'
 
 export const Container = styled.button`
   width: 100%;
@@ -23,4 +23,4 @@ export const Container = styled.button`
     font-weight: 500;
     color: ${theme.COLORS.DARK};
   }
-`;
+`

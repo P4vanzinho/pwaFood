@@ -1,11 +1,11 @@
-import { styled } from '@linaria/react';
+import { styled } from '@linaria/react'
 
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   max-height: none;
   justify-content: center;
-`;
+`
 
 export const Container = styled.div`
   width: 1200px;
@@ -20,4 +20,4 @@ export const Container = styled.div`
   div {
     margin-top: 50px;
   }
-`;
+`

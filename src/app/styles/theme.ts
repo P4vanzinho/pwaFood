@@ -12,4 +12,4 @@ export const theme = {
     PRIMARY_DARK: '#1EAE94',
     ERROR: '#F77272',
   },
-};
+}

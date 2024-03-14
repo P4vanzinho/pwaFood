@@ -1,10 +1,10 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import { lighten } from 'polished';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
+import { lighten } from 'polished'
 
 type ContainerProps = {
-  checked?: boolean;
-};
+  checked?: boolean
+}
 
 export const Container = styled.div<ContainerProps>`
   display: flex;
@@ -34,4 +34,4 @@ export const Container = styled.div<ContainerProps>`
       border-radius: 50%;
     }
   }
-`;
+`

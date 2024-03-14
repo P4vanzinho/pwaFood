@@ -1,19 +1,19 @@
-import { Container, Close, Content, Button } from './styles';
-import { IoHelp, IoClose } from 'react-icons/io5';
-import Modal from '../Modal';
-import { poppins } from '@/app/fonts';
+import { Container, Close, Content, Button } from './styles'
+import { IoHelp, IoClose } from 'react-icons/io5'
+import Modal from '../Modal'
+import { poppins } from '@/app/fonts'
 
-type ActionCallBack = 'yes' | 'no';
+type ActionCallBack = 'yes' | 'no'
 
-type Type = 'MB_OK' | 'MB_OKCANCEL' | 'MB_YESNO' | 'MB_YESNOCANCEL';
+type Type = 'MB_OK' | 'MB_OKCANCEL' | 'MB_YESNO' | 'MB_YESNOCANCEL'
 
 type DialogProps = {
-  type: Type;
-  show: boolean;
-  closeCallback: () => void;
-  actionCallback: (action: ActionCallBack) => void;
-  text: string;
-};
+  type: Type
+  show: boolean
+  closeCallback: () => void
+  actionCallback: (action: ActionCallBack) => void
+  text: string
+}
 
 export default function DialogBox({
   type,
@@ -23,14 +23,14 @@ export default function DialogBox({
   text,
 }: DialogProps) {
   const closeOnClick = () => {
-    closeCallback();
-  };
+    closeCallback()
+  }
 
   const buttonOnClick = (action: ActionCallBack) => {
-    actionCallback(action);
-  };
+    actionCallback(action)
+  }
 
-  const Icon = IoHelp;
+  const Icon = IoHelp
 
   return (
     <Modal onClickCallback={closeOnClick}>
@@ -65,5 +65,5 @@ export default function DialogBox({
         </footer>
       </Container>
     </Modal>
-  );
+  )
 }

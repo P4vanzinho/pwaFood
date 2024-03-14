@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import { darken, grayscale } from 'polished';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
+import { darken, grayscale } from 'polished'
 
 export const Container = styled.form`
   *:focus {
@@ -8,7 +8,7 @@ export const Container = styled.form`
   }
 
   display: flex;
-`;
+`
 
 export const Main = styled.main`
   width: 100%;
@@ -53,12 +53,12 @@ export const Main = styled.main`
       }
     }
   }
-`;
+`
 
 export const ToggleSwitchContainer = styled.div`
   margin-top: 2.1rem;
   width: 100%;
-`;
+`
 
 export const ToggleSwitch = styled.div`
   width: 100%;
@@ -77,19 +77,19 @@ export const ToggleSwitch = styled.div`
     font-weight: 500;
     line-height: normal;
   }
-`;
+`
 
 export const Label = styled.label`
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
-`;
+`
 
 export const Input = styled.input`
   opacity: 0;
   position: absolute;
-`;
+`
 
 export const Switch = styled.div`
   position: relative;
@@ -133,7 +133,7 @@ export const Switch = styled.div`
       left: calc(100% - (28px + 4px));
     }
   }
-`;
+`
 
 export const ButtonsContainer = styled.div`
   width: 25.4rem;
@@ -156,4 +156,4 @@ export const ButtonsContainer = styled.div`
       color: ${() => theme.COLORS.WHITE};
     }
   }
-`;
+`

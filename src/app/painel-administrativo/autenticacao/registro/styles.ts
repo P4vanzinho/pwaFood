@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
 
 export const Container = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-`;
+`
 
 export const RegisterForm = styled.form`
   display: flex;
@@ -25,14 +25,14 @@ export const RegisterForm = styled.form`
     height: 3.4rem;
     align-items: center;
   }
-`;
+`
 
 export const FieldsetRegister = styled.fieldset`
   display: flex;
   flex-direction: column;
   gap: 2rem;
   border: none;
-`;
+`
 
 export const ForgetPasswordContainer = styled.div`
   display: flex;
@@ -53,9 +53,9 @@ export const ForgetPasswordContainer = styled.div`
     line-height: 1.8rem;
     color: ${({}) => theme.COLORS.PRIMARY_LIGHT};
   }
-`;
+`
 
 export const AlertSpan = styled.span`
   font-size: 12px;
   color: red;
-`;
+`

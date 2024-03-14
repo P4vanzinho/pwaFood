@@ -1,6 +1,6 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
-import Image from 'next/image';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
+import Image from 'next/image'
 
 export const Container = styled.div`
   height: auto;
@@ -41,7 +41,7 @@ export const Container = styled.div`
       width: 100%;
     }
   }
-`;
+`
 
 export const PhotoFood = styled(Image)`
   object-fit: cover;
@@ -49,4 +49,4 @@ export const PhotoFood = styled(Image)`
 
   -webkit-box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
   box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
-`;
+`

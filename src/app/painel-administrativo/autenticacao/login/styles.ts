@@ -1,11 +1,11 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
+`
 
 export const FieldsetLogin = styled.fieldset`
   display: flex;
@@ -16,7 +16,7 @@ export const FieldsetLogin = styled.fieldset`
   border: none;
   padding: 0px;
   margin: 0px;
-`;
+`
 
 export const ForgetPasswordContainer = styled.div`
   display: flex;
@@ -38,11 +38,11 @@ export const ForgetPasswordContainer = styled.div`
       color: ${theme.COLORS.PRIMARY_LIGHT};
     }
   }
-`;
+`
 
 export const AlertSpan = styled.span`
   font-size: 12px;
-`;
+`
 
 export const Or = styled.div`
   margin: 20px 0px;
@@ -65,4 +65,4 @@ export const Or = styled.div`
     height: 1px;
     background: ${theme.COLORS.GRAY};
   }
-`;
+`

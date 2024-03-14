@@ -1,29 +1,29 @@
-import { poppins } from '@/app/fonts';
-import { Container, Input } from './styles';
-import { useEffect, useState } from 'react';
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import { poppins } from '@/app/fonts'
+import { Container, Input } from './styles'
+import { useEffect, useState } from 'react'
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 
 type InputQtyProps = {
-  initialValue?: number;
-  callback: (value: number) => void;
-};
+  initialValue?: number
+  callback: (value: number) => void
+}
 
 export default function InputQty({ initialValue, callback }: InputQtyProps) {
-  const [qty, setQty] = useState(initialValue ?? 0);
-  const [subtractActive, setSubractActive] = useState(true);
+  const [qty, setQty] = useState(initialValue ?? 0)
+  const [subtractActive, setSubractActive] = useState(true)
 
   useEffect(() => {
-    setSubractActive(qty > 0);
-    callback(qty);
-  }, [callback, qty]);
+    setSubractActive(qty > 0)
+    callback(qty)
+  }, [callback, qty])
 
   const buttonOnClick = (mode: 'add' | 'subtract') => {
     if (!subtractActive && mode === 'subtract') {
-      return;
+      return
     }
 
-    setQty(current => (mode === 'subtract' ? current - 1 : current + 1));
-  };
+    setQty((current) => (mode === 'subtract' ? current - 1 : current + 1))
+  }
 
   return (
     <Container>
@@ -42,11 +42,7 @@ export default function InputQty({ initialValue, callback }: InputQtyProps) {
             disabled={!subtractActive}
             type="button"
             onClick={() =>
-              subtractActive
-                ? buttonOnClick('subtract')
-                : () => {
-                    return;
-                  }
+              subtractActive ? buttonOnClick('subtract') : () => {}
             }
           >
             <AiOutlineMinus size={20} />
@@ -57,5 +53,5 @@ export default function InputQty({ initialValue, callback }: InputQtyProps) {
         </div>
       </Input>
     </Container>
-  );
+  )
 }

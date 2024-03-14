@@ -1,5 +1,5 @@
-import { theme } from '@/app/styles/theme';
-import { styled } from '@linaria/react';
+import { theme } from '@/app/styles/theme'
+import { styled } from '@linaria/react'
 
 export const Container = styled.header`
   align-items: center;
@@ -12,7 +12,7 @@ export const Container = styled.header`
   width: 100%;
   padding: 50px;
   height: 10px;
-`;
+`
 
 export const Logo = styled.button`
   display: flex;
@@ -29,7 +29,7 @@ export const Logo = styled.button`
   > span:nth-of-type(3) {
     color: ${theme.COLORS.PRIMARY};
   }
-`;
+`
 
 export const MenuTopCenter = styled.div`
   display: flex;
@@ -46,9 +46,9 @@ export const MenuTopCenter = styled.div`
     font-size: 1.5rem;
     color: ${theme.COLORS.DARK};
   }
-`;
+`
 
 export const RightTopMenu = styled.div`
   display: flex;
   gap: 50px;
-`;
+`
