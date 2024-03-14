@@ -1,55 +1,49 @@
-'use client';
+'use client'
 
-import {
-  Container,
-  Or,
-  FieldsetLogin,
-  ForgetPasswordContainer,
-} from './styles';
+import { Container, Or, FieldsetLogin, ForgetPasswordContainer } from './styles'
 
-import GoogleSignInButton from '@/app/components/GoogleSignInButton';
+import GoogleSignInButton from '@/app/components/GoogleSignInButton'
 
-import { poppins, inter, bebas_neue } from '@/app/fonts';
-import Link from 'next/link';
-import React, { useState, SyntheticEvent, useEffect } from 'react';
-import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
-import Button from '@/app/components/Button';
-import { RoutesEnum } from '@/app/enums';
-import Input from '@/app/components/Input';
+import { poppins, inter, bebasNeue } from '@/app/fonts'
+import Link from 'next/link'
+import React, { useState, SyntheticEvent, useEffect } from 'react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+import Button from '@/app/components/Button'
+import { RoutesEnum } from '@/app/enums'
+import Input from '@/app/components/Input'
 
 export default function Login() {
-  const router = useRouter();
-  const [password, setPassword] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [loading, setLoading] = useState(false);
+  const router = useRouter()
+  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [loading, setLoading] = useState(false)
 
   async function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault();
+    event.preventDefault()
 
-    setLoading(true);
+    setLoading(true)
 
     try {
       const result = await signIn('credentials', {
         email,
         password,
         redirect: false,
-      });
+      })
       if (result?.error) {
         toast.error(result?.error, {
           theme: 'colored',
-        });
+        })
 
-        setLoading(false);
+        setLoading(false)
       } else {
-        toast.success('Bem-vindo!');
-        router.replace(RoutesEnum.PRODUTOS);
-        setLoading(false);
+        toast.success('Bem-vindo!')
+        router.replace(RoutesEnum.PRODUTOS)
+        setLoading(false)
       }
     } catch (error) {
-      setLoading(false);
-      return;
+      setLoading(false)
     }
   }
 
@@ -70,7 +64,7 @@ export default function Login() {
             id="email"
             type="email"
             placeholder="Digite seu e-mail"
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
 
@@ -79,12 +73,12 @@ export default function Login() {
             id="password"
             placeholder="Digite sua senha"
             type={'password'}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
 
           <Button
-            className={bebas_neue.className}
+            className={bebasNeue.className}
             type="submit"
             text="ENTRAR"
             loading={loading}
@@ -98,5 +92,5 @@ export default function Login() {
         </ForgetPasswordContainer>
       </form>
     </Container>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { bebas_neue } from './fonts'
+import { bebasNeue } from './fonts'
 import NextAuthSessionProvider from './providers/SessionProvider'
 import { ToastContainer } from 'react-toastify'
 import '../assets/ReactToastify.css'
@@ -169,7 +169,7 @@ function RootLayout({ children }: { children: ReactNode }) {
         <LoadingContextProvider>
           <FullScreenLoading>
             <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
-            <ToastContainer className={bebas_neue.className} />
+            <ToastContainer className={bebasNeue.className} />
           </FullScreenLoading>
         </LoadingContextProvider>
       </body>

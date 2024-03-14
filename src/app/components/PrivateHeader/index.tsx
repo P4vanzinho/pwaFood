@@ -1,30 +1,30 @@
-'use client';
-import { Container, Logo, MenuTopCenter, RightTopMenu } from './styles';
+'use client'
+import { Container, Logo, MenuTopCenter, RightTopMenu } from './styles'
 
-import { bebas_neue } from '../../fonts';
-import { useRouter, usePathname } from 'next/navigation';
-import Image from 'next/image';
+import { bebasNeue } from '../../fonts'
+import { useRouter, usePathname } from 'next/navigation'
+import Image from 'next/image'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { RoutesEnum } from '@/app/enums';
-import classNames from 'classnames';
+import { RoutesEnum } from '@/app/enums'
+import classNames from 'classnames'
 
 export default function PrivateHeader() {
-  const router = useRouter();
-  const pathname = usePathname();
+  const router = useRouter()
+  const pathname = usePathname()
 
   function handleSignIn() {
-    router.push(RoutesEnum.LOGIN);
+    router.push(RoutesEnum.LOGIN)
   }
 
   function handleSignUp() {
-    router.push(RoutesEnum.SIGNUP);
+    router.push(RoutesEnum.SIGNUP)
   }
 
   return (
     <Container>
-      <Logo className={bebas_neue.className}>
+      <Logo className={bebasNeue.className}>
         <div>
           <Image
             src="https://fooda.nyc3.digitaloceanspaces.com/develop/751df1fe-b516-4b2d-8dd4-916b54d3bd22.png"
@@ -41,7 +41,7 @@ export default function PrivateHeader() {
         </div>
       </Logo>
 
-      <MenuTopCenter className={bebas_neue.className}>
+      <MenuTopCenter className={bebasNeue.className}>
         <Link
           className={classNames({ selected: pathname === RoutesEnum.PRODUTOS })}
           href={RoutesEnum.PRODUTOS}
@@ -57,5 +57,5 @@ export default function PrivateHeader() {
         </Link>
       </MenuTopCenter>
     </Container>
-  );
+  )
 }

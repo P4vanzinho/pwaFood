@@ -1,6 +1,6 @@
 'use client'
 
-import { bebas_neue, poppins } from '@/app/fonts'
+import { bebasNeue, poppins } from '@/app/fonts'
 import {
   Container,
   FormContainer,
@@ -21,7 +21,7 @@ import {
 } from './styles'
 
 import Title from '@/app/components/Title'
-import { ChangeEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
 import Image from 'next/image'
 
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
@@ -328,7 +328,7 @@ export default function ProductPage({
 
             <SelectCategoryLabel
               htmlFor="foodCategory"
-              className={bebas_neue.className}
+              className={bebasNeue.className}
             >
               SELECIONE EM QUAL CATEGORIA ESTE PRODUTO SERA EXIBIDO
               <SelectContainer>
@@ -352,7 +352,7 @@ export default function ProductPage({
             </SelectCategoryLabel>
             <DescriptionLabel
               htmlFor="description"
-              className={bebas_neue.className}
+              className={bebasNeue.className}
             >
               DESCRICAO
               <div>

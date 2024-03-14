@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import classnames from 'classnames';
-import { Button, Container, ButtonContainer } from './styles';
-import { useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { bebas_neue, poppins } from '@/app/fonts';
-import Image from 'next/image';
-import Modal from '../Modal';
-import { IoCloseSharp } from 'react-icons/io5';
-import { MdOutlineAdd } from 'react-icons/md';
-import { RoutesEnum } from '@/app/enums';
+import classnames from 'classnames'
+import { Button, Container, ButtonContainer } from './styles'
+import { useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { bebasNeue, poppins } from '@/app/fonts'
+import Image from 'next/image'
+import Modal from '../Modal'
+import { IoCloseSharp } from 'react-icons/io5'
+import { MdOutlineAdd } from 'react-icons/md'
+import { RoutesEnum } from '@/app/enums'
 
 export default function FloatMenu() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
 
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const registerOnClick = () => {
-    setShowModal(current => !current);
-  };
+    setShowModal((current) => !current)
+  }
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function FloatMenu() {
               })}
               onClick={() => router.push(RoutesEnum.CATEGORIA_CADASTRO)}
             >
-              <button className={bebas_neue.className}>
+              <button className={bebasNeue.className}>
                 <span>CATEGORIA</span>
               </button>
               <button>
@@ -46,7 +46,7 @@ export default function FloatMenu() {
               })}
               onClick={() => router.push(RoutesEnum.CADASTRO_PRODUTO)}
             >
-              <button className={bebas_neue.className}>
+              <button className={bebasNeue.className}>
                 <span>PRODUTO</span>
               </button>
               <button>
@@ -62,17 +62,17 @@ export default function FloatMenu() {
           className={classnames(poppins.className, { higherZIndex: showModal })}
           onClick={registerOnClick}
         >
-          {!!showModal ? (
+          {showModal ? (
             <div>
               <IoCloseSharp />
             </div>
           ) : (
-            <span className={bebas_neue.className}>
+            <span className={bebasNeue.className}>
               <MdOutlineAdd /> CADASTRO
             </span>
           )}
         </Button>
       </ButtonContainer>
     </>
-  );
+  )
 }

@@ -1,19 +1,24 @@
-import { Container, ImageContainer, DescriptionsContainer } from './styles';
-import Image from 'next/image';
-import { bebas_neue, poppins } from '@/app/fonts';
-import { SelectButton } from './styles';
-import { useRouter } from 'next/navigation';
+import {
+  Container,
+  ImageContainer,
+  DescriptionsContainer,
+  SelectButton,
+} from './styles'
+import Image from 'next/image'
+import { bebasNeue, poppins } from '@/app/fonts'
+
+import { useRouter } from 'next/navigation'
 
 interface Props {
-  showSidebar: () => void;
+  showSidebar: () => void
 }
 
 export default function SidebarProductTemplates({ showSidebar }: Props) {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <Container>
       <header>
-        <h1 className={bebas_neue.className}>QUAL O MODELO DO PRODUTO</h1>
+        <h1 className={bebasNeue.className}>QUAL O MODELO DO PRODUTO</h1>
         <button onClick={showSidebar}>
           <Image
             src="/CloseNewProduct.jpg"
@@ -44,5 +49,5 @@ export default function SidebarProductTemplates({ showSidebar }: Props) {
         </DescriptionsContainer>
       </SelectButton>
     </Container>
-  );
+  )
 }

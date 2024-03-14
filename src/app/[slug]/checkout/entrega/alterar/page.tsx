@@ -1,71 +1,71 @@
-'use client';
+'use client'
 
-import { Container } from './styles';
-import Input from '../../../../components/Input';
-import Button from '../../../../components/Button';
-import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser';
-import { SyntheticEvent, useEffect, useState } from 'react';
-import { bebas_neue } from '@/app/fonts';
-import { useRouter } from 'next/navigation';
-import Title from '@/app/components/Title';
-import useFoodFetch from '@/app/hooks/useFoodFetch';
-import { EndpointFoodApiEnum } from '@/app/enums';
-import { FoodApiAddressGettingByPostalCode } from '../../../../../../types/foodApi';
+import { Container } from './styles'
+import Input from '../../../../components/Input'
+import Button from '../../../../components/Button'
+import { getPublicUser, setPublicUser } from '@/utils/cookiePublicUser'
+import { SyntheticEvent, useEffect, useState } from 'react'
+import { bebasNeue } from '@/app/fonts'
+import { useRouter } from 'next/navigation'
+import Title from '@/app/components/Title'
+import useFoodFetch from '@/app/hooks/useFoodFetch'
+import { EndpointFoodApiEnum } from '@/app/enums'
+import { FoodApiAddressGettingByPostalCode } from '../../../../../../types/foodApi'
 
 type PersonalDataProps = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 type DataDelivery = FoodApiAddressGettingByPostalCode & {
-  name: string;
-  whatsapp: string;
-  streetNumber: string;
-  addressDetails?: string;
-};
+  name: string
+  whatsapp: string
+  streetNumber: string
+  addressDetails?: string
+}
 
 export default function PersonalData({ params }: PersonalDataProps) {
-  const user = getPublicUser();
-  let dataDeliveryInitial: DataDelivery = {} as DataDelivery;
+  const user = getPublicUser()
+  let dataDeliveryInitial: DataDelivery = {} as DataDelivery
 
   if (user) {
     dataDeliveryInitial = {
       ...user.address,
       name: user.name ?? '',
       whatsapp: user.whatsapp ?? '',
-    } as DataDelivery;
+    } as DataDelivery
   }
 
-  const router = useRouter();
+  const router = useRouter()
   const { data: address, request } =
-    useFoodFetch<FoodApiAddressGettingByPostalCode>();
-  const [dataDelivery, setDataDelivery] = useState(dataDeliveryInitial);
+    useFoodFetch<FoodApiAddressGettingByPostalCode>()
+  const [dataDelivery, setDataDelivery] = useState(dataDeliveryInitial)
 
   const inputOnChange = (inputId: string, currentValue: string) => {
     if (inputId === 'cep' && currentValue.length === 9) {
       request({
         endPoint: `${EndpointFoodApiEnum.ADDRESS}/${currentValue}`,
         method: 'GET',
-      });
+      })
     }
 
-    setDataDelivery(dataDelivery => ({
+    setDataDelivery((dataDelivery) => ({
       ...dataDelivery,
       [inputId]: currentValue,
-    }));
-  };
+    }))
+  }
 
   useEffect(() => {
     if (!address) {
-      return;
+      return
     }
 
-    setDataDelivery(dataDelivery => ({
+    setDataDelivery((dataDelivery) => ({
       ...dataDelivery,
       ...address,
-    }));
-  }, [address]);
+    }))
+  }, [address])
 
   const inputs = [
     {
@@ -133,13 +133,13 @@ export default function PersonalData({ params }: PersonalDataProps) {
       required: true,
       type: 'text',
     },
-  ];
+  ]
 
   async function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault();
+    event.preventDefault()
 
     if (!Object.keys(dataDelivery).length) {
-      return;
+      return
     }
 
     const {
@@ -152,7 +152,7 @@ export default function PersonalData({ params }: PersonalDataProps) {
       streetNumber,
       whatsapp,
       addressDetails,
-    } = dataDelivery;
+    } = dataDelivery
 
     setPublicUser({
       whatsapp,
@@ -166,33 +166,33 @@ export default function PersonalData({ params }: PersonalDataProps) {
         city,
         state,
       },
-    });
+    })
 
-    router.push(`/${params?.slug}/checkout/entrega`);
+    router.push(`/${params?.slug}/checkout/entrega`)
   }
 
   return (
     <Container>
       <Title>Dados de entrega</Title>
       <form onSubmit={handleSubmit}>
-        {inputs.map(input => (
+        {inputs.map((input) => (
           <Input
             key={input.label}
             id={input.label}
             label={input.label}
             placeholder={input.placeHolder}
             type={input.type}
-            onChange={e => inputOnChange(input.id, e.currentTarget.value)}
+            onChange={(e) => inputOnChange(input.id, e.currentTarget.value)}
             required={input.required}
             value={input.value}
           />
         ))}
         <Button
-          className={bebas_neue.className}
+          className={bebasNeue.className}
           type="submit"
           text="ADICIONAR ENDEREÇO"
         />
       </form>
     </Container>
-  );
+  )
 }

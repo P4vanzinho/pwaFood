@@ -1,15 +1,15 @@
-import { bebas_neue } from '@/app/fonts';
-import { Container } from './styles';
+import { bebasNeue } from '@/app/fonts'
+import { Container } from './styles'
 import {
   MdAlternateEmail,
   MdPhoneAndroid,
   MdOutlinePhoneEnabled,
-} from 'react-icons/md';
+} from 'react-icons/md'
 
-import { PiTextTBold } from 'react-icons/pi';
-import { HiIdentification } from 'react-icons/hi';
-import { PiCurrencyDollarSimpleFill } from 'react-icons/pi';
-import { Bs123 } from 'react-icons/bs';
+import { PiTextTBold, PiCurrencyDollarSimpleFill } from 'react-icons/pi'
+import { HiIdentification } from 'react-icons/hi'
+
+import { Bs123 } from 'react-icons/bs'
 
 type HTMLInputTypeAttribute =
   | 'button'
@@ -39,22 +39,22 @@ type HTMLInputTypeAttribute =
   | 'cpf'
   | 'cnpj'
   | 'cellphone'
-  | string;
+  | string
 
 type InputProps = {
   valuesCallback?: (
     original: string | number | readonly string[],
     masked: string | number | readonly string[],
-  ) => void;
-  label?: string;
-  type: HTMLInputTypeAttribute;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  ) => void
+  label?: string
+  type: HTMLInputTypeAttribute
+} & React.InputHTMLAttributes<HTMLInputElement>
 
-type Icon = Partial<Record<HTMLInputTypeAttribute, JSX.Element>>;
+type Icon = Partial<Record<HTMLInputTypeAttribute, JSX.Element>>
 
 type MaskByType = Partial<
   Record<HTMLInputTypeAttribute, (value: string) => string>
->;
+>
 
 export default function Input({ label, value, ...rest }: InputProps) {
   const icon: Icon = {
@@ -66,20 +66,20 @@ export default function Input({ label, value, ...rest }: InputProps) {
     cpf: <HiIdentification />,
     cep: <Bs123 />,
     currency: <PiCurrencyDollarSimpleFill />,
-  };
+  }
 
   const maskByType: MaskByType = {
     cep: (value: string) => {
       return value
         .replace(/\D/g, '')
         .replace(/(\d{5})(\d)/, '$1-$2')
-        .replace(/(-\d{3})\d+?$/, '$1');
+        .replace(/(-\d{3})\d+?$/, '$1')
     },
     currency: (value: string) => {
       return value
         .replace(/\D/g, '')
         .replace(/(\d+)(\d{2})$/, '$1,$2')
-        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     },
     cpf: (value: string) => {
       return value
@@ -87,7 +87,7 @@ export default function Input({ label, value, ...rest }: InputProps) {
         .replace(/(\d{3})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1-$2')
-        .replace(/(-\d{2})\d+?$/, '$1');
+        .replace(/(-\d{2})\d+?$/, '$1')
     },
     cnpj: (value: string) => {
       return value
@@ -95,45 +95,45 @@ export default function Input({ label, value, ...rest }: InputProps) {
         .replace(/(\d{2})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1/$2')
-        .replace(/(\d{4})(\d)/, '$1-$2');
+        .replace(/(\d{4})(\d)/, '$1-$2')
     },
     cellphone: (value: string) => {
       return value
         .replace(/\D/g, '')
         .replace(/(\d{2})(\d)/, '($1) $2')
         .replace(/(\d{5})(\d)/, '$1-$2')
-        .replace(/(-\d{4})\d+?$/, '$1');
+        .replace(/(-\d{4})\d+?$/, '$1')
     },
     date: (value: string) => {
       return value
         .replace(/\D/g, '')
         .replace(/(\d{2})(\d)/, '$1/$2')
         .replace(/(\d{2})(\d)/, '$1/$2')
-        .replace(/(\d{4})(\d)/, '$1');
+        .replace(/(\d{4})(\d)/, '$1')
     },
-  };
+  }
 
   const maskValueByType = (
     value?: string | number | readonly string[],
     type?: HTMLInputTypeAttribute,
   ) => {
     if (!type) {
-      return value;
+      return value
     }
 
     if (!value) {
-      return '';
+      return ''
     }
 
-    const fn = maskByType[type];
-    const result = fn ? fn(String(value)) : value;
+    const fn = maskByType[type]
+    const result = fn ? fn(String(value)) : value
 
-    return result;
-  };
+    return result
+  }
 
   return (
     <Container type={rest.type}>
-      <label className={bebas_neue.className}>
+      <label className={bebasNeue.className}>
         {label} {rest.required && '*'}
       </label>
 
@@ -146,5 +146,5 @@ export default function Input({ label, value, ...rest }: InputProps) {
         {icon[rest.type] && <div>{icon[rest.type]}</div>}
       </div>
     </Container>
-  );
+  )
 }
