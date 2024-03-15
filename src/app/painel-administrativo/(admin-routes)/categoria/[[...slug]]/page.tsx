@@ -2,22 +2,23 @@
 
 import {
   Container,
-  Main,
+  FormContainer,
   ToggleSwitch,
   ToggleSwitchContainer,
   Label,
-  Input,
+  InputCheckBoxInToggle,
   Switch,
   ButtonsContainer,
 } from "./styles";
 import { poppins, bebasNeue } from "@/app/fonts";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import useFoodFetch from "@/app/hooks/useFoodFetch";
 import { useSession } from "next-auth/react";
 import { EndpointFoodApiEnum, RoutesEnum } from "@/app/enums";
 import Title from "@/app/components/Title";
 import Button from "@/app/components/Button";
+import { FoodApiCategory } from "../../../../../../types/foodApi";
 
 type CategoryProps = {
   params: {
@@ -27,26 +28,42 @@ type CategoryProps = {
 
 export default function Category({ params }: CategoryProps) {
   const mode = params?.slug ? "edit" : "register";
+  const title =
+    mode === "register"
+      ? "CADASTRO DE CATEGORIA DE PRODUTO"
+      : "EDIÇÃO DA CATEGORIA DE PRODUTO";
 
   const [checked, setChecked] = useState<boolean>(false);
   const [categoryName, setCategoryName] = useState<string>("");
   const { data: session } = useSession();
   const router = useRouter();
+  const categorySlug = params?.slug?.[0];
 
-  const businessID = session?.data?.business[0]?.id;
+  const businessId = session?.data?.business[0]?.id;
 
-  const { request: requestRegisterCategory, error, message } = useFoodFetch();
+  const { request: requestRegisterCategory } = useFoodFetch<FoodApiCategory>();
+  const { request: requestPatchCategory, data: responsePatchProduct } =
+    useFoodFetch<FoodApiCategory>();
+
+  const { request: getCategoryRequest, data: category } =
+    useFoodFetch<FoodApiCategory>();
 
   function handleCategoryOnClick() {
     if (mode === "edit") {
-      // chamar rota de edicao
+      requestPatchCategory({
+        method: "PATCH",
+        body: {
+          name: categoryName,
+          enabled: true,
+        },
+        endPoint: EndpointFoodApiEnum.PRODUCT_CATEGORY,
+        params: { categoryId: category?.id, businessId },
+      });
     } else {
-      // chamar rota de cadastro
-
       requestRegisterCategory({
         method: "POST",
         body: {
-          businessId: businessID,
+          businessId: businessId,
           name: categoryName,
           enabled: checked,
         },
@@ -59,14 +76,37 @@ export default function Category({ params }: CategoryProps) {
     event.preventDefault();
   }
 
-  const title =
-    mode === "register"
-      ? "CADASTRO DE CATEGORIA DE PRODUTO"
-      : "EDIÇÃO DA CATEGORIA DE PRODUTO";
+  useEffect(() => {
+    if (!responsePatchProduct) return;
+    router.replace(RoutesEnum.PRODUTOS);
+  }, [responsePatchProduct, router]);
+
+  useEffect(() => {
+    if (!businessId) return;
+    getCategoryRequest({
+      endPoint: `${EndpointFoodApiEnum.PRODUCT_CATEGORY}/${categorySlug}`,
+      params: {
+        businessId,
+      },
+    });
+  }, [businessId, categorySlug, getCategoryRequest]);
+
+  useEffect(() => {
+    if (!responsePatchProduct) return;
+    router.replace(RoutesEnum.PRODUTOS);
+  }, [responsePatchProduct, router]);
+
+  useEffect(() => {
+    console.log(category, `category`);
+    setCategoryName(category?.name || ``);
+    setChecked(!!category?.enabled);
+    console.log(category?.enabled, `category?.enabled`);
+    console.log(checked, `checked`);
+  }, [getCategoryRequest, category, checked]);
 
   return (
     <Container onSubmit={handleSubmit}>
-      <Main>
+      <FormContainer>
         <Title>{title}</Title>
 
         <label htmlFor="title" className={bebasNeue.className}>
@@ -85,7 +125,11 @@ export default function Category({ params }: CategoryProps) {
           <ToggleSwitch>
             <p className={poppins.className}>Exibir categoria no cardápio</p>
             <Label>
-              <Input type="checkbox" onChange={() => setChecked(!checked)} />
+              <InputCheckBoxInToggle
+                type="checkbox"
+                onChange={() => setChecked(!checked)}
+                checked={checked}
+              />
               <Switch />
             </Label>
           </ToggleSwitch>
@@ -105,7 +149,7 @@ export default function Category({ params }: CategoryProps) {
             onClick={handleCategoryOnClick}
           />
         </ButtonsContainer>
-      </Main>
+      </FormContainer>
     </Container>
   );
 }
