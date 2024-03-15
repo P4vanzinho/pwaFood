@@ -195,15 +195,6 @@ export default function ProductPage({
   }, [file]);
 
   useEffect(() => {
-    if (!file && modePage === `register`) return;
-
-    setIsUploadedImage(() => true);
-    setUploadName(
-      ` https://fooda.nyc3.digitaloceanspaces.com/develop/${upload?.name}`,
-    );
-  }, [file, modePage, upload]);
-
-  useEffect(() => {
     if (categories && categories.length === 1) {
       setCategory(() => categories[0].name);
     }
