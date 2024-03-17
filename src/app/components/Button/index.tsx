@@ -9,12 +9,14 @@ type ButtonRegistrationType = {
   disabled?: boolean;
   selected?: boolean;
   enabledSelect?: boolean;
+  typeOfButton?: "default" | "delete" | "submit";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 export default function Button({
   text,
   loading,
   selected = false,
   enabledSelect = false,
+  typeOfButton = "default",
   ...rest
 }: ButtonRegistrationType) {
   const pLoading = typeof loading !== "boolean" ? false : loading;
@@ -24,6 +26,7 @@ export default function Button({
       className={poppins.className}
       selected={selected}
       enabledSelect={enabledSelect}
+      typeOfButton={typeOfButton}
     >
       <button
         type="button"
