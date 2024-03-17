@@ -26,7 +26,7 @@ import {
 import Title from "@/app/components/Title";
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import Image from "next/image";
-
+import DialogBox from "@/app/components/DialogBox";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
@@ -61,6 +61,7 @@ export default function Product(props: ProductProps) {
   const textAreaMaxLength = 300;
   const [remaining, setRemaining] = useState<number>(textAreaMaxLength);
   const [checked, setChecked] = useState<boolean>(false);
+  const [isDialogBox, setIsDialogBox] = useState<boolean>(false);
   const [price, setPrice] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -159,6 +160,10 @@ export default function Product(props: ProductProps) {
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     handleRequest();
+  }
+
+  function handleDeleteProduct() {
+    console.log(`delete product`);
   }
 
   useEffect(() => {
@@ -417,15 +422,30 @@ export default function Product(props: ProductProps) {
             <Button
               text={`Cancelar`}
               onClick={() => router.replace(RoutesEnum.PRODUTOS)}
+              typeOfButton="default"
+            />
+
+            <Button
+              text={`Excluir`}
+              onClick={() => setIsDialogBox(true)}
+              typeOfButton="delete"
             />
             <Button
               text={`Salvar`}
               type="submit"
               loading={loadingPatchProduct || loadingNewProduct}
+              typeOfButton="submit"
             />
           </FormButtonsContainer>
         </form>
       </FormContainer>
+      {isDialogBox && (
+        <DialogBox
+          closeCallback={() => setIsDialogBox(false)}
+          actionCallback={handleDeleteProduct}
+          text="Voce tem certeza que deseja fazer isso?"
+        />
+      )}
     </Container>
   );
 }
