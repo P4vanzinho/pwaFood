@@ -1,29 +1,25 @@
-import { lighten } from "polished";
 import { styled } from "@linaria/react";
-import css from "styled-jsx/css";
 import { theme } from "@/app/styles/theme";
 
+type ButtonProps = {
+  typeButton: "delete" | "cancel";
+};
+
 export const Container = styled.div`
-  height: 140px;
-  width: 100%;
+  height: 12.5rem;
+  width: 34rem;
   display: flex;
+  gap: 1.563rem;
   flex-direction: column;
   background-color: ${() => theme.COLORS.WHITE};
-  padding-bottom: 25px;
   color: ${() => theme.COLORS.DARK};
   border-radius: 5px;
-
-  h2 {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    margin-left: 5px;
-  }
+  padding: 2.25rem 2.5rem;
+  position: relative;
 
   footer {
     display: flex;
-    padding: 3px 25px;
-    justify-content: space-between;
-    margin-top: 10px;
+    gap: 1.5rem;
   }
 `;
 
@@ -33,50 +29,58 @@ export const Close = styled.div`
   width: 100%;
   height: 20px;
   padding: 5px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 
   > div {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: ${() => theme.COLORS.LIGHT};
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
+    cursor: pointer;
   }
 `;
 
 export const Content = styled.div`
   display: flex;
-  flex-direction: row;
+  gap: 1.5rem;
   align-items: center;
-  justify-content: space-between;
-  padding: 0px 25px;
-  width: 100%;
 
   > div {
-    padding: 10px;
-    background-color: ${() => theme.COLORS.LIGHT};
-    border: 1px solid ${() => lighten(0.8, theme.COLORS.WARNING)};
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-  }
+    flex-direction: column;
+    gap: 10px;
 
-  > h2 {
-    font-size: 1rem;
-    font-weight: 500;
-    width: 100%;
-    margin-left: 20px;
+    > h2 {
+      font-size: 18px;
+      font-weight: 500;
+      width: 100%;
+    }
   }
 `;
 
-type ButtonProps = {
-  mode: "danger" | "border";
-};
+export const HelpIconContainer = styled.div`
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${() => theme.COLORS.LIGHT};
+  border-radius: 10px;
+`;
 
-export const Button = styled.div<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   border-radius: 8px;
-  padding: 2px 10px;
+  padding: 14px 20px;
   font-size: 0.9rem;
+  background-color: ${(props) =>
+    props.typeButton === "delete" ? theme.COLORS.ERROR : theme.COLORS.LIGHT};
+  width: 100%;
+  color: ${(props) =>
+    props.typeButton === "delete" ? theme.COLORS.WHITE : theme.COLORS.DARK};
+  border: none;
 `;
