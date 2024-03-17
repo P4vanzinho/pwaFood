@@ -5,14 +5,8 @@ import { darken } from "polished";
 type ButtonProps = {
   selected: boolean;
   enabledSelect: boolean;
+  typeOfButton: "default" | "delete" | "submit";
 };
-
-const disabled = `{
-  background-color: ${darken(0.03, theme.COLORS.LIGHT)};
-  color: ${theme.COLORS.GRAY};
-  cursor: not-allowed;
-  opacity: 0.9;
-}`;
 
 export const Container = styled.div<ButtonProps>`
   width: 100%;
@@ -25,25 +19,18 @@ export const Container = styled.div<ButtonProps>`
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: ${({ selected, enabledSelect }) =>
-      selected
-        ? theme.COLORS.PRIMARY
-        : enabledSelect
-          ? theme.COLORS.GRAY
-          : theme.COLORS.PRIMARY};
+    background-color: ${(props) =>
+      props.typeOfButton === "delete"
+        ? theme.COLORS.ERROR
+        : props.typeOfButton === "submit"
+          ? theme.COLORS.PRIMARY
+          : theme.COLORS.GRAY};
+
     color: ${theme.COLORS.WHITE};
     height: 2.5rem;
     font-size: 1.125rem;
     border: none;
     border-radius: 20px;
     padding: 0px 20px;
-
-    &:disabled {
-      ${disabled}
-    }
-
-    &.loading {
-      ${disabled}
-    }
   }
 `;

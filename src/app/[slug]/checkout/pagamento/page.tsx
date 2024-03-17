@@ -26,10 +26,6 @@ export default function Checkout({ params }: CheckoutProps) {
   const { currentOrder, setCurrentOrder } = useOrderContext();
 
   useEffect(() => {
-    console.log(order?.id);
-    console.log(order?.business?.whatsapp);
-    console.log(order?.business?.whatsapp);
-
     if (!order?.raw?.whatsapp || !order.business.whatsapp) {
       return;
     }
