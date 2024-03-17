@@ -97,11 +97,8 @@ export default function Category({ params }: CategoryProps) {
   }, [responsePatchProduct, router]);
 
   useEffect(() => {
-    console.log(category, `category`);
     setCategoryName(category?.name || ``);
     setChecked(!!category?.enabled);
-    console.log(category?.enabled, `category?.enabled`);
-    console.log(checked, `checked`);
   }, [getCategoryRequest, category, checked]);
 
   return (
