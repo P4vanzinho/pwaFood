@@ -20,6 +20,7 @@ export default function CategoryList({
   mode = "public",
 }: CategoryListProps) {
   const router = useRouter();
+  const needsToken = mode === `private`;
 
   const { data: categories } = useFoodFetch(
     EndpointFoodApiEnum.PRODUCT_CATEGORY,
@@ -28,6 +29,7 @@ export default function CategoryList({
       hasProducts: true,
       businessId,
     },
+    needsToken,
   ) as { data: FoodApiCategory[] };
 
   return (
@@ -37,16 +39,19 @@ export default function CategoryList({
           <React.Fragment key={`category-${category.id}`}>
             <EditCategoryContainer key={`edit-${category.id}`}>
               <Title>{category.name}</Title>
-              <button
-                className={inter.className}
-                onClick={() =>
-                  router.push(
-                    `${RoutesEnum.CATEGORIA_CADASTRO}/${category.slug}`,
-                  )
-                }
-              >
-                editar
-              </button>
+
+              {needsToken && (
+                <button
+                  className={inter.className}
+                  onClick={() =>
+                    router.push(
+                      `${RoutesEnum.CATEGORIA_CADASTRO}/${category.slug}`,
+                    )
+                  }
+                >
+                  editar
+                </button>
+              )}
             </EditCategoryContainer>
 
             <ProductList
