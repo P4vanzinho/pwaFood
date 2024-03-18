@@ -169,7 +169,7 @@ export default function Product(props: ProductProps) {
   useEffect(() => {
     if (!responsePatchProduct) return;
     router.replace(RoutesEnum.PRODUTOS);
-  }, [responsePatchProduct]);
+  }, [responsePatchProduct, router]);
 
   useEffect(() => {
     if (!businessId) return;
@@ -194,7 +194,7 @@ export default function Product(props: ProductProps) {
         businessId,
       },
     });
-  }, [businessId, productRequest]);
+  }, [businessId, productId, productRequest]);
 
   useEffect(() => {
     if (categories && !categorySelected) {
@@ -219,7 +219,7 @@ export default function Product(props: ProductProps) {
       },
       endPoint: EndpointFoodApiEnum.UPLOAD,
     });
-  }, [file]);
+  }, [file, requestNewProductUpload]);
 
   useEffect(() => {
     if (!upload) return;

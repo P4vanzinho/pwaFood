@@ -10,15 +10,14 @@ export const Container = styled.form`
   display: flex;
 `;
 
-export const Main = styled.main`
-  width: 100%;
+export const FormContainer = styled.div`
+  width: 38.375rem;
   height: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
-  height: 100%;
-  width: 61.4rem;
+  margin: 0 auto;
 
   > label {
     display: flex;
@@ -29,12 +28,14 @@ export const Main = styled.main`
     font-weight: 400;
     line-height: normal;
     color: ${() => theme.COLORS.DARK};
+    width: 100%;
 
     > input {
       border: none;
       border-radius: 1.5rem;
       background-color: ${() => theme.COLORS.LIGHT};
       height: 2.563rem;
+      width: 100%;
       display: flex;
       align-items: center;
       padding-left: 1.4rem;
@@ -86,7 +87,7 @@ export const Label = styled.label`
   cursor: pointer;
 `;
 
-export const Input = styled.input`
+export const InputCheckBoxInToggle = styled.input`
   opacity: 0;
   position: absolute;
 `;
@@ -124,7 +125,7 @@ export const Switch = styled.div`
 
   /* Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo styled-components.*/
   /*seleciona apenas os elementos input do tipo checkbox ou radio que estão marcados (ou seja, quando o botão switch é clicado).*/
-  ${Input}:checked + & {
+  ${InputCheckBoxInToggle}:checked + & {
     background: ${() => theme.COLORS.PRIMARY};
 
     animation: color_change 0.5s both;
