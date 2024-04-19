@@ -1,15 +1,16 @@
 "use client";
 
 import Title from "@/app/components/Title";
-import { Container } from "./styles";
+import { Container, SubTotalContainer, Footer, PriceContainer } from "./styles";
 import { useBagContext } from "@/context/bag";
 import Button from "@/app/components/Button";
-import { inter } from "@/app/fonts";
+import { inter, poppins } from "@/app/fonts";
 import BagItem from "@/app/components/BagItem";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { getPublicUser } from "@/utils/cookiePublicUser";
 import { useOrderContext } from "@/context/order";
+import Price from "@/app/components/Price";
 
 type BagProps = {
   params: {
@@ -61,19 +62,28 @@ export default function Bag({ params }: BagProps) {
             <BagItem key={item.id} item={item} />
           ))}
 
-          <button className={inter.className} onClick={addItemOnClick}>
-            <span>ADICIONAR + ITENS</span>
+          <button className={poppins.className} onClick={addItemOnClick}>
+            <span>Adicionar mais produtos</span>
           </button>
         </div>
 
-        <footer>
+        <Footer>
+          <SubTotalContainer className={poppins.className}>
+            <span>Subtotal</span>
+
+            <PriceContainer>
+              <Price>{total}</Price>
+            </PriceContainer>
+          </SubTotalContainer>
+
           <Button
+            className={poppins.className}
             disabled={!total}
-            text="FINALIZAR PEDIDO"
+            text="Fechar pedido"
             onClick={paymentMethodButtonOnClick}
             loading={!!loading}
           />
-        </footer>
+        </Footer>
       </Container>
     </>
   );

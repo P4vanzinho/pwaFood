@@ -162,9 +162,7 @@ export default function Product(props: ProductProps) {
     handleRequest();
   }
 
-  function handleDeleteProduct() {
-    console.log(`delete product`);
-  }
+  function handleDeleteProduct() {}
 
   useEffect(() => {
     if (!responseNewProduct) return;

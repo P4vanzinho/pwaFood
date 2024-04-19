@@ -37,16 +37,19 @@ export default function CategoryList({
           <React.Fragment key={`category-${category.id}`}>
             <EditCategoryContainer key={`edit-${category.id}`}>
               <Title>{category.name}</Title>
-              <button
-                className={inter.className}
-                onClick={() =>
-                  router.push(
-                    `${RoutesEnum.CATEGORIA_CADASTRO}/${category.slug}`,
-                  )
-                }
-              >
-                editar
-              </button>
+
+              {mode === "private" && (
+                <button
+                  className={inter.className}
+                  onClick={() =>
+                    router.push(
+                      `${RoutesEnum.CATEGORIA_CADASTRO}/${category.slug}`,
+                    )
+                  }
+                >
+                  editar
+                </button>
+              )}
             </EditCategoryContainer>
 
             <ProductList

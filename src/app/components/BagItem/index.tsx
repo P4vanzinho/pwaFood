@@ -1,9 +1,20 @@
 import { Item, useBagContext } from "@/context/bag";
 import { useEffect, useRef, useState } from "react";
-import { Actions, Body, Container, InputWrapper, PhotoFood } from "./styles";
+import {
+  Actions,
+  Body,
+  Container,
+  InputWrapper,
+  PhotoFood,
+  QtyControlContainer,
+  QtyInputContainer,
+  PriceContainer,
+} from "./styles";
 import Price from "../Price";
-import { poppins } from "@/app/fonts";
-import { IoTrashBinSharp, IoChevronDownOutline } from "react-icons/io5";
+import { dmsSans, poppins } from "@/app/fonts";
+import trash from "../../../../public/trash.png";
+import Image from "next/image";
+import subtraticVector from "../../../../public/subtraticVector.svg";
 
 type BagItem = {
   item: Item;
@@ -11,14 +22,33 @@ type BagItem = {
 
 export default function BagItem({ item }: BagItem) {
   const { editItem, removeItem } = useBagContext();
-
   const inputRef = useRef<HTMLInputElement>(null);
+  const [qty, setQty] = useState(0);
+  const [subtractActive, setSubractActive] = useState(true);
+  const [inputValue, setInputValue] = useState(item.qty);
+
+  const inputQtyCallback = (value: number) => {
+    setQty(value);
+  };
+
+  useEffect(() => {
+    setSubractActive(inputValue > 0);
+    inputQtyCallback(inputValue);
+  }, [inputValue]);
+
+  const buttonOnClick = (mode: "add" | "subtract") => {
+    if (!subtractActive && mode === "subtract") {
+      return;
+    }
+
+    setInputValue((current) =>
+      mode === "subtract" ? current - 1 : current + 1,
+    );
+  };
 
   const inputOnClick = () => {
     inputRef?.current?.focus();
   };
-
-  const [inputValue, setInputValue] = useState(item.qty);
 
   const inputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(Number(e.currentTarget.value));
@@ -50,27 +80,64 @@ export default function BagItem({ item }: BagItem) {
           alt={item.title + "_photo"}
         />
 
-        <Body>
-          <span className={poppins.className}>{item.title}</span>
-          <Price>{item.unityPrice}</Price>
+        <Body className={poppins.className}>
+          <span className={dmsSans.className}>{item.title}</span>
+
+          <PriceContainer>
+            <Price>{item.unityPrice}</Price>
+          </PriceContainer>
         </Body>
       </div>
 
       <Actions>
-        <button onClick={trashOnClick}>
-          <div>
-            <IoTrashBinSharp />
-          </div>
-        </button>
+        <div>
+          <button onClick={trashOnClick}>
+            <Image src={trash} alt="treshImage" />
+          </button>
+        </div>
         <InputWrapper onClick={inputOnClick}>
-          <input
-            ref={inputRef}
-            type="number"
-            value={inputValue}
-            onChange={inputOnChange}
-            onFocus={inputOnFocus}
-          />
-          <IoChevronDownOutline />
+          <QtyInputContainer>
+            <input
+              className={poppins.className}
+              ref={inputRef}
+              type="text"
+              value={inputValue}
+              onChange={inputOnChange}
+              onFocus={inputOnFocus}
+            />
+
+            <QtyControlContainer>
+              <div>
+                <button
+                  disabled={!subtractActive}
+                  type="button"
+                  onClick={() => buttonOnClick("add")}
+                >
+                  <Image
+                    src={subtraticVector}
+                    alt={`botao para subtrair quantidade`}
+                    width={10}
+                    height={10}
+                  />
+                </button>
+
+                <button
+                  disabled={!subtractActive}
+                  type="button"
+                  onClick={() =>
+                    subtractActive ? buttonOnClick("subtract") : () => {}
+                  }
+                >
+                  <Image
+                    src={subtraticVector}
+                    alt={`botao para subtrair quantidade`}
+                    width={10}
+                    height={10}
+                  />
+                </button>
+              </div>
+            </QtyControlContainer>
+          </QtyInputContainer>
         </InputWrapper>
       </Actions>
     </Container>

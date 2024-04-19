@@ -1,7 +1,14 @@
 "use client";
 
 import useFoodFetch from "@/app/hooks/useFoodFetch";
-import { Container, Content } from "./styles";
+import {
+  Container,
+  Content,
+  QtyInputContainer,
+  SubTotalContainer,
+  Footer,
+  TitleAndDescriptionContainer,
+} from "./styles";
 import Image from "next/image";
 import { EndpointFoodApiEnum } from "@/app/enums";
 import Title from "@/app/components/Title";
@@ -13,6 +20,7 @@ import { useState } from "react";
 import Price from "@/app/components/Price";
 import { useBagContext } from "@/context/bag";
 import { useRouter } from "next/navigation";
+import { poppins } from "@/app/fonts";
 
 type ProductProps = {
   params: {
@@ -60,33 +68,40 @@ export default function Product(props: ProductProps) {
       {!!product && (
         <>
           <Image
-            width={0}
-            height={0}
+            width={265}
+            height={230}
             sizes="100vw"
             src={product.upload?.url as any}
             alt={`${product.slug} image`}
           />
-          <Content>
-            <div>
-              <Title>{product.name}</Title>
-              <Text>{product.description}</Text>
-            </div>
 
-            <footer>
+          <QtyInputContainer>
+            <InputQty callback={inputQtyCallback} initialValue={qty} />
+          </QtyInputContainer>
+          <Content>
+            <TitleAndDescriptionContainer>
               <div>
-                <div>
-                  <InputQty callback={inputQtyCallback} initialValue={qty} />
-                </div>
+                <Title>{product.name}</Title>
+              </div>
+
+              <div>
+                <Text>{product.description}</Text>
+              </div>
+            </TitleAndDescriptionContainer>
+
+            <Footer className={poppins.className}>
+              <SubTotalContainer>
+                <span>Subtotal</span>
 
                 <Price>{subTotal}</Price>
-              </div>
+              </SubTotalContainer>
 
               <Button
                 disabled={!qty}
                 text="ADICIONAR À SACOLA"
                 onClick={buttonOnClick}
               />
-            </footer>
+            </Footer>
           </Content>
         </>
       )}

@@ -8,6 +8,7 @@ import "../assets/ReactToastify.css";
 import { css } from "@linaria/core";
 import { LoadingContextProvider } from "@/context/loading";
 import FullScreenLoading from "./components/FullScreenLoading";
+import { theme } from "./styles/theme";
 
 const globalStyle = css`
   :root {
@@ -25,6 +26,10 @@ const globalStyle = css`
     cursor: pointer;
   }
 
+  button:focus {
+    outline: none;
+  }
+
   body {
     width: 100%;
     overflow-x: hidden;
@@ -34,6 +39,7 @@ const globalStyle = css`
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: ${theme.COLORS.LIGHT};
 
     p,
     h1,

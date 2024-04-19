@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Bebas_Neue, Poppins, Inter } from "next/font/google";
+import { Bebas_Neue, Poppins, Inter, DM_Sans } from "next/font/google";
 
 export const bebasNeue = Bebas_Neue({
   display: "swap",
@@ -14,6 +14,12 @@ export const poppins = Poppins({
 });
 
 export const inter = Inter({
+  display: "swap",
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+});
+
+export const dmsSans = DM_Sans({
   display: "swap",
   weight: ["400", "500", "700"],
   subsets: ["latin"],

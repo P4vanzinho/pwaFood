@@ -64,7 +64,7 @@ export const DescriptionsContainer = styled.div`
     font-size: 1.8rem;
     font-weight: 600;
     line-height: normal;
-    color: ${() => theme.COLORS.SECUNDARY_DARK};
+    color: ${() => theme.COLORS.DARK};
     text-align: start;
   }
 

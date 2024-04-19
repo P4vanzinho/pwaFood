@@ -7,6 +7,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useBagContext } from "@/context/bag";
 import { inter } from "@/app/fonts";
 import { centsToUnities } from "@/utils/money";
+import { RiCalendarLine } from "react-icons/ri";
 
 type MenuBottomPRops = {
   slug: string;
@@ -22,7 +23,7 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
       <>
         {!!total && (
           <Bubble className={inter.className}>
-            {centsToUnities(total).toLocaleString("pt-BR")}
+            {centsToUnities(total).toLocaleString()}
           </Bubble>
         )}
       </>
@@ -35,10 +36,18 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
       route: "/",
       selected: false,
     },
+
     {
-      Icon: BiSearch,
-      route: "/buscar",
+      Icon: RiCalendarLine,
+      route: "/history",
       selected: false,
+    },
+
+    {
+      Icon: BiBasket,
+      route: "/sacola",
+      selected: false,
+      Info: ViewBubble,
     },
 
     {
@@ -46,12 +55,7 @@ export default function MenuBottom({ slug }: MenuBottomPRops) {
       route: "/favorito",
       selected: false,
     },
-    {
-      Icon: BiBasket,
-      route: "/sacola",
-      selected: false,
-      Info: ViewBubble,
-    },
+
     {
       Icon: FaRegUser,
       route: "/usuario",

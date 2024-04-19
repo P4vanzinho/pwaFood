@@ -10,18 +10,22 @@ export const Container = styled.div`
   justify-content: center;
   height: 100%;
   overflow: none;
+  margin-top: 100px;
+  padding: 0px 1rem;
 
   > div {
-    padding: 1rem;
-    overflow: auto;
-    height: 90%;
-    padding-bottom: 170px;
-
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     > button {
       border: none;
-      background-color: ${theme.COLORS.WHITE};
+      background-color: transparent;
       margin-top: 30px;
       padding: 20px 20px 20px 0px;
+
+      input:focus {
+        outline: none;
+      }
 
       &:hover {
         > span {
@@ -31,26 +35,49 @@ export const Container = styled.div`
       }
 
       > span {
-        color: ${theme.COLORS.ERROR};
-        font-weight: 600;
+        font-size: 1rem;
+        color: ${theme.COLORS.PRIMARY};
+        font-weight: 700;
         transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 250ms;
         cursor: pointer;
       }
     }
   }
+`;
 
-  > footer {
-    padding: 0px 1rem;
-    position: fixed;
-    width: 100%;
-    max-width: 1200px;
-    height: 4.8rem;
-    bottom: 70px;
-    background-color: ${theme.COLORS.WHITE};
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    left: 50%;
-    transform: translateX(-50%);
+export const SubTotalContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  span {
+    font-size: 16px;
+    color: ${theme.COLORS.DARK};
   }
+
+  span:nth-of-type(2) {
+    font-weight: 600;
+  }
+`;
+
+export const PriceContainer = styled.div`
+  > span {
+    font-size: 20px;
+    color: ${theme.COLORS.DARK};
+    font-weight: 600;
+  }
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 70px;
+
+  left: 0;
+  padding: 0 40px;
+  background-color: ${theme.COLORS.LIGHT};
 `;
