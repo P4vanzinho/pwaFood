@@ -5,7 +5,7 @@ export const Container = styled.header`
   display: flex;
   flex-direction: column;
   background-color: ${theme.COLORS.LIGHT};
-  z-index: 1;
+
   width: 100%;
   height: auto;
   border-radius: 5px;
@@ -16,7 +16,7 @@ export const Container = styled.header`
     width: 100%;
 
     & > div {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
   }
 `;

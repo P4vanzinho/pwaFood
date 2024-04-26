@@ -17,7 +17,7 @@ export const Container = styled.div<InputProps>`
 
   > label {
     font-size: 0.75rem;
-    color: ${() => theme.COLORS.PRIMARY};
+    color: ${() => theme.COLORS.DARK};
   }
 
   &:has(input:focus) {
@@ -44,12 +44,12 @@ export const Container = styled.div<InputProps>`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    border: 2px solid ${() => theme.COLORS.PRIMARY};
+    border: 1px solid ${() => theme.COLORS.PRIMARY};
     margin-top: 7px;
     overflow: hidden;
 
     &:has(> input:focus) {
-      border: 2px solid ${() => darken(0.1, theme.COLORS.PRIMARY)};
+      border: 1px solid ${() => darken(0.1, theme.COLORS.PRIMARY)};
 
       svg {
         fill: ${() => darken(0.1, theme.COLORS.PRIMARY)};
@@ -57,7 +57,7 @@ export const Container = styled.div<InputProps>`
     }
 
     &:has(> input:invalid) {
-      border: 2px solid ${() => darken(0.1, theme.COLORS.ERROR)};
+      border: 1px solid ${() => darken(0.1, theme.COLORS.ERROR)};
 
       svg {
         fill: ${() => darken(0.1, theme.COLORS.ERROR)};
@@ -65,7 +65,7 @@ export const Container = styled.div<InputProps>`
     }
 
     &:has(> input:valid) {
-      border: 2px solid ${() => theme.COLORS.PRIMARY};
+      border: 1px solid ${() => theme.COLORS.PRIMARY};
 
       svg {
         fill: ${() => darken(0.1, theme.COLORS.PRIMARY)};
