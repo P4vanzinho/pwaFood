@@ -1,4 +1,4 @@
-import { bebasNeue } from "@/app/fonts";
+import { bebasNeue, dmsSans } from "@/app/fonts";
 import { Container } from "./styles";
 import {
   MdAlternateEmail,
@@ -133,7 +133,7 @@ export default function Input({ label, value, ...rest }: InputProps) {
 
   return (
     <Container type={rest.type}>
-      <label className={bebasNeue.className}>
+      <label className={dmsSans.className}>
         {label} {rest.required && "*"}
       </label>
 
