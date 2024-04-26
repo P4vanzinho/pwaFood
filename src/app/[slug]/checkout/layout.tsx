@@ -24,7 +24,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1200px;
   min-height: calc(100vh - 6rem);
-  padding: 1rem 1rem;
+  padding: 100px 1rem 0 1rem;
 `;
 
 const HeaderNavigation = styled.div`
@@ -58,11 +58,6 @@ function CheckoutLayout(props: CheckoutLayoutProps) {
   return (
     <>
       <Wrapper>
-        <HeaderNavigation>
-          <AiOutlineLeft size={25} onClick={() => router.back()} />
-
-          <span className={poppins.className}>checkout</span>
-        </HeaderNavigation>
         <Container>{props.children}</Container>
       </Wrapper>
     </>
