@@ -131,7 +131,7 @@ function PublicLayout(props: PublicLayoutProps) {
                 <span className={poppins.className}>{data.name}</span>
                 {!!user?.name && (
                   <>
-                    <span> {user?.name}!</span>
+                    <span className={poppins.className}> {user?.name}!</span>
                   </>
                 )}
               </SlugNameContainer>
