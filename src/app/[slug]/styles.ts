@@ -82,5 +82,6 @@ export const SlugNameContainer = styled.div`
 
   > span:nth-of-type(2) {
     color: ${theme.COLORS.PRIMARY};
+    text-align: center;
   }
 `;
