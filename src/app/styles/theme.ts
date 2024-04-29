@@ -8,5 +8,6 @@ export const theme = {
     WARNING: "#F1C75D",
     PRIMARY: "#F9881F",
     ERROR: "#FE554A",
+    BLACK: "#000000",
   },
 };
