@@ -91,7 +91,7 @@ export const Footer = styled.footer`
   justify-content: flex-end;
   position: fixed;
   bottom: 70px;
-
+  z-index: 1;
   left: 0;
   padding: 0 40px;
   background-color: ${theme.COLORS.LIGHT};
