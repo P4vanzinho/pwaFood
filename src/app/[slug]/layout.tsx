@@ -106,6 +106,7 @@ function PublicLayout(props: PublicLayoutProps) {
               type="text"
               placeholder="Salada de ovo"
               className={poppins.className}
+              onBlur={() => setIsSearching(false)}
             />
 
             <button onClick={() => setIsSearching(false)}>
