@@ -12,7 +12,7 @@ import Title from "@/app/components/Title";
 import Button from "@/app/components/Button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { inter, poppins } from "@/app/fonts";
+import { dmsSans, inter, poppins } from "@/app/fonts";
 import { useBagContext } from "@/context/bag";
 import { centsToUnities } from "@/utils/money";
 import useFoodFetch from "@/app/hooks/useFoodFetch";
@@ -173,7 +173,7 @@ export default function Checkout({ params }: CheckoutProps) {
                 className={poppins.className}
                 href={`/${params?.slug}/checkout/entrega/alterar`}
               >
-                alterar
+                Alterar
               </ChangeLink>
             )}
           </div>
@@ -205,7 +205,7 @@ export default function Checkout({ params }: CheckoutProps) {
                 className={poppins.className}
                 href={`/${params?.slug}/checkout/pagamento/alterar`}
               >
-                alterar
+                Alterar
               </ChangeLink>
             )}
           </div>
@@ -227,18 +227,21 @@ export default function Checkout({ params }: CheckoutProps) {
         </DeliveryMethod>
       </div>
       <footer>
-        <Total className={inter.className}>
-          <label>Total</label>
+        <Total>
+          <label className={poppins.className}>Total</label>
           <div>
             {!!deliveryFee && (
-              <caption>entrega +{centsToUnities(deliveryFee)}</caption>
+              <caption className={dmsSans.className}>
+                entrega +{centsToUnities(deliveryFee)}
+              </caption>
             )}
-            <span>{centsToUnities(total)}</span>
+            <span className={poppins.className}>{centsToUnities(total)}</span>
           </div>
         </Total>
         <Button
-          text="Confirmar dados de entrega"
+          text="Confirmar dados"
           onClick={sendDataButtonOnClick}
+          className={poppins.className}
         />
       </footer>
     </Container>
