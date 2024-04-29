@@ -9,7 +9,6 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   height: 100%;
-  overflow: none;
   margin-top: 100px;
   padding: 0px 1rem;
 
@@ -17,6 +16,25 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 60vh;
+
+    > div {
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: ${theme.COLORS.PRIMARY};
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: ${theme.COLORS.LIGHT};
+        border-radius: 8px;
+      }
+    }
+
     > button {
       border: none;
       background-color: transparent;
