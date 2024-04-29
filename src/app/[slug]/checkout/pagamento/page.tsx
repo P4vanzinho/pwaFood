@@ -6,7 +6,7 @@ import Title from "@/app/components/Title";
 import Button from "@/app/components/Button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { inter, poppins } from "@/app/fonts";
+import { dmsSans, inter, poppins } from "@/app/fonts";
 import { useBagContext } from "@/context/bag";
 import { centsToUnities } from "@/utils/money";
 import useFoodFetch from "@/app/hooks/useFoodFetch";
@@ -103,7 +103,7 @@ export default function Checkout({ params }: CheckoutProps) {
               className={poppins.className}
               href={`/${params?.slug}/checkout/pagamento/alterar`}
             >
-              alterar
+              Alterar
             </ChangeLink>
           </div>
           <section>
@@ -122,21 +122,24 @@ export default function Checkout({ params }: CheckoutProps) {
         </PaymentData>
       </div>
       <footer>
-        <Total className={inter.className}>
-          <label>Total</label>
+        <Total>
+          <label className={poppins.className}>Total</label>
           <div>
             {!!currentOrder?.deliveryFee && (
-              <caption>
+              <caption className={dmsSans.className}>
                 entrega +{centsToUnities(currentOrder?.deliveryFee)}
               </caption>
             )}
-            <span>{centsToUnities(currentOrder?.total ?? 0)}</span>
+            <span className={poppins.className}>
+              {centsToUnities(currentOrder?.total ?? 0)}
+            </span>
           </div>
         </Total>
         <Button
           disabled={!showSendOrderButton}
-          text="Enviar pedido"
+          text="Confirmar e enviar pedido"
           onClick={sendOrderOnClick}
+          className={poppins.className}
         />
       </footer>
     </Container>
