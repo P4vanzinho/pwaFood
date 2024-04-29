@@ -4,8 +4,10 @@ import Link from "next/link";
 import { lighten } from "polished";
 
 export const ChangeLink = styled(Link)`
-  color: ${theme.COLORS.WARNING};
+  color: ${theme.COLORS.PRIMARY};
   font-size: 1.063rem;
+  text-decoration: none;
+  font-weight: bold;
 `;
 
 export const Container = styled.div`
@@ -17,7 +19,7 @@ export const Container = styled.div`
   & > div {
     overflow: auto;
     height: 90%;
-    padding-bottom: 170px;
+    padding-bottom: 31vh;
   }
 
   & > footer {
@@ -31,6 +33,8 @@ export const Container = styled.div`
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
+    z-index: 1;
+    background-color: ${theme.COLORS.LIGHT};
   }
 `;
 
@@ -53,18 +57,19 @@ export const DeliveryData = styled.div`
     width: 100%;
     background-color: ${theme.COLORS.WHITE};
     border-radius: 20px;
-    padding: 25px;
+    padding: 25px 30px;
     margin-top: 15px;
 
     & > div {
       color: ${theme.COLORS.DARK};
       font-weight: lighter;
-      border-style: solid;
-      border-color: ${() => lighten(0.25, theme.COLORS.GRAY)};
-      border-width: 1px;
-      border-right: none;
-      border-left: none;
-      padding: 15px 0px;
+      padding: 5px 0;
+      border-bottom: ${theme.COLORS.BLACK} 1px solid;
+      border-top: ${theme.COLORS.BLACK} 1px solid;
+
+      > p {
+        padding-bottom: 5px;
+      }
     }
 
     & > p {
@@ -72,7 +77,7 @@ export const DeliveryData = styled.div`
     }
 
     > p:nth-of-type(1) {
-      margin-bottom: 15px;
+      padding-bottom: 5px;
     }
 
     > p:nth-of-type(2) {
@@ -104,12 +109,13 @@ export const DeliveryMethod = styled.div`
 
     > div:nth-of-type(1) {
       padding-bottom: 15px;
-      border-color: ${() => lighten(0.25, theme.COLORS.GRAY)};
+      border-color: ${theme.COLORS.BLACK};
       border-style: solid;
       border-width: 1px;
       border-right: none;
       border-left: none;
       border-top: none;
+      border-bottom: 1px solid;
     }
 
     > div:nth-of-type(2) {
