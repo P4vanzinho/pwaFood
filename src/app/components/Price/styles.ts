@@ -3,5 +3,5 @@ import { styled } from "@linaria/react";
 
 export const Span = styled.span`
   color: ${theme.COLORS.PRIMARY};
-  font-size: 1.125em;
+  font-size: 0.875rem;
 `;

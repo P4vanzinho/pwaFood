@@ -1,6 +1,6 @@
 import CurrencyFormat from "react-currency-format";
 import { ReactNode } from "react";
-import { bebasNeue } from "@/app/fonts";
+import { bebasNeue, poppins } from "@/app/fonts";
 import { Span } from "./styles";
 import { centsToUnities } from "@/utils/money";
 
@@ -12,7 +12,8 @@ export default function Price({ children }: ButtonRegistrationType) {
   const price = centsToUnities(Number(children));
 
   return (
-    <Span className={bebasNeue.className}>
+    <Span className={poppins.className}>
+      $
       {price?.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",

@@ -1,18 +1,13 @@
-import { theme } from "@/app/styles/theme";
 import { styled } from "@linaria/react";
-import { darken } from "polished";
+import classnames from "classnames";
+import { theme } from "@/app/styles/theme";
 
 type ButtonProps = {
   selected: boolean;
   enabledSelect: boolean;
+  typeOfButton: "default" | "delete" | "submit";
+  disabled?: boolean;
 };
-
-const disabled = `{
-  background-color: ${darken(0.03, theme.COLORS.LIGHT)};
-  color: ${theme.COLORS.GRAY};
-  cursor: not-allowed;
-  opacity: 0.9;
-}`;
 
 export const Container = styled.div<ButtonProps>`
   width: 100%;
@@ -20,30 +15,26 @@ export const Container = styled.div<ButtonProps>`
   margin-right: auto;
 
   > button {
-    cursor: pointer;
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: ${({ selected, enabledSelect }) =>
-      selected
-        ? theme.COLORS.PRIMARY
-        : enabledSelect
-          ? theme.COLORS.GRAY
-          : theme.COLORS.PRIMARY};
+    background-color: ${theme.COLORS.PRIMARY};
+
     color: ${theme.COLORS.WHITE};
     height: 2.5rem;
-    font-size: 1.125rem;
+    font-size: 0.875rem;
     border: none;
     border-radius: 20px;
     padding: 0px 20px;
+    font-weight: bold;
+  }
 
-    &:disabled {
-      ${disabled}
-    }
-
-    &.loading {
-      ${disabled}
-    }
+  button[disabled] {
+    background-color: ${theme.COLORS.GRAY};
+    color: ${theme.COLORS.LIGHT};
+    cursor: not-allowed;
+    opacity: 0.9;
   }
 `;

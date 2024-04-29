@@ -5,7 +5,7 @@ import Input from "../../../../components/Input";
 import Button from "../../../../components/Button";
 import { getPublicUser, setPublicUser } from "@/utils/cookiePublicUser";
 import { SyntheticEvent, useEffect, useState } from "react";
-import { bebasNeue } from "@/app/fonts";
+import { poppins } from "@/app/fonts";
 import { useRouter } from "next/navigation";
 import Title from "@/app/components/Title";
 import useFoodFetch from "@/app/hooks/useFoodFetch";
@@ -71,7 +71,7 @@ export default function PersonalData({ params }: PersonalDataProps) {
     {
       placeHolder: "Digite o seu nome",
       id: "name",
-      label: "nome",
+      label: "Nome",
       type: "text",
       value: dataDelivery.name,
       required: true,
@@ -79,7 +79,7 @@ export default function PersonalData({ params }: PersonalDataProps) {
     {
       placeHolder: "Digite o número do seu WhatsApp",
       id: "whatsapp",
-      label: "whatsapp",
+      label: "Whatsapp",
       type: "cellphone",
       value: dataDelivery.whatsapp,
       required: true,
@@ -188,9 +188,9 @@ export default function PersonalData({ params }: PersonalDataProps) {
           />
         ))}
         <Button
-          className={bebasNeue.className}
+          className={poppins.className}
           type="submit"
-          text="ADICIONAR ENDEREÇO"
+          text="Enviar para esse endereço"
         />
       </form>
     </Container>

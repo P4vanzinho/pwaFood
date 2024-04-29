@@ -1,10 +1,10 @@
 :root {
   --toastify-color-light: #fff;
-  --toastify-color-dark: #121212;
+  --toastify-color-dark: #2a3037;
   --toastify-color-info: #1eae94;
-  --toastify-color-success: #2fdbbc;
+  --toastify-color-success: #f9881f;
   --toastify-color-warning: #f1c75d;
-  --toastify-color-error: #f77272;
+  --toastify-color-error: #fe554a;
   --toastify-color-transparent: rgba(255, 255, 255, 0.7);
   --toastify-icon-color-info: var(--toastify-color-info);
   --toastify-icon-color-success: var(--toastify-color-success);

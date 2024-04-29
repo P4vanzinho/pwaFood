@@ -4,8 +4,10 @@ import Link from "next/link";
 import { lighten } from "polished";
 
 export const ChangeLink = styled(Link)`
-  color: ${theme.COLORS.WARNING};
+  color: ${theme.COLORS.PRIMARY};
   font-size: 1.063rem;
+  text-decoration: none;
+  font-weight: bold;
 `;
 
 export const Container = styled.div`
@@ -52,30 +54,26 @@ export const PaymentData = styled.div`
     padding: 25px;
     margin-top: 15px;
 
-    & > p {
-      padding-bottom: 15px;
-      border-color: ${() => lighten(0.25, theme.COLORS.GRAY)};
-      border-style: solid;
-      border-width: 1px;
-      border-right: none;
-      border-left: none;
-      border-top: none;
-      font-weight: 400;
-      color: ${() => lighten(0.25, theme.COLORS.DARK)};
+    & > p:nth-of-type(1) {
+      border-bottom: 1px solid ${theme.COLORS.DARK};
+      padding-bottom: 7px;
+      color: ${theme.COLORS.DARK};
+      font-weight: 600;
+    }
 
-      &:nth-of-type(n + 2) {
-        margin-top: 15px;
-      }
+    & > p:nth-of-type(2) {
+      border-bottom: 1px solid ${theme.COLORS.DARK};
+      padding: 5px 0;
+      padding-bottom: 2px;
+      color: ${theme.COLORS.DARK};
+      font-weight: 300;
+    }
 
-      &:nth-last-of-type(1) {
-        border: none;
-        padding-bottom: 0px;
-        color: ${theme.COLORS.DARK};
-      }
-
-      &:nth-of-type(1) {
-        color: ${theme.COLORS.DARK};
-      }
+    & > p:nth-of-type(3) {
+      color: ${theme.COLORS.DARK};
+      font-weight: 600;
+      text-transform: uppercase;
+      padding-top: 7px;
     }
   }
 `;

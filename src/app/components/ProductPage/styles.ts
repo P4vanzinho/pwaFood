@@ -407,7 +407,7 @@ export const Switch = styled.div`
   /* ${InputCheckBoxInToggle} Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo linaria.*/
   /*seleciona apenas os elementos input do tipo checkbox ou radio que estão marcados (ou seja, quando o botão switch é clicado).*/
   ${InputCheckBoxInToggle}:checked + & {
-    background-color: ${() => theme.COLORS.PRIMARY_DARK};
+    background-color: ${() => theme.COLORS.PRIMARY};
 
     &:before {
       left: calc(100% - (28px + 4px));

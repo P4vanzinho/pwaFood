@@ -35,7 +35,7 @@ export const ForgetPasswordContainer = styled.div`
       margin-left: 5px;
       font-size: 0.875rem;
       font-weight: 700;
-      color: ${theme.COLORS.PRIMARY_LIGHT};
+      color: ${theme.COLORS.PRIMARY};
     }
   }
 `;

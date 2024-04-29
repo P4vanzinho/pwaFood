@@ -1,66 +1,56 @@
-import { Container, Close, Content, Button } from "./styles";
+import { Container, Close, Content, Button, HelpIconContainer } from "./styles";
 import { IoHelp, IoClose } from "react-icons/io5";
 import Modal from "../Modal";
 import { poppins } from "@/app/fonts";
 
-type ActionCallBack = "yes" | "no";
-
-type Type = "MB_OK" | "MB_OKCANCEL" | "MB_YESNO" | "MB_YESNOCANCEL";
-
 type DialogProps = {
-  type: Type;
-  show: boolean;
   closeCallback: () => void;
-  actionCallback: (action: ActionCallBack) => void;
+  actionCallback: () => void;
   text: string;
 };
 
 export default function DialogBox({
-  type,
-  show,
   closeCallback,
   actionCallback,
   text,
 }: DialogProps) {
-  const closeOnClick = () => {
-    closeCallback();
-  };
-
-  const buttonOnClick = (action: ActionCallBack) => {
-    actionCallback(action);
-  };
-
   const Icon = IoHelp;
 
   return (
-    <Modal onClickCallback={closeOnClick}>
+    <Modal onClickCallback={() => closeCallback()}>
       <Container>
-        <Close onClick={closeOnClick}>
+        <Close onClick={() => closeCallback()}>
           <div>
             <IoClose />
           </div>
         </Close>
+
         <Content className={poppins.className}>
-          <div>
+          <HelpIconContainer>
             <Icon size={25} />
+          </HelpIconContainer>
+
+          <div>
+            <h2>{text}</h2>
+            <span>Seu produto nao podera ser recuperado</span>
           </div>
-          <h2>{text}</h2>
         </Content>
 
         <footer>
           <Button
-            mode="border"
             className={poppins.className}
-            onClick={() => buttonOnClick("yes")}
+            onClick={() => actionCallback()}
+            typeButton="delete"
           >
-            Sim, adicionar
+            Sim, excluir
           </Button>
+
           <Button
-            mode="danger"
             className={poppins.className}
-            onClick={() => buttonOnClick("no")}
+            onClick={() => closeCallback()}
+            typeButton="cancel"
           >
-            Não, fechar pedido
+            Não, cancelar
           </Button>
         </footer>
       </Container>

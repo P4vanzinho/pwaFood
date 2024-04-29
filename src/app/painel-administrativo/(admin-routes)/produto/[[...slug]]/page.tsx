@@ -26,7 +26,7 @@ import {
 import Title from "@/app/components/Title";
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import Image from "next/image";
-
+import DialogBox from "@/app/components/DialogBox";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
@@ -61,6 +61,7 @@ export default function Product(props: ProductProps) {
   const textAreaMaxLength = 300;
   const [remaining, setRemaining] = useState<number>(textAreaMaxLength);
   const [checked, setChecked] = useState<boolean>(false);
+  const [isDialogBox, setIsDialogBox] = useState<boolean>(false);
   const [price, setPrice] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -161,6 +162,8 @@ export default function Product(props: ProductProps) {
     handleRequest();
   }
 
+  function handleDeleteProduct() {}
+
   useEffect(() => {
     if (!responseNewProduct) return;
     emptyingInputs();
@@ -169,7 +172,7 @@ export default function Product(props: ProductProps) {
   useEffect(() => {
     if (!responsePatchProduct) return;
     router.replace(RoutesEnum.PRODUTOS);
-  }, [responsePatchProduct]);
+  }, [responsePatchProduct, router]);
 
   useEffect(() => {
     if (!businessId) return;
@@ -194,7 +197,7 @@ export default function Product(props: ProductProps) {
         businessId,
       },
     });
-  }, [businessId, productRequest]);
+  }, [businessId, productId, productRequest]);
 
   useEffect(() => {
     if (categories && !categorySelected) {
@@ -219,7 +222,7 @@ export default function Product(props: ProductProps) {
       },
       endPoint: EndpointFoodApiEnum.UPLOAD,
     });
-  }, [file]);
+  }, [file, requestNewProductUpload]);
 
   useEffect(() => {
     if (!upload) return;
@@ -417,15 +420,30 @@ export default function Product(props: ProductProps) {
             <Button
               text={`Cancelar`}
               onClick={() => router.replace(RoutesEnum.PRODUTOS)}
+              typeOfButton="default"
+            />
+
+            <Button
+              text={`Excluir`}
+              onClick={() => setIsDialogBox(true)}
+              typeOfButton="delete"
             />
             <Button
               text={`Salvar`}
               type="submit"
               loading={loadingPatchProduct || loadingNewProduct}
+              typeOfButton="submit"
             />
           </FormButtonsContainer>
         </form>
       </FormContainer>
+      {isDialogBox && (
+        <DialogBox
+          closeCallback={() => setIsDialogBox(false)}
+          actionCallback={handleDeleteProduct}
+          text="Voce tem certeza que deseja fazer isso?"
+        />
+      )}
     </Container>
   );
 }

@@ -6,10 +6,13 @@ import useFoodFetch from "../hooks/useFoodFetch";
 import { FoodApiBusiness } from "../../../types/foodApi";
 import { EndpointFoodApiEnum } from "../enums";
 import Image from "next/image";
-import { poppins } from "../fonts";
+import { poppins, dmsSans } from "../fonts";
 import { theme } from "../styles/theme";
 import { styled } from "@linaria/react";
 import { getPublicUser } from "@/utils/cookiePublicUser";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const Container = styled.div`
   display: flex;
@@ -18,45 +21,9 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  padding: 1rem;
-
-  > header {
-    margin: 10px 0px 20px 5px;
-    display: flex;
-    align-items: center;
-
-    > p {
-      font-size: 0.75rem;
-      color: ${theme.COLORS.ERROR};
-      font-weight: 600;
-      margin-left: 2px;
-    }
-
-    > img {
-      width: 1.563rem;
-      height: 1.563rem;
-      border-radius: 5px;
-    }
-
-    > span {
-      margin-left: 5px;
-      font-size: 0.75rem;
-      color: ${theme.COLORS.GRAY};
-      font-weight: 600;
-    }
-  }
-
-  > div {
-    margin: 10px 0px 20px;
-
-    p {
-      margin-left: 5px;
-    }
-
-    span {
-      color: ${theme.COLORS.PRIMARY};
-    }
-  }
+  padding: 0 1rem 1rem;
+  background-color: ${theme.COLORS.LIGHT};
+  margin-top: 100px;
 `;
 
 type HomeProps = {
@@ -66,45 +33,24 @@ type HomeProps = {
 };
 
 export default function Home(props: HomeProps) {
-  const user = getPublicUser();
+  const isSlugPage = !!props?.params?.slug;
 
   const { data } = useFoodFetch<FoodApiBusiness>(
     `${EndpointFoodApiEnum.BUSINESS}/${props.params.slug}`,
   );
 
+  const pathname = usePathname();
+  const slug = pathname.split("/").pop(); // Extrai o slug do pathname atual
+
+  // Verifica se a rota atual corresponde à rota base /app/[slug]
+  const isAppSlugRoute = pathname.startsWith("/app/") && slug !== undefined;
+
+  useEffect(() => {
+    console.log(isSlugPage, ` isSlugPage`);
+  }, [isSlugPage]);
+
   return (
     <Container>
-      <header>
-        {!!data?.upload?.url && (
-          <Image
-            src={data?.upload?.url}
-            width={30}
-            height={30}
-            alt={`${data?.name}_logo`}
-          ></Image>
-        )}
-
-        {!!data?.name && (
-          <>
-            <span className={poppins.className}>{data.name.toUpperCase()}</span>
-          </>
-        )}
-
-        <p className={poppins.className}>
-          {data?.status === "close" ? "( FECHADO )" : ""}
-        </p>
-      </header>
-
-      <div>
-        <Text>
-          Olá
-          {!!user?.name && (
-            <>
-              ,<span> {user?.name}!</span>
-            </>
-          )}
-        </Text>
-      </div>
       <CategoryList businessId={props.params.slug} />
     </Container>
   );

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const Container = styled.div`
   height: auto;
-  width: 130px;
+  width: 10rem;
   display: flex;
   flex-direction: column;
   background-color: ${theme.COLORS.WHITE};
@@ -24,22 +24,10 @@ export const Container = styled.div`
   > div {
     display: flex;
     flex-direction: column;
+    padding: 0 10px 16px;
     justify-content: space-between;
-
-    height: 6rem;
-
-    > p {
-      margin: 0.625rem;
-      display: inline-block;
-      width: 100%;
-    }
-
-    > span {
-      display: flex;
-      margin: 0px 0.625rem 0.625rem;
-
-      width: 100%;
-    }
+    gap: 10px;
+    flex: 1;
   }
 `;
 
@@ -49,4 +37,19 @@ export const PhotoFood = styled(Image)`
 
   -webkit-box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
   box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
+`;
+
+export const Foodname = styled.span`
+  color: ${theme.COLORS.DARK};
+  font-size: 0.875em;
+  font-weight: 600;
+  margin-top: 10px;
+`;
+
+export const PriceAndLikeContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-end;
+  align-items: center;
 `;

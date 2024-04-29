@@ -1,14 +1,19 @@
 import { poppins } from "@/app/fonts";
-import { Container, Input } from "./styles";
+import { Container, QtyContainer } from "./styles";
 import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { RiSubtractFill } from "react-icons/ri";
 
 type InputQtyProps = {
   initialValue?: number;
   callback: (value: number) => void;
 };
 
-export default function InputQty({ initialValue, callback }: InputQtyProps) {
+export default function InputQty({
+  initialValue,
+  callback,
+  ...rest
+}: InputQtyProps) {
   const [qty, setQty] = useState(initialValue ?? 0);
   const [subtractActive, setSubractActive] = useState(true);
 
@@ -27,31 +32,21 @@ export default function InputQty({ initialValue, callback }: InputQtyProps) {
 
   return (
     <Container>
-      <span className={poppins.className}>QUANTIDADE</span>
-      <Input>
-        <input
-          className={poppins.className}
-          type="number"
-          name="number"
-          id="number"
-          value={qty}
-        />
-
-        <div>
-          <button
-            disabled={!subtractActive}
-            type="button"
-            onClick={() =>
-              subtractActive ? buttonOnClick("subtract") : () => {}
-            }
-          >
-            <AiOutlineMinus size={20} />
-          </button>
-          <button type="button" onClick={() => buttonOnClick("add")}>
-            <AiOutlinePlus size={20} />
-          </button>
-        </div>
-      </Input>
+      <QtyContainer>
+        <button
+          disabled={!subtractActive}
+          type="button"
+          onClick={() =>
+            subtractActive ? buttonOnClick("subtract") : () => {}
+          }
+        >
+          <RiSubtractFill size={15} />
+        </button>
+        <input type="text" value={qty} className={poppins.className} />
+        <button type="button" onClick={() => buttonOnClick("add")}>
+          <AiOutlinePlus size={15} />
+        </button>
+      </QtyContainer>
     </Container>
   );
 }

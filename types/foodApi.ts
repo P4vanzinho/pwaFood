@@ -30,6 +30,7 @@ export type FoodApiCategory = {
   id: number;
   businessId: number;
   product: FoodApiProduct[];
+  slug: string;
 };
 
 export type FoodApiOrder = {

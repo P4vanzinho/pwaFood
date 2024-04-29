@@ -6,35 +6,45 @@ import { darken } from "polished";
 export const Container = styled.div`
   width: 100%;
   display: flex;
-  margin-top: 25px;
-  height: 5rem;
+  background-color: ${theme.COLORS.WHITE};
+  padding: 1.375rem 1.563rem;
+  border-radius: 20px;
 
   > div:nth-of-type(1) {
     display: flex;
     width: 100%;
+    gap: 10px;
+    height: 4.188rem;
   }
 `;
 
 export const PhotoFood = styled(Image)`
   object-fit: cover;
   border-radius: 10px;
-  -webkit-box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
-  box-shadow: 2px 0px 15px -2px rgba(0, 0, 0, 0.03);
-  padding: 5px;
-  width: 6rem;
-  height: 5rem;
+
+  width: 4.625rem;
+  height: 100%;
 `;
 
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0px;
-  margin-left: 15px;
   width: 100%;
+  justify-content: space-between;
 
+  > span:nth-of-type(1) {
+    line-height: 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 5px 11px;
+  }
+`;
+
+export const PriceContainer = styled.div`
   > span {
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 20px;
+    color: ${theme.COLORS.PRIMARY};
+    font-weight: 600;
   }
 `;
 
@@ -42,22 +52,32 @@ export const Actions = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5px 0px;
-  width: 15%;
-  height: 100%;
-  justify-content: space-between;
+  width: 1.688rem;
 
-  > button {
-    width: 100%;
-    justify-content: flex-start;
-    align-items: flex-end;
-    height: 2rem;
-
-    border: none;
-    background-color: transparent;
+  > div:nth-of-type(1) {
     display: flex;
-    flex-direction: column;
-    cursor: pointer;
+    justify-content: flex-end;
+
+    > button {
+      height: 22px;
+      width: 19px;
+      padding: 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: ${() => theme.COLORS.ERROR};
+      border: none;
+      border-radius: 5px;
+      outline: none;
+
+      svg {
+        color: ${() => theme.COLORS.WHITE};
+
+        path {
+          background-color: ${() => theme.COLORS.ERROR};
+        }
+      }
+    }
 
     &:hover > div {
       background-color: ${() => darken(0.2, theme.COLORS.ERROR)};
@@ -80,20 +100,59 @@ export const Actions = styled.div`
   }
 `;
 
+export const ButtonDeleteContainer = styled.div``;
+
 export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 2rem;
-  align-items: flex-end;
-  align-self: flex-end;
-
-  cursor: pointer;
-
-  > input {
-    display: flex;
-    width: 30px;
-    height: 1rem;
+  input {
+    color: ${theme.COLORS.DARK};
     border: none;
-    font-size: 0.875rem;
+    outline: none;
+    width: 100%;
+
+    /* Adicione a estilização dos botões */
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      margin: 0;
+    }
+
+    /* Adicione outros estilos personalizados, se desejar */
+    background-color: transparent;
+    color: ${theme.COLORS.DARK};
+
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+
+export const QtyInputContainer = styled.div`
+  display: flex;
+  > input {
+    font-size: 14px;
+    font-weight: 600;
+  }
+`;
+
+export const QtyControlContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  align-items: center;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    > button {
+      background-color: transparent;
+      border: none;
+    }
+
+    > button:nth-of-type(1) {
+      > img {
+        transform: scaleY(-1);
+      }
+    }
   }
 `;
