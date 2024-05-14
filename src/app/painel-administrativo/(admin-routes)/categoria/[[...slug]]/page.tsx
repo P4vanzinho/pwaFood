@@ -6,6 +6,7 @@ import {
   ToggleSwitch,
   ToggleSwitchContainer,
   Label,
+  LabelToglleSwitch,
   InputCheckBoxInToggle,
   Switch,
   ButtonsContainer,
@@ -99,7 +100,7 @@ export default function Category({ params }: CategoryProps) {
   useEffect(() => {
     setCategoryName(category?.name || ``);
     setChecked(!!category?.enabled);
-  }, [getCategoryRequest, category, checked]);
+  }, [getCategoryRequest, category]);
 
   return (
     <Container onSubmit={handleSubmit}>
@@ -120,15 +121,15 @@ export default function Category({ params }: CategoryProps) {
 
         <ToggleSwitchContainer>
           <ToggleSwitch>
-            <p className={poppins.className}>Exibir categoria no cardápio</p>
-            <Label>
+            <p className={poppins.className}>Exibir o produto no cardapio</p>
+            <LabelToglleSwitch>
               <InputCheckBoxInToggle
                 type="checkbox"
                 onChange={() => setChecked(!checked)}
                 checked={checked}
               />
               <Switch />
-            </Label>
+            </LabelToglleSwitch>
           </ToggleSwitch>
         </ToggleSwitchContainer>
 
