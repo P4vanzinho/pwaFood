@@ -4,7 +4,7 @@ import { theme } from "@/app/styles/theme";
 export const Container = styled.div`
   height: 100%;
   width: 100%;
-  padding: 0px 0px 40px;
+  padding: 0px 0px 60px;
   display: flex;
   flex-direction: column;
 
@@ -26,6 +26,6 @@ export const EditCategoryContainer = styled.div`
     background-color: transparent;
     font-weight: 500;
 
-    color: ${() => theme.COLORS.SECUNDARY_DARK};
+    color: ${() => theme.COLORS.DARK};
   }
 `;
