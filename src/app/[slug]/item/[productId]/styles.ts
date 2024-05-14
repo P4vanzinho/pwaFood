@@ -53,23 +53,6 @@ export const TitleAndDescriptionContainer = styled.div`
     left: 50%;
   }
 
-  > div:nth-of-type(2) {
-    max-height: 100px;
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: ${theme.COLORS.PRIMARY};
-      border-radius: 4px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: ${theme.COLORS.LIGHT};
-      border-radius: 8px;
-    }
-  }
   /* Estilização da barra de rolagem */
 `;
 

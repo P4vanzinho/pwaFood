@@ -84,9 +84,7 @@ export default function Product(props: ProductProps) {
                 <Title>{product.name}</Title>
               </div>
 
-              <div>
-                <Text>{product.description}</Text>
-              </div>
+              <Text>{product.description}</Text>
             </TitleAndDescriptionContainer>
 
             <Footer className={poppins.className}>

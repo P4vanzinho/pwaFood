@@ -32,9 +32,25 @@ const globalStyle = css`
 
   body {
     width: 100%;
+    max-width: 100vw;
     overflow-x: hidden;
     min-height: 100vh;
-    max-height: none;
+    overflow-y: auto;
+
+    /* Estilos para as barras de rolagem */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: ${theme.COLORS.PRIMARY};
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: ${theme.COLORS.LIGHT};
+      border-radius: 8px;
+    }
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;

@@ -92,22 +92,20 @@ export const InputCheckBoxInToggle = styled.input`
   position: absolute;
 `;
 
+export const LabelToglleSwitch = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+`;
+
 export const Switch = styled.div`
   position: relative;
-  width: 4.438rem;
-  height: 2rem;
-  background: ${() => theme.COLORS.GRAY};
+  width: 4.486rem;
+  height: 2.019rem;
+  background: #b3b3b3;
   border-radius: 32px;
   padding: 4px;
-
-  @keyframes color_change {
-    from {
-      background-color: ${() => theme.COLORS.GRAY};
-    }
-    to {
-      background-color: ${() => darken(0.2, theme.COLORS.PRIMARY)};
-    }
-  }
 
   &:before {
     content: "";
@@ -123,12 +121,10 @@ export const Switch = styled.div`
     filter: drop-shadow(-2px 1px 6px rgba(0, 0, 0, 0.25));
   }
 
-  /* Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo styled-components.*/
+  /* ${InputCheckBoxInToggle} Isso permite que você use o componente Input como um seletor CSS sem precisar saber qual é o nome da classe gerado pelo linaria.*/
   /*seleciona apenas os elementos input do tipo checkbox ou radio que estão marcados (ou seja, quando o botão switch é clicado).*/
   ${InputCheckBoxInToggle}:checked + & {
-    background: ${() => theme.COLORS.PRIMARY};
-
-    animation: color_change 0.5s both;
+    background-color: ${() => theme.COLORS.PRIMARY};
 
     &:before {
       left: calc(100% - (28px + 4px));
