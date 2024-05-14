@@ -58,11 +58,9 @@ export default function Bag({ params }: BagProps) {
         <div>
           <Title>Sacola</Title>
 
-          <div>
-            {items.map((item) => (
-              <BagItem key={item.id} item={item} />
-            ))}
-          </div>
+          {items.map((item) => (
+            <BagItem key={item.id} item={item} />
+          ))}
 
           <button className={poppins.className} onClick={addItemOnClick}>
             <span>Adicionar mais produtos</span>

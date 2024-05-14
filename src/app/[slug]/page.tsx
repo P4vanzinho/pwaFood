@@ -45,10 +45,6 @@ export default function Home(props: HomeProps) {
   // Verifica se a rota atual corresponde à rota base /app/[slug]
   const isAppSlugRoute = pathname.startsWith("/app/") && slug !== undefined;
 
-  useEffect(() => {
-    console.log(isSlugPage, ` isSlugPage`);
-  }, [isSlugPage]);
-
   return (
     <Container>
       <CategoryList businessId={props.params.slug} />
