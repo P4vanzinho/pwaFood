@@ -181,7 +181,7 @@ export default function Product(props: ProductProps) {
       endPoint: EndpointFoodApiEnum.PRODUCT_CATEGORY,
       params: {
         injectProducts: true,
-        hasProducts: true,
+
         businessId,
       },
     });
@@ -200,13 +200,25 @@ export default function Product(props: ProductProps) {
   }, [businessId, productId, productRequest]);
 
   useEffect(() => {
-    if (categories && !categorySelected) {
+    if (product) {
+      const currentProductCategory = categories?.find(
+        (category) => category.id === product.categoryId,
+      );
+
+      if (currentProductCategory) {
+        setCategory(currentProductCategory.name);
+        setCategorySelected(currentProductCategory);
+      }
+      return;
+    }
+
+    if (categories && !categorySelected && !product) {
       setCategory(() => categories[0].name);
     }
     const foundCategory = categories?.find((prev) => prev.name === category);
 
     setCategorySelected(foundCategory);
-  }, [categories, category, categorySelected]);
+  }, [categories, category, categorySelected, product]);
 
   useEffect(() => {
     if (!file) return;
@@ -238,11 +250,10 @@ export default function Product(props: ProductProps) {
   }, [product]);
 
   useEffect(() => {
-    if (categories && categories.length) {
+    if (categories && categories.length === 1) {
       setCategory(() => categories[0].name);
     }
     const foundCategory = categories?.find((prev) => prev.name === category);
-
     setCategorySelected(foundCategory);
   }, [categories, category, categorySelected]);
 
@@ -355,8 +366,7 @@ export default function Product(props: ProductProps) {
                   onChange={(e) => setCategory(e.target.value)}
                 >
                   {/* obs: testar o que realmente e necessario nesses ifs */}
-                  {businessId &&
-                    categories &&
+                  {categories &&
                     categories?.map((category) => (
                       <option key={category.id} value={category.name}>
                         {category.name}
