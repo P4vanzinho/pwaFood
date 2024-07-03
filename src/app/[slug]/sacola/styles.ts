@@ -9,8 +9,8 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   height: 100%;
-  margin-top: 100px;
-  padding: 0px 1rem 150px;
+
+  padding-bottom: 150px;
 
   > div {
     display: flex;

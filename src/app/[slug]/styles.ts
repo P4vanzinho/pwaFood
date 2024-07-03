@@ -75,6 +75,8 @@ export const BackButton = styled.button`
 export const SlugNameContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   > span {
     font-size: 0.875rem;
