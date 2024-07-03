@@ -3,14 +3,11 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import MenuBottom from "../components/MenuBottom";
 import { BagContextProvider } from "@/context/bag";
-import { LoadingContextProvider } from "@/context/loading";
-import FullScreenLoading from "../components/FullScreenLoading";
 import { OrderContextProvider } from "@/context/order";
 import { styled } from "@linaria/react";
 import { theme } from "../styles/theme";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { getPublicUser, setPublicUserByToken } from "@/utils/cookiePublicUser";
-import Version from "../components/Version";
+
 import {
   SlugHeader,
   SlugNameContainer,
@@ -22,12 +19,8 @@ import {
 import { poppins } from "../fonts";
 import { MdClose } from "react-icons/md";
 import Image from "next/image";
-import Search from "../../../public/Search.png";
 import Delivre from "../../../public/delivre.svg";
-import back from "../../../public/back.svg";
-import useFoodFetch from "../hooks/useFoodFetch";
-import { FoodApiBusiness } from "../../../types/foodApi";
-import { EndpointFoodApiEnum } from "../enums";
+
 import { CiSearch } from "react-icons/ci";
 
 import { IoIosArrowBack } from "react-icons/io";
@@ -60,7 +53,6 @@ interface PublicLayoutProps {
 }
 
 function PublicLayout(props: PublicLayoutProps) {
-  const searchParams = useSearchParams();
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const slug = props?.params?.slug;
   const userName = "Thiago Pavan da Silva";
@@ -68,15 +60,7 @@ function PublicLayout(props: PublicLayoutProps) {
   const isSlugSubRoute = currentPath.startsWith(`/${slug}/`);
   const router = useRouter();
 
-  // Use useRef para criar uma referência ao input
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // if (token) {
-  //   setPublicUserByToken(token);
-  // }
-  // const { data } = useFoodFetch<FoodApiBusiness>(
-  //   `${EndpointFoodApiEnum.BUSINESS}/${props.params.slug}`,
-  // );
 
   useEffect(() => {
     setIsSearching(false);
@@ -103,7 +87,7 @@ function PublicLayout(props: PublicLayoutProps) {
         {isSearching && !isSlugSubRoute ? (
           <InputSearchContainer>
             <input
-              ref={inputRef} // Adicione a referência ao input
+              ref={inputRef}
               type="text"
               placeholder="Salada de ovo"
               className={poppins.className}
@@ -150,19 +134,15 @@ function PublicLayout(props: PublicLayoutProps) {
         <Container>{props.children}</Container>
         <MenuBottom slug={props.params.slug} />
       </Wrapper>
-      {/* <OrderContextProvider>
+      <OrderContextProvider>
         <BagContextProvider>
           <Wrapper>
             <Container>{props.children}</Container>
             <MenuBottom slug={props.params.slug} />
           </Wrapper>
         </BagContextProvider>
-      </OrderContextProvider> */}
-
-      {/*quando back end voltar, essa versao comentada e a correta */}
+      </OrderContextProvider>
     </>
   );
-
-  return <>{props.children}</>;
 }
 export default PublicLayout;
