@@ -1,4 +1,4 @@
-import { bebasNeue, dmsSans } from "@/app/fonts";
+import { bebasNeue, dmsSans, urbanist } from "@/app/fonts";
 import { Container } from "./styles";
 import {
   MdAlternateEmail,
@@ -48,6 +48,7 @@ type InputProps = {
   ) => void;
   label?: string;
   type: HTMLInputTypeAttribute;
+  isPublicAuth?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 type Icon = Partial<Record<HTMLInputTypeAttribute, JSX.Element>>;
@@ -56,7 +57,12 @@ type MaskByType = Partial<
   Record<HTMLInputTypeAttribute, (value: string) => string>
 >;
 
-export default function Input({ label, value, ...rest }: InputProps) {
+export default function Input({
+  isPublicAuth,
+  label,
+  value,
+  ...rest
+}: InputProps) {
   const icon: Icon = {
     password: <MdAlternateEmail />,
     email: <MdAlternateEmail />,
@@ -132,8 +138,8 @@ export default function Input({ label, value, ...rest }: InputProps) {
   };
 
   return (
-    <Container type={rest.type}>
-      <label className={dmsSans.className}>
+    <Container type={rest.type} isPublicAuth={isPublicAuth}>
+      <label className={urbanist.className}>
         {label} {rest.required && "*"}
       </label>
 
@@ -142,6 +148,7 @@ export default function Input({ label, value, ...rest }: InputProps) {
           {...rest}
           value={maskValueByType(value, rest.type)}
           type={rest.type}
+          className={urbanist.className}
         ></input>
         {icon[rest.type] && <div>{icon[rest.type]}</div>}
       </div>
