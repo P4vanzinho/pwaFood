@@ -48,6 +48,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 1200px;
   min-height: 100vh;
+  padding: 6.625rem 1.438rem;
 `;
 
 interface PublicLayoutProps {
@@ -60,9 +61,8 @@ interface PublicLayoutProps {
 function PublicLayout(props: PublicLayoutProps) {
   const searchParams = useSearchParams();
   const [isSearching, setIsSearching] = useState<boolean>(false);
-  const token = searchParams.get("u");
   const slug = props?.params?.slug;
-  const user = getPublicUser();
+  const userName = "Thiago Pavan da Silva";
   const currentPath = usePathname();
   const isSlugSubRoute = currentPath.startsWith(`/${slug}/`);
   const router = useRouter();
@@ -70,12 +70,12 @@ function PublicLayout(props: PublicLayoutProps) {
   // Use useRef para criar uma referência ao input
   const inputRef = useRef<HTMLInputElement>(null);
 
-  if (token) {
-    setPublicUserByToken(token);
-  }
-  const { data } = useFoodFetch<FoodApiBusiness>(
-    `${EndpointFoodApiEnum.BUSINESS}/${props.params.slug}`,
-  );
+  // if (token) {
+  //   setPublicUserByToken(token);
+  // }
+  // const { data } = useFoodFetch<FoodApiBusiness>(
+  //   `${EndpointFoodApiEnum.BUSINESS}/${props.params.slug}`,
+  // );
 
   useEffect(() => {
     setIsSearching(false);
@@ -127,12 +127,12 @@ function PublicLayout(props: PublicLayoutProps) {
               )}
             </SearchAndLogoContainer>
 
-            {!!data?.name && (
+            {!!userName && (
               <SlugNameContainer>
-                <span className={poppins.className}>{data.name}</span>
-                {!!user?.name && (
+                <span className={poppins.className}>{slug}</span>
+                {!!userName && (
                   <>
-                    <span className={poppins.className}> {user?.name}!</span>
+                    <span className={poppins.className}> {userName}!</span>
                   </>
                 )}
               </SlugNameContainer>
@@ -145,15 +145,24 @@ function PublicLayout(props: PublicLayoutProps) {
         </SearchAndLogoContainer>
       </SlugHeader>
       <Version />
-      <OrderContextProvider>
+
+      <Wrapper>
+        <Container>{props.children}</Container>
+        <MenuBottom slug={props.params.slug} />
+      </Wrapper>
+      {/* <OrderContextProvider>
         <BagContextProvider>
           <Wrapper>
             <Container>{props.children}</Container>
             <MenuBottom slug={props.params.slug} />
           </Wrapper>
         </BagContextProvider>
-      </OrderContextProvider>
+      </OrderContextProvider> */}
+
+      {/*quando back end voltar, essa versao comentada e a correta */}
     </>
   );
+
+  return <>{props.children}</>;
 }
 export default PublicLayout;
