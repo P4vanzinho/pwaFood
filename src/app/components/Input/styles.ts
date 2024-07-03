@@ -6,6 +6,7 @@ import { HTMLInputTypeAttribute } from "react";
 
 type InputProps = {
   type: HTMLInputTypeAttribute;
+  isPublicAuth?: boolean;
 };
 
 export const Container = styled.div<InputProps>`
@@ -16,7 +17,7 @@ export const Container = styled.div<InputProps>`
   overflow: hidden;
 
   > label {
-    font-size: 0.75rem;
+    font-size: 1rem;
     color: ${() => theme.COLORS.DARK};
   }
 
@@ -47,6 +48,7 @@ export const Container = styled.div<InputProps>`
     border: 1px solid ${() => theme.COLORS.PRIMARY};
     margin-top: 7px;
     overflow: hidden;
+    height: ${(props) => (props.isPublicAuth ? "54px" : "41px")};
 
     &:has(> input:focus) {
       border: 1px solid ${() => darken(0.1, theme.COLORS.PRIMARY)};
@@ -80,6 +82,7 @@ export const Container = styled.div<InputProps>`
       border: 0;
       outline: 0;
       color: ${() => theme.COLORS.DARK};
+      font-size: 1rem;
 
       &:focus {
         outline: none !important;
