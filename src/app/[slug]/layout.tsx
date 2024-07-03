@@ -20,9 +20,7 @@ import { poppins } from "../fonts";
 import { MdClose } from "react-icons/md";
 import Image from "next/image";
 import Delivre from "../../../public/delivre.svg";
-
 import { CiSearch } from "react-icons/ci";
-
 import { IoIosArrowBack } from "react-icons/io";
 
 const Wrapper = styled.div`
@@ -130,10 +128,6 @@ function PublicLayout(props: PublicLayoutProps) {
         </SearchAndLogoContainer>
       </SlugHeader>
 
-      <Wrapper>
-        <Container>{props.children}</Container>
-        <MenuBottom slug={props.params.slug} />
-      </Wrapper>
       <OrderContextProvider>
         <BagContextProvider>
           <Wrapper>
