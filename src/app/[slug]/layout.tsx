@@ -145,7 +145,6 @@ function PublicLayout(props: PublicLayoutProps) {
           <Image src={Delivre} alt={`slugImage`} width={23} height={23} />
         </SearchAndLogoContainer>
       </SlugHeader>
-      <Version />
 
       <Wrapper>
         <Container>{props.children}</Container>
