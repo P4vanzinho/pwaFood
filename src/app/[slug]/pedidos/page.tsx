@@ -53,9 +53,8 @@ export default function Requests() {
 
   return (
     <Container>
-      <TitleContainer>
-        <Title>Meus Pedidos</Title>
-      </TitleContainer>
+      <Title>Meus Pedidos</Title>
+
       <RequestsContainer>
         {pedidos.map((pedido, index) => (
           <RequestCard key={index}>
