@@ -11,9 +11,7 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   display: flex;
-
-  height: 100vh;
-  padding-bottom: 70px;
+  height: calc(100vh - 13.25rem);
   gap: 1.625rem;
 `;
 
@@ -23,8 +21,12 @@ export const RequestsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  max-height: 90%;
   overflow-y: auto;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${theme.COLORS.PRIMARY};
+    border-radius: 4px;
+  }
 `;
 
 export const RequestCard = styled.div`
