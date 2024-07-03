@@ -1,7 +1,13 @@
 "use client";
 
 import Title from "@/app/components/Title";
-import { Container, SubTotalContainer, Footer, PriceContainer } from "./styles";
+import {
+  Container,
+  SubTotalContainer,
+  Footer,
+  PriceContainer,
+  RequestsContainer,
+} from "./styles";
 import { useBagContext } from "@/context/bag";
 import Button from "@/app/components/Button";
 import { inter, poppins } from "@/app/fonts";
@@ -53,38 +59,35 @@ export default function Bag({ params }: BagProps) {
   };
 
   return (
-    <>
-      <Container>
-        <div>
-          <Title>Sacola</Title>
+    <Container>
+      <Title>Sacola</Title>
+      <RequestsContainer>
+        {items.map((item) => (
+          <BagItem key={item.id} item={item} />
+        ))}
 
-          {items.map((item) => (
-            <BagItem key={item.id} item={item} />
-          ))}
+        <button className={poppins.className} onClick={addItemOnClick}>
+          <span>Adicionar mais produtos</span>
+        </button>
+      </RequestsContainer>
 
-          <button className={poppins.className} onClick={addItemOnClick}>
-            <span>Adicionar mais produtos</span>
-          </button>
-        </div>
+      <Footer>
+        <SubTotalContainer className={poppins.className}>
+          <span>Subtotal</span>
 
-        <Footer>
-          <SubTotalContainer className={poppins.className}>
-            <span>Subtotal</span>
+          <PriceContainer>
+            <Price>{total}</Price>
+          </PriceContainer>
+        </SubTotalContainer>
 
-            <PriceContainer>
-              <Price>{total}</Price>
-            </PriceContainer>
-          </SubTotalContainer>
-
-          <Button
-            className={poppins.className}
-            disabled={!total}
-            text="Fechar pedido"
-            onClick={paymentMethodButtonOnClick}
-            loading={!!loading}
-          />
-        </Footer>
-      </Container>
-    </>
+        <Button
+          className={poppins.className}
+          disabled={!total}
+          text="Fechar pedido"
+          onClick={paymentMethodButtonOnClick}
+          loading={!!loading}
+        />
+      </Footer>
+    </Container>
   );
 }
