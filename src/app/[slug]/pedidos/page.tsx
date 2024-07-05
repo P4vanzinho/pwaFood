@@ -20,31 +20,31 @@ export default function Requests() {
   //get pedidos mockado.
   const pedidos = [
     {
-      date: "Quarta 20 Jun, 2024 ,  20:00", // provavelmente sera um newDate ou ms.
+      date: "Quarta 20 Jun, 2024 ,  20:00",
       qty: 4,
       price: 23.99,
       status: "enviado",
     },
     {
-      date: "Sexta 21 Jun, 2024 ,  21:00", // provavelmente sera um newDate ou ms.
+      date: "Sexta 21 Jun, 2024 ,  21:00",
       qty: 5,
       price: 25.99,
       status: "cancelado",
     },
     {
-      date: "Quinta 21 Jun, 2024 ,  22:00", // provavelmente sera um newDate ou ms.
+      date: "Quinta 21 Jun, 2024 ,  22:00",
       qty: 7,
       price: 34.99,
       status: "enviado",
     },
     {
-      date: "Quinta 21 Jun, 2024 ,  22:00", // provavelmente sera um newDate ou ms.
+      date: "Quinta 21 Jun, 2024 ,  22:00",
       qty: 7,
       price: 34.99,
       status: "finalizado",
     },
     {
-      date: "Quinta 21 Jun, 2024 ,  22:00", // provavelmente sera um newDate ou ms.
+      date: "Quinta 21 Jun, 2024 ,  22:00",
       qty: 7,
       price: 34.99,
       status: "finalizado",
