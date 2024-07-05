@@ -26,7 +26,7 @@ export const Container = styled.div`
     & > div {
       color: ${theme.COLORS.DARK};
       font-weight: lighter;
-      padding: 5px 0;
+
       border-bottom: ${theme.COLORS.BLACK} 1px solid;
       border-top: ${theme.COLORS.BLACK} 1px solid;
 
@@ -44,7 +44,7 @@ export const Container = styled.div`
     }
 
     > p:nth-of-type(2) {
-      margin-top: 15px;
+      margin-top: 8px;
     }
   }
 `;

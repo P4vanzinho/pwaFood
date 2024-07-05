@@ -25,11 +25,11 @@ type PedidoStatusProps = {
 type StatusType = string;
 
 export default function PedidoStatus({ params }: PedidoStatusProps) {
-  //Alterne statusText "sent"; "confirmed";"on-the-way"; "finished" para ver alterações no layout.
-
   const [currentStatus, setCurrentStatus] = useState<StatusType>("sent");
   const user = { name: "Thiago Pavan da Silva", whatsapp: 6298545234 };
   const radioSelected = "delivery";
+
+  //Alterne statusText "sent"; "confirmed";"on-the-way"; "finished" para ver alterações no layout.
   const getStatusResp = { timing: "19:30", statusText: "finished" };
 
   const renderConfirmedStatus =
