@@ -42,7 +42,7 @@ export async function foodFetch<T = any>({
   if (token) {
     headersToFetch = {
       ...headersToFetch,
-      Authorization: `Bearer ${token}` ?? undefined,
+      Authorization: !!`Bearer ${token}`,
     };
   }
 
