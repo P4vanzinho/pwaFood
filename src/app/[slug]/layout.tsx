@@ -3,14 +3,11 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import MenuBottom from "../components/MenuBottom";
 import { BagContextProvider } from "@/context/bag";
-import { LoadingContextProvider } from "@/context/loading";
-import FullScreenLoading from "../components/FullScreenLoading";
 import { OrderContextProvider } from "@/context/order";
 import { styled } from "@linaria/react";
 import { theme } from "../styles/theme";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { getPublicUser, setPublicUserByToken } from "@/utils/cookiePublicUser";
-import Version from "../components/Version";
+
 import {
   SlugHeader,
   SlugNameContainer,
@@ -22,14 +19,8 @@ import {
 import { poppins } from "../fonts";
 import { MdClose } from "react-icons/md";
 import Image from "next/image";
-import Search from "../../../public/Search.png";
 import Delivre from "../../../public/delivre.svg";
-import back from "../../../public/back.svg";
-import useFoodFetch from "../hooks/useFoodFetch";
-import { FoodApiBusiness } from "../../../types/foodApi";
-import { EndpointFoodApiEnum } from "../enums";
 import { CiSearch } from "react-icons/ci";
-
 import { IoIosArrowBack } from "react-icons/io";
 
 const Wrapper = styled.div`
@@ -47,7 +38,9 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
-  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: hidden;
+  padding: 6.625rem 1.438rem;
 `;
 
 interface PublicLayoutProps {
@@ -58,24 +51,14 @@ interface PublicLayoutProps {
 }
 
 function PublicLayout(props: PublicLayoutProps) {
-  const searchParams = useSearchParams();
   const [isSearching, setIsSearching] = useState<boolean>(false);
-  const token = searchParams.get("u");
   const slug = props?.params?.slug;
-  const user = getPublicUser();
+  const userName = "Thiago Pavan da Silva";
   const currentPath = usePathname();
   const isSlugSubRoute = currentPath.startsWith(`/${slug}/`);
   const router = useRouter();
 
-  // Use useRef para criar uma referência ao input
   const inputRef = useRef<HTMLInputElement>(null);
-
-  if (token) {
-    setPublicUserByToken(token);
-  }
-  const { data } = useFoodFetch<FoodApiBusiness>(
-    `${EndpointFoodApiEnum.BUSINESS}/${props.params.slug}`,
-  );
 
   useEffect(() => {
     setIsSearching(false);
@@ -102,7 +85,7 @@ function PublicLayout(props: PublicLayoutProps) {
         {isSearching && !isSlugSubRoute ? (
           <InputSearchContainer>
             <input
-              ref={inputRef} // Adicione a referência ao input
+              ref={inputRef}
               type="text"
               placeholder="Salada de ovo"
               className={poppins.className}
@@ -127,12 +110,12 @@ function PublicLayout(props: PublicLayoutProps) {
               )}
             </SearchAndLogoContainer>
 
-            {!!data?.name && (
+            {!!userName && (
               <SlugNameContainer>
-                <span className={poppins.className}>{data.name}</span>
-                {!!user?.name && (
+                <span className={poppins.className}>{slug}</span>
+                {!!userName && (
                   <>
-                    <span className={poppins.className}> {user?.name}!</span>
+                    <span className={poppins.className}> {userName}!</span>
                   </>
                 )}
               </SlugNameContainer>
@@ -144,7 +127,7 @@ function PublicLayout(props: PublicLayoutProps) {
           <Image src={Delivre} alt={`slugImage`} width={23} height={23} />
         </SearchAndLogoContainer>
       </SlugHeader>
-      <Version />
+
       <OrderContextProvider>
         <BagContextProvider>
           <Wrapper>

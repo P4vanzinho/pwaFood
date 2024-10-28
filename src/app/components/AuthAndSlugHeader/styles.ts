@@ -1,14 +1,14 @@
 import { styled } from "@linaria/react";
 import { theme } from "@/app/styles/theme";
 
-export const SlugHeader = styled.header`
+export const Container = styled.header`
   padding: 30px 1.25rem 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${theme.COLORS.LIGHT};
   position: fixed;
   width: 100%;
+  z-index: 9999;
 `;
 
 export const InputSearchContainer = styled.div`
@@ -31,7 +31,7 @@ export const InputSearchContainer = styled.div`
   }
 
   input::placeholder {
-    opacity: 0.5; /* opacidade do placeholder */
+    opacity: 0.5;
   }
 
   input:focus {

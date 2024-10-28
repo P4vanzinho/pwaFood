@@ -7,21 +7,23 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   display: flex;
-  justify-content: center;
-  height: 100%;
-  margin-top: 100px;
-  padding: 0px 1rem 150px;
+  height: calc(100vh - 20.438rem);
+  gap: 1.625rem;
 
   > div {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow-y: auto;
 
     > button {
       border: none;
       background-color: transparent;
       margin-top: 30px;
       padding: 20px 20px 20px 0px;
+      position: fixed;
+      bottom: 166px;
+      left: 25%;
 
       input:focus {
         outline: none;
@@ -42,6 +44,39 @@ export const Container = styled.div`
         cursor: pointer;
       }
     }
+  }
+`;
+
+export const RequestsContainer = styled.div`
+  display: flex;
+  gap: 0.625rem;
+  flex-direction: column;
+  overflow-y: auto;
+
+  > button {
+    border: none;
+    background-color: transparent;
+    margin-top: 30px;
+    padding: 20px 20px 20px 0px;
+    position: fixed;
+    bottom: 166px;
+    left: 25%;
+
+    input:focus {
+      outline: none;
+    }
+
+    &:hover {
+      > span {
+        font-weight: 600;
+        color: ${() => darken(0.2, theme.COLORS.ERROR)};
+      }
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${theme.COLORS.PRIMARY};
+    border-radius: 4px;
   }
 `;
 
